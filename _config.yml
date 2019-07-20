@@ -1,2 +1,7 @@
+title: Ini Oguntola
+url: ini.io
 plugins:
   - jekyll-seo-tag
+twitter:
+  username: inioguntola
+  card: summary
