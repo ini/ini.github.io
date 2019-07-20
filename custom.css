@@ -1,0 +1,25 @@
+.header_top {
+	background-color: white;
+	box-shadow:0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
+	height: 64px;
+}
+
+.header_nav {
+	position:relative;
+	left:50px;
+}
+
+.header_link {
+	font-size:14px;
+	letter-spacing:.25px;
+	margin:0 0 0 28px;
+	color: red;
+}
+
+.navbar-nav .nav-item .nav-link a {
+    color: red;
+}
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: pink;
+}
