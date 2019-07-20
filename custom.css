@@ -16,10 +16,6 @@
 	color: red;
 }
 
-.navbar-nav .nav-item .nav-link a {
-    color: red;
-}
-.navbar-nav .nav-item.active .nav-link,
-.navbar-nav .nav-item:hover .nav-link {
-    color: pink;
+.avatar {
+    pointer-events: none;
 }
