@@ -34,6 +34,7 @@ body {
 	}
 
 	.header-link {
+		font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		font-size: 14px;
 		letter-spacing: 0.25px;
 		margin:0 0 0 28px;
