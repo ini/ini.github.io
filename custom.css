@@ -9,13 +9,35 @@
     font-weight: bold;
 }
 
+a, h1, h2, h3, h4, h5, h6, p {
+	font-family: 'Avenir';
+}
+
 body { 
   padding: 64px 0 0 0;
 }
 
-.header-top {
-	background-color: white;
-	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
+.avatar {
+    pointer-events: none;
+    border: solid 3px white;
+}
+
+.cmu-bg {
+  background-image: url('cmu_pano.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.fa {
+	color: white;
+	font-size: 50px;
+	width: 70px;
+	text-align: left;
+}
+
+.header-brand {
+	font-family: 'Courier New', 'Helvetica Neue', Helvetica, Arial, sans-serif
 }
 
 .header-link {
@@ -24,26 +46,12 @@ body {
 	margin: 10px 0 10px 0;
 }
 
-.avatar {
-    pointer-events: none;
-}
-
-.header-brand {
-	font-family: 'Courier New', 'Helvetica Neue', Helvetica, Arial, sans-serif
+.header-top {
+	background-color: white;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
 }
 
 @media (min-width: 768px) {
-	.header-top {
-		background-color: white;
-		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
-		height: 64px;
-	}
-
-	.header-nav {
-		position: relative;
-		left: 64px;
-	}
-
 	.header-brand {
 		margin: 0 0 0 32px;
 		font-family: 'Courier New', 'Helvetica Neue', Helvetica, Arial, sans-serif
@@ -62,6 +70,17 @@ body {
 		font-weight: bold;
 		letter-spacing: 0.25px;
 		margin:0 0 0 28px;
+	}
+
+	.header-nav {
+		position: relative;
+		left: 64px;
+	}
+
+	.header-top {
+		background-color: white;
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
+		height: 64px;
 	}
 }
 
