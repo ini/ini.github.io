@@ -14,7 +14,7 @@ a, h1, h2, h3, h4, h5, h6, p {
 }
 
 body { 
-  padding: 64px 0 0 0;
+  padding: 48px 0 0 0;
 }
 
 .avatar {
@@ -57,6 +57,10 @@ body {
 }
 
 @media (min-width: 768px) {
+	body { 
+	  padding: 64px 0 0 0;
+	}
+
 	.fa {
 		color: white;
 		font-size: 50px;
