@@ -1,20 +1,12 @@
-@font-face {
-    font-family: 'Avenir';
-    src: url('fonts/avenir/Avenir-Book.ttf');
-}
-
-@font-face {
-    font-family: 'Avenir';
-    src: url('fonts/avenir/Avenir-Medium.ttf');
-    font-weight: bold;
-}
-
-a, h1, h2, h3, h4, h5, h6, p {
-	font-family: 'Avenir';
-}
+@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Avenir:300,900|Roboto:300,700");
 
 body { 
-  padding: 48px 0 0 0;
+	padding: 48px 0 0 0;
+	font-family: 'Roboto';
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Avenir';
 }
 
 .avatar {
@@ -41,7 +33,7 @@ body {
 }
 
 .header-brand {
-	font-family: 'Courier New', 'Helvetica Neue', Helvetica, Arial, sans-serif
+	font-family: 'Courier New'
 }
 
 .header-link {
@@ -51,9 +43,18 @@ body {
 	margin: 10px 0 10px 0;
 }
 
+.header-link.active {
+	font-family: 'Avenir';
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 0.25px;
+	margin: 0 20px 0 20px;
+}
+
 .header-top {
-	background-color: white;
-	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
+	background-color: #222222;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 0 0 0 #dadce0;
+	text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -69,33 +70,31 @@ body {
 	}
 
 	.header-brand {
-		margin: 0 0 0 32px;
-		font-family: 'Courier New', 'Helvetica Neue', Helvetica, Arial, sans-serif
+		font-family: 'Courier New'
 	}
 
 	.header-link {
-		font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-family: 'Avenir';
 		font-size: 14px;
 		letter-spacing: 0.25px;
-		margin:0 0 0 28px;
+		margin: 0 20px 0 20px;
 	}
 
 	.header-link.active {
-		font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-family: 'Avenir';
 		font-size: 14px;
 		font-weight: bold;
 		letter-spacing: 0.25px;
-		margin:0 0 0 28px;
+		margin: 0 20px 0 20px;
 	}
 
 	.header-nav {
 		position: relative;
-		left: 64px;
 	}
 
 	.header-top {
-		background-color: white;
-		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 -1px 0 0 #dadce0;
+		background-color: #222222;
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 0 0 0 #dadce0;
 		height: 64px;
 	}
 }
