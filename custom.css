@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Avenir:300,900|Roboto:300,700");
+@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Avenir:300,900|Montserrat:300,500|Roboto:300,700");
 
 body { 
 	padding: 48px 0 0 0;
@@ -6,7 +6,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Avenir';
+	font-family: 'Montserrat';
 }
 
 .avatar {
