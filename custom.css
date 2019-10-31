@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Nunito+Sans:300,700|Montserrat:300,700|Muli:300,700");
+@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Open+Sans:300,500|Montserrat:300,700|Muli:300,700");
 
 body { 
 	padding: 48px 0 0 0;
@@ -24,8 +24,8 @@ h1, h2, h3, h4, h5, h6 {
 .fa {
 	color: white;
 	font-size: 40px;
-	width: 50px;
 	text-align: left;
+	width: 50px;
 }
 
 .fa:hover {
@@ -33,19 +33,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-brand {
-	font-family: 'Courier New'
+	font-family: 'Courier New';
+	font-size: 18px;
 }
 
 .header-link {
+	font-family: 'Muli';
 	font-size: 14px;
 	letter-spacing: 0.25px;
 	margin: 10px 0 10px 0;
 }
 
 .header-link.active {
-	font-size: 14px;
 	font-weight: bold;
-	letter-spacing: 0.25px;
 	margin: 0 20px 0 20px;
 }
 
@@ -56,10 +56,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (min-width: 768px) {
-	body { 
-	  padding: 64px 0 0 0;
-	}
-
 	.fa {
 		color: white;
 		font-size: 50px;
@@ -72,16 +68,11 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.header-link {
-		font-size: 14px;
-		letter-spacing: 0.25px;
-		margin: 0 20px 0 20px;
+		margin: 0 30px 0 30px;
 	}
 
 	.header-link.active {
-		font-size: 14px;
-		font-weight: bold;
-		letter-spacing: 0.25px;
-		margin: 0 20px 0 20px;
+		margin: 0 30px 0 30px;
 	}
 
 	.header-nav {
@@ -89,9 +80,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 
 	.header-top {
-		background-color: #222222;
-		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 0 0 0 #dadce0;
-		height: 64px;
+		height: 48px;
 	}
 }
 
