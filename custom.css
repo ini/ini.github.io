@@ -33,6 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-brand {
+	display: inline-block;
 	font-family: 'Courier New';
 	font-size: 18px;
 }
@@ -46,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header-link.active {
 	font-weight: bold;
-	margin: 0 20px 0 20px;
+	margin: 10px 0 10px 0;
 }
 
 .header-top {
