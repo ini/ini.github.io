@@ -1,7 +1,3 @@
-function myFunction() {
-      document.getElementById("demo").innerHTML = "Paragraph changed.";
-}
-
 function checkScroll() {
     var startY = $(".navbar").height() * 2;
 
@@ -15,10 +11,3 @@ function checkScroll() {
 $(window).on("scroll load resize", function() {
     checkScroll();
 });
-
-if($(".navbar").length > 0) {
-	document.getElementById("demo").innerHTML = "checkers";
-    $(window).on("scroll load resize", function() {
-        checkScroll();
-    });
-}
