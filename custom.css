@@ -14,13 +14,6 @@ h1, h2, h3, h4, h5, h6 {
     border: solid 3px white;
 }
 
-.cmu-bg {
-  background-image: url('cmu_pano.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-
 .fa {
 	color: white;
 	font-size: 40px;
@@ -33,7 +26,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-brand {
-	display: inline-block;
 	font-family: 'Courier New';
 	font-size: 18px;
 }
@@ -47,7 +39,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .header-link.active {
 	font-weight: bold;
-	margin: 10px 0 10px 0;
 }
 
 .header-top {
@@ -56,16 +47,18 @@ h1, h2, h3, h4, h5, h6 {
 	text-align: center;
 }
 
+.image-bg {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 @media (min-width: 768px) {
 	.fa {
 		color: white;
 		font-size: 50px;
 		width: 70px;
 		text-align: left;
-	}
-
-	.header-brand {
-		font-family: 'Courier New'
 	}
 
 	.header-link {
@@ -82,6 +75,16 @@ h1, h2, h3, h4, h5, h6 {
 
 	.header-top {
 		height: 48px;
+		-webkit-transition: all 0.6s ease-out;
+	    -moz-transition: all 0.6s ease-out;
+	    -o-transition: all 0.6s ease-out;
+	    -ms-transition: all 0.6s ease-out;
+	    transition: all 0.6s ease-out;
+	}
+
+	.header-top.at-top {
+    	background: rgba(0, 0, 0, 0);
+    	box-shadow: 0 0 0 0;
 	}
 }
 

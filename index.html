@@ -9,19 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="custom.css">
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous">
-    </script>
-    <script> 
-        $(function() { $("#header").load("header.html"); });
-    </script>
     {% seo %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="ja.js"></script>
 </head>
 
 <body>
-    <nav class="navbar header-top fixed-top navbar-expand-md navbar-dark">
+    <span class="position-absolute trigger"><!-- hidden trigger to apply 'stuck' styles --></span>
+    <nav class="navbar header-top fixed-top navbar-expand-md navbar-dark" id="site-header">
         <div class="d-flex flex-nowrap w-100">
             <a class="navbar-brand header-brand font-weight-light d-flex w-100" href="/">i/o</a>
             <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
@@ -39,8 +34,8 @@
         <div class="d-flex w-100"> </div>
     </nav>
 
-    <div class="cmu-bg">
-        <div class="container-fluid" style="background-color:rgba(0, 0, 0, 0.4)">
+    <div class="image-bg" style="background-image:url('cmu_pano.jpg'); margin: -48px 0 0 0;">
+        <div class="container-fluid" style="background-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1));">
             <div class="row mb-5">
                 <span class="my-4"></span>
             </div>
@@ -85,20 +80,82 @@
                 <p>
                     I’m also an active musician and composer, working mostly in hip-hop, jazz, and R&B.
                 </p>
+                <p>
+                    For the rest of todays lecture we will talk about a special class of statistics called sufficient
+statistics. There are two ways to motivate sufficient statistics: the data reduction viewpoint
+where we would like to discard non-informative pieces of the dataset (for storage or other
+benefits), and the risk reduction viewpoint where we want to construct estimators that only
+depend on meaningful variation in the data. We will focus on the former viewpoint today.
+The goal in data reduction roughly is to find ways to reduce the size of a dataset without
+throwing away important information. We need to fix ideas more concretely to make progress
+on this abstract question.
+We focus on parametric models and suppose we observe samples {X1, . . . , Xn} ∼ p(X; θ).
+The typical statistical estimation problem is that we observe the samples as want to understand something about the unknown parameter θ. Again somewhat abstractly the goal of
+data reduction is to find statistics T(X1, . . . , Xn) that contain all the information about the
+unknown parameter θ.
+For the rest of todays lecture we will talk about a special class of statistics called sufficient
+statistics. There are two ways to motivate sufficient statistics: the data reduction viewpoint
+where we would like to discard non-informative pieces of the dataset (for storage or other
+benefits), and the risk reduction viewpoint where we want to construct estimators that only
+depend on meaningful variation in the data. We will focus on the former viewpoint today.
+The goal in data reduction roughly is to find ways to reduce the size of a dataset without
+throwing away important information. We need to fix ideas more concretely to make progress
+on this abstract question.
+We focus on parametric models and suppose we observe samples {X1, . . . , Xn} ∼ p(X; θ).
+The typical statistical estimation problem is that we observe the samples as want to understand something about the unknown parameter θ. Again somewhat abstractly the goal of
+data reduction is to find statistics T(X1, . . . , Xn) that contain all the information about the
+unknown parameter θ.For the rest of todays lecture we will talk about a special class of statistics called sufficient
+statistics. There are two ways to motivate sufficient statistics: the data reduction viewpoint
+where we would like to discard non-informative pieces of the dataset (for storage or other
+benefits), and the risk reduction viewpoint where we want to construct estimators that only
+depend on meaningful variation in the data. We will focus on the former viewpoint today.
+The goal in data reduction roughly is to find ways to reduce the size of a dataset without
+throwing away important information. We need to fix ideas more concretely to make progress
+on this abstract question.
+We focus on parametric models and suppose we observe samples {X1, . . . , Xn} ∼ p(X; θ).
+The typical statistical estimation problem is that we observe the samples as want to understand something about the unknown parameter θ. Again somewhat abstractly the goal of
+data reduction is to find statistics T(X1, . . . , Xn) that contain all the information about the
+unknown parameter θ.
+For the rest of todays lecture we will talk about a special class of statistics called sufficient
+statistics. There are two ways to motivate sufficient statistics: the data reduction viewpoint
+where we would like to discard non-informative pieces of the dataset (for storage or other
+benefits), and the risk reduction viewpoint where we want to construct estimators that only
+depend on meaningful variation in the data. We will focus on the former viewpoint today.
+The goal in data reduction roughly is to find ways to reduce the size of a dataset without
+throwing away important information. We need to fix ideas more concretely to make progress
+on this abstract question.
+We focus on parametric models and suppose we observe samples {X1, . . . , Xn} ∼ p(X; θ).
+The typical statistical estimation problem is that we observe the samples as want to understand something about the unknown parameter θ. Again somewhat abstractly the goal of
+data reduction is to find statistics T(X1, . . . , Xn) that contain all the information about the
+unknown parameter θ.
+For the rest of todays lecture we will talk about a special class of statistics called sufficient
+statistics. There are two ways to motivate sufficient statistics: the data reduction viewpoint
+where we would like to discard non-informative pieces of the dataset (for storage or other
+benefits), and the risk reduction viewpoint where we want to construct estimators that only
+depend on meaningful variation in the data. We will focus on the former viewpoint today.
+The goal in data reduction roughly is to find ways to reduce the size of a dataset without
+throwing away important information. We need to fix ideas more concretely to make progress
+on this abstract question.
+We focus on parametric models and suppose we observe samples {X1, . . . , Xn} ∼ p(X; θ).
+The typical statistical estimation problem is that we observe the samples as want to understand something about the unknown parameter θ. Again somewhat abstractly the goal of
+data reduction is to find statistics T(X1, . . . , Xn) that contain all the information about the
+unknown parameter θ.For the rest of todays lecture we will talk about a special class of statistics called sufficient
+statistics. There are two ways to motivate sufficient statistics: the data reduction viewpoint
+where we would like to discard non-informative pieces of the dataset (for storage or other
+benefits), and the risk reduction viewpoint where we want to construct estimators that only
+depend on meaningful variation in the data. We will focus on the former viewpoint today.
+The goal in data reduction roughly is to find ways to reduce the size of a dataset without
+throwing away important information. We need to fix ideas more concretely to make progress
+on this abstract question.
+We focus on parametric models and suppose we observe samples {X1, . . . , Xn} ∼ p(X; θ).
+The typical statistical estimation problem is that we observe the samples as want to understand something about the unknown parameter θ. Again somewhat abstractly the goal of
+data reduction is to find statistics T(X1, . . . , Xn) that contain all the information about the
+unknown parameter θ.
+                </p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col mt-5">
-
-            </div>
-        </div>           
+        </div>         
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-
 </html>
 
 
