@@ -86,16 +86,16 @@ h1, h2, h3, h4, h5, h6 {
 
     .header-top {
         height: 48px;
-        -webkit-transition: all 0.75s ease-out;
-        -moz-transition: all 0.75s ease-out;
-        -o-transition: all 0.75s ease-out;
-        -ms-transition: all 0.75s ease-out;
-        transition: all 0.75s ease-out;
     }
 
     .header-top.at-top.animated {
         background: rgba(0, 0, 0, 0);
         box-shadow: 0 0 0 0;
+        -webkit-transition: all 0.75s ease-out;
+        -moz-transition: all 0.75s ease-out;
+        -o-transition: all 0.75s ease-out;
+        -ms-transition: all 0.75s ease-out;
+        transition: all 0.75s ease-out;
     }
 }
 
