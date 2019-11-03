@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header-brand {
     font-family: 'Courier New';
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .header-link {
@@ -114,6 +114,10 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 50px;
         width: 70px;
         text-align: left;
+    }
+
+    .header-brand {
+        font-size: 18px;
     }
 
     .header-link {
