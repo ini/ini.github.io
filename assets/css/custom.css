@@ -1,8 +1,14 @@
-@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Open+Sans:300,500|Montserrat:300,700|Muli:300,700");
+@import url("https://fonts.googleapis.com/css?family=Courier+New+Bold|Open+Sans:300,500|Montserrat:300,700|Roboto");
 
 @font-face {
     font-family: 'Avenir';
     src: url('/assets/fonts/avenir/Avenir-Light.ttf');
+}
+
+@font-face {
+    font-family: "Avenir";
+    src: url('/assets/fonts/avenir/Avenir-Medium.ttf');
+    font-weight: 500;
 }
 
 @font-face {
@@ -25,6 +31,27 @@ h1, h2, h3, h4, h5, h6 {
     border: solid 3px white;
 }
 
+.black-button {
+    background-color: #222222;
+    color: white;
+    display: inline-block;
+    font-family: "Avenir";
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin: 6px 0;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.black-button:hover, .black-button:active {
+    color: white;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
 .fa {
     color: white;
     font-size: 40px;
@@ -34,6 +61,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .fa:hover {
     text-decoration: none;
+}
+
+.fade:after {
+    width:100%;
+    content:'';
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    background: linear-gradient(to right, rgba(247,247,49,1) 0%,rgba(255,255,255,0) 69%);
+    height:100%;
 }
 
 .header-brand {
