@@ -185,3 +185,21 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+.square {
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 100%;
+}
+
+.showme{ 
+    display: none;
+}
+
+.showhim:hover .showme{
+    display: block;
+}
+
+.showhim:hover .ok{
+    display: none;
+}
+

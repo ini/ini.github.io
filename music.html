@@ -25,13 +25,47 @@
     <div id="header"></div>
 
     <div class="container">
-        <div class="row">
-            <div class="col mt-5">
-                <p>This page is blank.</p>
-            </div>
+        <div class="row px-5 py-0 mt-5 mb-4">
+            <div class="col">
+                <span class="p-0 m-0" style="font-size:24px">"When you’re creating your own sh**, man, even the sky ain’t the limit." - </span>
+                <span class="p-0 m-0" style="font-size:24px; text-align:right; font-weight:bold">Miles Davis</span>
+            </div> 
+            <hr>
         </div>
     </div>
 
+    <div class="container">
+        <div class="row px-5 pb-3">
+            <div class="col"><hr></div>
+        </div>
+
+        <div class="row px-5">
+            <div class="col showhim">
+                <iframe class="showme" width="100%" height="100%" src="https://www.youtube.com/embed/0TvEyzum4Eg" frameborder="0" allow="" allowfullscreen></iframe>
+                <div class="square ok" style="background-image:url('http://img.youtube.com/vi/0TvEyzum4Eg/maxresdefault.jpg')"></div> 
+            </div>
+            <div class="col showhim">
+                <iframe class="showme" width="100%" height="100%" src="https://www.youtube.com/embed/DnCN-bJlOSo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="square ok" style="background-image:url('http://img.youtube.com/vi/DnCN-bJlOSo/maxresdefault.jpg')"></div> 
+            </div>
+            <div class="col showhim">
+                <iframe class="showme" width="100%" height="100%" src="https://www.youtube.com/embed/gPzT7syS8PM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="square ok" style="background-image:url('http://img.youtube.com/vi/gPzT7syS8PM/maxresdefault.jpg')"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="my-5"></span>
+        </div>
+    </div>
+
+    <script>
+    function myFunction() {
+      var iframe = document.getElementById("myFrame");
+      var elmnt = iframe.contentWindow.document.getElementsByTagName("H1")[0];
+      elmnt.style.display = "none";
+    }
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
