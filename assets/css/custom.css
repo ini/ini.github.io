@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
     position:absolute;
     top:0;
     left:0;
-    background: linear-gradient(to right, rgba(247,247,49,1) 0%,rgba(255,255,255,0) 69%);
+    background: linear-gradient(to right, rgba(247, 247, 49, 1) 0%, rgba(255, 255, 255, 0) 69%);
     height:100%;
 }
 
@@ -91,9 +91,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-top {
-    background-color: #222222;
+    background-color: rgba(34, 34, 34, 0.95);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 0 0 0 #dadce0;
     text-align: center;
+    backdrop-filter: blur(6px);
 }
 
 .image-bg {
