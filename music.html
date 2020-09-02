@@ -26,15 +26,15 @@
     <div id="header"></div>
 
     <div class="container insta-container">
-        <div class="row p-0 mt-5 mb-4">
-            <div class="col-md py-0">
+        <div class="row p-0 mt-5">
+            <div class="col-md">
                 <span class="p-0 m-0" style="font-size:20px">"When you’re creating your own sh**, man, even the sky ain’t the limit." - </span>
                 <span class="p-0 m-0" style="font-size:20px; font-weight:bold">Miles Davis</span>
             </div> 
-            <div class="col-md-3 py-0" style="text-align:right">
+            <div class="col-md-3" style="text-align:right">
                 <ul class="list-inline">
-                    <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCJfZOFJUnwkpCysC3I0omIw" class="fa fa-youtube-play" style="color:red; font-size:30px; width:40px" target="_blank"></a></li>
-                    <li class="list-inline-item"><a href="https://soundcloud.com/iniog" class="fa fa-soundcloud" style="color:#222222; font-size:30px; width:40px" target="_blank"></a></li>
+                    <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCJfZOFJUnwkpCysC3I0omIw" class="fa fa-youtube-play" style="color:#222222; font-size:30px; width:40px" target="_blank"></a></li>
+                    <li class="list-inline-item"><a href="https://soundcloud.com/iniog" class="fa fa-soundcloud" style="color:#222222;; font-size:30px; width:40px" target="_blank"></a></li>
                 </ul>
             </div> 
         </div>
@@ -42,7 +42,7 @@
 
     <div class="container insta-container">
         <div class="row p-0">
-            <div class="col p-0" style="margin:0"><hr></div>
+            <div class="col p-0"><hr></div>
         </div>
 
         <div class="row p-0">
@@ -78,44 +78,6 @@
             <span class="my-5"></span>
         </div>
     </div>
-
-    <div id="footer" class="container">
-        <div class="row">
-            <div class="col p-0" style="text-align:right">
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCJfZOFJUnwkpCysC3I0omIw" class="fa fa-youtube-play" style="color:#222222; font-size:30px; width:40px" target="_blank"></a></li>
-                    <li class="list-inline-item"><a href="https://soundcloud.com/iniog" class="fa fa-soundcloud" style="color:#222222; font-size:30px; width:40px" target="_blank"></a></li>
-                </ul>
-            </div> 
-        </div>
-    </div>
-
-    <script>
-        var player, playing = false;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('video', {
-                height: '360',
-                width: '640',
-                videoId: 'RWeFOe2Cs4k',
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerStateChange(event) {
-
-          if (event.data == YT.PlayerState.PLAYING) {
-             alert('video started');
-             playing = true;
-            }
-
-          else if(event.data == YT.PlayerState.PAUSED){
-                alert('video paused');
-                playing = false;
-           }
-        }
-    </script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
