@@ -94,6 +94,11 @@ h1, h2, h3, h4, h5, h6 {
     background-color: rgba(34, 34, 34, 0.95);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 0 0 0 #dadce0;
     text-align: center;
+
+    -webkit-backdrop-filter: blur(6px);
+    -moz-backdrop-filter: blur(6px);
+    -o-backdrop-filter: blur(6px);
+    -ms-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
 }
 
@@ -185,9 +190,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header-top.animated.at-top {
-        backdrop-filter: blur(0px);
         background: rgba(0, 0, 0, 0);
         box-shadow: 0 0 0 0;
+
+        -webkit-backdrop-filter: blur(0px);
+        -moz-backdrop-filter: blur(0px);
+        -o-backdrop-filter: blur(0px);
+        -ms-backdrop-filter: blur(0px);
+        backdrop-filter: blur(0px);
+
         -webkit-transition: all 0.75s ease-out;
         -moz-transition: all 0.75s ease-out;
         -o-transition: all 0.75s ease-out;
@@ -196,9 +207,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header-top.animated:not(at-top) {
-        backdrop-filter: blur(6px);
         background-color: rgba(34, 34, 34, 0.95);
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12), inset 0 0 0 0 #dadce0;
+
+        -webkit-backdrop-filter: blur(6px);
+        -moz-backdrop-filter: blur(6px);
+        -o-backdrop-filter: blur(6px);
+        -ms-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+
         -webkit-transition: all 0.75s ease-out;
         -moz-transition: all 0.75s ease-out;
         -o-transition: all 0.75s ease-out;
