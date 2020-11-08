@@ -176,10 +176,6 @@ h1, h2, h3, h4, h5, h6 {
         padding-top: 100vmin;
     }
 
-    .insta-container {
-        width: 100%;
-    }
-
     .header-padding {
         padding-top: 0;
     }
@@ -191,27 +187,23 @@ h1, h2, h3, h4, h5, h6 {
     .hr-padding {
         visibility: hidden;
         height: 0px;
+        padding-top: 1px;
+    }
+
+    .insta-container {
+        width: 100%;
+    }
+
+    .insta-footer {
+        margin: 15px 0 0 0;
     }
 
     .top-image {
         margin: 14px 0 0 0;
     }
 
-    .square div {
-        height: 100vmin;
-        width: 100vmin;
-    }
-
-    .square iframe {
-        height: 100vmin;
-        width: 100vmin;
-    }
-
     .showhim {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        padding-left: 0;
-        padding-right: 0;
+        padding: 1px;
     }
 }
 
@@ -228,6 +220,10 @@ h1, h2, h3, h4, h5, h6 {
     .fa {
         font-size: 50px;
         width: 70px;
+    }
+
+    .footer-text {
+        padding: 0;
     }
 
     .header-brand {
@@ -297,10 +293,7 @@ h1, h2, h3, h4, h5, h6 {
 .square2 {
     background-size: cover;
     background-position: center;
-}
-
-.showhim {
-    padding-top: 15px;
+    padding-top: 100%;
 }
 
 .showme { 
