@@ -164,16 +164,22 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 767px) {
     .almost-full-screen {
-        width: 100vmin;
-    }
-
-    .almost-full-screen .container {
+        width: 100vw;
         padding: 0;
     }
 
+    .almost-full-screen .container {
+        background-color: rgb(45, 45, 45);
+    }
+
+
     .almost-full-screen .spotlight {
-        width: 100vmin; 
+        width: 100vmin;
         padding-top: 100vmin;
+    }
+
+    .footer-quote {
+        display: none;
     }
 
     .header-padding {
@@ -195,7 +201,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .insta-footer {
-        margin: 15px 0 0 0;
+        margin: 24px 0 0 0;
+        width: 100%;
     }
 
     .top-image {
