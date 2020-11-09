@@ -149,17 +149,28 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-.square div, .square iframe {
+.square {
     top: 0; 
     left: 0; 
     bottom: 0; 
     right: 0;
-    position: relative;
 }
 
 .square iframe {
     height: 100%;
     width: 100%;
+    top: 0; 
+    left: 0;
+    position: absolute;
+}
+
+.showme {
+    display: block;
+    opacity: 0;
+}
+
+.showme:active, .showme:hover {
+    opacity: 1;
 }
 
 @media (max-width: 767px) {
@@ -291,27 +302,9 @@ h1, h2, h3, h4, h5, h6 {
     .showhim {
         padding: 15px;
     }
-
-    .square2 {
-        padding-top: 100%;
-    }
 }
 
-.square2 {
-    background-size: cover;
-    background-position: center;
-    padding-top: 100%;
-}
 
-.showme { 
-    display: none;
-}
 
-.showhim:hover .showme {
-    display: block;
-}
 
-.showhim:hover .ok {
-    display: none;
-}
 
