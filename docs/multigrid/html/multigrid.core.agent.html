@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>multigrid.core.agent module &#8212; multigrid 0.1.0b documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'multigrid.core.agent';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="multigrid.core.constants module" href="multigrid.core.constants.html" />
+    <link rel="prev" title="multigrid.core.actions module" href="multigrid.core.actions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">multigrid 0.1.0b documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="multigrid.html">multigrid package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="multigrid.core.html">multigrid.core package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">multigrid.core.agent module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.grid.html">multigrid.core.grid module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.world_object.html">multigrid.core.world_object module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.act.html">multigrid.utils.act module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.manual_control.html">multigrid.manual_control module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.minigrid_interface.html">multigrid.minigrid_interface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.wrappers.html">multigrid.wrappers module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">multigrid</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="multigrid.core.html" class="nav-link">multigrid.core package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">multigrid.core.agent module</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-multigrid.core.agent">
+<span id="multigrid-core-agent-module"></span><h1>multigrid.core.agent module<a class="headerlink" href="#module-multigrid.core.agent" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.agent.</span></span><span class="sig-name descname"><span class="pre">AgentState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#AgentState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.AgentState" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>State for an <cite>Agent</cite> object.</p>
+<dl class="simple">
+<dt>The state is a 10-dimensional array, indexed as follows:</dt><dd><ul class="simple">
+<li><p>0: object type (i.e. ‘agent’)</p></li>
+<li><p>1: agent color</p></li>
+<li><p>2: agent direction</p></li>
+<li><p>3: x position</p></li>
+<li><p>4: y position</p></li>
+<li><p>5: whether the agent has terminated</p></li>
+<li><p>6-9: array representation of carried object (if any)</p></li>
+</ul>
+</dd>
+</dl>
+<p>AgentState objects also support vectorized operations,
+in which case the first (n - 1) dimensions represent a “batch” of states,
+and the last dimension represents each index in a state array.</p>
+<p class="rubric">Examples</p>
+<p>Create a vectorized agent state for 3 agents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span>
+<span class="go">AgentState([[10,  0, -1, -1, -1,  0,  0,  0,  0,  0],</span>
+<span class="go">            [10,  1, -1, -1, -1,  0,  0,  0,  0,  0],</span>
+<span class="go">            [10,  2, -1, -1, -1,  0,  0,  0,  0,  0]])</span>
+</pre></div>
+</div>
+<p>Access and set state attributes one at a time:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">color</span>
+<span class="go">&#39;red&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">AgentState([10,  4, -1, -1, -1,  0,  0,  0,  0,  0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">AgentState([10,  1, -1, 23, 45,  0,  0,  0,  0,  0])</span>
+</pre></div>
+</div>
+<p>The underlying vectorized state is updated as well:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span>
+<span class="go">AgentState([[10,  4, -1, -1, -1,  0,  0,  0,  0,  0],</span>
+<span class="go">            [10,  1, -1, 23, 45,  0,  0,  0,  0,  0],</span>
+<span class="go">            [10,  2, -1, -1, -1,  0,  0,  0,  0,  0]])</span>
+</pre></div>
+</div>
+<p>Access and set state attributes all at once:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span>
+<span class="go">array([-1, -1, -1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">agent_state</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span>
+<span class="go">array([2, 3, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dir</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">dir</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">dir</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#multigrid.core.agent.AgentState.color" title="multigrid.core.agent.AgentState.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span></code></a><span class="classifier">str</span></dt><dd><p>Return the name of the agent color.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.agent.AgentState.dir" title="multigrid.core.agent.AgentState.dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dir</span></code></a><span class="classifier">int</span></dt><dd><p>Return the agent direction.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.agent.AgentState.pos" title="multigrid.core.agent.AgentState.pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pos</span></code></a><span class="classifier">np.ndarray[int]</span></dt><dd><p>Return the agent’s (x, y) position.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.agent.AgentState.terminated" title="multigrid.core.agent.AgentState.terminated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terminated</span></code></a><span class="classifier">bool</span></dt><dd><p>Return whether the agent has terminated.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.agent.AgentState.carrying" title="multigrid.core.agent.AgentState.carrying"><code class="xref py py-obj docutils literal notranslate"><span class="pre">carrying</span></code></a><span class="classifier">WorldObj or None</span></dt><dd><p>Return the WorldObj the agent is carrying.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#multigrid.core.agent.AgentState.dim" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#multigrid.core.agent.AgentState.color" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the name of the agent color.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#multigrid.core.agent.AgentState.dir" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the agent direction.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.AgentState.pos" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the agent’s (x, y) position.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.terminated">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminated</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#multigrid.core.agent.AgentState.terminated" title="Permalink to this definition">#</a></dt>
+<dd><p>Return whether the agent has terminated.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.carrying">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">carrying</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#multigrid.core.agent.AgentState.carrying" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the WorldObj the agent is carrying.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.AgentState.world_obj_encoding">
+<span class="sig-name descname"><span class="pre">world_obj_encoding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#AgentState.world_obj_encoding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.AgentState.world_obj_encoding" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode a description of this agent as a 3-tuple of integers
+(i.e. type, color, direction).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.agent.</span></span><span class="sig-name descname"><span class="pre">Agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mission_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace" title="multigrid.core.mission.MissionSpace"><span class="pre">MissionSpace</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.agent.AgentState" title="multigrid.core.agent.AgentState"><span class="pre">AgentState</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">see_through_walls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing an agent in the environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the agent in the environment</p>
+</dd>
+<dt><strong>state</strong><span class="classifier">AgentState</span></dt><dd><p>State of the agent</p>
+</dd>
+<dt><strong>action_space</strong><span class="classifier">gym.spaces.Discrete</span></dt><dd><p>Action space for the agent</p>
+</dd>
+<dt><strong>observation_space</strong><span class="classifier">gym.spaces.Dict</span></dt><dd><p>Observation space for the agent</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'maximize</span> <span class="pre">reward'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.reset" title="Permalink to this definition">#</a></dt>
+<dd><p>Reset the agent to an initial state.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.Agent.pos" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the agent’s (x, y) position.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#multigrid.core.agent.Agent.dir" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the agent direction.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.carrying">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">carrying</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#multigrid.core.agent.Agent.carrying" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the object the agent is carrying.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.dir_vec">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir_vec</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.Agent.dir_vec" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the direction vector for the agent, pointing in the direction
+of forward movement.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.right_vec">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">right_vec</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.Agent.right_vec" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the vector pointing to the right of the agent.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.front_pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.Agent.front_pos" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the position of the cell that is right in front of the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.to_world_obj">
+<span class="sig-name descname"><span class="pre">to_world_obj</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.to_world_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.to_world_obj" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.get_view_coords">
+<span class="sig-name descname"><span class="pre">get_view_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.get_view_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.get_view_coords" title="Permalink to this definition">#</a></dt>
+<dd><p>Translate and rotate absolute grid coordinates (i, j) into the
+agent’s partially observable view (sub-grid). Note that the resulting
+coordinates may be negative or outside of the agent’s view size.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.relative_coords">
+<span class="sig-name descname"><span class="pre">relative_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.relative_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.relative_coords" title="Permalink to this definition">#</a></dt>
+<dd><p>Check if a grid position belongs to the agent’s field of view,
+and returns the corresponding coordinates.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.in_view">
+<span class="sig-name descname"><span class="pre">in_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.in_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.in_view" title="Permalink to this definition">#</a></dt>
+<dd><p>Check if a grid position is visible to the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.sees">
+<span class="sig-name descname"><span class="pre">sees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.grid.html#multigrid.core.grid.Grid" title="multigrid.core.grid.Grid"><span class="pre">Grid</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.sees"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.sees" title="Permalink to this definition">#</a></dt>
+<dd><p>Check if a non-empty grid position is visible to the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.encode" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode a description of this agent as a 3-tuple of integers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw the agent.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="multigrid.core.actions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">multigrid.core.actions module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multigrid.core.constants.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">multigrid.core.constants module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.dim"><code class="docutils literal notranslate"><span class="pre">AgentState.dim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.color"><code class="docutils literal notranslate"><span class="pre">AgentState.color</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.dir"><code class="docutils literal notranslate"><span class="pre">AgentState.dir</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.pos"><code class="docutils literal notranslate"><span class="pre">AgentState.pos</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.terminated"><code class="docutils literal notranslate"><span class="pre">AgentState.terminated</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.carrying"><code class="docutils literal notranslate"><span class="pre">AgentState.carrying</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.AgentState.world_obj_encoding"><code class="docutils literal notranslate"><span class="pre">AgentState.world_obj_encoding()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent"><code class="docutils literal notranslate"><span class="pre">Agent</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.reset"><code class="docutils literal notranslate"><span class="pre">Agent.reset()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.pos"><code class="docutils literal notranslate"><span class="pre">Agent.pos</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.dir"><code class="docutils literal notranslate"><span class="pre">Agent.dir</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.carrying"><code class="docutils literal notranslate"><span class="pre">Agent.carrying</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.dir_vec"><code class="docutils literal notranslate"><span class="pre">Agent.dir_vec</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.right_vec"><code class="docutils literal notranslate"><span class="pre">Agent.right_vec</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.front_pos"><code class="docutils literal notranslate"><span class="pre">Agent.front_pos</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.to_world_obj"><code class="docutils literal notranslate"><span class="pre">Agent.to_world_obj()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.get_view_coords"><code class="docutils literal notranslate"><span class="pre">Agent.get_view_coords()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.relative_coords"><code class="docutils literal notranslate"><span class="pre">Agent.relative_coords()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.in_view"><code class="docutils literal notranslate"><span class="pre">Agent.in_view()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.sees"><code class="docutils literal notranslate"><span class="pre">Agent.sees()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.encode"><code class="docutils literal notranslate"><span class="pre">Agent.encode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.agent.Agent.render"><code class="docutils literal notranslate"><span class="pre">Agent.render()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/multigrid.core.agent.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Ini Oguntola.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

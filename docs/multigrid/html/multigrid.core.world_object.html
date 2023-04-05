@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>multigrid.core.world_object module &#8212; multigrid 0.1.0b documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'multigrid.core.world_object';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="multigrid.utils package" href="multigrid.utils.html" />
+    <link rel="prev" title="multigrid.core.roomgrid module" href="multigrid.core.roomgrid.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">multigrid 0.1.0b documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="multigrid.html">multigrid package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="multigrid.core.html">multigrid.core package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.grid.html">multigrid.core.grid module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">multigrid.core.world_object module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.act.html">multigrid.utils.act module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.manual_control.html">multigrid.manual_control module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.minigrid_interface.html">multigrid.minigrid_interface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.wrappers.html">multigrid.wrappers module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">multigrid</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="multigrid.core.html" class="nav-link">multigrid.core package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">multigrid.core.world_object module</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-multigrid.core.world_object">
+<span id="multigrid-core-world-object-module"></span><h1>multigrid.core.world_object module<a class="headerlink" href="#module-multigrid.core.world_object" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">WorldObj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'empty'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Base class for grid world objects.</p>
+<p>The state is a 4-dimensional integer array, indexed as follows:
+* 0: object type
+* 1: object color
+* 2: object state (i.e. open/closed/locked)
+* 3: mixed-radix integer encoding of contained object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#multigrid.core.world_object.WorldObj.type" title="multigrid.core.world_object.WorldObj.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a><span class="classifier">str</span></dt><dd><p>Return the name of the object type.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.world_object.WorldObj.color" title="multigrid.core.world_object.WorldObj.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span></code></a><span class="classifier">str</span></dt><dd><p>Return the name of the object color.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.world_object.WorldObj.state" title="multigrid.core.world_object.WorldObj.state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">state</span></code></a><span class="classifier">str</span></dt><dd><p>Return the name of the object state.</p>
+</dd>
+<dt><a class="reference internal" href="#multigrid.core.world_object.WorldObj.contains" title="multigrid.core.world_object.WorldObj.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains</span></code></a><span class="classifier">WorldObj or None</span></dt><dd><p>Return the object contained by this object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.dim" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.encode_dim">
+<span class="sig-name descname"><span class="pre">encode_dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.encode_dim" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.max_contain_depth">
+<span class="sig-name descname"><span class="pre">max_contain_depth</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.max_contain_depth" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.empty">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.empty" title="Permalink to this definition">#</a></dt>
+<dd><p>Return fixed reference to an empty WorldObj instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.from_array">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.from_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.from_array" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert an array to a WorldObj instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.from_int">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="s"><span class="pre">'WorldObj'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.from_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.from_int" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a mixed-radix integer encoding to a WorldObj instance.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.type" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the name of the object type.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.color" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the name of the object color.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.state" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the name of the object state.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.contains">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contains</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="s"><span class="pre">'WorldObj'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.contains" title="Permalink to this definition">#</a></dt>
+<dd><p>Return the object contained by this object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.can_overlap">
+<span class="sig-name descname"><span class="pre">can_overlap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.can_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.can_overlap" title="Permalink to this definition">#</a></dt>
+<dd><p>Can an agent overlap with this?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.can_pickup">
+<span class="sig-name descname"><span class="pre">can_pickup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.can_pickup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.can_pickup" title="Permalink to this definition">#</a></dt>
+<dd><p>Can an agent pick this up?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.can_contain">
+<span class="sig-name descname"><span class="pre">can_contain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.can_contain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.can_contain" title="Permalink to this definition">#</a></dt>
+<dd><p>Can this contain another object?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.see_behind">
+<span class="sig-name descname"><span class="pre">see_behind</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.see_behind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.see_behind" title="Permalink to this definition">#</a></dt>
+<dd><p>Can an agent see behind this object?</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.encode" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode a description of this object state.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.decode">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="s"><span class="pre">'WorldObj'</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.decode" title="Permalink to this definition">#</a></dt>
+<dd><p>Create an object from a 3-tuple state description.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.to_int">
+<span class="sig-name descname"><span class="pre">to_int</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj.to_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj.to_int" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode this object state as a mixed-radix integer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Goal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Goal</span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Goal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Goal" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Goal object an agent may be searching for.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Goal.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Goal.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Goal.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Floor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Floor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Floor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Colored floor tile an agent can walk over.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Floor.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Floor.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Lava">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Lava</span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Lava"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Lava" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Lava object an agent can fall onto.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Lava.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Lava.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Lava.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Wall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'grey'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Wall" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Wall object that agents cannot move through.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Wall.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Wall.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Wall.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Door">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Door</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_open</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_locked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Door"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Door" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Door object that may be opened or closed. Locked doors require a key to open.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>is_open: bool</strong></dt><dd><p>Whether the door is open</p>
+</dd>
+<dt><strong>is_locked: bool</strong></dt><dd><p>Whether the door is locked</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Door.is_open">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_open</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#multigrid.core.world_object.Door.is_open" title="Permalink to this definition">#</a></dt>
+<dd><p>Whether the door is open.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Door.is_locked">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_locked</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#multigrid.core.world_object.Door.is_locked" title="Permalink to this definition">#</a></dt>
+<dd><p>Whether the door is locked.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Door.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Door.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Door.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Key">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Key" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Key object that can be picked up and used to open locked doors.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Key.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Key.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Key.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Ball">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Ball</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Ball"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Ball" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Ball object that can be picked up by agents.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Ball.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Ball.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Ball.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Box">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'yellow'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contains</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Box" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
+<p>Box object that may contain other objects.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.world_object.Box.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Box.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Box.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw this object with the given renderer.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="multigrid.core.roomgrid.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">multigrid.core.roomgrid module</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multigrid.utils.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">multigrid.utils package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj"><code class="docutils literal notranslate"><span class="pre">WorldObj</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.dim"><code class="docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.encode_dim"><code class="docutils literal notranslate"><span class="pre">WorldObj.encode_dim</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.max_contain_depth"><code class="docutils literal notranslate"><span class="pre">WorldObj.max_contain_depth</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.empty"><code class="docutils literal notranslate"><span class="pre">WorldObj.empty()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.from_array"><code class="docutils literal notranslate"><span class="pre">WorldObj.from_array()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.from_int"><code class="docutils literal notranslate"><span class="pre">WorldObj.from_int()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.type"><code class="docutils literal notranslate"><span class="pre">WorldObj.type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.color"><code class="docutils literal notranslate"><span class="pre">WorldObj.color</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.state"><code class="docutils literal notranslate"><span class="pre">WorldObj.state</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.contains"><code class="docutils literal notranslate"><span class="pre">WorldObj.contains</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.can_overlap"><code class="docutils literal notranslate"><span class="pre">WorldObj.can_overlap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.can_pickup"><code class="docutils literal notranslate"><span class="pre">WorldObj.can_pickup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.can_contain"><code class="docutils literal notranslate"><span class="pre">WorldObj.can_contain()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.see_behind"><code class="docutils literal notranslate"><span class="pre">WorldObj.see_behind()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.encode"><code class="docutils literal notranslate"><span class="pre">WorldObj.encode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.decode"><code class="docutils literal notranslate"><span class="pre">WorldObj.decode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.render"><code class="docutils literal notranslate"><span class="pre">WorldObj.render()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.WorldObj.to_int"><code class="docutils literal notranslate"><span class="pre">WorldObj.to_int()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Goal"><code class="docutils literal notranslate"><span class="pre">Goal</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Goal.render"><code class="docutils literal notranslate"><span class="pre">Goal.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Floor"><code class="docutils literal notranslate"><span class="pre">Floor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Floor.render"><code class="docutils literal notranslate"><span class="pre">Floor.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Lava"><code class="docutils literal notranslate"><span class="pre">Lava</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Lava.render"><code class="docutils literal notranslate"><span class="pre">Lava.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Wall"><code class="docutils literal notranslate"><span class="pre">Wall</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Wall.render"><code class="docutils literal notranslate"><span class="pre">Wall.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Door"><code class="docutils literal notranslate"><span class="pre">Door</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Door.is_open"><code class="docutils literal notranslate"><span class="pre">Door.is_open</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Door.is_locked"><code class="docutils literal notranslate"><span class="pre">Door.is_locked</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Door.render"><code class="docutils literal notranslate"><span class="pre">Door.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Key"><code class="docutils literal notranslate"><span class="pre">Key</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Key.render"><code class="docutils literal notranslate"><span class="pre">Key.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Ball"><code class="docutils literal notranslate"><span class="pre">Ball</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Ball.render"><code class="docutils literal notranslate"><span class="pre">Ball.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Box"><code class="docutils literal notranslate"><span class="pre">Box</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multigrid.core.world_object.Box.render"><code class="docutils literal notranslate"><span class="pre">Box.render()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/multigrid.core.world_object.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Ini Oguntola.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

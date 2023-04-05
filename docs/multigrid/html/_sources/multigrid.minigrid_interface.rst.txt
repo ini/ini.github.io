@@ -1,0 +1,7 @@
+multigrid.minigrid\_interface module
+====================================
+
+.. automodule:: multigrid.minigrid_interface
+   :members:
+   :undoc-members:
+   :show-inheritance:

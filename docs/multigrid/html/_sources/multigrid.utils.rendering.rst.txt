@@ -1,0 +1,7 @@
+multigrid.utils.rendering module
+================================
+
+.. automodule:: multigrid.utils.rendering
+   :members:
+   :undoc-members:
+   :show-inheritance:

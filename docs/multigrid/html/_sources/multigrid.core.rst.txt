@@ -1,0 +1,24 @@
+multigrid.core package
+======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.core.actions
+   multigrid.core.agent
+   multigrid.core.constants
+   multigrid.core.grid
+   multigrid.core.mission
+   multigrid.core.roomgrid
+   multigrid.core.world_object
+
+Module contents
+---------------
+
+.. automodule:: multigrid.core
+   :members:
+   :undoc-members:
+   :show-inheritance:

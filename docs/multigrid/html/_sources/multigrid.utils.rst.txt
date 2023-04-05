@@ -1,0 +1,21 @@
+multigrid.utils package
+=======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.utils.act
+   multigrid.utils.misc
+   multigrid.utils.obs
+   multigrid.utils.rendering
+
+Module contents
+---------------
+
+.. automodule:: multigrid.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

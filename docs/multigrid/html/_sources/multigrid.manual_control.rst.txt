@@ -1,0 +1,7 @@
+multigrid.manual\_control module
+================================
+
+.. automodule:: multigrid.manual_control
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,30 @@
+multigrid package
+=================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.core
+   multigrid.utils
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.manual_control
+   multigrid.minigrid_interface
+   multigrid.multigrid_env
+   multigrid.wrappers
+
+Module contents
+---------------
+
+.. automodule:: multigrid
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,1073 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multigrid.multigrid_env &#8212; multigrid 0.1.0b documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multigrid/multigrid_env';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">multigrid 0.1.0b documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">multigrid.multigrid_env</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for multigrid.multigrid_env</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">import</span> <span class="nn">pygame.freetype</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">gymnasium</span> <span class="kn">import</span> <span class="n">spaces</span>
+<span class="kn">from</span> <span class="nn">gymnasium.core</span> <span class="kn">import</span> <span class="n">ActType</span><span class="p">,</span> <span class="n">ObsType</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="kn">from</span> <span class="nn">.core.actions</span> <span class="kn">import</span> <span class="n">Actions</span>
+<span class="kn">from</span> <span class="nn">.core.agent</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">AgentState</span>
+<span class="kn">from</span> <span class="nn">.core.constants</span> <span class="kn">import</span> <span class="n">COLOR_NAMES</span><span class="p">,</span> <span class="n">TILE_PIXELS</span>
+<span class="kn">from</span> <span class="nn">.core.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
+<span class="kn">from</span> <span class="nn">.core.mission</span> <span class="kn">import</span> <span class="n">MissionSpace</span>
+<span class="kn">from</span> <span class="nn">.core.world_object</span> <span class="kn">import</span> <span class="n">WorldObj</span>
+
+<span class="kn">from</span> <span class="nn">.utils.act</span> <span class="kn">import</span> <span class="n">handle_actions</span>
+<span class="kn">from</span> <span class="nn">.utils.obs</span> <span class="kn">import</span> <span class="n">gen_obs_grid_encoding</span><span class="p">,</span> <span class="n">gen_obs_grid_vis_mask</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<span class="n">AgentID</span> <span class="o">=</span> <span class="nb">int</span>
+
+
+
+<div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multi-agent 2D gridworld game environment.</span>
+
+<span class="sd">    Agents are identified by their index, from 0 to (`num_agents - 1`).</span>
+
+<span class="sd">    The multi-agent observation space is a Dict mapping from agent index to</span>
+<span class="sd">    corresponding agent observation space.</span>
+
+<span class="sd">    Similarly, the multi-agent action space is a Dict mapping from agent index to</span>
+<span class="sd">    corresponding agent action space.</span>
+
+<span class="sd">    Subclasses of MultiGridEnv should implement `_gen_grid()`.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    agents : list[Agent]</span>
+<span class="sd">        List of agents in the environment</span>
+<span class="sd">    grid : Grid</span>
+<span class="sd">        Environment grid</span>
+<span class="sd">    action_space : spaces.Dict[AgentID, spaces.Space]</span>
+<span class="sd">        Joint action space of all agents</span>
+<span class="sd">    observation_space : spaces.Dict[AgentID, spaces.Space]</span>
+<span class="sd">        Joint observation space of all agents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;render_modes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="s1">&#39;rgb_array&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;render_fps&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mission_space</span><span class="p">:</span> <span class="n">MissionSpace</span><span class="p">,</span>
+        <span class="n">agents</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">grid_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">see_through_walls</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">agent_view_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="n">allow_agent_overlap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">is_competitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">render_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">screen_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">tile_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TILE_PIXELS</span><span class="p">,</span>
+        <span class="n">agent_pov</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agents : int or Iterable[Agent]</span>
+<span class="sd">            Number of agents in the environment (or provide a list of agents)</span>
+<span class="sd">        grid_size : int</span>
+<span class="sd">            Size of the environment grid (width and height)</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Width of the environment grid (overrides grid_size)</span>
+<span class="sd">        height : int</span>
+<span class="sd">            Height of the environment grid (overrides grid_size)</span>
+<span class="sd">        max_steps : int</span>
+<span class="sd">            Maximum number of steps per episode</span>
+<span class="sd">        see_through_walls : bool</span>
+<span class="sd">            Whether agents can see through walls</span>
+<span class="sd">        agent_view_size : int</span>
+<span class="sd">            Size of agent view (must be odd)</span>
+<span class="sd">        allow_agent_overlap : bool</span>
+<span class="sd">            Whether agents are allowed to overlap</span>
+<span class="sd">        is_competitive : bool</span>
+<span class="sd">            Whether the task is competitive (i.e. only one agent can get the reward)</span>
+<span class="sd">        render_mode : str</span>
+<span class="sd">            Rendering mode (human or rgb_array)</span>
+<span class="sd">        screen_size : int</span>
+<span class="sd">            Size of the screen (in tiles)</span>
+<span class="sd">        highlight : bool</span>
+<span class="sd">            Whether to highlight the view of each agent when rendering</span>
+<span class="sd">        tile_size : int</span>
+<span class="sd">            Width and height of each grid tiles (in pixels)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize mission</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span> <span class="o">=</span> <span class="n">mission_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+        <span class="c1"># Initialize grid</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span> <span class="k">if</span> <span class="n">grid_size</span> <span class="k">else</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">height</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+
+        <span class="c1"># Initialize agents</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="n">agents</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
+                <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+                    <span class="n">i</span><span class="p">,</span>
+                    <span class="n">mission_space</span><span class="p">,</span>
+                    <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">view_size</span><span class="o">=</span><span class="n">agent_view_size</span><span class="p">,</span>
+                    <span class="n">see_through_walls</span><span class="o">=</span><span class="n">see_through_walls</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="p">{</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">}</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">agents</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">agent</span><span class="p">:</span> <span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="c1"># copy to joint agent state</span>
+                <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="c1"># reference joint agent state</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid argument for agents: </span><span class="si">{</span><span class="n">agents</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Action enumeration for this environment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">Actions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">null_actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">done</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="c1"># Range of possible rewards</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">max_steps</span><span class="p">,</span> <span class="nb">int</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;The argument max_steps must be an integer, got: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">max_steps</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="n">max_steps</span>
+
+        <span class="c1"># Rendering attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">=</span> <span class="n">render_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight</span> <span class="o">=</span> <span class="n">highlight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tile_size</span> <span class="o">=</span> <span class="n">tile_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent_pov</span> <span class="o">=</span> <span class="n">agent_pov</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span> <span class="o">=</span> <span class="n">screen_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_size</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Other</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_agent_overlap</span> <span class="o">=</span> <span class="n">allow_agent_overlap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_competitive</span> <span class="o">=</span> <span class="n">is_competitive</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">action_space</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the joint action space of all agents.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">({</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="n">agent</span><span class="o">.</span><span class="n">action_space</span>
+            <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span>
+        <span class="p">})</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">observation_space</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the joint observation space of all agents.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">({</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="n">agent</span><span class="o">.</span><span class="n">observation_space</span>
+            <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span>
+        <span class="p">})</span>
+
+<div class="viewcode-block" id="MultiGridEnv.reset"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the environment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="c1"># Reinitialize episode-specific variables</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mission</span><span class="p">)</span>
+
+        <span class="c1"># Generate a new random grid at the start of each episode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">locations_to_update</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">locations_to_remove</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="c1"># These fields should be defined by _gen_grid</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Check that agents don&#39;t overlap with other objects</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
+            <span class="n">start_cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">start_cell</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">start_cell</span><span class="o">.</span><span class="n">can_overlap</span><span class="p">()</span>
+
+        <span class="c1"># Step count since episode start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+        <span class="c1"># Return first observation</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.step"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">actions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ActType</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">],</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">],</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run one timestep of the environment’s dynamics</span>
+<span class="sd">        using the provided agent actions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        actions : dict[AgentID, ActType]</span>
+<span class="sd">            Action for each agent acting at this timestep</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        obs : dict[AgentID, ObsType]</span>
+<span class="sd">            Observation for each agent</span>
+<span class="sd">        reward : dict[AgentID, SupportsFloat]</span>
+<span class="sd">            Reward for each agent</span>
+<span class="sd">        terminated : dict[AgentID, bool]</span>
+<span class="sd">            Whether the episode has been terminated for each agent (success or failure)</span>
+<span class="sd">        truncated : dict[AgentID, bool]</span>
+<span class="sd">            Whether the episode has been truncated for each agent (max steps reached)</span>
+<span class="sd">        info : dict[AgentID, dict[str, Any]]</span>
+<span class="sd">            Additional information for each agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">action_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">null_actions</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">action_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span>
+
+        <span class="c1"># Randomize agent action order</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+
+        <span class="c1"># Update agent state and grid state from actions</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="n">handle_actions</span><span class="p">(</span>
+            <span class="n">action_array</span><span class="p">,</span>
+            <span class="n">order</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">needs_update</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">locations_to_update</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">needs_remove</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">locations_to_remove</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">allow_agent_overlap</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_competitive</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Update world objects in grid</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">needs_update</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">update_world_objects</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">needs_remove</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">remove_world_objects</span><span class="p">()</span>
+
+        <span class="c1"># Rendering</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+        <span class="c1"># Generate outputs</span>
+        <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span>
+        <span class="n">truncated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span>
+        <span class="n">truncated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">([</span><span class="n">truncated</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">))</span>
+        <span class="n">terminated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.gen_obs"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.gen_obs">[docs]</a>    <span class="k">def</span> <span class="nf">gen_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate observations for each agent (partially observable, low-res encoding).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        obs : dict[AgentID, dict]</span>
+<span class="sd">            Mapping from agent ID to observation dict, containing:</span>
+<span class="sd">                - &#39;image&#39;: partially observable view of the environment</span>
+<span class="sd">                - &#39;direction&#39;: agent&#39;s direction/orientation (acting as a compass)</span>
+<span class="sd">                - &#39;mission&#39;: textual mission string (instructions for the agent)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">gen_obs_grid_encoding</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">view_size</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">see_through_walls</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">obs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">):</span>
+            <span class="n">obs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="s1">&#39;mission&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mission</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="n">obs</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.hash"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.hash">[docs]</a>    <span class="k">def</span> <span class="nf">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute a hash that uniquely identifies the current state of the environment.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : int</span>
+<span class="sd">            Size of the hashing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sample_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+
+        <span class="n">to_encode</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="o">*</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">],</span>
+            <span class="o">*</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">],</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">to_encode</span><span class="p">:</span>
+            <span class="n">sample_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">sample_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="n">size</span><span class="p">]</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">steps_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Number of steps remaining in the episode (until truncation).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Produce a pretty string of the environment&#39;s grid along with the agent.</span>
+<span class="sd">        A grid cell is represented by 2-character string, the first one for</span>
+<span class="sd">        the object and the second one for the color.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Map of object types to short string</span>
+        <span class="n">OBJECT_TO_STR</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;wall&#39;</span><span class="p">:</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;floor&#39;</span><span class="p">:</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;door&#39;</span><span class="p">:</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ball&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;goal&#39;</span><span class="p">:</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;lava&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Map agent&#39;s direction to short string</span>
+        <span class="n">AGENT_DIR_TO_STR</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;^&#39;</span><span class="p">}</span>
+
+        <span class="c1"># Get agent locations</span>
+        <span class="n">location_to_agent</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">pos</span><span class="p">):</span> <span class="n">agent</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">}</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">height</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">width</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="n">location_to_agent</span><span class="p">:</span>
+                    <span class="n">output</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">AGENT_DIR_TO_STR</span><span class="p">[</span><span class="n">tile</span><span class="o">.</span><span class="n">dir</span><span class="p">]</span>
+                    <span class="k">continue</span>
+
+                <span class="n">tile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">tile</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;  &#39;</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">tile</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;agent&#39;</span><span class="p">:</span>
+                    <span class="n">output</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">AGENT_DIR_TO_STR</span><span class="p">[</span><span class="n">tile</span><span class="o">.</span><span class="n">dir</span><span class="p">]</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">tile</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;door&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">tile</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
+                        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;__&#39;</span>
+                    <span class="k">elif</span> <span class="n">tile</span><span class="o">.</span><span class="n">is_locked</span><span class="p">:</span>
+                        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;L&#39;</span> <span class="o">+</span> <span class="n">tile</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;D&#39;</span> <span class="o">+</span> <span class="n">tile</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="k">continue</span>
+
+                <span class="n">output</span> <span class="o">+=</span> <span class="n">OBJECT_TO_STR</span><span class="p">[</span><span class="n">tile</span><span class="o">.</span><span class="n">type</span><span class="p">]</span> <span class="o">+</span> <span class="n">tile</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_rand_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate random integer in range [low, high].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_rand_float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate random float in range [low, high].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_rand_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate random boolean value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_rand_elem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pick a random element in a list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_rand_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">num_elems</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sample a random subset of distinct elements of a list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">num_elems</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_elems</span><span class="p">:</span>
+            <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_elem</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">_rand_color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a random color name (string).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_elem</span><span class="p">(</span><span class="n">COLOR_NAMES</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_rand_pos</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">x_low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x_high</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y_low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y_high</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a random (x, y) position tuple.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">x_low</span><span class="p">,</span> <span class="n">x_high</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">y_low</span><span class="p">,</span> <span class="n">y_high</span><span class="p">),</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="MultiGridEnv.place_obj"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_obj">[docs]</a>    <span class="k">def</span> <span class="nf">place_obj</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">top</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reject_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_tries</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Place an object at an empty position in the grid.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obj: WorldObj</span>
+<span class="sd">            Object to place in the grid</span>
+<span class="sd">        top: tuple[int, int]</span>
+<span class="sd">            Top-left position of the rectangular area where to place the object</span>
+<span class="sd">        size: tuple[int, int]</span>
+<span class="sd">            Width and height of the rectangular area where to place the object</span>
+<span class="sd">        reject_fn: Callable(env, pos) -&gt; bool</span>
+<span class="sd">            Function to filter out potential positions</span>
+<span class="sd">        max_tries: int</span>
+<span class="sd">            Maximum number of attempts to place the object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">top</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+
+        <span class="n">num_tries</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># This is to handle with rare cases where rejection sampling</span>
+            <span class="c1"># gets stuck in an infinite loop</span>
+            <span class="k">if</span> <span class="n">num_tries</span> <span class="o">&gt;</span> <span class="n">max_tries</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RecursionError</span><span class="p">(</span><span class="s2">&quot;rejection sampling failed in place_obj&quot;</span><span class="p">)</span>
+
+            <span class="n">num_tries</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">width</span><span class="p">)),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">height</span><span class="p">)),</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Don&#39;t place the object on top of another object</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Don&#39;t place the object where agents are</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Check if there is a filtering criterion</span>
+            <span class="k">if</span> <span class="n">reject_fn</span> <span class="ow">and</span> <span class="n">reject_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">break</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">init_pos</span> <span class="o">=</span> <span class="n">pos</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">cur_pos</span> <span class="o">=</span> <span class="n">pos</span>
+
+        <span class="k">return</span> <span class="n">pos</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.put_obj"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.put_obj">[docs]</a>    <span class="k">def</span> <span class="nf">put_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Put an object at a specific position in the grid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">init_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">cur_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.place_agent"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_agent">[docs]</a>    <span class="k">def</span> <span class="nf">place_agent</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span>
+        <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">rand_dir</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">max_tries</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set agent starting point at an empty position in the grid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="n">max_tries</span><span class="p">)</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span>
+
+        <span class="k">if</span> <span class="n">rand_dir</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pos</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.get_pov_render"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_pov_render">[docs]</a>    <span class="k">def</span> <span class="nf">get_pov_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Render an agent&#39;s POV observation for visualization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s2">&quot;POV rendering not supported for multiagent environments.&quot;</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.get_full_render"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_full_render">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Render a non-partial observation for visualization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Compute agent visibility masks</span>
+        <span class="n">vis_masks</span> <span class="o">=</span> <span class="n">gen_obs_grid_vis_mask</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">view_size</span><span class="p">)</span>
+
+        <span class="c1"># Mask of which cells to highlight</span>
+        <span class="n">highlight_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
+            <span class="c1"># Compute the world coordinates of the bottom-left corner</span>
+            <span class="c1"># of the agent&#39;s view area</span>
+            <span class="n">f_vec</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">dir_vec</span>
+            <span class="n">r_vec</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">right_vec</span>
+            <span class="n">top_left</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span>
+                <span class="o">+</span> <span class="n">f_vec</span> <span class="o">*</span> <span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">view_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="o">-</span> <span class="n">r_vec</span> <span class="o">*</span> <span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">view_size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="c1"># For each cell in the visibility mask</span>
+            <span class="k">for</span> <span class="n">vis_j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">view_size</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">vis_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">view_size</span><span class="p">):</span>
+                    <span class="c1"># If this cell is not visible, don&#39;t highlight it</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">vis_masks</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">][</span><span class="n">vis_i</span><span class="p">,</span> <span class="n">vis_j</span><span class="p">]:</span>
+                        <span class="k">continue</span>
+
+                    <span class="c1"># Compute the world coordinates of this cell</span>
+                    <span class="n">abs_i</span><span class="p">,</span> <span class="n">abs_j</span> <span class="o">=</span> <span class="n">top_left</span> <span class="o">-</span> <span class="p">(</span><span class="n">f_vec</span> <span class="o">*</span> <span class="n">vis_j</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">*</span> <span class="n">vis_i</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">abs_i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">abs_i</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="n">abs_j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">abs_j</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+                    <span class="c1"># Mark this cell to be highlighted</span>
+                    <span class="n">highlight_mask</span><span class="p">[</span><span class="n">abs_i</span><span class="p">,</span> <span class="n">abs_j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Render the whole grid</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+            <span class="n">tile_size</span><span class="p">,</span>
+            <span class="n">agents</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">,</span>
+            <span class="n">highlight_mask</span><span class="o">=</span><span class="n">highlight_mask</span> <span class="k">if</span> <span class="n">highlight</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.get_frame"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_frame">[docs]</a>    <span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">tile_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TILE_PIXELS</span><span class="p">,</span>
+        <span class="n">agent_pov</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an RGB image corresponding to the whole environment.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        highlight: bool</span>
+<span class="sd">            Whether to highlight agents&#39; field of view (with a lighter gray color)</span>
+<span class="sd">        tile_size: int</span>
+<span class="sd">            How many pixels will form a tile from the NxM grid</span>
+<span class="sd">        agent_pov: bool</span>
+<span class="sd">            Whether to render agent&#39;s POV or the full environment</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        frame: np.ndarray of shape (H, W, 3)</span>
+<span class="sd">            A frame representing RGB values for the HxW pixel image</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">agent_pov</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pov_render</span><span class="p">(</span><span class="n">tile_size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_full_render</span><span class="p">(</span><span class="n">highlight</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.render"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Render the environment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tile_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">render_size</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+                <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;multigrid&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
+            <span class="n">surf</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">surfarray</span><span class="o">.</span><span class="n">make_surface</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+            <span class="c1"># Create background with mission description</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">surf</span><span class="o">.</span><span class="n">get_size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.1</span>
+            <span class="c1"># offset = 32 if self.agent_pov else 64</span>
+            <span class="n">bg</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span>
+                <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">surf</span><span class="o">.</span><span class="n">get_size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">surf</span><span class="o">.</span><span class="n">get_size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">offset</span><span class="p">))</span>
+            <span class="p">)</span>
+            <span class="n">bg</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+            <span class="n">bg</span><span class="o">.</span><span class="n">fill</span><span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+            <span class="n">bg</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">surf</span><span class="p">,</span> <span class="p">(</span><span class="n">offset</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+            <span class="n">bg</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">smoothscale</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span><span class="p">))</span>
+
+            <span class="n">font_size</span> <span class="o">=</span> <span class="mi">22</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mission</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">freetype</span><span class="o">.</span><span class="n">SysFont</span><span class="p">(</span><span class="n">pygame</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">get_default_font</span><span class="p">(),</span> <span class="n">font_size</span><span class="p">)</span>
+            <span class="n">text_rect</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">get_rect</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
+            <span class="n">text_rect</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="n">get_rect</span><span class="p">()</span><span class="o">.</span><span class="n">center</span>
+            <span class="n">text_rect</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">-</span> <span class="n">font_size</span> <span class="o">*</span> <span class="mf">1.5</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">render_to</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="n">text_rect</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><span class="n">bg</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">pump</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clock</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;render_fps&#39;</span><span class="p">])</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;rgb_array&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.close"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close the rendering window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span></div></div>
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Ini Oguntola.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

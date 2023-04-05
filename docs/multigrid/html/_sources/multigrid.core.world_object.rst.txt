@@ -1,0 +1,7 @@
+multigrid.core.world\_object module
+===================================
+
+.. automodule:: multigrid.core.world_object
+   :members:
+   :undoc-members:
+   :show-inheritance:

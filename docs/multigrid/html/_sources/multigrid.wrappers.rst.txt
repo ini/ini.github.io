@@ -1,0 +1,7 @@
+multigrid.wrappers module
+=========================
+
+.. automodule:: multigrid.wrappers
+   :members:
+   :undoc-members:
+   :show-inheritance:

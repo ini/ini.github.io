@@ -1,0 +1,7 @@
+multigrid.core.roomgrid module
+==============================
+
+.. automodule:: multigrid.core.roomgrid
+   :members:
+   :undoc-members:
+   :show-inheritance:

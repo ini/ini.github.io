@@ -1,0 +1,7 @@
+multigrid.core.agent module
+===========================
+
+.. automodule:: multigrid.core.agent
+   :members:
+   :undoc-members:
+   :show-inheritance:

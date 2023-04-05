@@ -1,0 +1,1077 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; multigrid 0.1.0b documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">multigrid 0.1.0b documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        multigrid
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.action_space">action_space (multigrid.minigrid_interface.MiniGridInterface property)</a>
+
+      <ul>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.action_space">(multigrid.multigrid_env.MultiGridEnv property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.ActionBonus">ActionBonus (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions">Actions (class in multigrid.core.actions)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_distractors">add_distractors() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_door">add_door() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_object">add_object() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent">Agent (class in multigrid.core.agent)</a>
+</li>
+      <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.agent_dir">agent_dir (multigrid.minigrid_interface.MiniGridInterface property)</a>
+</li>
+      <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.agent_pos">agent_pos (multigrid.minigrid_interface.MiniGridInterface property)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState">AgentState (class in multigrid.core.agent)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Ball">Ball (class in multigrid.core.world_object)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Box">Box (class in multigrid.core.world_object)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_contain">can_contain() (multigrid.core.world_object.WorldObj method)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_overlap">can_overlap() (multigrid.core.world_object.WorldObj method)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_pickup">can_pickup() (multigrid.core.world_object.WorldObj method)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.carrying">carrying (multigrid.core.agent.Agent property)</a>
+
+      <ul>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.carrying">(multigrid.core.agent.AgentState property)</a>
+</li>
+        <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.carrying">(multigrid.minigrid_interface.MiniGridInterface property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.core.mission.html#multigrid.core.mission.check_if_no_duplicate">check_if_no_duplicate() (in module multigrid.core.mission)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.close">close() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.color">color (multigrid.core.agent.AgentState property)</a>
+
+      <ul>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.color">(multigrid.core.world_object.WorldObj property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.connect_all">connect_all() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.contains">contains (multigrid.core.world_object.WorldObj property)</a>
+</li>
+      <li><a href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace.contains">contains() (multigrid.core.mission.MissionSpace method)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.copy">copy() (multigrid.core.grid.Grid method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.decode">decode() (multigrid.core.grid.Grid static method)</a>
+
+      <ul>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.decode">(multigrid.core.world_object.WorldObj static method)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.DictObservationSpaceWrapper">DictObservationSpaceWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.dim">dim (multigrid.core.agent.AgentState attribute)</a>
+
+      <ul>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim">(multigrid.core.world_object.WorldObj attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.dir">dir (multigrid.core.agent.Agent property)</a>
+
+      <ul>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.dir">(multigrid.core.agent.AgentState property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.dir_vec">dir_vec (multigrid.core.agent.Agent property)</a>
+
+      <ul>
+        <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.dir_vec">(multigrid.minigrid_interface.MiniGridInterface property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.DirectionObsWrapper">DirectionObsWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.done">done (multigrid.core.actions.Actions attribute)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Door">Door (class in multigrid.core.world_object)</a>
+</li>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.downsample">downsample() (in module multigrid.utils.rendering)</a>
+</li>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.drop">drop (multigrid.core.actions.Actions attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.empty">empty() (multigrid.core.world_object.WorldObj static method)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.encode">encode() (multigrid.core.agent.Agent method)</a>
+
+      <ul>
+        <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.encode">(multigrid.core.grid.Grid method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.encode">(multigrid.core.world_object.WorldObj method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.encode_dim">encode_dim (multigrid.core.world_object.WorldObj attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.fill_coords">fill_coords() (in module multigrid.utils.rendering)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.FlatObsWrapper">FlatObsWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Floor">Floor (class in multigrid.core.world_object)</a>
+</li>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.forward">forward (multigrid.core.actions.Actions attribute)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.from_array">from_array() (multigrid.core.world_object.WorldObj static method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.from_int">from_int() (multigrid.core.world_object.WorldObj class method)</a>
+</li>
+      <li><a href="multigrid.utils.act.html#multigrid.utils.act.from_mixed_radix_int">from_mixed_radix_int() (in module multigrid.utils.act)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.front_pos">front_pos (multigrid.core.agent.Agent property)</a>
+
+      <ul>
+        <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.front_pos">(multigrid.minigrid_interface.MiniGridInterface property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.utils.misc.html#multigrid.utils.misc.front_pos">front_pos() (in module multigrid.utils.misc)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.FullyObsWrapper">FullyObsWrapper (class in multigrid.wrappers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.gen_obs">gen_obs() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      <li><a href="multigrid.utils.obs.html#multigrid.utils.obs.gen_obs_grid">gen_obs_grid() (in module multigrid.utils.obs)</a>
+</li>
+      <li><a href="multigrid.utils.obs.html#multigrid.utils.obs.gen_obs_grid_encoding">gen_obs_grid_encoding() (in module multigrid.utils.obs)</a>
+</li>
+      <li><a href="multigrid.utils.obs.html#multigrid.utils.obs.gen_obs_grid_vis_mask">gen_obs_grid_vis_mask() (in module multigrid.utils.obs)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.get">get() (multigrid.core.grid.Grid method)</a>
+</li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_frame">get_frame() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_full_render">get_full_render() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.DictObservationSpaceWrapper.get_minigrid_words">get_minigrid_words() (multigrid.wrappers.DictObservationSpaceWrapper static method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_pov_render">get_pov_render() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.get_room">get_room() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.utils.obs.html#multigrid.utils.obs.get_see_behind_mask">get_see_behind_mask() (in module multigrid.utils.obs)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.get_view_coords">get_view_coords() (multigrid.core.agent.Agent method)</a>
+</li>
+      <li><a href="multigrid.utils.obs.html#multigrid.utils.obs.get_view_exts">get_view_exts() (in module multigrid.utils.obs)</a>
+</li>
+      <li><a href="multigrid.utils.obs.html#multigrid.utils.obs.get_vis_mask">get_vis_mask() (in module multigrid.utils.obs)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Goal">Goal (class in multigrid.core.world_object)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid">Grid (class in multigrid.core.grid)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.grid">grid (multigrid.core.grid.Grid property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.utils.act.html#multigrid.utils.act.handle_actions">handle_actions() (in module multigrid.utils.act)</a>
+</li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.hash">hash() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.height">height (multigrid.core.grid.Grid property)</a>
+</li>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.highlight_img">highlight_img() (in module multigrid.utils.rendering)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.horz_wall">horz_wall() (multigrid.core.grid.Grid method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.ImgObsWrapper">ImgObsWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.in_view">in_view() (multigrid.core.agent.Agent method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Door.is_locked">is_locked (multigrid.core.world_object.Door property)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Door.is_open">is_open (multigrid.core.world_object.Door property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Key">Key (class in multigrid.core.world_object)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.manual_control.html#multigrid.manual_control.ManualControl.key_handler">key_handler() (multigrid.manual_control.ManualControl method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Lava">Lava (class in multigrid.core.world_object)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.left">left (multigrid.core.actions.Actions attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.manual_control.html#multigrid.manual_control.ManualControl">ManualControl (class in multigrid.manual_control)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.max_contain_depth">max_contain_depth (multigrid.core.world_object.WorldObj attribute)</a>
+</li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.metadata">metadata (multigrid.multigrid_env.MultiGridEnv attribute)</a>
+</li>
+      <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface">MiniGridInterface (class in multigrid.minigrid_interface)</a>
+</li>
+      <li><a href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace">MissionSpace (class in multigrid.core.mission)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="multigrid.html#module-multigrid">multigrid</a>
+</li>
+        <li><a href="multigrid.core.html#module-multigrid.core">multigrid.core</a>
+</li>
+        <li><a href="multigrid.core.actions.html#module-multigrid.core.actions">multigrid.core.actions</a>
+</li>
+        <li><a href="multigrid.core.agent.html#module-multigrid.core.agent">multigrid.core.agent</a>
+</li>
+        <li><a href="multigrid.core.constants.html#module-multigrid.core.constants">multigrid.core.constants</a>
+</li>
+        <li><a href="multigrid.core.grid.html#module-multigrid.core.grid">multigrid.core.grid</a>
+</li>
+        <li><a href="multigrid.core.mission.html#module-multigrid.core.mission">multigrid.core.mission</a>
+</li>
+        <li><a href="multigrid.core.roomgrid.html#module-multigrid.core.roomgrid">multigrid.core.roomgrid</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#module-multigrid.core.world_object">multigrid.core.world_object</a>
+</li>
+        <li><a href="multigrid.manual_control.html#module-multigrid.manual_control">multigrid.manual_control</a>
+</li>
+        <li><a href="multigrid.minigrid_interface.html#module-multigrid.minigrid_interface">multigrid.minigrid_interface</a>
+</li>
+        <li><a href="multigrid.multigrid_env.html#module-multigrid.multigrid_env">multigrid.multigrid_env</a>
+</li>
+        <li><a href="multigrid.utils.html#module-multigrid.utils">multigrid.utils</a>
+</li>
+        <li><a href="multigrid.utils.act.html#module-multigrid.utils.act">multigrid.utils.act</a>
+</li>
+        <li><a href="multigrid.utils.misc.html#module-multigrid.utils.misc">multigrid.utils.misc</a>
+</li>
+        <li><a href="multigrid.utils.obs.html#module-multigrid.utils.obs">multigrid.utils.obs</a>
+</li>
+        <li><a href="multigrid.utils.rendering.html#module-multigrid.utils.rendering">multigrid.utils.rendering</a>
+</li>
+        <li><a href="multigrid.wrappers.html#module-multigrid.wrappers">multigrid.wrappers</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid
+
+      <ul>
+        <li><a href="multigrid.html#module-multigrid">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core
+
+      <ul>
+        <li><a href="multigrid.core.html#module-multigrid.core">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core.actions
+
+      <ul>
+        <li><a href="multigrid.core.actions.html#module-multigrid.core.actions">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    multigrid.core.agent
+
+      <ul>
+        <li><a href="multigrid.core.agent.html#module-multigrid.core.agent">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core.constants
+
+      <ul>
+        <li><a href="multigrid.core.constants.html#module-multigrid.core.constants">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core.grid
+
+      <ul>
+        <li><a href="multigrid.core.grid.html#module-multigrid.core.grid">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core.mission
+
+      <ul>
+        <li><a href="multigrid.core.mission.html#module-multigrid.core.mission">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core.roomgrid
+
+      <ul>
+        <li><a href="multigrid.core.roomgrid.html#module-multigrid.core.roomgrid">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.core.world_object
+
+      <ul>
+        <li><a href="multigrid.core.world_object.html#module-multigrid.core.world_object">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.manual_control
+
+      <ul>
+        <li><a href="multigrid.manual_control.html#module-multigrid.manual_control">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.minigrid_interface
+
+      <ul>
+        <li><a href="multigrid.minigrid_interface.html#module-multigrid.minigrid_interface">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.multigrid_env
+
+      <ul>
+        <li><a href="multigrid.multigrid_env.html#module-multigrid.multigrid_env">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.utils
+
+      <ul>
+        <li><a href="multigrid.utils.html#module-multigrid.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.utils.act
+
+      <ul>
+        <li><a href="multigrid.utils.act.html#module-multigrid.utils.act">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.utils.misc
+
+      <ul>
+        <li><a href="multigrid.utils.misc.html#module-multigrid.utils.misc">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.utils.obs
+
+      <ul>
+        <li><a href="multigrid.utils.obs.html#module-multigrid.utils.obs">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.utils.rendering
+
+      <ul>
+        <li><a href="multigrid.utils.rendering.html#module-multigrid.utils.rendering">module</a>
+</li>
+      </ul></li>
+      <li>
+    multigrid.wrappers
+
+      <ul>
+        <li><a href="multigrid.wrappers.html#module-multigrid.wrappers">module</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">MultiGridEnv (class in multigrid.multigrid_env)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.DictObservationSpaceWrapper.observation">observation() (multigrid.wrappers.DictObservationSpaceWrapper method)</a>
+
+      <ul>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.DirectionObsWrapper.observation">(multigrid.wrappers.DirectionObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.FlatObsWrapper.observation">(multigrid.wrappers.FlatObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.FullyObsWrapper.observation">(multigrid.wrappers.FullyObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.ImgObsWrapper.observation">(multigrid.wrappers.ImgObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.OneHotPartialObsWrapper.observation">(multigrid.wrappers.OneHotPartialObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.RGBImgObsWrapper.observation">(multigrid.wrappers.RGBImgObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.RGBImgPartialObsWrapper.observation">(multigrid.wrappers.RGBImgPartialObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.SymbolicObsWrapper.observation">(multigrid.wrappers.SymbolicObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.ViewSizeWrapper.observation">(multigrid.wrappers.ViewSizeWrapper method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.observation_space">observation_space (multigrid.minigrid_interface.MiniGridInterface property)</a>
+
+      <ul>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.observation_space">(multigrid.multigrid_env.MultiGridEnv property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.OneHotPartialObsWrapper">OneHotPartialObsWrapper (class in multigrid.wrappers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.pickup">pickup (multigrid.core.actions.Actions attribute)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.place_agent">place_agent() (multigrid.core.roomgrid.RoomGrid method)</a>
+
+      <ul>
+        <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.place_agent">(multigrid.minigrid_interface.MiniGridInterface method)</a>
+</li>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_agent">(multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.place_in_room">place_in_room() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_obj">place_obj() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">point_in_circle() (in module multigrid.utils.rendering)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_line">point_in_line() (in module multigrid.utils.rendering)</a>
+</li>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_rect">point_in_rect() (in module multigrid.utils.rendering)</a>
+</li>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_triangle">point_in_triangle() (in module multigrid.utils.rendering)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.pos">pos (multigrid.core.agent.Agent property)</a>
+
+      <ul>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.pos">(multigrid.core.agent.AgentState property)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.Room.pos_inside">pos_inside() (multigrid.core.roomgrid.Room method)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.PositionBonus">PositionBonus (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.put_obj">put_obj() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.Room.rand_pos">rand_pos() (multigrid.core.roomgrid.Room method)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.reject_next_to">reject_next_to() (in module multigrid.core.roomgrid)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.relative_coords">relative_coords() (multigrid.core.agent.Agent method)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.remove_wall">remove_wall() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.remove_world_objects">remove_world_objects() (multigrid.core.grid.Grid method)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.render">render() (multigrid.core.agent.Agent method)</a>
+
+      <ul>
+        <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.render">(multigrid.core.grid.Grid method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Ball.render">(multigrid.core.world_object.Ball method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Box.render">(multigrid.core.world_object.Box method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Door.render">(multigrid.core.world_object.Door method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Floor.render">(multigrid.core.world_object.Floor method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Goal.render">(multigrid.core.world_object.Goal method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Key.render">(multigrid.core.world_object.Key method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Lava.render">(multigrid.core.world_object.Lava method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Wall.render">(multigrid.core.world_object.Wall method)</a>
+</li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.render">(multigrid.core.world_object.WorldObj method)</a>
+</li>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.render">(multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.render_tile">render_tile() (multigrid.core.grid.Grid class method)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.ReseedWrapper">ReseedWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.reset">reset() (multigrid.core.agent.Agent method)</a>
+
+      <ul>
+        <li><a href="multigrid.manual_control.html#multigrid.manual_control.ManualControl.reset">(multigrid.manual_control.ManualControl method)</a>
+</li>
+        <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.reset">(multigrid.minigrid_interface.MiniGridInterface method)</a>
+</li>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.reset">(multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.DirectionObsWrapper.reset">(multigrid.wrappers.DirectionObsWrapper method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.ReseedWrapper.reset">(multigrid.wrappers.ReseedWrapper method)</a>
+</li>
+      </ul></li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.RGBImgObsWrapper">RGBImgObsWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.RGBImgPartialObsWrapper">RGBImgPartialObsWrapper (class in multigrid.wrappers)</a>
+</li>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.right">right (multigrid.core.actions.Actions attribute)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.right_vec">right_vec (multigrid.core.agent.Agent property)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.Room">Room (class in multigrid.core.roomgrid)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.room_from_pos">room_from_pos() (multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
+      <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid">RoomGrid (class in multigrid.core.roomgrid)</a>
+</li>
+      <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.rotate_fn">rotate_fn() (in module multigrid.utils.rendering)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace.sample">sample() (multigrid.core.mission.MissionSpace method)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.see_behind">see_behind() (multigrid.core.world_object.WorldObj method)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.sees">sees() (multigrid.core.agent.Agent method)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.set">set() (multigrid.core.grid.Grid method)</a>
+</li>
+      <li><a href="multigrid.manual_control.html#multigrid.manual_control.ManualControl.start">start() (multigrid.manual_control.ManualControl method)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.state">state (multigrid.core.world_object.WorldObj property)</a>
+</li>
+      <li><a href="multigrid.manual_control.html#multigrid.manual_control.ManualControl.step">step() (multigrid.manual_control.ManualControl method)</a>
+
+      <ul>
+        <li><a href="multigrid.minigrid_interface.html#multigrid.minigrid_interface.MiniGridInterface.step">(multigrid.minigrid_interface.MiniGridInterface method)</a>
+</li>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.step">(multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.ActionBonus.step">(multigrid.wrappers.ActionBonus method)</a>
+</li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.PositionBonus.step">(multigrid.wrappers.PositionBonus method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.steps_remaining">steps_remaining (multigrid.multigrid_env.MultiGridEnv property)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.DictObservationSpaceWrapper.string_to_indices">string_to_indices() (multigrid.wrappers.DictObservationSpaceWrapper method)</a>
+</li>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.SymbolicObsWrapper">SymbolicObsWrapper (class in multigrid.wrappers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.terminated">terminated (multigrid.core.agent.AgentState property)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.tile_cache">tile_cache (multigrid.core.grid.Grid attribute)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.to_int">to_int() (multigrid.core.world_object.WorldObj method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.to_world_obj">to_world_obj() (multigrid.core.agent.Agent method)</a>
+</li>
+      <li><a href="multigrid.core.actions.html#multigrid.core.actions.Actions.toggle">toggle (multigrid.core.actions.Actions attribute)</a>
+</li>
+      <li><a href="multigrid.utils.act.html#multigrid.utils.act.toggle">toggle() (in module multigrid.utils.act)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.type">type (multigrid.core.world_object.WorldObj property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.update_world_objects">update_world_objects() (multigrid.core.grid.Grid method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.vert_wall">vert_wall() (multigrid.core.grid.Grid method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.wrappers.html#multigrid.wrappers.ViewSizeWrapper">ViewSizeWrapper (class in multigrid.wrappers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Wall">Wall (class in multigrid.core.world_object)</a>
+</li>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.wall_rect">wall_rect() (multigrid.core.grid.Grid method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.width">width (multigrid.core.grid.Grid property)</a>
+</li>
+      <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.world_obj_encoding">world_obj_encoding() (multigrid.core.agent.AgentState method)</a>
+</li>
+      <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj">WorldObj (class in multigrid.core.world_object)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Ini Oguntola.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

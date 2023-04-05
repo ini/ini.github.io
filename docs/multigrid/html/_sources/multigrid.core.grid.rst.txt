@@ -1,0 +1,7 @@
+multigrid.core.grid module
+==========================
+
+.. automodule:: multigrid.core.grid
+   :members:
+   :undoc-members:
+   :show-inheritance:

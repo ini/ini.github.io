@@ -1,0 +1,7 @@
+multigrid.core.mission module
+=============================
+
+.. automodule:: multigrid.core.mission
+   :members:
+   :undoc-members:
+   :show-inheritance:

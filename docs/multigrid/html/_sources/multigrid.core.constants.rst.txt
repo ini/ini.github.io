@@ -1,0 +1,7 @@
+multigrid.core.constants module
+===============================
+
+.. automodule:: multigrid.core.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:

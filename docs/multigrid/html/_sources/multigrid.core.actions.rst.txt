@@ -1,0 +1,7 @@
+multigrid.core.actions module
+=============================
+
+.. automodule:: multigrid.core.actions
+   :members:
+   :undoc-members:
+   :show-inheritance:
