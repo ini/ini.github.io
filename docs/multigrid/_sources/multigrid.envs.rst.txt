@@ -1,0 +1,26 @@
+multigrid.envs package
+======================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.envs.minigrid
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.envs.locked_room
+
+Module contents
+---------------
+
+.. automodule:: multigrid.envs
+   :members:
+   :undoc-members:
+   :show-inheritance:

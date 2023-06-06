@@ -1,0 +1,7 @@
+multigrid.rllib.resnet module
+=============================
+
+.. automodule:: multigrid.rllib.resnet
+   :members:
+   :undoc-members:
+   :show-inheritance:

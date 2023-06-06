@@ -1,0 +1,20 @@
+multigrid.rllib package
+=======================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.rllib.env_utils
+   multigrid.rllib.model
+   multigrid.rllib.resnet
+
+Module contents
+---------------
+
+.. automodule:: multigrid.rllib
+   :members:
+   :undoc-members:
+   :show-inheritance:

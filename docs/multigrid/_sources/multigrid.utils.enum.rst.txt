@@ -1,0 +1,7 @@
+multigrid.utils.enum module
+===========================
+
+.. automodule:: multigrid.utils.enum
+   :members:
+   :undoc-members:
+   :show-inheritance:

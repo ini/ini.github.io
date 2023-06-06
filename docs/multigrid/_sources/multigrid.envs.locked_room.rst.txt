@@ -1,0 +1,7 @@
+multigrid.envs.locked\_room module
+==================================
+
+.. automodule:: multigrid.envs.locked_room
+   :members:
+   :undoc-members:
+   :show-inheritance:

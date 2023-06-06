@@ -1,0 +1,19 @@
+multigrid.envs.minigrid package
+===============================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   multigrid.envs.minigrid.blockedunlockpickup
+   multigrid.envs.minigrid.empty
+
+Module contents
+---------------
+
+.. automodule:: multigrid.envs.minigrid
+   :members:
+   :undoc-members:
+   :show-inheritance:
