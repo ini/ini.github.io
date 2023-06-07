@@ -304,7 +304,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a one-hot encoding of a 3D integer array,</span>
 <span class="sd">        where each 2D slice is encoded separately.</span>
-<span class="sd">    </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        x : ndarray[int] of shape (view_height, view_width, dim)</span>
@@ -316,7 +316,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        out : ndarray[uint8] of shape (view_height, view_width, sum(dim_sizes))</span>
 <span class="sd">            One-hot encoding</span>
-<span class="sd">        </span>
+
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dim_sizes</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
