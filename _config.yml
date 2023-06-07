@@ -1,7 +1,5 @@
 title: Ini Oguntola
 url: https://ini.io
-plugins:
-  - jekyll-seo-tag
 twitter:
   username: inioguntola
   card: summary
