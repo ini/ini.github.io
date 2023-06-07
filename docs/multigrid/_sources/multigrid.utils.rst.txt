@@ -1,21 +1,20 @@
 multigrid.utils package
 =======================
 
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 4
-
-   multigrid.utils.enum
-   multigrid.utils.misc
-   multigrid.utils.obs
-   multigrid.utils.rendering
-
-Module contents
----------------
-
 .. automodule:: multigrid.utils
    :members:
    :undoc-members:
    :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   multigrid.utils.enum
+   multigrid.utils.minigrid_interface
+   multigrid.utils.misc
+   multigrid.utils.obs
+   multigrid.utils.rendering

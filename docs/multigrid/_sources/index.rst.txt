@@ -7,6 +7,7 @@ Welcome to multigrid's documentation!
 ======================================
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 3
    :caption: Contents:
 

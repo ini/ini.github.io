@@ -168,28 +168,25 @@
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.envs.html">multigrid.envs package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4 has-children"><a class="reference internal" href="../../../multigrid.envs.minigrid.html">multigrid.envs.minigrid package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.envs.minigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="../../../multigrid.envs.minigrid.blockedunlockpickup.html">multigrid.envs.minigrid.blockedunlockpickup module</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../../../multigrid.envs.minigrid.empty.html">multigrid.envs.minigrid.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_room.html">multigrid.envs.locked_room module</a></li>
-</ul>
-</li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.enum.html">multigrid.utils.enum module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../multigrid.minigrid_interface.html">multigrid.minigrid_interface module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
@@ -230,9 +227,7 @@
         </div>
         <article role="main">
           <h1>Source code for multigrid.rllib.model</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">ray.rllib.models.torch.visionnet</span>
-
-<span class="kn">from</span> <span class="nn">gymnasium</span> <span class="kn">import</span> <span class="n">spaces</span>
+<span></span><span class="kn">from</span> <span class="nn">gymnasium</span> <span class="kn">import</span> <span class="n">spaces</span>
 <span class="kn">from</span> <span class="nn">ray.rllib.models.tf.complex_input_net</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ComplexInputNetwork</span> <span class="k">as</span> <span class="n">TFComplexInputNetwork</span>
 <span class="p">)</span>
@@ -243,15 +238,7 @@
 <span class="kn">from</span> <span class="nn">ray.rllib.models.torch.torch_modelv2</span> <span class="kn">import</span> <span class="n">TorchModelV2</span>
 <span class="kn">from</span> <span class="nn">ray.rllib.utils.framework</span> <span class="kn">import</span> <span class="n">try_import_torch</span>
 
-<span class="kn">from</span> <span class="nn">.resnet</span> <span class="kn">import</span> <span class="n">ResNet</span>
-
 <span class="n">torch</span><span class="p">,</span> <span class="n">nn</span> <span class="o">=</span> <span class="n">try_import_torch</span><span class="p">()</span>
-
-
-
-<span class="c1"># Monkey patch ResNet into ray.rllib.models.torch.visionnet.VisionNetwork</span>
-<span class="kn">import</span> <span class="nn">ray.rllib.models.torch.visionnet</span>
-<span class="c1">#ray.rllib.models.torch.visionnet.VisionNetwork = ResNet</span>
 
 
 

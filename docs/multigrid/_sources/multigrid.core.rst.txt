@@ -1,11 +1,17 @@
 multigrid.core package
 ======================
 
+.. automodule:: multigrid.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
 .. toctree::
-   :maxdepth: 4
+   :titlesonly:
+   :maxdepth: 3
 
    multigrid.core.actions
    multigrid.core.agent
@@ -14,11 +20,3 @@ Submodules
    multigrid.core.mission
    multigrid.core.roomgrid
    multigrid.core.world_object
-
-Module contents
----------------
-
-.. automodule:: multigrid.core
-   :members:
-   :undoc-members:
-   :show-inheritance:

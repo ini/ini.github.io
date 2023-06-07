@@ -169,28 +169,25 @@
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.envs.html">multigrid.envs package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4 has-children"><a class="reference internal" href="multigrid.envs.minigrid.html">multigrid.envs.minigrid package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.envs.minigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="multigrid.envs.minigrid.blockedunlockpickup.html">multigrid.envs.minigrid.blockedunlockpickup module</a></li>
-<li class="toctree-l5"><a class="reference internal" href="multigrid.envs.minigrid.empty.html">multigrid.envs.minigrid.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.locked_room.html">multigrid.envs.locked_room module</a></li>
-</ul>
-</li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.enum.html">multigrid.utils.enum module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="multigrid.minigrid_interface.html">multigrid.minigrid_interface module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
@@ -233,6 +230,159 @@
         <article role="main">
           <section id="module-multigrid.core.agent">
 <span id="multigrid-core-agent-module"></span><h1>multigrid.core.agent module<a class="headerlink" href="#module-multigrid.core.agent" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.agent.</span></span><span class="sig-name descname"><span class="pre">Agent</span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing an agent in the environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Observation Space<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>Observations are dictionaries with the following entries:</p>
+<ul>
+<li><dl>
+<dt>image<span class="classifier">ndarray[int] of shape (view_size, view_size, <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim" title="multigrid.core.world_object.WorldObj.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a>)</span></dt><dd><p>Encoding of the agent’s view of the environment</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>direction<span class="classifier">int</span></dt><dd><p>Agent’s direction (0: right, 1: down, 2: left, 3: up)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>mission<span class="classifier">Mission</span></dt><dd><p>Task string corresponding to the current environment configuration</p>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Action Space<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>Actions are discrete integers, as enumerated in <a class="reference internal" href="multigrid.core.actions.html#multigrid.core.actions.Action" title="multigrid.core.actions.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the agent in the environment</p>
+</dd>
+<dt><strong>state</strong><span class="classifier">AgentState</span></dt><dd><p>State of the agent</p>
+</dd>
+<dt><strong>mission</strong><span class="classifier">Mission</span></dt><dd><p>Current mission string for the agent</p>
+</dd>
+<dt><strong>action_space</strong><span class="classifier">gym.spaces.Discrete</span></dt><dd><p>Action space for the agent</p>
+</dd>
+<dt><strong>observation_space</strong><span class="classifier">gym.spaces.Dict</span></dt><dd><p>Observation space for the agent</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mission_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace" title="multigrid.core.mission.MissionSpace"><span class="pre">MissionSpace</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MissionSpace('maximize</span> <span class="pre">reward')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.agent.AgentState" title="multigrid.core.agent.AgentState"><span class="pre">AgentState</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">see_through_walls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.__init__" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the agent in the environment</p>
+</dd>
+<dt><strong>mission_space</strong><span class="classifier">MissionSpace</span></dt><dd><p>The mission space for the agent</p>
+</dd>
+<dt><strong>state</strong><span class="classifier">AgentState or None</span></dt><dd><p>AgentState object to use for the agent</p>
+</dd>
+<dt><strong>view_size</strong><span class="classifier">int</span></dt><dd><p>The size of the agent’s view (must be odd)</p>
+</dd>
+<dt><strong>see_through_walls</strong><span class="classifier">bool</span></dt><dd><p>Whether the agent can see through walls</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.color">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.color" title="Permalink to this definition">#</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.color" title="multigrid.core.agent.AgentState.color"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.color</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.dir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.dir" title="Permalink to this definition">#</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.dir" title="multigrid.core.agent.AgentState.dir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.dir</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pos</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.pos" title="Permalink to this definition">#</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.pos" title="multigrid.core.agent.AgentState.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.pos</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.terminated">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminated</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.terminated" title="Permalink to this definition">#</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.terminated" title="multigrid.core.agent.AgentState.terminated"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.terminated</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.carrying">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">carrying</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.carrying" title="Permalink to this definition">#</a></dt>
+<dd><p>Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.carrying" title="multigrid.core.agent.AgentState.carrying"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.carrying</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.front_pos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.Agent.front_pos" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the position of the cell that is directly in front of the agent.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.mission.html#multigrid.core.mission.Mission" title="multigrid.core.mission.Mission"><span class="pre">Mission</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Mission('maximize</span> <span class="pre">reward')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.reset" title="Permalink to this definition">#</a></dt>
+<dd><p>Reset the agent to an initial state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mission</strong><span class="classifier">Mission</span></dt><dd><p>Mission string to use for the new episode</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.encode" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode a description of this agent as a 3-tuple of integers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>type_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the agent type</p>
+</dd>
+<dt><strong>color_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the agent color</p>
+</dd>
+<dt><strong>agent_dir</strong><span class="classifier">int</span></dt><dd><p>The direction of the agent (0: right, 1: down, 2: left, 3: up)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.agent.Agent.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.render" title="Permalink to this definition">#</a></dt>
+<dd><p>Draw the agent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>img</strong><span class="classifier">ndarray[int] of shape (width, height, 3)</span></dt><dd><p>RGB image array to render agent on</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="multigrid.core.agent.AgentState">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.agent.</span></span><span class="sig-name descname"><span class="pre">AgentState</span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#AgentState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.AgentState" title="Permalink to this definition">#</a></dt>
@@ -338,158 +488,6 @@ over multiple agents.</p>
 
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.agent.</span></span><span class="sig-name descname"><span class="pre">Agent</span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class representing an agent in the environment.</p>
-<p><strong>Observation Space</strong></p>
-<p>Observations are dictionaries with the following entries:</p>
-<ul>
-<li><dl>
-<dt>image<span class="classifier">ndarray[int] of shape (view_size, view_size, <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim" title="multigrid.core.world_object.WorldObj.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a>)</span></dt><dd><p>Encoding of the agent’s view of the environment</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>direction<span class="classifier">int</span></dt><dd><p>Agent’s direction (0: right, 1: down, 2: left, 3: up)</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>mission<span class="classifier">Mission</span></dt><dd><p>Task string corresponding to the current environment configuration</p>
-</dd>
-</dl>
-</li>
-</ul>
-<p><strong>Action Space</strong></p>
-<p>Actions are discrete integers, as enumerated in <a class="reference internal" href="multigrid.core.actions.html#multigrid.core.actions.Action" title="multigrid.core.actions.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the agent in the environment</p>
-</dd>
-<dt><strong>state</strong><span class="classifier">AgentState</span></dt><dd><p>State of the agent</p>
-</dd>
-<dt><strong>mission</strong><span class="classifier">Mission</span></dt><dd><p>Current mission string for the agent</p>
-</dd>
-<dt><strong>action_space</strong><span class="classifier">gym.spaces.Discrete</span></dt><dd><p>Action space for the agent</p>
-</dd>
-<dt><strong>observation_space</strong><span class="classifier">gym.spaces.Dict</span></dt><dd><p>Observation space for the agent</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mission_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace" title="multigrid.core.mission.MissionSpace"><span class="pre">MissionSpace</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MissionSpace('maximize</span> <span class="pre">reward')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.agent.AgentState" title="multigrid.core.agent.AgentState"><span class="pre">AgentState</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">see_through_walls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.__init__" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the agent in the environment</p>
-</dd>
-<dt><strong>mission_space</strong><span class="classifier">MissionSpace</span></dt><dd><p>The mission space for the agent</p>
-</dd>
-<dt><strong>state</strong><span class="classifier">AgentState or None</span></dt><dd><p>AgentState object to use for the agent</p>
-</dd>
-<dt><strong>view_size</strong><span class="classifier">int</span></dt><dd><p>The size of the agent’s view (must be odd)</p>
-</dd>
-<dt><strong>see_through_walls</strong><span class="classifier">bool</span></dt><dd><p>Whether the agent can see through walls</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.color">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.color" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the agent color.
-Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.color" title="multigrid.core.agent.AgentState.color"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.color</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.dir">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dir</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.dir" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the agent direction.
-Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.dir" title="multigrid.core.agent.AgentState.dir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.dir</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.pos">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pos</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.pos" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the agent’s (x, y) position.
-Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.pos" title="multigrid.core.agent.AgentState.pos"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.pos</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.terminated">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminated</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.terminated" title="Permalink to this definition">#</a></dt>
-<dd><p>Return whether the agent has terminated.
-Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.terminated" title="multigrid.core.agent.AgentState.terminated"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.terminated</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.carrying">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">carrying</span></span><a class="headerlink" href="#multigrid.core.agent.Agent.carrying" title="Permalink to this definition">#</a></dt>
-<dd><p>Return the object the agent is carrying.
-Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.carrying" title="multigrid.core.agent.AgentState.carrying"><code class="xref py py-attr docutils literal notranslate"><span class="pre">AgentState.carrying</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.front_pos">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_pos</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.agent.Agent.front_pos" title="Permalink to this definition">#</a></dt>
-<dd><p>Get the position of the cell that is directly in front of the agent.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.reset">
-<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.mission.html#multigrid.core.mission.Mission" title="multigrid.core.mission.Mission"><span class="pre">Mission</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Mission('maximize</span> <span class="pre">reward')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.reset" title="Permalink to this definition">#</a></dt>
-<dd><p>Reset the agent to an initial state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>mission</strong><span class="classifier">Mission</span></dt><dd><p>Mission string to use for the new episode</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.encode">
-<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.encode" title="Permalink to this definition">#</a></dt>
-<dd><p>Encode a description of this agent as a 3-tuple of integers.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>type_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the agent type</p>
-</dd>
-<dt><strong>color_idx</strong><span class="classifier">int</span></dt><dd><p>The index of the agent color</p>
-</dd>
-<dt><strong>agent_dir</strong><span class="classifier">int</span></dt><dd><p>The direction of the agent (0: right, 1: down, 2: left, 3: up)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.agent.Agent.render">
-<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent.render" title="Permalink to this definition">#</a></dt>
-<dd><p>Draw the agent.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>img</strong><span class="classifier">ndarray[int] of shape (width, height, 3)</span></dt><dd><p>RGB image array to render agent on</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
         </article>
@@ -548,16 +546,6 @@ Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.c
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">multigrid.core.agent module</a><ul>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.dim"><code class="docutils literal notranslate"><span class="pre">AgentState.dim</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.__new__"><code class="docutils literal notranslate"><span class="pre">AgentState.__new__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.color"><code class="docutils literal notranslate"><span class="pre">AgentState.color</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.dir"><code class="docutils literal notranslate"><span class="pre">AgentState.dir</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.pos"><code class="docutils literal notranslate"><span class="pre">AgentState.pos</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.terminated"><code class="docutils literal notranslate"><span class="pre">AgentState.terminated</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.agent.AgentState.carrying"><code class="docutils literal notranslate"><span class="pre">AgentState.carrying</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#multigrid.core.agent.Agent"><code class="docutils literal notranslate"><span class="pre">Agent</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.core.agent.Agent.__init__"><code class="docutils literal notranslate"><span class="pre">Agent.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.agent.Agent.color"><code class="docutils literal notranslate"><span class="pre">Agent.color</span></code></a></li>
@@ -569,6 +557,16 @@ Alias for <a class="reference internal" href="#multigrid.core.agent.AgentState.c
 <li><a class="reference internal" href="#multigrid.core.agent.Agent.reset"><code class="docutils literal notranslate"><span class="pre">Agent.reset()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.agent.Agent.encode"><code class="docutils literal notranslate"><span class="pre">Agent.encode()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.agent.Agent.render"><code class="docutils literal notranslate"><span class="pre">Agent.render()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.dim"><code class="docutils literal notranslate"><span class="pre">AgentState.dim</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.__new__"><code class="docutils literal notranslate"><span class="pre">AgentState.__new__()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.color"><code class="docutils literal notranslate"><span class="pre">AgentState.color</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.dir"><code class="docutils literal notranslate"><span class="pre">AgentState.dir</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.pos"><code class="docutils literal notranslate"><span class="pre">AgentState.pos</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.terminated"><code class="docutils literal notranslate"><span class="pre">AgentState.terminated</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.agent.AgentState.carrying"><code class="docutils literal notranslate"><span class="pre">AgentState.carrying</span></code></a></li>
 </ul>
 </li>
 </ul>

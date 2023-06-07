@@ -1,7 +1,7 @@
-multigrid.utils.misc module
+multigrid.envs.empty module
 ===========================
 
-.. automodule:: multigrid.utils.misc
+.. automodule:: multigrid.envs.empty
    :members:
    :undoc-members:
    :show-inheritance:

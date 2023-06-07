@@ -1,7 +1,0 @@
-multigrid.envs.minigrid.blockedunlockpickup module
-==================================================
-
-.. automodule:: multigrid.envs.minigrid.blockedunlockpickup
-   :members:
-   :undoc-members:
-   :show-inheritance:

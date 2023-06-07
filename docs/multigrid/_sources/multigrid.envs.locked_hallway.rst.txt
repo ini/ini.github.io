@@ -1,0 +1,7 @@
+multigrid.envs.locked\_hallway module
+=====================================
+
+.. automodule:: multigrid.envs.locked_hallway
+   :members:
+   :undoc-members:
+   :show-inheritance:

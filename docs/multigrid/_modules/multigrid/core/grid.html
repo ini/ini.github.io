@@ -168,28 +168,25 @@
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.envs.html">multigrid.envs package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4 has-children"><a class="reference internal" href="../../../multigrid.envs.minigrid.html">multigrid.envs.minigrid package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.envs.minigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="../../../multigrid.envs.minigrid.blockedunlockpickup.html">multigrid.envs.minigrid.blockedunlockpickup module</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../../../multigrid.envs.minigrid.empty.html">multigrid.envs.minigrid.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_room.html">multigrid.envs.locked_room module</a></li>
-</ul>
-</li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.enum.html">multigrid.utils.enum module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../multigrid.minigrid_interface.html">multigrid.minigrid_interface module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
@@ -254,7 +251,7 @@
 
 <div class="viewcode-block" id="Grid"><a class="viewcode-back" href="../../../multigrid.core.grid.html#multigrid.core.grid.Grid">[docs]</a><span class="k">class</span> <span class="nc">Grid</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Represent a grid and operations on it.</span>
+<span class="sd">    Representation of an environment grid.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -263,9 +260,9 @@
 <span class="sd">    height : int</span>
 <span class="sd">        Height of the grid</span>
 <span class="sd">    world_objects : dict[tuple[int, int], WorldObj]</span>
-<span class="sd">        Dictionary of world objects in the grid, indexed by location</span>
+<span class="sd">        Dictionary of world objects in the grid, indexed by (x, y) location</span>
 <span class="sd">    state : ndarray[int] of shape (width, height, WorldObj.dim)</span>
-<span class="sd">        Grid state, where each (i, j) entry is a WorldObj encoding</span>
+<span class="sd">        Grid state, where each (x, y) entry is a WorldObj encoding</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Static cache of pre-renderer tiles</span>

@@ -168,28 +168,25 @@
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.envs.html">multigrid.envs package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l4 has-children"><a class="reference internal" href="../../../multigrid.envs.minigrid.html">multigrid.envs.minigrid package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.envs.minigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l5"><a class="reference internal" href="../../../multigrid.envs.minigrid.blockedunlockpickup.html">multigrid.envs.minigrid.blockedunlockpickup module</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../../../multigrid.envs.minigrid.empty.html">multigrid.envs.minigrid.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_room.html">multigrid.envs.locked_room module</a></li>
-</ul>
-</li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.enum.html">multigrid.utils.enum module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../multigrid.minigrid_interface.html">multigrid.minigrid_interface module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
@@ -251,7 +248,7 @@
 
 
 
-<span class="c1"># AgentState indices</span>
+<span class="c1"># AgentState Indices</span>
 <span class="n">TYPE</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">COLOR</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">DIR</span> <span class="o">=</span> <span class="mi">2</span>
@@ -259,6 +256,157 @@
 <span class="n">TERMINATED</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">CARRYING</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
 
+
+
+<div class="viewcode-block" id="Agent"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent">[docs]</a><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing an agent in the environment.</span>
+
+<span class="sd">    :Observation Space:</span>
+
+<span class="sd">    Observations are dictionaries with the following entries:</span>
+
+<span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
+<span class="sd">        Encoding of the agent&#39;s view of the environment</span>
+<span class="sd">    * direction : int</span>
+<span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
+<span class="sd">    * mission : Mission</span>
+<span class="sd">        Task string corresponding to the current environment configuration</span>
+
+<span class="sd">    :Action Space:</span>
+
+<span class="sd">    Actions are discrete integers, as enumerated in :class:`.Action`.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    index : int</span>
+<span class="sd">        Index of the agent in the environment</span>
+<span class="sd">    state : AgentState</span>
+<span class="sd">        State of the agent</span>
+<span class="sd">    mission : Mission</span>
+<span class="sd">        Current mission string for the agent</span>
+<span class="sd">    action_space : gym.spaces.Discrete</span>
+<span class="sd">        Action space for the agent</span>
+<span class="sd">    observation_space : gym.spaces.Dict</span>
+<span class="sd">        Observation space for the agent</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Agent.__init__"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mission_space</span><span class="p">:</span> <span class="n">MissionSpace</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;maximize reward&#39;</span><span class="p">),</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">view_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="n">see_through_walls</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">            Index of the agent in the environment</span>
+<span class="sd">        mission_space : MissionSpace</span>
+<span class="sd">            The mission space for the agent</span>
+<span class="sd">        state : AgentState or None</span>
+<span class="sd">            AgentState object to use for the agent</span>
+<span class="sd">        view_size : int</span>
+<span class="sd">            The size of the agent&#39;s view (must be odd)</span>
+<span class="sd">        see_through_walls : bool</span>
+<span class="sd">            Whether the agent can see through walls</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">()</span> <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span><span class="p">:</span> <span class="n">Mission</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Number of cells (width and height) in the agent view</span>
+        <span class="k">assert</span> <span class="n">view_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">assert</span> <span class="n">view_size</span> <span class="o">&gt;=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">view_size</span> <span class="o">=</span> <span class="n">view_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">see_through_walls</span> <span class="o">=</span> <span class="n">see_through_walls</span>
+
+        <span class="c1"># Observations are dictionaries containing an</span>
+        <span class="c1"># encoding of the grid and a textual &#39;mission&#39; string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">observation_space</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">({</span>
+            <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+                <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">high</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+                <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">view_size</span><span class="p">,</span> <span class="n">view_size</span><span class="p">,</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Discrete</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Direction</span><span class="p">)),</span>
+            <span class="s1">&#39;mission&#39;</span><span class="p">:</span> <span class="n">mission_space</span><span class="p">,</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Actions are discrete integer values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_space</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Discrete</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Action</span><span class="p">))</span></div>
+
+    <span class="c1"># Property Aliases</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.color`.&#39;</span><span class="p">)</span>
+    <span class="nb">dir</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;dir&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.dir`.&#39;</span><span class="p">)</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.pos`.&#39;</span><span class="p">)</span>
+    <span class="n">terminated</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;terminated&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.terminated`.&#39;</span><span class="p">)</span>
+    <span class="n">carrying</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;carrying&#39;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.carrying`.&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">front_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the position of the cell that is directly in front of the agent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">agent_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">_view</span><span class="p">[</span><span class="n">DIR</span><span class="p">]</span>
+        <span class="n">agent_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">_view</span><span class="p">[</span><span class="n">POS</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">front_pos</span><span class="p">(</span><span class="o">*</span><span class="n">agent_pos</span><span class="p">,</span> <span class="n">agent_dir</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Agent.reset"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mission</span><span class="p">:</span> <span class="n">Mission</span> <span class="o">=</span> <span class="n">Mission</span><span class="p">(</span><span class="s1">&#39;maximize reward&#39;</span><span class="p">)):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the agent to an initial state.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mission : Mission</span>
+<span class="sd">            Mission string to use for the new episode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span> <span class="o">=</span> <span class="n">mission</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Agent.encode"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode a description of this agent as a 3-tuple of integers.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        type_idx : int</span>
+<span class="sd">            The index of the agent type</span>
+<span class="sd">        color_idx : int</span>
+<span class="sd">            The index of the agent color</span>
+<span class="sd">        agent_dir : int</span>
+<span class="sd">            The direction of the agent (0: right, 1: down, 2: left, 3: up)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Type</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">to_index</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">to_index</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Agent.render"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the agent.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        img : ndarray[int] of shape (width, height, 3)</span>
+<span class="sd">            RGB image array to render agent on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tri_fn</span> <span class="o">=</span> <span class="n">point_in_triangle</span><span class="p">(</span>
+            <span class="p">(</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.19</span><span class="p">),</span>
+            <span class="p">(</span><span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">),</span>
+            <span class="p">(</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Rotate the agent based on its direction</span>
+        <span class="n">tri_fn</span> <span class="o">=</span> <span class="n">rotate_fn</span><span class="p">(</span><span class="n">tri_fn</span><span class="p">,</span> <span class="n">cx</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cy</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span>
+        <span class="n">fill_coords</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">tri_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb</span><span class="p">())</span></div></div>
 
 
 <div class="viewcode-block" id="AgentState"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.AgentState">[docs]</a><span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -314,7 +462,10 @@
 <span class="sd">    &gt;&gt;&gt; a.dir</span>
 <span class="sd">    2</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dim</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">dim</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+        <span class="n">i</span><span class="o">.</span><span class="n">stop</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">else</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">COLOR</span><span class="p">,</span> <span class="n">DIR</span><span class="p">,</span> <span class="n">POS</span><span class="p">,</span> <span class="n">TERMINATED</span><span class="p">,</span> <span class="n">CARRYING</span><span class="p">)</span>
+    <span class="p">)</span>
 
 <div class="viewcode-block" id="AgentState.__new__"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.AgentState.__new__">[docs]</a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -423,157 +574,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">CARRYING</span><span class="p">]</span> <span class="o">=</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span> <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">obj</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_carried_obj</span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="Agent"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent">[docs]</a><span class="k">class</span> <span class="nc">Agent</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class representing an agent in the environment.</span>
-
-<span class="sd">    **Observation Space**</span>
-
-<span class="sd">    Observations are dictionaries with the following entries:</span>
-
-<span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
-<span class="sd">        Encoding of the agent&#39;s view of the environment</span>
-<span class="sd">    * direction : int</span>
-<span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
-<span class="sd">    * mission : Mission</span>
-<span class="sd">        Task string corresponding to the current environment configuration</span>
-
-<span class="sd">    **Action Space**</span>
-
-<span class="sd">    Actions are discrete integers, as enumerated in :class:`.Action`.</span>
-
-<span class="sd">    Attributes</span>
-<span class="sd">    ----------</span>
-<span class="sd">    index : int</span>
-<span class="sd">        Index of the agent in the environment</span>
-<span class="sd">    state : AgentState</span>
-<span class="sd">        State of the agent</span>
-<span class="sd">    mission : Mission</span>
-<span class="sd">        Current mission string for the agent</span>
-<span class="sd">    action_space : gym.spaces.Discrete</span>
-<span class="sd">        Action space for the agent</span>
-<span class="sd">    observation_space : gym.spaces.Dict</span>
-<span class="sd">        Observation space for the agent</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="Agent.__init__"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">mission_space</span><span class="p">:</span> <span class="n">MissionSpace</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;maximize reward&#39;</span><span class="p">),</span>
-        <span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">view_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
-        <span class="n">see_through_walls</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        index : int</span>
-<span class="sd">            Index of the agent in the environment</span>
-<span class="sd">        mission_space : MissionSpace</span>
-<span class="sd">            The mission space for the agent</span>
-<span class="sd">        state : AgentState or None</span>
-<span class="sd">            AgentState object to use for the agent</span>
-<span class="sd">        view_size : int</span>
-<span class="sd">            The size of the agent&#39;s view (must be odd)</span>
-<span class="sd">        see_through_walls : bool</span>
-<span class="sd">            Whether the agent can see through walls</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">index</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">()</span> <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">state</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span><span class="p">:</span> <span class="n">Mission</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="c1"># Number of cells (width and height) in the agent view</span>
-        <span class="k">assert</span> <span class="n">view_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
-        <span class="k">assert</span> <span class="n">view_size</span> <span class="o">&gt;=</span> <span class="mi">3</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">view_size</span> <span class="o">=</span> <span class="n">view_size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">see_through_walls</span> <span class="o">=</span> <span class="n">see_through_walls</span>
-
-        <span class="c1"># Observations are dictionaries containing an</span>
-        <span class="c1"># encoding of the grid and a textual &#39;mission&#39; string</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">observation_space</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">({</span>
-            <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
-                <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                <span class="n">high</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
-                <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">view_size</span><span class="p">,</span> <span class="n">view_size</span><span class="p">,</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">dim</span><span class="p">),</span>
-                <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span>
-            <span class="p">),</span>
-            <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Discrete</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Direction</span><span class="p">)),</span>
-            <span class="s1">&#39;mission&#39;</span><span class="p">:</span> <span class="n">mission_space</span><span class="p">,</span>
-        <span class="p">})</span>
-
-        <span class="c1"># Actions are discrete integer values</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">action_space</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Discrete</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Action</span><span class="p">))</span></div>
-
-    <span class="c1"># Property Aliases</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
-        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.color`.&#39;</span><span class="p">)</span>
-    <span class="nb">dir</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
-        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.dir`.&#39;</span><span class="p">)</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
-        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.pos`.&#39;</span><span class="p">)</span>
-    <span class="n">terminated</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
-        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">terminated</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.terminated`.&#39;</span><span class="p">)</span>
-    <span class="n">carrying</span> <span class="o">=</span> <span class="n">PropertyAlias</span><span class="p">(</span>
-        <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">carrying</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&#39;Alias for :attr:`AgentState.carrying`.&#39;</span><span class="p">)</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">front_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the position of the cell that is directly in front of the agent.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">agent_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">_view</span><span class="p">[</span><span class="n">DIR</span><span class="p">]</span>
-        <span class="n">agent_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">_view</span><span class="p">[</span><span class="n">POS</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">front_pos</span><span class="p">(</span><span class="o">*</span><span class="n">agent_pos</span><span class="p">,</span> <span class="n">agent_dir</span><span class="p">)</span>
-
-<div class="viewcode-block" id="Agent.reset"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mission</span><span class="p">:</span> <span class="n">Mission</span> <span class="o">=</span> <span class="n">Mission</span><span class="p">(</span><span class="s1">&#39;maximize reward&#39;</span><span class="p">)):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reset the agent to an initial state.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        mission : Mission</span>
-<span class="sd">            Mission string to use for the new episode</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span> <span class="o">=</span> <span class="n">mission</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="o">=</span> <span class="kc">None</span></div>
-
-<div class="viewcode-block" id="Agent.encode"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Encode a description of this agent as a 3-tuple of integers.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        type_idx : int</span>
-<span class="sd">            The index of the agent type</span>
-<span class="sd">        color_idx : int</span>
-<span class="sd">            The index of the agent color</span>
-<span class="sd">        agent_dir : int</span>
-<span class="sd">            The direction of the agent (0: right, 1: down, 2: left, 3: up)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">Type</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">to_index</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">to_index</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Agent.render"><a class="viewcode-back" href="../../../multigrid.core.agent.html#multigrid.core.agent.Agent.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draw the agent.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        img : ndarray[int] of shape (width, height, 3)</span>
-<span class="sd">            RGB image array to render agent on</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tri_fn</span> <span class="o">=</span> <span class="n">point_in_triangle</span><span class="p">(</span>
-            <span class="p">(</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.19</span><span class="p">),</span>
-            <span class="p">(</span><span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">),</span>
-            <span class="p">(</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">),</span>
-        <span class="p">)</span>
-
-        <span class="c1"># Rotate the agent based on its direction</span>
-        <span class="n">tri_fn</span> <span class="o">=</span> <span class="n">rotate_fn</span><span class="p">(</span><span class="n">tri_fn</span><span class="p">,</span> <span class="n">cx</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cy</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span><span class="p">)</span>
-        <span class="n">fill_coords</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">tri_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb</span><span class="p">())</span></div></div>
 </pre></div>
         </article>
       </div>

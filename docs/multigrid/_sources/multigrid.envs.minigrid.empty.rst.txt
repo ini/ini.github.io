@@ -1,7 +1,0 @@
-multigrid.envs.minigrid.empty module
-====================================
-
-.. automodule:: multigrid.envs.minigrid.empty
-   :members:
-   :undoc-members:
-   :show-inheritance:
