@@ -172,6 +172,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -250,22 +251,23 @@ the agent’s starting point</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>top</strong><span class="classifier">tuple[int, int]</span></dt><dd><p>Top-left position of the room</p>
 </dd>
-<dt><strong>size</strong><span class="classifier">tuple[int, int]</span></dt><dd><p>Tuple of room size as (width, height)</p>
+<dt><strong>size</strong><span class="classifier">tuple[int, int]</span></dt><dd><p>Room size as (width, height)</p>
 </dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.roomgrid.Room.rand_pos">
-<span class="sig-name descname"><span class="pre">rand_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/roomgrid.html#Room.rand_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.Room.rand_pos" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.core.roomgrid.Room.locked">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">locked</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#multigrid.core.roomgrid.Room.locked" title="Permalink to this definition">#</a></dt>
+<dd><p>Return whether this room is behind a locked door.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.Room.pos_inside">
 <span class="sig-name descname"><span class="pre">pos_inside</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/roomgrid.html#Room.pos_inside"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.Room.pos_inside" title="Permalink to this definition">#</a></dt>
-<dd><p>Check if a position is within the bounds of this room</p>
+<dd><p>Check if a position is within the bounds of this room.</p>
 </dd></dl>
 
 </dd></dl>
@@ -302,8 +304,11 @@ This is meant to serve as a base class for other environments.</p>
 </dd>
 <dt><strong>joint_reward</strong><span class="classifier">bool</span></dt><dd><p>Whether all agents receive the same joint reward</p>
 </dd>
-<dt><strong>termination_mode</strong><span class="classifier">‘any’ or ‘all’</span></dt><dd><p>Whether to terminate when any agent completes its mission
+<dt><strong>success_termination_mode</strong><span class="classifier">‘any’ or ‘all’</span></dt><dd><p>Whether to terminate when any agent completes its mission
 or when all agents complete their missions</p>
+</dd>
+<dt><strong>failure_termination_mode</strong><span class="classifier">‘any’ or ‘all’</span></dt><dd><p>Whether to terminate when any agent fails its mission
+or when all agents fail their missions</p>
 </dd>
 <dt><strong>render_mode</strong><span class="classifier">str</span></dt><dd><p>Rendering mode (human or rgb_array)</p>
 </dd>
@@ -372,7 +377,7 @@ or when all agents complete their missions</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.remove_wall">
-<span class="sig-name descname"><span class="pre">remove_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wall_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/roomgrid.html#RoomGrid.remove_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.remove_wall" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">remove_wall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wall_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Direction" title="multigrid.core.constants.Direction"><span class="pre">Direction</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/roomgrid.html#RoomGrid.remove_wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.remove_wall" title="Permalink to this definition">#</a></dt>
 <dd><p>Remove a wall between two rooms</p>
 </dd></dl>
 
@@ -458,7 +463,7 @@ starting position</p>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.reject_next_to"><code class="docutils literal notranslate"><span class="pre">reject_next_to()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room"><code class="docutils literal notranslate"><span class="pre">Room</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room.__init__"><code class="docutils literal notranslate"><span class="pre">Room.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.roomgrid.Room.rand_pos"><code class="docutils literal notranslate"><span class="pre">Room.rand_pos()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.roomgrid.Room.locked"><code class="docutils literal notranslate"><span class="pre">Room.locked</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room.pos_inside"><code class="docutils literal notranslate"><span class="pre">Room.pos_inside()</span></code></a></li>
 </ul>
 </li>

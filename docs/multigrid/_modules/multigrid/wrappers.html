@@ -171,6 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -229,242 +230,327 @@
           <h1>Source code for multigrid.wrappers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">operator</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
-
-<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">numba</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">gymnasium</span> <span class="kn">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">spaces</span>
-<span class="kn">from</span> <span class="nn">gymnasium.core</span> <span class="kn">import</span> <span class="n">ObservationWrapper</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">,</span> <span class="n">Wrapper</span>
 
-<span class="kn">from</span> <span class="nn">gymnasium.core</span> <span class="kn">import</span> <span class="n">ObservationWrapper</span><span class="p">,</span> <span class="n">RewardWrapper</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">gymnasium</span> <span class="kn">import</span> <span class="n">spaces</span>
+<span class="kn">from</span> <span class="nn">gymnasium.core</span> <span class="kn">import</span> <span class="n">ObservationWrapper</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span> <span class="k">as</span> <span class="n">ndarray</span>
 
-
-<span class="kn">from</span> <span class="nn">multigrid</span> <span class="kn">import</span> <span class="n">MultiGridEnv</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.actions</span> <span class="kn">import</span> <span class="n">Action</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.constants</span> <span class="kn">import</span> <span class="n">Type</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.world_object</span> <span class="kn">import</span> <span class="n">can_overlap</span><span class="p">,</span> <span class="n">can_pickup</span><span class="p">,</span> <span class="n">Door</span>
+<span class="kn">from</span> <span class="nn">.multigrid_env</span> <span class="kn">import</span> <span class="n">MultiGridEnv</span><span class="p">,</span> <span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span>
+<span class="kn">from</span> <span class="nn">.core.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">State</span><span class="p">,</span> <span class="n">Type</span>
 
 
 
-<div class="viewcode-block" id="Wrapper"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.Wrapper">[docs]</a><span class="k">class</span> <span class="nc">Wrapper</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
-
-<div class="viewcode-block" id="Wrapper.config"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.Wrapper.config">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">],</span> <span class="n">Wrapper</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return wrapper class with the given configuration,</span>
-<span class="sd">        whose constructor accepts a single argument: the base environment.</span>
-
-<span class="sd">        `MyWrapper.config(**kwargs)(env)` is equivalent to `MyWrapper(env, **kwargs)`. </span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        kwargs : dict</span>
-<span class="sd">            Configuration parameters</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">class</span> <span class="nc">ConfigWrapper</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
-                <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="n">ConfigWrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="k">return</span> <span class="n">ConfigWrapper</span></div></div>
-
-
-<div class="viewcode-block" id="MovementReward"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.MovementReward">[docs]</a><span class="k">class</span> <span class="nc">MovementReward</span><span class="p">(</span><span class="n">Wrapper</span><span class="p">):</span>
-
-<div class="viewcode-block" id="MovementReward.__init__"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.MovementReward.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">MultiGridEnv</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span> <span class="o">=</span> <span class="n">scale</span></div>
-
-<div class="viewcode-block" id="MovementReward.step"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.MovementReward.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="n">prev_pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_id</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">agent_id</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">}</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="n">Action</span><span class="o">.</span><span class="n">forward</span><span class="p">:</span>
-                <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_scale</span>
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div></div>
-
-
-
-
-
-
-
-<div class="viewcode-block" id="ActionMaskWrapper"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.ActionMaskWrapper">[docs]</a><span class="k">class</span> <span class="nc">ActionMaskWrapper</span><span class="p">(</span><span class="n">Wrapper</span><span class="p">):</span>
-
-    <span class="c1"># def __init__(self, env: MultiGridEnv):</span>
-    <span class="c1">#     super().__init__(env)</span>
-    <span class="c1">#     action_mask_space = spaces.Box(low=0, high=1, shape=(len(Action),), dtype=bool)</span>
-    <span class="c1">#     for agent in self.env.agents:</span>
-    <span class="c1">#         agent.observation_space[&#39;action_mask&#39;] = action_mask_space</span>
-
-    <span class="c1"># def observation(self, obs):</span>
-    <span class="c1">#     for agent_id in obs:</span>
-    <span class="c1">#         obs[agent_id][&#39;action_mask&#39;] = self.action_mask(self.env.agents[agent_id])</span>
-    <span class="c1">#     return obs</span>
-
-<div class="viewcode-block" id="ActionMaskWrapper.step"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.ActionMaskWrapper.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">action_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">action_mask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">])</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">action_mask</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="ow">or</span> <span class="n">action</span> <span class="ow">in</span> <span class="p">{</span><span class="n">Action</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">Action</span><span class="o">.</span><span class="n">right</span><span class="p">}:</span>
-                <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1e-5</span>
-
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div>
-
-<div class="viewcode-block" id="ActionMaskWrapper.action_mask"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.ActionMaskWrapper.action_mask">[docs]</a>    <span class="k">def</span> <span class="nf">action_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">):</span>
-        <span class="n">fwd_pos</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span>
-        <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">fwd_pos</span><span class="p">)</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Action</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">left</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">right</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">forward</span><span class="p">]</span> <span class="o">=</span> <span class="n">can_overlap</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">pickup</span><span class="p">]</span> <span class="o">=</span> <span class="n">can_pickup</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">drop</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fwd_obj</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">and</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">door</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="ow">and</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">is_locked</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span><span class="o">.</span><span class="n">color</span><span class="p">:</span>
-                        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">fwd_obj</span> <span class="ow">and</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="p">:</span>
-            <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
-            <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">{</span><span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="p">,</span> <span class="n">Type</span><span class="o">.</span><span class="n">door</span><span class="p">})</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">{</span><span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="p">,</span> <span class="n">Type</span><span class="o">.</span><span class="n">door</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">mask</span></div></div>
-
-
-
-
-<div class="viewcode-block" id="RewardShaping"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping">[docs]</a><span class="k">class</span> <span class="nc">RewardShaping</span><span class="p">(</span><span class="n">Wrapper</span><span class="p">):</span>
+<div class="viewcode-block" id="OneHotObsWrapper"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.OneHotObsWrapper">[docs]</a><span class="k">class</span> <span class="nc">OneHotObsWrapper</span><span class="p">(</span><span class="n">ObservationWrapper</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    General reward shaping wrapper for MultiGrid environments.</span>
+<span class="sd">    Wrapper to get a one-hot encoding of a partially observable</span>
+<span class="sd">    agent view as observation.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from multigrid.envs import EmptyEnv</span>
+<span class="sd">    &gt;&gt;&gt; from multigrid.wrappers import OneHotObsWrapper</span>
+<span class="sd">    &gt;&gt;&gt; env = EmptyEnv()</span>
+<span class="sd">    &gt;&gt;&gt; obs, _ = env.reset()</span>
+<span class="sd">    &gt;&gt;&gt; obs[0][&#39;image&#39;][0, :, :]</span>
+<span class="sd">    array([[2, 5, 0],</span>
+<span class="sd">            [2, 5, 0],</span>
+<span class="sd">            [2, 5, 0],</span>
+<span class="sd">            [2, 5, 0],</span>
+<span class="sd">            [2, 5, 0],</span>
+<span class="sd">            [2, 5, 0],</span>
+<span class="sd">            [2, 5, 0]])</span>
+<span class="sd">    &gt;&gt;&gt; env = OneHotObsWrapper(env)</span>
+<span class="sd">    &gt;&gt;&gt; obs, _ = env.reset()</span>
+<span class="sd">    &gt;&gt;&gt; obs[0][&#39;image&#39;][0, :, :]</span>
+<span class="sd">    array([[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="sd">            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="sd">            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="sd">            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="sd">            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="sd">            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="sd">            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]],</span>
+<span class="sd">            dtype=uint8)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="RewardShaping.__init__"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">MultiGridEnv</span><span class="p">,</span> <span class="n">bonus</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
+<div class="viewcode-block" id="OneHotObsWrapper.__init__"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.OneHotObsWrapper.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">MultiGridEnv</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        env : MultiGridEnv</span>
-<span class="sd">            Environment to wrap</span>
-<span class="sd">        bonus : float</span>
-<span class="sd">            Reward bonus</span>
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_bonus</span> <span class="o">=</span> <span class="n">bonus</span></div>
-        <span class="c1">#self.agents[0].color = &#39;purple&#39;</span>
-        <span class="c1">#self.agents[1].color = &#39;yellow&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">Type</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">Color</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">State</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">Direction</span><span class="p">))])</span>
 
-<div class="viewcode-block" id="RewardShaping.reset"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_picked_up</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># objects that have been picked up</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_opened</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># doors that have been opened</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="c1"># Update agent observation spaces</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_sizes</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
+            <span class="n">view_height</span><span class="p">,</span> <span class="n">view_width</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">observation_space</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">observation_space</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+                <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">view_height</span><span class="p">,</span> <span class="n">view_width</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RewardShaping.step"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="n">prev_pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_id</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">agent_id</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">}</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">agent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span>
-
-            <span class="c1"># Reward picking up new objects</span>
-            <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">carrying</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_picked_up</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_picked_up</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">carrying</span><span class="p">)</span>
-                <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bonus</span>
-
-            <span class="c1"># Reward opening new doors</span>
-            <span class="k">if</span> <span class="n">agent_id</span> <span class="ow">in</span> <span class="n">actions</span> <span class="ow">and</span> <span class="n">action</span> <span class="o">==</span> <span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">:</span>
-                <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">,</span> <span class="n">Door</span><span class="p">)</span> <span class="ow">and</span> <span class="n">fwd_obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opened</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_opened</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span>
-                    <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bonus</span>
-
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div></div>
-
-
-<div class="viewcode-block" id="RewardShaping2"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping2">[docs]</a><span class="k">class</span> <span class="nc">RewardShaping2</span><span class="p">(</span><span class="n">Wrapper</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    General reward shaping wrapper for MultiGrid environments.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<div class="viewcode-block" id="RewardShaping2.__init__"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping2.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">MultiGridEnv</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">observation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">agent_id</span> <span class="ow">in</span> <span class="n">obs</span><span class="p">:</span>
+            <span class="n">obs</span><span class="p">[</span><span class="n">agent_id</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">obs</span><span class="p">[</span><span class="n">agent_id</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_sizes</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obs</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@nb</span><span class="o">.</span><span class="n">njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">],</span> <span class="n">dim_sizes</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a one-hot encoding of a 3D integer array,</span>
+<span class="sd">        where each 2D slice is encoded separately.</span>
+<span class="sd">    </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        env : MultiGridEnv</span>
-<span class="sd">            Environment to wrap</span>
-<span class="sd">        scale : float</span>
-<span class="sd">            Reward scale</span>
+<span class="sd">        x : ndarray[int] of shape (view_height, view_width, dim)</span>
+<span class="sd">            3D array of integers to be one-hot encoded</span>
+<span class="sd">        dim_sizes : ndarray[int] of shape (dim,)</span>
+<span class="sd">            Number of possible values for each dimension</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        out : ndarray[uint8] of shape (view_height, view_width, sum(dim_sizes))</span>
+<span class="sd">            One-hot encoding</span>
+<span class="sd">        </span>
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_reward_scale</span> <span class="o">=</span> <span class="n">scale</span></div>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dim_sizes</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RewardShaping2.reset"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping2.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_picked_up</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="c1"># objects that have been picked up</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_opened</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># doors that have been opened</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_seen</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="n">dim_offset</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dim_sizes</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">k</span> <span class="o">=</span> <span class="n">dim_offset</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span>
+                    <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="RewardShaping2.step"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping2.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="n">prev_pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_id</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">agent_id</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">}</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+            <span class="n">dim_offset</span> <span class="o">+=</span> <span class="n">dim_sizes</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
 
-        <span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">agent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">out</span></div>
 
-            <span class="c1"># # Reward new states directly in front of the agent</span>
-            <span class="c1"># fwd_pos = agent.front_pos</span>
-            <span class="c1"># fwd_obj = self.env.grid.get(*fwd_pos)</span>
-            <span class="c1"># fwd_obj = fwd_obj if fwd_obj is None else tuple(fwd_obj)</span>
-            <span class="c1"># if can_pickup(fwd_obj):</span>
-            <span class="c1">#     fwd_obj += fwd_pos</span>
 
-            <span class="c1"># if fwd_obj not in self._seen[agent_id]:</span>
-            <span class="c1">#     self._seen[agent_id].add(fwd_obj)</span>
-            <span class="c1">#     reward[agent_id] += self._reward_scale</span>
+
+<span class="c1"># class Wrapper(gym.Wrapper):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     :meta private:</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     @classmethod</span>
+<span class="c1">#     def config(cls, **kwargs) -&gt; Callable[[gym.Env], Wrapper]:</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Return wrapper class with the given configuration,</span>
+<span class="c1">#         whose constructor accepts a single argument: the base environment.</span>
+
+<span class="c1">#         `MyWrapper.config(**kwargs)(env)` is equivalent to `MyWrapper(env, **kwargs)`. </span>
+
+<span class="c1">#         Parameters</span>
+<span class="c1">#         ----------</span>
+<span class="c1">#         kwargs : dict</span>
+<span class="c1">#             Configuration parameters</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         class ConfigWrapper(cls):</span>
+<span class="c1">#             def __init__(self, env):</span>
+<span class="c1">#                 super().__init__(env, **kwargs)</span>
+
+<span class="c1">#         ConfigWrapper.__name__ = cls.__name__</span>
+<span class="c1">#         return ConfigWrapper</span>
+
+
+<span class="c1"># class MovementReward(Wrapper):</span>
+
+<span class="c1">#     def __init__(self, env: MultiGridEnv, scale: float = 1e-5):</span>
+<span class="c1">#         super().__init__(env)</span>
+<span class="c1">#         self._scale = scale</span>
+
+<span class="c1">#     def step(self, actions):</span>
+<span class="c1">#         prev_pos = {agent_id: self.agents[agent_id].pos for agent_id in actions}</span>
+<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
+<span class="c1">#         for agent_id, action in actions.items():</span>
+<span class="c1">#             if action == Action.forward:</span>
+<span class="c1">#                 reward[agent_id] = self.reward_scale</span>
+<span class="c1">#         return obs, reward, terminated, truncated, info</span>
+
+
+
+
+
+
+
+<span class="c1"># class ActionMaskWrapper(Wrapper):</span>
+
+<span class="c1">#     # def __init__(self, env: MultiGridEnv):</span>
+<span class="c1">#     #     super().__init__(env)</span>
+<span class="c1">#     #     action_mask_space = spaces.Box(low=0, high=1, shape=(len(Action),), dtype=bool)</span>
+<span class="c1">#     #     for agent in self.env.agents:</span>
+<span class="c1">#     #         agent.observation_space[&#39;action_mask&#39;] = action_mask_space</span>
+
+<span class="c1">#     # def observation(self, obs):</span>
+<span class="c1">#     #     for agent_id in obs:</span>
+<span class="c1">#     #         obs[agent_id][&#39;action_mask&#39;] = self.action_mask(self.env.agents[agent_id])</span>
+<span class="c1">#     #     return obs</span>
+
+<span class="c1">#     def step(self, actions):</span>
+<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
+<span class="c1">#         for agent_id, action in actions.items():</span>
+<span class="c1">#             action_mask = self.action_mask(self.env.agents[agent_id])</span>
+<span class="c1">#             if not action_mask[action] or action in {Action.left, Action.right}:</span>
+<span class="c1">#                 reward[agent_id] = -1e-5</span>
+
+<span class="c1">#         return obs, reward, terminated, truncated, info</span>
+
+<span class="c1">#     def action_mask(self, agent: Agent):</span>
+<span class="c1">#         fwd_pos = agent.front_pos</span>
+<span class="c1">#         fwd_obj = self.grid.get(*fwd_pos)</span>
+<span class="c1">#         mask = np.zeros(len(Action), dtype=bool)</span>
+<span class="c1">#         mask[Action.left] = True</span>
+<span class="c1">#         mask[Action.right] = True</span>
+<span class="c1">#         mask[Action.forward] = can_overlap(fwd_obj)</span>
+<span class="c1">#         mask[Action.pickup] = can_pickup(fwd_obj)</span>
+<span class="c1">#         mask[Action.drop] = (fwd_obj is None and agent.state.carrying is not None)</span>
+
+<span class="c1">#         if fwd_obj and fwd_obj.type == Type.door:</span>
+<span class="c1">#             if agent.state.carrying and agent.state.carrying.type == Type.key:</span>
+<span class="c1">#                 if fwd_obj.is_locked:</span>
+<span class="c1">#                     if fwd_obj.color == agent.state.carrying.color:</span>
+<span class="c1">#                         mask[Action.toggle] = True</span>
+<span class="c1">#                 else:</span>
+<span class="c1">#                     mask[Action.toggle] = True</span>
+<span class="c1">#         elif fwd_obj and fwd_obj.type == Type.box:</span>
+<span class="c1">#             mask[Action.toggle] = True</span>
+
+<span class="c1">#             mask[Action.toggle] = (</span>
+<span class="c1">#                 fwd_obj is not None and fwd_obj.type in {Type.box, Type.door})</span>
+<span class="c1">#         mask[Action.toggle] = (</span>
+<span class="c1">#             fwd_obj is not None and fwd_obj.type in {Type.box, Type.door})</span>
+<span class="c1">#         return mask</span>
+
+
+
+
+<span class="c1"># class RewardShaping(Wrapper):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     General reward shaping wrapper for MultiGrid environments.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     def __init__(self, env: MultiGridEnv, bonus=1e-4):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Parameters</span>
+<span class="c1">#         ----------</span>
+<span class="c1">#         env : MultiGridEnv</span>
+<span class="c1">#             Environment to wrap</span>
+<span class="c1">#         bonus : float</span>
+<span class="c1">#             Reward bonus</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         super().__init__(env)</span>
+<span class="c1">#         self._bonus = bonus</span>
+<span class="c1">#         #self.agents[0].color = &#39;purple&#39;</span>
+<span class="c1">#         #self.agents[1].color = &#39;yellow&#39;</span>
+
+<span class="c1">#     def reset(self, *args, **kwargs):</span>
+<span class="c1">#         self._picked_up = [] # objects that have been picked up</span>
+<span class="c1">#         self._opened = [] # doors that have been opened</span>
+<span class="c1">#         return super().reset(*args, **kwargs)</span>
+
+<span class="c1">#     def step(self, actions):</span>
+<span class="c1">#         prev_pos = {agent_id: self.agents[agent_id].pos for agent_id in actions}</span>
+<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
+
+<span class="c1">#         for agent_id, action in actions.items():</span>
+<span class="c1">#             agent = self.agents[agent_id]</span>
+
+<span class="c1">#             # Reward picking up new objects</span>
+<span class="c1">#             if agent.carrying not in self._picked_up:</span>
+<span class="c1">#                 self._picked_up.append(agent.carrying)</span>
+<span class="c1">#                 reward[agent_id] += self._bonus</span>
+
+<span class="c1">#             # Reward opening new doors</span>
+<span class="c1">#             if agent_id in actions and action == Action.toggle:</span>
+<span class="c1">#                 fwd_obj = self.env.grid.get(*agent.front_pos)</span>
+<span class="c1">#                 if isinstance(fwd_obj, Door) and fwd_obj not in self._opened:</span>
+<span class="c1">#                     self._opened.append(fwd_obj)</span>
+<span class="c1">#                     reward[agent_id] += self._bonus</span>
+
+<span class="c1">#         return obs, reward, terminated, truncated, info</span>
+
+
+<span class="c1"># class RewardShaping2(Wrapper):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     General reward shaping wrapper for MultiGrid environments.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     def __init__(self, env: MultiGridEnv, scale: float = 1e-3):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Parameters</span>
+<span class="c1">#         ----------</span>
+<span class="c1">#         env : MultiGridEnv</span>
+<span class="c1">#             Environment to wrap</span>
+<span class="c1">#         scale : float</span>
+<span class="c1">#             Reward scale</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         super().__init__(env)</span>
+<span class="c1">#         self._reward_scale = scale</span>
+
+<span class="c1">#     def reset(self, *args, **kwargs):</span>
+<span class="c1">#         self._picked_up = defaultdict(list) # objects that have been picked up</span>
+<span class="c1">#         self._opened = [] # doors that have been opened</span>
+<span class="c1">#         self._seen = defaultdict(set)</span>
+<span class="c1">#         return super().reset(*args, **kwargs)</span>
+
+<span class="c1">#     def step(self, actions):</span>
+<span class="c1">#         prev_pos = {agent_id: self.agents[agent_id].pos for agent_id in actions}</span>
+<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
+
+<span class="c1">#         for agent_id, action in actions.items():</span>
+<span class="c1">#             agent = self.env.agents[agent_id]</span>
+
+<span class="c1">#             # # Reward new states directly in front of the agent</span>
+<span class="c1">#             # fwd_pos = agent.front_pos</span>
+<span class="c1">#             # fwd_obj = self.env.grid.get(*fwd_pos)</span>
+<span class="c1">#             # fwd_obj = fwd_obj if fwd_obj is None else tuple(fwd_obj)</span>
+<span class="c1">#             # if can_pickup(fwd_obj):</span>
+<span class="c1">#             #     fwd_obj += fwd_pos</span>
+
+<span class="c1">#             # if fwd_obj not in self._seen[agent_id]:</span>
+<span class="c1">#             #     self._seen[agent_id].add(fwd_obj)</span>
+<span class="c1">#             #     reward[agent_id] += self._reward_scale</span>
             
-            <span class="c1"># Reward moving in front of new objects</span>
-            <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span><span class="p">)</span>
-            <span class="n">fwd_obj</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span> <span class="k">if</span> <span class="n">fwd_obj</span> <span class="k">else</span> <span class="kc">None</span>
-            <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seen</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_seen</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span>
-                <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward_scale</span>
+<span class="c1">#             # Reward moving in front of new objects</span>
+<span class="c1">#             fwd_obj = self.env.grid.get(*agent.front_pos)</span>
+<span class="c1">#             fwd_obj = tuple(fwd_obj) if fwd_obj else None</span>
+<span class="c1">#             if fwd_obj not in self._seen[agent_id]:</span>
+<span class="c1">#                 self._seen[agent_id].add(fwd_obj)</span>
+<span class="c1">#                 reward[agent_id] += self._reward_scale</span>
 
-            <span class="c1"># Reward picking up new objects</span>
-            <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">carrying</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">carrying</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_picked_up</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_picked_up</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">carrying</span><span class="p">)</span>
-                    <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward_scale</span>
-                    <span class="c1">#print(&quot;Agent&quot;, agent_id, &quot;picked up&quot;, agent.carrying)</span>
+<span class="c1">#             # Reward picking up new objects</span>
+<span class="c1">#             if agent.carrying:</span>
+<span class="c1">#                 if agent.carrying not in self._picked_up[agent_id]:</span>
+<span class="c1">#                     self._picked_up[agent_id].append(agent.carrying)</span>
+<span class="c1">#                     reward[agent_id] += self._reward_scale</span>
+<span class="c1">#                     #print(&quot;Agent&quot;, agent_id, &quot;picked up&quot;, agent.carrying)</span>
 
-            <span class="c1"># # Reward opening new doors</span>
-            <span class="c1"># if agent_id in actions and action == Action.toggle:</span>
-            <span class="c1">#     fwd_obj = self.env.grid.get(*agent.front_pos)</span>
-            <span class="c1">#     if isinstance(fwd_obj, Door) and fwd_obj not in self._opened:</span>
-            <span class="c1">#         self._opened.append(fwd_obj)</span>
-            <span class="c1">#         reward[agent_id] += self._reward_scale            </span>
+<span class="c1">#             # # Reward opening new doors</span>
+<span class="c1">#             # if agent_id in actions and action == Action.toggle:</span>
+<span class="c1">#             #     fwd_obj = self.env.grid.get(*agent.front_pos)</span>
+<span class="c1">#             #     if isinstance(fwd_obj, Door) and fwd_obj not in self._opened:</span>
+<span class="c1">#             #         self._opened.append(fwd_obj)</span>
+<span class="c1">#             #         reward[agent_id] += self._reward_scale            </span>
 
-            <span class="c1"># # Penalize staying in the same position</span>
-            <span class="c1"># if agent.pos == prev_pos[agent_id]:</span>
-            <span class="c1">#     reward[agent_id] -= 0.01 * self._reward_scale</span>
+<span class="c1">#             # # Penalize staying in the same position</span>
+<span class="c1">#             # if agent.pos == prev_pos[agent_id]:</span>
+<span class="c1">#             #     reward[agent_id] -= 0.01 * self._reward_scale</span>
 
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div>
+<span class="c1">#         return obs, reward, terminated, truncated, info</span>
     
-<div class="viewcode-block" id="RewardShaping2.weighted"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.RewardShaping2.weighted">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">weighted</span><span class="p">(</span><span class="n">weight</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="k">class</span> <span class="nc">WeightedRewardShaping</span><span class="p">(</span><span class="n">RewardShaping2</span><span class="p">):</span>
-            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">):</span>
-                <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">bonus</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">WeightedRewardShaping</span></div></div>
+<span class="c1">#     @staticmethod</span>
+<span class="c1">#     def weighted(weight: float):</span>
+<span class="c1">#         class WeightedRewardShaping(RewardShaping2):</span>
+<span class="c1">#             def __init__(self, env):</span>
+<span class="c1">#                 super().__init__(env, bonus=weight)</span>
+<span class="c1">#         return WeightedRewardShaping</span>
 </pre></div>
         </article>
       </div>

@@ -171,6 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -249,6 +250,7 @@
 <span class="kn">from</span> <span class="nn">.core.world_object</span> <span class="kn">import</span> <span class="n">WorldObj</span>
 <span class="kn">from</span> <span class="nn">.core.world_object</span> <span class="kn">import</span> <span class="n">can_overlap</span><span class="p">,</span> <span class="n">can_pickup</span>
 <span class="kn">from</span> <span class="nn">.utils.obs</span> <span class="kn">import</span> <span class="n">gen_obs_grid_encoding</span>
+<span class="kn">from</span> <span class="nn">.utils.misc</span> <span class="kn">import</span> <span class="n">dict_update_all</span>
 
 
 
@@ -264,32 +266,36 @@
 
 <div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multi-agent 2D gridworld game environment.</span>
+<span class="sd">    Base for multi-agent 2D gridworld environments.</span>
 
-<span class="sd">    Agents are identified by their index, from ``0`` to ``NUM_AGENTS-1``.</span>
+<span class="sd">    :Agents:</span>
 
-<span class="sd">    **Observation Space**</span>
+<span class="sd">        The environment can be configured with any fixed number of agents.</span>
+<span class="sd">        Agents are represented by :class:`.Agent` instances, and are</span>
+<span class="sd">        identified by their index, from ``0`` to ``len(env.agents) - 1``.</span>
 
-<span class="sd">    The multi-agent observation space is a Dict mapping from agent index to</span>
-<span class="sd">    corresponding agent observation space.</span>
+<span class="sd">    :Observation Space:</span>
 
-<span class="sd">    The standard agent observation is a dictionary with the following entries:</span>
+<span class="sd">        The multi-agent observation space is a Dict mapping from agent index to</span>
+<span class="sd">        corresponding agent observation space.</span>
 
-<span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
-<span class="sd">        Encoding of the agent&#39;s view of the environment,</span>
-<span class="sd">        where each grid object is encoded as a 3 dimensional tuple:</span>
-<span class="sd">        (:class:`.Type`, :class:`.Color`, :class:`.State`)</span>
-<span class="sd">    * direction : int</span>
-<span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
-<span class="sd">    * mission : Mission</span>
-<span class="sd">        Task string corresponding to the current environment configuration</span>
+<span class="sd">        The standard agent observation is a dictionary with the following entries:</span>
 
-<span class="sd">    **Action Space**</span>
+<span class="sd">            * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
+<span class="sd">                Encoding of the agent&#39;s view of the environment,</span>
+<span class="sd">                where each grid object is encoded as a 3 dimensional tuple:</span>
+<span class="sd">                (:class:`.Type`, :class:`.Color`, :class:`.State`)</span>
+<span class="sd">            * direction : int</span>
+<span class="sd">                Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
+<span class="sd">            * mission : Mission</span>
+<span class="sd">                Task string corresponding to the current environment configuration</span>
 
-<span class="sd">    The multi-agent action space is a Dict mapping from agent index to</span>
-<span class="sd">    corresponding agent action space.</span>
+<span class="sd">    :Action Space:</span>
 
-<span class="sd">    Agent actions are discrete integers, as enumerated in :class:`.Action`.</span>
+<span class="sd">        The multi-agent action space is a Dict mapping from agent index to</span>
+<span class="sd">        corresponding agent action space.</span>
+
+<span class="sd">        Agent actions are discrete integers, as enumerated in :class:`.Action`.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -309,7 +315,7 @@
 
 <div class="viewcode-block" id="MultiGridEnv.__init__"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">mission_space</span><span class="p">:</span> <span class="n">MissionSpace</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s1">&#39;maximize reward&#39;</span><span class="p">),</span>
+        <span class="n">mission_space</span><span class="p">:</span> <span class="n">MissionSpace</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;maximize reward&quot;</span><span class="p">,</span>
         <span class="n">agents</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">grid_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -319,7 +325,8 @@
         <span class="n">agent_view_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
         <span class="n">allow_agent_overlap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">joint_reward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">termination_mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
+        <span class="n">success_termination_mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
+        <span class="n">failure_termination_mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span><span class="p">,</span>
         <span class="n">render_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">screen_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">640</span><span class="p">,</span>
         <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -348,9 +355,12 @@
 <span class="sd">            Whether agents are allowed to overlap</span>
 <span class="sd">        joint_reward : bool</span>
 <span class="sd">            Whether all agents receive the same joint reward</span>
-<span class="sd">        termination_mode : &#39;any&#39; or &#39;all&#39;</span>
+<span class="sd">        success_termination_mode : &#39;any&#39; or &#39;all&#39;</span>
 <span class="sd">            Whether to terminate when any agent completes its mission</span>
 <span class="sd">            or when all agents complete their missions</span>
+<span class="sd">        failure_termination_mode : &#39;any&#39; or &#39;all&#39;</span>
+<span class="sd">            Whether to terminate when any agent fails its mission</span>
+<span class="sd">            or when all agents fail their missions</span>
 <span class="sd">        render_mode : str</span>
 <span class="sd">            Rendering mode (human or rgb_array)</span>
 <span class="sd">        screen_size : int</span>
@@ -360,9 +370,11 @@
 <span class="sd">        tile_size : int</span>
 <span class="sd">            Width and height of each grid tiles (in pixels)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Initialize mission</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mission_space</span> <span class="o">=</span> <span class="n">mission_space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span> <span class="o">=</span> <span class="n">mission_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="c1"># Initialize mission space</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mission_space</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mission_space</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">mission_space</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mission_space</span> <span class="o">=</span> <span class="n">mission_space</span>
 
         <span class="c1"># Initialize grid</span>
         <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span> <span class="k">if</span> <span class="n">grid_size</span> <span class="k">else</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
@@ -378,7 +390,7 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
                 <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
                     <span class="n">index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
-                    <span class="n">mission_space</span><span class="o">=</span><span class="n">mission_space</span><span class="p">,</span>
+                    <span class="n">mission_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mission_space</span><span class="p">,</span>
                     <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                     <span class="n">view_size</span><span class="o">=</span><span class="n">agent_view_size</span><span class="p">,</span>
                     <span class="n">see_through_walls</span><span class="o">=</span><span class="n">see_through_walls</span><span class="p">,</span>
@@ -419,7 +431,8 @@
         <span class="c1"># Other</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">allow_agent_overlap</span> <span class="o">=</span> <span class="n">allow_agent_overlap</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">joint_reward</span> <span class="o">=</span> <span class="n">joint_reward</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">termination_mode</span> <span class="o">=</span> <span class="n">termination_mode</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">success_termination_mode</span> <span class="o">=</span> <span class="n">success_termination_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_termination_mode</span> <span class="o">=</span> <span class="n">failure_termination_mode</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">observation_space</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">]:</span>
@@ -523,17 +536,16 @@
 <span class="sd">            Additional information for each agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
 
         <span class="c1"># Rendering</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
-        <span class="c1"># Generate outputs</span>
+        <span class="c1"># Generate observations</span>
         <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
         <span class="n">truncated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span>
         <span class="n">truncated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">([</span><span class="n">truncated</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">))</span>
-        <span class="n">terminated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
@@ -569,7 +581,9 @@
         <span class="k">return</span> <span class="n">obs</span></div>
 
 <div class="viewcode-block" id="MultiGridEnv.handle_actions"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.handle_actions">[docs]</a>    <span class="k">def</span> <span class="nf">handle_actions</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">Action</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">Action</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">],</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle actions taken by agents.</span>
 
@@ -580,10 +594,13 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        rewards : dict[AgentID, SupportsFloat]</span>
+<span class="sd">        reward : dict[AgentID, SupportsFloat]</span>
 <span class="sd">            Reward for each agent</span>
+<span class="sd">        terminated : dict[AgentID, bool]</span>
+<span class="sd">            Whether the episode has been terminated for each agent (success or failure)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">rewards</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_index</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">agent_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)}</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_index</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">agent_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)}</span>
+        <span class="n">terminated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span><span class="p">))</span>
 
         <span class="c1"># Randomize agent action order</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -621,10 +638,10 @@
                             <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">fwd_pos</span>
 
                 <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;lava&#39;</span><span class="p">:</span>
-                        <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span>
-                    <span class="k">elif</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;goal&#39;</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">on_goal</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">rewards</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">lava</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
 
             <span class="c1"># Pick up an object</span>
             <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="n">Action</span><span class="o">.</span><span class="n">pickup</span><span class="p">:</span>
@@ -664,9 +681,13 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown action: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">rewards</span></div>
+        <span class="k">return</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.on_goal"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_goal">[docs]</a>    <span class="k">def</span> <span class="nf">on_goal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">rewards</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">]):</span>
+<div class="viewcode-block" id="MultiGridEnv.on_success"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_success">[docs]</a>    <span class="k">def</span> <span class="nf">on_success</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span>
+        <span class="n">reward</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">],</span>
+        <span class="n">terminated</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Callback for when an agent completes its mission.</span>
 
@@ -674,19 +695,46 @@
 <span class="sd">        ----------</span>
 <span class="sd">        agent : Agent</span>
 <span class="sd">            Agent that completed its mission</span>
-<span class="sd">        rewards : dict[AgentID, SupportsFloat]</span>
+<span class="sd">        reward : dict[AgentID, SupportsFloat]</span>
 <span class="sd">            Reward dictionary to be updated</span>
+<span class="sd">        terminated : dict[AgentID, bool]</span>
+<span class="sd">            Termination dictionary to be updated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">termination_mode</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all if any agent reaches goal</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_termination_mode</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all agents</span>
+            <span class="n">dict_update_all</span><span class="p">(</span><span class="n">terminated</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate this agent only</span>
+            <span class="n">terminated</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint_reward</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">rewards</span><span class="p">:</span>
-                <span class="n">rewards</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span> <span class="c1"># reward all agents</span>
+            <span class="n">dict_update_all</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">())</span> <span class="c1"># reward all agents</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">rewards</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span> <span class="c1"># reward this agent only</span></div>
+            <span class="n">reward</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span> <span class="c1"># reward this agent only</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.on_failure"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_failure">[docs]</a>    <span class="k">def</span> <span class="nf">on_failure</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span>
+        <span class="n">reward</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">],</span>
+        <span class="n">terminated</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Callback for when an agent fails its mission prematurely.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : Agent</span>
+<span class="sd">            Agent that failed its mission</span>
+<span class="sd">        reward : dict[AgentID, SupportsFloat]</span>
+<span class="sd">            Reward dictionary to be updated</span>
+<span class="sd">        terminated : dict[AgentID, bool]</span>
+<span class="sd">            Termination dictionary to be updated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_termination_mode</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all agents</span>
+            <span class="n">dict_update_all</span><span class="p">(</span><span class="n">terminated</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate this agent only</span>
+            <span class="n">terminated</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">steps_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -172,6 +172,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -231,136 +232,43 @@
           <section id="module-multigrid.wrappers">
 <span id="multigrid-wrappers-module"></span><h1>multigrid.wrappers module<a class="headerlink" href="#module-multigrid.wrappers" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.Wrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">Wrapper</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#Wrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.Wrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></p>
+<dt class="sig sig-object py" id="multigrid.wrappers.OneHotObsWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">OneHotObsWrapper</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#OneHotObsWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.OneHotObsWrapper" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationWrapper</span></code></p>
+<p>Wrapper to get a one-hot encoding of a partially observable
+agent view as observation.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.envs</span> <span class="kn">import</span> <span class="n">EmptyEnv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.wrappers</span> <span class="kn">import</span> <span class="n">OneHotObsWrapper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">EmptyEnv</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="go">array([[2, 5, 0],</span>
+<span class="go">        [2, 5, 0],</span>
+<span class="go">        [2, 5, 0],</span>
+<span class="go">        [2, 5, 0],</span>
+<span class="go">        [2, 5, 0],</span>
+<span class="go">        [2, 5, 0],</span>
+<span class="go">        [2, 5, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">OneHotObsWrapper</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="go">array([[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
+<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]],</span>
+<span class="go">        dtype=uint8)</span>
+</pre></div>
+</div>
 <dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.Wrapper.config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Env</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#multigrid.wrappers.Wrapper" title="multigrid.wrappers.Wrapper"><span class="pre">Wrapper</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#Wrapper.config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.Wrapper.config" title="Permalink to this definition">#</a></dt>
-<dd><p>Return wrapper class with the given configuration,
-whose constructor accepts a single argument: the base environment.</p>
-<p><cite>MyWrapper.config(**kwargs)(env)</cite> is equivalent to <cite>MyWrapper(env, **kwargs)</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Configuration parameters</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.MovementReward">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">MovementReward</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#MovementReward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.MovementReward" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#multigrid.wrappers.Wrapper" title="multigrid.wrappers.Wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.MovementReward.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#MovementReward.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.MovementReward.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Wraps an environment to allow a modular transformation of the <a class="reference internal" href="#multigrid.wrappers.MovementReward.step" title="multigrid.wrappers.MovementReward.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> methods.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>env: The environment to wrap</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.MovementReward.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#MovementReward.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.MovementReward.step" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.wrappers.MovementReward.step" title="multigrid.wrappers.MovementReward.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.ActionMaskWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">ActionMaskWrapper</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#ActionMaskWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.ActionMaskWrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#multigrid.wrappers.Wrapper" title="multigrid.wrappers.Wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.ActionMaskWrapper.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#ActionMaskWrapper.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.ActionMaskWrapper.step" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.wrappers.ActionMaskWrapper.step" title="multigrid.wrappers.ActionMaskWrapper.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.ActionMaskWrapper.action_mask">
-<span class="sig-name descname"><span class="pre">action_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.agent.html#multigrid.core.agent.Agent" title="multigrid.core.agent.Agent"><span class="pre">Agent</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#ActionMaskWrapper.action_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.ActionMaskWrapper.action_mask" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">RewardShaping</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#multigrid.wrappers.Wrapper" title="multigrid.wrappers.Wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></a></p>
-<p>General reward shaping wrapper for MultiGrid environments.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping.__init__" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multigrid.wrappers.OneHotObsWrapper.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#OneHotObsWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.OneHotObsWrapper.__init__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>env</strong><span class="classifier">MultiGridEnv</span></dt><dd><p>Environment to wrap</p>
-</dd>
-<dt><strong>bonus</strong><span class="classifier">float</span></dt><dd><p>Reward bonus</p>
-</dd>
-</dl>
-</dd>
 </dl>
 </dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping.reset">
-<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping.reset" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.wrappers.RewardShaping.reset" title="multigrid.wrappers.RewardShaping.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping.step" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.wrappers.RewardShaping.step" title="multigrid.wrappers.RewardShaping.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping2">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">RewardShaping2</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping2" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#multigrid.wrappers.Wrapper" title="multigrid.wrappers.Wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></a></p>
-<p>General reward shaping wrapper for MultiGrid environments.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping2.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping2.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping2.__init__" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>env</strong><span class="classifier">MultiGridEnv</span></dt><dd><p>Environment to wrap</p>
-</dd>
-<dt><strong>scale</strong><span class="classifier">float</span></dt><dd><p>Reward scale</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping2.reset">
-<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping2.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping2.reset" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.wrappers.RewardShaping2.reset" title="multigrid.wrappers.RewardShaping2.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping2.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping2.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping2.step" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.wrappers.RewardShaping2.step" title="multigrid.wrappers.RewardShaping2.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.RewardShaping2.weighted">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weighted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#RewardShaping2.weighted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.RewardShaping2.weighted" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -414,31 +322,8 @@ whose constructor accepts a single argument: the base environment.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">multigrid.wrappers module</a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.Wrapper"><code class="docutils literal notranslate"><span class="pre">Wrapper</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.Wrapper.config"><code class="docutils literal notranslate"><span class="pre">Wrapper.config()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multigrid.wrappers.MovementReward"><code class="docutils literal notranslate"><span class="pre">MovementReward</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.MovementReward.__init__"><code class="docutils literal notranslate"><span class="pre">MovementReward.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.MovementReward.step"><code class="docutils literal notranslate"><span class="pre">MovementReward.step()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multigrid.wrappers.ActionMaskWrapper"><code class="docutils literal notranslate"><span class="pre">ActionMaskWrapper</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.ActionMaskWrapper.step"><code class="docutils literal notranslate"><span class="pre">ActionMaskWrapper.step()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.ActionMaskWrapper.action_mask"><code class="docutils literal notranslate"><span class="pre">ActionMaskWrapper.action_mask()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping"><code class="docutils literal notranslate"><span class="pre">RewardShaping</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping.__init__"><code class="docutils literal notranslate"><span class="pre">RewardShaping.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping.reset"><code class="docutils literal notranslate"><span class="pre">RewardShaping.reset()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping.step"><code class="docutils literal notranslate"><span class="pre">RewardShaping.step()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping2"><code class="docutils literal notranslate"><span class="pre">RewardShaping2</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping2.__init__"><code class="docutils literal notranslate"><span class="pre">RewardShaping2.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping2.reset"><code class="docutils literal notranslate"><span class="pre">RewardShaping2.reset()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping2.step"><code class="docutils literal notranslate"><span class="pre">RewardShaping2.step()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.wrappers.RewardShaping2.weighted"><code class="docutils literal notranslate"><span class="pre">RewardShaping2.weighted()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.wrappers.OneHotObsWrapper"><code class="docutils literal notranslate"><span class="pre">OneHotObsWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.wrappers.OneHotObsWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">OneHotObsWrapper.__init__()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -171,6 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -264,18 +265,18 @@
 
 <span class="sd">    :Observation Space:</span>
 
-<span class="sd">    Observations are dictionaries with the following entries:</span>
+<span class="sd">        Observations are dictionaries with the following entries:</span>
 
-<span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
-<span class="sd">        Encoding of the agent&#39;s view of the environment</span>
-<span class="sd">    * direction : int</span>
-<span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
-<span class="sd">    * mission : Mission</span>
-<span class="sd">        Task string corresponding to the current environment configuration</span>
+<span class="sd">            * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
+<span class="sd">                Encoding of the agent&#39;s view of the environment</span>
+<span class="sd">            * direction : int</span>
+<span class="sd">                Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
+<span class="sd">            * mission : Mission</span>
+<span class="sd">                Task string corresponding to the current environment configuration</span>
 
 <span class="sd">    :Action Space:</span>
 
-<span class="sd">    Actions are discrete integers, as enumerated in :class:`.Action`.</span>
+<span class="sd">        Actions are discrete integers, as enumerated in :class:`.Action`.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>

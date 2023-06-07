@@ -172,6 +172,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -235,12 +236,11 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.agent.</span></span><span class="sig-name descname"><span class="pre">Agent</span></span><a class="reference internal" href="_modules/multigrid/core/agent.html#Agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.agent.Agent" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class representing an agent in the environment.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Observation Space<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>Observations are dictionaries with the following entries:</p>
-<ul>
+<dd class="field-odd"><p>Observations are dictionaries with the following entries:</p>
+<blockquote>
+<div><ul>
 <li><dl>
 <dt>image<span class="classifier">ndarray[int] of shape (view_size, view_size, <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim" title="multigrid.core.world_object.WorldObj.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a>)</span></dt><dd><p>Encoding of the agent’s view of the environment</p>
 </dd>
@@ -257,12 +257,11 @@
 </dl>
 </li>
 </ul>
-<dl class="field-list simple">
-<dt class="field-odd">Action Space<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>Actions are discrete integers, as enumerated in <a class="reference internal" href="multigrid.core.actions.html#multigrid.core.actions.Action" title="multigrid.core.actions.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
-<dl class="field-list simple">
+</div></blockquote>
+</dd>
+<dt class="field-even">Action Space<span class="colon">:</span></dt>
+<dd class="field-even"><p>Actions are discrete integers, as enumerated in <a class="reference internal" href="multigrid.core.actions.html#multigrid.core.actions.Action" title="multigrid.core.actions.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a>.</p>
+</dd>
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>index</strong><span class="classifier">int</span></dt><dd><p>Index of the agent in the environment</p>

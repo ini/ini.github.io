@@ -171,6 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -228,9 +229,18 @@
         <article role="main">
           <h1>Source code for multigrid.utils.misc</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">..core.constants</span> <span class="kn">import</span> <span class="n">Direction</span>
 
 
+
+<div class="viewcode-block" id="dict_update_all"><a class="viewcode-back" href="../../../multigrid.utils.misc.html#multigrid.utils.misc.dict_update_all">[docs]</a><span class="k">def</span> <span class="nf">dict_update_all</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set all values in a dictionary to a given value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="front_pos"><a class="viewcode-back" href="../../../multigrid.utils.misc.html#multigrid.utils.misc.front_pos">[docs]</a><span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
 <span class="k">def</span> <span class="nf">front_pos</span><span class="p">(</span><span class="n">agent_x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">agent_y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">agent_dir</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>

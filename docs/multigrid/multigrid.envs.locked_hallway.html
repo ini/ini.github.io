@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.rllib package" href="multigrid.rllib.html" /><link rel="prev" title="multigrid.envs.empty module" href="multigrid.envs.empty.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.envs.redbluedoors module" href="multigrid.envs.redbluedoors.html" /><link rel="prev" title="multigrid.envs.empty module" href="multigrid.envs.empty.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
         <title>multigrid.envs.locked_hallway module - multigrid 0.1.0b documentation</title>
@@ -172,6 +172,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4 current current-page"><a class="current reference internal" href="#">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -360,8 +361,11 @@ when each door is opened.</p>
 </dd>
 <dt><strong>joint_reward</strong><span class="classifier">bool</span></dt><dd><p>Whether all agents receive the same joint reward</p>
 </dd>
-<dt><strong>termination_mode</strong><span class="classifier">‘any’ or ‘all’</span></dt><dd><p>Whether to terminate when any agent completes its mission
+<dt><strong>success_termination_mode</strong><span class="classifier">‘any’ or ‘all’</span></dt><dd><p>Whether to terminate when any agent completes its mission
 or when all agents complete their missions</p>
+</dd>
+<dt><strong>failure_termination_mode</strong><span class="classifier">‘any’ or ‘all’</span></dt><dd><p>Whether to terminate when any agent fails its mission
+or when all agents fail their missions</p>
 </dd>
 <dt><strong>render_mode</strong><span class="classifier">str</span></dt><dd><p>Rendering mode (human or rgb_array)</p>
 </dd>
@@ -523,12 +527,12 @@ using the provided agent actions.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="multigrid.rllib.html">
+          <a class="next-page" href="multigrid.envs.redbluedoors.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">multigrid.rllib package</div>
+                <div class="title">multigrid.envs.redbluedoors module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -171,6 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -340,16 +341,19 @@
     <span class="n">agent_grid_encoding</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
     <span class="n">agent_dir</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
     <span class="n">agent_pos</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">agent_terminated</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
     <span class="n">agent_carrying_encoding</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span><span class="mi">6</span><span class="o">+</span><span class="n">ENCODE_DIM</span><span class="p">]</span>
 
     <span class="c1"># Get grid encoding</span>
     <span class="k">if</span> <span class="n">num_agents</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">grid_encoding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="o">*</span><span class="n">grid_state</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ENCODE_DIM</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
         <span class="n">grid_encoding</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span>
+
         <span class="c1"># Insert agent grid encodings</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">):</span>
-            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">agent_pos</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
-            <span class="n">grid_encoding</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_grid_encoding</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">agent_terminated</span><span class="p">[</span><span class="n">agent</span><span class="p">]:</span>
+                <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">agent_pos</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
+                <span class="n">grid_encoding</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_grid_encoding</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">grid_encoding</span> <span class="o">=</span> <span class="n">grid_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span>
 

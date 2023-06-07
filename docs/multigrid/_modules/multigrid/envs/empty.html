@@ -171,6 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -230,8 +231,8 @@
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">multigrid</span> <span class="kn">import</span> <span class="n">MultiGridEnv</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.mission</span> <span class="kn">import</span> <span class="n">MissionSpace</span>
+<span class="kn">from</span> <span class="nn">multigrid.core</span> <span class="kn">import</span> <span class="n">Grid</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.constants</span> <span class="kn">import</span> <span class="n">Direction</span>
 <span class="kn">from</span> <span class="nn">multigrid.core.world_object</span> <span class="kn">import</span> <span class="n">Goal</span>
 
 
@@ -246,10 +247,13 @@
 <span class="sd">    ***********</span>
 
 <span class="sd">    This environment is an empty room, and the goal for each agent is to reach the</span>
-<span class="sd">    green goal square before any other agents, which provides a sparse reward.</span>
-<span class="sd">    A small penalty is subtracted for the number of steps to reach the goal.</span>
+<span class="sd">    green goal square, which provides a sparse reward. A small penalty is subtracted</span>
+<span class="sd">    for the number of steps to reach the goal.</span>
 
-<span class="sd">    This environment is useful, with small rooms, to validate that your RL algorithm</span>
+<span class="sd">    The standard setting is competitive, where agents race to the goal, and</span>
+<span class="sd">    only the winner receives a reward.</span>
+
+<span class="sd">    This environment is useful with small rooms, to validate that your RL algorithm</span>
 <span class="sd">    works correctly, and with large rooms to experiment with sparse rewards and</span>
 <span class="sd">    exploration. The random variants of the environment have the agents starting</span>
 <span class="sd">    at a random position for each episode, while the regular variants have the</span>
@@ -336,10 +340,12 @@
 
 <div class="viewcode-block" id="EmptyEnv.__init__"><a class="viewcode-back" href="../../../multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-        <span class="n">agent_start_pos</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-        <span class="n">agent_start_dir</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="n">agent_start_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">agent_start_dir</span><span class="p">:</span> <span class="n">Direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">right</span><span class="p">,</span>
         <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">joint_reward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">success_termination_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_pos</span> <span class="o">=</span> <span class="n">agent_start_pos</span>
@@ -349,12 +355,12 @@
             <span class="n">max_steps</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">size</span><span class="o">**</span><span class="mi">2</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">mission_space</span><span class="o">=</span><span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;get to the green goal square&quot;</span><span class="p">),</span>
+            <span class="n">mission_space</span><span class="o">=</span><span class="s2">&quot;get to the green goal square&quot;</span><span class="p">,</span>
             <span class="n">grid_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
             <span class="n">see_through_walls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># set this to True for maximum speed</span>
             <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
-            <span class="n">joint_reward</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">termination_mode</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">,</span>
+            <span class="n">joint_reward</span><span class="o">=</span><span class="n">joint_reward</span><span class="p">,</span>
+            <span class="n">success_termination_mode</span><span class="o">=</span><span class="n">success_termination_mode</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.envs.blockedunlockpickup - multigrid 0.1.0b documentation</title>
+        <title>multigrid.envs.redbluedoors - multigrid 0.1.0b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -227,38 +227,34 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for multigrid.envs.blockedunlockpickup</h1><div class="highlight"><pre>
+          <h1>Source code for multigrid.envs.redbluedoors</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">multigrid.core.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Type</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.mission</span> <span class="kn">import</span> <span class="n">MissionSpace</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.roomgrid</span> <span class="kn">import</span> <span class="n">RoomGrid</span>
-<span class="kn">from</span> <span class="nn">multigrid.core.world_object</span> <span class="kn">import</span> <span class="n">Ball</span>
+<span class="kn">from</span> <span class="nn">multigrid</span> <span class="kn">import</span> <span class="n">MultiGridEnv</span>
+<span class="kn">from</span> <span class="nn">multigrid.core</span> <span class="kn">import</span> <span class="n">Action</span><span class="p">,</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">MissionSpace</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.constants</span> <span class="kn">import</span> <span class="n">Color</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.world_object</span> <span class="kn">import</span> <span class="n">Door</span>
 
 
 
-<div class="viewcode-block" id="BlockedUnlockPickupEnv"><a class="viewcode-back" href="../../../multigrid.envs.blockedunlockpickup.html#multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv">[docs]</a><span class="k">class</span> <span class="nc">BlockedUnlockPickupEnv</span><span class="p">(</span><span class="n">RoomGrid</span><span class="p">):</span>
+<div class="viewcode-block" id="RedBlueDoorEnv"><a class="viewcode-back" href="../../../multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorEnv">[docs]</a><span class="k">class</span> <span class="nc">RedBlueDoorEnv</span><span class="p">(</span><span class="n">MultiGridEnv</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    ***********</span>
 <span class="sd">    Description</span>
 <span class="sd">    ***********</span>
 
-<span class="sd">    The objective is to pick up a box which is placed in another room, behind a</span>
-<span class="sd">    locked door. The door is also blocked by a ball which must be moved before</span>
-<span class="sd">    the door can be unlocked. Hence, agents must learn to move the ball,</span>
-<span class="sd">    pick up the key, open the door and pick up the object in the other</span>
-<span class="sd">    room.</span>
-
+<span class="sd">    This environment is a room with one red and one blue door facing</span>
+<span class="sd">    opposite directions. Agents must open the red door and then open the blue door,</span>
+<span class="sd">    in that order.</span>
+<span class="sd">    </span>
 <span class="sd">    The standard setting is cooperative, where all agents receive the reward</span>
-<span class="sd">    when the task is completed.</span>
+<span class="sd">    upon completion of the task.</span>
 
 <span class="sd">    *************</span>
 <span class="sd">    Mission Space</span>
 <span class="sd">    *************</span>
 
-<span class="sd">    &quot;pick up the ``{color}`` box&quot;</span>
-
-<span class="sd">    ``{color}`` is the color of the box. Can be any :class:`.Color`.</span>
+<span class="sd">    &quot;open the red door then the blue door&quot;</span>
 
 <span class="sd">    *****************</span>
 <span class="sd">    Observation Space</span>
@@ -318,77 +314,84 @@
 
 <span class="sd">    The episode ends if any one of the following conditions is met:</span>
 
-<span class="sd">    * Any agent picks up the correct box</span>
+<span class="sd">    * Any agent opens the blue door while the red door is open (success)</span>
+<span class="sd">    * Any agent opens the blue door while the red door is not open (failure)</span>
 <span class="sd">    * Timeout (see ``max_steps``)</span>
 
 <span class="sd">    *************************</span>
 <span class="sd">    Registered Configurations</span>
 <span class="sd">    *************************</span>
 
-<span class="sd">    * ``MultiGrid-BlockedUnlockPickup-v0``</span>
+<span class="sd">    * ``MultiGrid-RedBlueDoors-6x6-v0``</span>
+<span class="sd">    * ``MultiGrid-RedBlueDoors-8x8-v0``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="BlockedUnlockPickupEnv.__init__"><a class="viewcode-back" href="../../../multigrid.envs.blockedunlockpickup.html#multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="RedBlueDoorEnv.__init__"><a class="viewcode-back" href="../../../multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">room_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
         <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">joint_reward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">success_termination_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
+        <span class="n">failure_termination_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-        <span class="k">assert</span> <span class="n">room_size</span> <span class="o">&gt;=</span> <span class="mi">4</span>
-        <span class="k">if</span> <span class="n">max_steps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">max_steps</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">room_size</span><span class="o">**</span><span class="mi">2</span>
-
-        <span class="n">mission_space</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="p">(</span>
-            <span class="n">mission_func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gen_mission</span><span class="p">,</span>
-            <span class="n">ordered_placeholders</span><span class="o">=</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">Color</span><span class="p">),</span> <span class="p">[</span><span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="p">,</span> <span class="n">Type</span><span class="o">.</span><span class="n">key</span><span class="p">]],</span>
-        <span class="p">)</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="n">mission_space</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;open the red door then the blue door&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">mission_space</span><span class="o">=</span><span class="n">mission_space</span><span class="p">,</span>
-            <span class="n">num_rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">num_cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">room_size</span><span class="o">=</span><span class="n">room_size</span><span class="p">,</span>
-            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">size</span><span class="p">),</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="n">size</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span>
             <span class="n">joint_reward</span><span class="o">=</span><span class="n">joint_reward</span><span class="p">,</span>
-            <span class="n">success_termination_mode</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">,</span>
+            <span class="n">success_termination_mode</span><span class="o">=</span><span class="n">success_termination_mode</span><span class="p">,</span>
+            <span class="n">failure_termination_mode</span><span class="o">=</span><span class="n">failure_termination_mode</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_gen_mission</span><span class="p">(</span><span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;pick up the </span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">obj_type</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_gen_grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="c1"># Create an empty grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 
-        <span class="c1"># Add a box to the room on the right</span>
-        <span class="n">obj</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_object</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
-        <span class="c1"># Make sure the two rooms are directly connected by a locked door</span>
-        <span class="n">door</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_door</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1"># Block the door with a ball</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_color</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Ball</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
-        <span class="c1"># Add a key to unlock the door</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_object</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">door</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="c1"># Generate the grid walls</span>
+        <span class="n">room_top</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">room_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">wall_rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">wall_rect</span><span class="p">(</span><span class="o">*</span><span class="n">room_top</span><span class="p">,</span> <span class="o">*</span><span class="n">room_size</span><span class="p">)</span>
 
+        <span class="c1"># Place agents in the top-left corner</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">room_top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">room_size</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;pick up the </span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">color</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="c1"># Add a red door at a random position in the left wall</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">room_top</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">red_door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">red</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">red_door</span><span class="p">)</span>
+
+        <span class="c1"># Add a blue door at a random position in the right wall</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">room_top</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">room_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blue_door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">blue</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue_door</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">:</span>
+                <span class="n">agent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span>
+                <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">fwd_obj</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue_door</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue_door</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">red_door</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">on_goal</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div>
 </pre></div>

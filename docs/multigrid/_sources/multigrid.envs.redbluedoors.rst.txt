@@ -1,0 +1,7 @@
+multigrid.envs.redbluedoors module
+==================================
+
+.. automodule:: multigrid.envs.redbluedoors
+   :members:
+   :undoc-members:
+   :show-inheritance:
