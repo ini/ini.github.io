@@ -161,6 +161,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.constants.html">multigrid.core.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -276,7 +277,7 @@
 
 <span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
 <span class="sd">        Encoding of the agent&#39;s partially observable view of the environment,</span>
-<span class="sd">        where each grid cell is encoded as a 3 dimensional tuple:</span>
+<span class="sd">        where the object at each grid cell is encoded as a vector:</span>
 <span class="sd">        (:class:`.Type`, :class:`.Color`, :class:`.State`)</span>
 <span class="sd">    * direction : int</span>
 <span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
@@ -341,24 +342,39 @@
 <div class="viewcode-block" id="EmptyEnv.__init__"><a class="viewcode-back" href="../../../multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
-        <span class="n">agent_start_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-        <span class="n">agent_start_dir</span><span class="p">:</span> <span class="n">Direction</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">right</span><span class="p">,</span>
+        <span class="n">agent_start_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">agent_start_dir</span><span class="p">:</span> <span class="n">Direction</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Direction</span><span class="o">.</span><span class="n">right</span><span class="p">,</span>
         <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">joint_reward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">success_termination_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : int, default=8</span>
+<span class="sd">            Width and height of the grid</span>
+<span class="sd">        agent_start_pos : tuple[int, int], default=(1, 1)</span>
+<span class="sd">            Starting position of the agents (random if None)</span>
+<span class="sd">        agent_start_dir : Direction, default=Direction.right</span>
+<span class="sd">            Starting direction of the agents (random if None)</span>
+<span class="sd">        max_steps : int, optional</span>
+<span class="sd">            Maximum number of steps per episode</span>
+<span class="sd">        joint_reward : bool, default=True</span>
+<span class="sd">            Whether all agents receive the reward when the task is completed</span>
+<span class="sd">        success_termination_mode : &#39;any&#39; or &#39;all&#39;, default=&#39;any&#39;</span>
+<span class="sd">            Whether to terminate the environment when any agent reaches the goal</span>
+<span class="sd">            or after all agents reach the goal</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            See :attr:`multigrid.multigrid_env.MultiGridEnv.__init__`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_pos</span> <span class="o">=</span> <span class="n">agent_start_pos</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_dir</span> <span class="o">=</span> <span class="n">agent_start_dir</span>
-
-        <span class="k">if</span> <span class="n">max_steps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">max_steps</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">size</span><span class="o">**</span><span class="mi">2</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">mission_space</span><span class="o">=</span><span class="s2">&quot;get to the green goal square&quot;</span><span class="p">,</span>
             <span class="n">grid_size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
             <span class="n">see_through_walls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># set this to True for maximum speed</span>
-            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
+            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">size</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span>
             <span class="n">joint_reward</span><span class="o">=</span><span class="n">joint_reward</span><span class="p">,</span>
             <span class="n">success_termination_mode</span><span class="o">=</span><span class="n">success_termination_mode</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -379,7 +395,7 @@
 
         <span class="c1"># Place the agent</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_pos</span>
                 <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_start_dir</span>
             <span class="k">else</span><span class="p">:</span>

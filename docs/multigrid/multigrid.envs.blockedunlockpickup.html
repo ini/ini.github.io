@@ -162,6 +162,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -259,7 +260,7 @@ corresponding agent observation space.</p>
 <ul>
 <li><dl>
 <dt>image<span class="classifier">ndarray[int] of shape (view_size, view_size, <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim" title="multigrid.core.world_object.WorldObj.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a>)</span></dt><dd><p>Encoding of the agent’s partially observable view of the environment,
-where each grid cell is encoded as a 3 dimensional tuple:
+where the object at each grid cell is encoded as a vector:
 (<a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Type" title="multigrid.core.constants.Type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>, <a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Color" title="multigrid.core.constants.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">Color</span></code></a>, <a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.State" title="multigrid.core.constants.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code></a>)</p>
 </dd>
 </dl>
@@ -346,9 +347,9 @@ and <code class="docutils literal notranslate"><span class="pre">0</span></code>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>room_size</strong><span class="classifier">int</span></dt><dd><p>Width and height for each of the two rooms</p>
+<dt><strong>room_size</strong><span class="classifier">int, default=6</span></dt><dd><p>Width and height for each of the two rooms</p>
 </dd>
-<dt><strong>max_steps</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of steps per episode (default: <code class="docutils literal notranslate"><span class="pre">16</span> <span class="pre">*</span> <span class="pre">room_size**2</span></code>)</p>
+<dt><strong>max_steps</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of steps per episode</p>
 </dd>
 <dt><strong>joint_reward</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether all agents receive the reward when the task is completed</p>
 </dd>

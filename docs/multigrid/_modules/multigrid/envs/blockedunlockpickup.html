@@ -161,6 +161,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.constants.html">multigrid.core.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -274,7 +275,7 @@
 
 <span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
 <span class="sd">        Encoding of the agent&#39;s partially observable view of the environment,</span>
-<span class="sd">        where each grid cell is encoded as a 3 dimensional tuple:</span>
+<span class="sd">        where the object at each grid cell is encoded as a vector:</span>
 <span class="sd">        (:class:`.Type`, :class:`.Color`, :class:`.State`)</span>
 <span class="sd">    * direction : int</span>
 <span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
@@ -340,30 +341,26 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        room_size : int</span>
+<span class="sd">        room_size : int, default=6</span>
 <span class="sd">            Width and height for each of the two rooms</span>
 <span class="sd">        max_steps : int, optional</span>
-<span class="sd">            Maximum number of steps per episode (default: ``16 * room_size**2``)</span>
+<span class="sd">            Maximum number of steps per episode</span>
 <span class="sd">        joint_reward : bool, default=True</span>
 <span class="sd">            Whether all agents receive the reward when the task is completed</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            See :attr:`multigrid.multigrid_env.MultiGridEnv.__init__`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">room_size</span> <span class="o">&gt;=</span> <span class="mi">4</span>
-        <span class="k">if</span> <span class="n">max_steps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">max_steps</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">room_size</span><span class="o">**</span><span class="mi">2</span>
-
         <span class="n">mission_space</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="p">(</span>
             <span class="n">mission_func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gen_mission</span><span class="p">,</span>
             <span class="n">ordered_placeholders</span><span class="o">=</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">Color</span><span class="p">),</span> <span class="p">[</span><span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="p">,</span> <span class="n">Type</span><span class="o">.</span><span class="n">key</span><span class="p">]],</span>
         <span class="p">)</span>
-
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">mission_space</span><span class="o">=</span><span class="n">mission_space</span><span class="p">,</span>
             <span class="n">num_rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">num_cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">room_size</span><span class="o">=</span><span class="n">room_size</span><span class="p">,</span>
-            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
+            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">16</span> <span class="o">*</span> <span class="n">room_size</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span>
             <span class="n">joint_reward</span><span class="o">=</span><span class="n">joint_reward</span><span class="p">,</span>
             <span class="n">success_termination_mode</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -380,7 +377,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_gen_grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 
         <span class="c1"># Add a box to the room on the right</span>
-        <span class="n">obj</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_object</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
+        <span class="n">obj</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_object</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">)</span>
         <span class="c1"># Make sure the two rooms are directly connected by a locked door</span>
         <span class="n">door</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_door</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># Block the door with a ball</span>

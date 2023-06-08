@@ -161,6 +161,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.constants.html">multigrid.core.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -270,7 +271,7 @@
 
 <span class="sd">    * image : ndarray[int] of shape (view_size, view_size, :attr:`.WorldObj.dim`)</span>
 <span class="sd">        Encoding of the agent&#39;s partially observable view of the environment,</span>
-<span class="sd">        where each grid cell is encoded as a 3 dimensional tuple:</span>
+<span class="sd">        where the object at each grid cell is encoded as a vector:</span>
 <span class="sd">        (:class:`.Type`, :class:`.Color`, :class:`.State`)</span>
 <span class="sd">    * direction : int</span>
 <span class="sd">        Agent&#39;s direction (0: right, 1: down, 2: left, 3: up)</span>
@@ -337,7 +338,24 @@
         <span class="n">success_termination_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
         <span class="n">failure_termination_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : int, default=8</span>
+<span class="sd">            Width and height of the grid</span>
+<span class="sd">        max_steps : int, optional</span>
+<span class="sd">            Maximum number of steps per episode</span>
+<span class="sd">        joint_reward : bool, default=True</span>
+<span class="sd">            Whether all agents receive the reward when the task is completed</span>
+<span class="sd">        success_termination_mode : &#39;any&#39; or &#39;all&#39;, default=&#39;any&#39;</span>
+<span class="sd">            Whether to terminate the environment when any agent fails the task</span>
+<span class="sd">            or after all agents fail the task</span>
+<span class="sd">        failure_termination_mode : &#39;any&#39; or &#39;all&#39;, default=&#39;any&#39;</span>
+<span class="sd">            Whether to terminate the environment when any agent fails the task</span>
+<span class="sd">            or after all agents fail the task</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            See :attr:`multigrid.multigrid_env.MultiGridEnv.__init__`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="n">mission_space</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;open the red door then the blue door&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -395,6 +413,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">blue_door</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># close the door again</span>
 
         <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div>
 </pre></div>

@@ -16,6 +16,7 @@ Submodules
    multigrid.core.actions
    multigrid.core.agent
    multigrid.core.constants
+   multigrid.core.encodable
    multigrid.core.grid
    multigrid.core.mission
    multigrid.core.roomgrid
