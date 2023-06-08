@@ -574,7 +574,10 @@
 <span class="sd">        Set the object the agent is carrying.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">CARRYING</span><span class="p">]</span> <span class="o">=</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span> <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">obj</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_carried_obj</span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="n">WorldObj</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_carried_obj</span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_carried_obj</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span></div>
 </pre></div>
         </article>
       </div>
