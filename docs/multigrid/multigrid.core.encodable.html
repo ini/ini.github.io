@@ -240,32 +240,36 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multigrid.core.encodable.Encodable.TYPE">
 <span class="sig-name descname"><span class="pre">TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#multigrid.core.encodable.Encodable.TYPE" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Encoding index for type representation</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multigrid.core.encodable.Encodable.COLOR">
 <span class="sig-name descname"><span class="pre">COLOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#multigrid.core.encodable.Encodable.COLOR" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Encoding index for color representation</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multigrid.core.encodable.Encodable.STATE">
 <span class="sig-name descname"><span class="pre">STATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#multigrid.core.encodable.Encodable.STATE" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Encoding index for state representation</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multigrid.core.encodable.Encodable.dim">
 <span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#multigrid.core.encodable.Encodable.dim" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Total encoding dimension</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.encodable.Encodable.encode">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/encodable.html#Encodable.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.encodable.Encodable.encode" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/encodable.html#Encodable.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.encodable.Encodable.encode" title="Permalink to this definition">#</a></dt>
 <dd><p>Encode this object as a vector of integers.</p>
 <dl class="field-list">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
-<dt><strong>encoding</strong><span class="classifier">ndarray[uint8] of shape (…, <a class="reference internal" href="#multigrid.core.encodable.Encodable.dim" title="multigrid.core.encodable.Encodable.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Encodable.dim</span></code></a>)</span></dt><dd><dl class="simple">
-<dt>The encoding of the object, where:</dt><dd><ul class="simple">
+<dt><strong>encoding</strong><span class="classifier">ndarray[int] of shape (…, <a class="reference internal" href="#multigrid.core.encodable.Encodable.dim" title="multigrid.core.encodable.Encodable.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Encodable.dim</span></code></a>)</span></dt><dd><dl class="simple">
+<dt>Array encoding of the object, where:</dt><dd><ul class="simple">
 <li><p>encoding[…, 0] represents <a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Type" title="multigrid.core.constants.Type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a> index</p></li>
 <li><p>encoding[…, 1] represents <a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Color" title="multigrid.core.constants.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">Color</span></code></a> index</p></li>
 <li><p>encoding[…, 2] represents state</p></li>
@@ -280,8 +284,22 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.encodable.Encodable.decode">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#multigrid.core.encodable.Encodable" title="multigrid.core.encodable.Encodable"><span class="pre">Encodable</span></a></span></span><a class="reference internal" href="_modules/multigrid/core/encodable.html#Encodable.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.encodable.Encodable.decode" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#multigrid.core.encodable.Encodable" title="multigrid.core.encodable.Encodable"><span class="pre">Encodable</span></a></span></span><a class="reference internal" href="_modules/multigrid/core/encodable.html#Encodable.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.encodable.Encodable.decode" title="Permalink to this definition">#</a></dt>
 <dd><p>Decode an object from its encoding.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>encoding</strong><span class="classifier">ndarray[int] of shape (…, <a class="reference internal" href="#multigrid.core.encodable.Encodable.dim" title="multigrid.core.encodable.Encodable.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Encodable.dim</span></code></a>)</span></dt><dd><p>Array encoding of the object</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>obj</strong><span class="classifier">Encodable</span></dt><dd><p>Decoded object</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

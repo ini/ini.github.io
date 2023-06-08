@@ -578,7 +578,6 @@
                 <span class="s1">&#39;mission&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mission</span><span class="p">,</span>
             <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_obs</span> <span class="o">=</span> <span class="n">obs</span>
         <span class="k">return</span> <span class="n">obs</span></div>
 
 <div class="viewcode-block" id="MultiGridEnv.handle_actions"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.handle_actions">[docs]</a>    <span class="k">def</span> <span class="nf">handle_actions</span><span class="p">(</span>
@@ -996,7 +995,7 @@
         <span class="c1"># Compute agent visibility masks</span>
         <span class="n">obs_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">observation_space</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">vis_masks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">,</span> <span class="o">*</span><span class="n">obs_shape</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">agent_obs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_obs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">agent_obs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">vis_masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">agent_obs</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Type</span><span class="o">.</span><span class="n">unseen</span><span class="o">.</span><span class="n">to_index</span><span class="p">())</span>
 
         <span class="c1"># Mask of which cells to highlight</span>
