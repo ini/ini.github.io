@@ -160,7 +160,6 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -374,45 +373,57 @@
   <h2>C</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.can_contain">can_contain() (in module multigrid.core.world_object)</a>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_contain">can_contain() (multigrid.core.world_object.WorldObj method)</a>
 </li>
-        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.can_overlap">can_overlap() (in module multigrid.core.world_object)</a>
-</li>
-        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.can_pickup">can_pickup() (in module multigrid.core.world_object)</a>
-</li>
-        <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.carrying">carrying (multigrid.core.agent.Agent property)</a>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Door.can_overlap">can_overlap() (multigrid.core.world_object.Door method)</a>
 
         <ul>
-          <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.carrying">(multigrid.core.agent.AgentState property)</a>
+          <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Floor.can_overlap">(multigrid.core.world_object.Floor method)</a>
 </li>
+          <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Goal.can_overlap">(multigrid.core.world_object.Goal method)</a>
+</li>
+          <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Lava.can_overlap">(multigrid.core.world_object.Lava method)</a>
+</li>
+          <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_overlap">(multigrid.core.world_object.WorldObj method)</a>
+</li>
+        </ul></li>
+        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_pickup">can_pickup() (multigrid.core.world_object.WorldObj method)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.carrying">carrying (multigrid.core.agent.Agent property)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.CARRYING">CARRYING (multigrid.core.agent.AgentState attribute)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.carrying">carrying (multigrid.core.agent.AgentState property)</a>
+
+        <ul>
           <li><a href="multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.carrying">(multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.close">close() (multigrid.multigrid_env.MultiGridEnv method)</a>
 </li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.State.closed">closed (multigrid.core.constants.State attribute)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.Color">Color (class in multigrid.core.constants)</a>
 </li>
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.color">color (multigrid.core.agent.Agent property)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.COLOR">COLOR (multigrid.core.agent.AgentState attribute)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.color">color (multigrid.core.agent.AgentState property)</a>
 
         <ul>
-          <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.color">(multigrid.core.agent.AgentState property)</a>
+          <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.color">(multigrid.core.world_object.WorldObj property)</a>
 </li>
-        </ul></li>
-        <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable.COLOR">COLOR (multigrid.core.encodable.Encodable attribute)</a>
-</li>
-        <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.color">color (multigrid.core.world_object.WorldObj property)</a>
-
-        <ul>
           <li><a href="multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.color">(multigrid.envs.locked_hallway.Room property)</a>
 </li>
         </ul></li>
         <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.connect_all">connect_all() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
         <li><a href="multigrid.core.mission.html#multigrid.core.mission.MissionSpace.contains">contains() (multigrid.core.mission.MissionSpace method)</a>
+</li>
+        <li><a href="multigrid.core.constants.html#multigrid.core.constants.Color.cycle">cycle() (multigrid.core.constants.Color static method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -422,11 +433,9 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable.decode">decode() (multigrid.core.encodable.Encodable class method)</a>
+        <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.decode">decode() (multigrid.core.grid.Grid static method)</a>
 
         <ul>
-          <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.decode">(multigrid.core.grid.Grid static method)</a>
-</li>
           <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.decode">(multigrid.core.world_object.WorldObj static method)</a>
 </li>
         </ul></li>
@@ -435,17 +444,15 @@
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.dim">dim (multigrid.core.agent.AgentState attribute)</a>
 
         <ul>
-          <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable.dim">(multigrid.core.encodable.Encodable attribute)</a>
-</li>
           <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim">(multigrid.core.world_object.WorldObj attribute)</a>
 </li>
         </ul></li>
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.dir">dir (multigrid.core.agent.Agent property)</a>
-
-        <ul>
-          <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.dir">(multigrid.core.agent.AgentState property)</a>
 </li>
-        </ul></li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.DIR">DIR (multigrid.core.agent.AgentState attribute)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.dir">dir (multigrid.core.agent.AgentState property)</a>
+</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.dir_vec">dir_vec (multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
@@ -478,15 +485,11 @@
 </li>
         <li><a href="multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv">EmptyEnv (class in multigrid.envs.empty)</a>
 </li>
-        <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable">Encodable (class in multigrid.core.encodable)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.encode">encode() (multigrid.core.agent.Agent method)</a>
 
         <ul>
-          <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable.encode">(multigrid.core.encodable.Encodable method)</a>
-</li>
           <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.encode">(multigrid.core.grid.Grid method)</a>
 </li>
           <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.encode">(multigrid.core.world_object.WorldObj method)</a>
@@ -700,8 +703,6 @@
 </li>
           <li><a href="multigrid.core.constants.html#module-multigrid.core.constants">multigrid.core.constants</a>
 </li>
-          <li><a href="multigrid.core.encodable.html#module-multigrid.core.encodable">multigrid.core.encodable</a>
-</li>
           <li><a href="multigrid.core.grid.html#module-multigrid.core.grid">multigrid.core.grid</a>
 </li>
           <li><a href="multigrid.core.mission.html#module-multigrid.core.mission">multigrid.core.mission</a>
@@ -781,21 +782,14 @@
 </li>
         </ul></li>
         <li>
-    multigrid.core.encodable
-
-        <ul>
-          <li><a href="multigrid.core.encodable.html#module-multigrid.core.encodable">module</a>
-</li>
-        </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li>
     multigrid.core.grid
 
         <ul>
           <li><a href="multigrid.core.grid.html#module-multigrid.core.grid">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     multigrid.core.mission
 
@@ -990,20 +984,20 @@
         </ul></li>
         <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">point_in_circle() (in module multigrid.utils.rendering)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_line">point_in_line() (in module multigrid.utils.rendering)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_rect">point_in_rect() (in module multigrid.utils.rendering)</a>
 </li>
         <li><a href="multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_triangle">point_in_triangle() (in module multigrid.utils.rendering)</a>
 </li>
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.pos">pos (multigrid.core.agent.Agent property)</a>
-
-        <ul>
-          <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.pos">(multigrid.core.agent.AgentState property)</a>
 </li>
-        </ul></li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.POS">POS (multigrid.core.agent.AgentState attribute)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.pos">pos (multigrid.core.agent.AgentState property)</a>
+</li>
         <li><a href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.Room.pos_inside">pos_inside() (multigrid.core.roomgrid.Room method)</a>
 </li>
         <li><a href="multigrid.utils.misc.html#multigrid.utils.misc.PropertyAlias">PropertyAlias (class in multigrid.utils.misc)</a>
@@ -1090,8 +1084,6 @@
 </li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.State">State (class in multigrid.core.constants)</a>
 </li>
-        <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable.STATE">STATE (multigrid.core.encodable.Encodable attribute)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.state">state (multigrid.core.world_object.WorldObj property)</a>
@@ -1115,11 +1107,11 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.Agent.terminated">terminated (multigrid.core.agent.Agent property)</a>
-
-        <ul>
-          <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.terminated">(multigrid.core.agent.AgentState property)</a>
 </li>
-        </ul></li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.TERMINATED">TERMINATED (multigrid.core.agent.AgentState attribute)</a>
+</li>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.terminated">terminated (multigrid.core.agent.AgentState property)</a>
+</li>
         <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TFModel">TFModel (class in multigrid.rllib.model)</a>
 </li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.TILE_PIXELS">TILE_PIXELS (in module multigrid.core.constants)</a>
@@ -1130,10 +1122,10 @@
 </li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.Direction.to_vec">to_vec() (multigrid.core.constants.Direction method)</a>
 </li>
-        <li><a href="multigrid.core.actions.html#multigrid.core.actions.Action.toggle">toggle (multigrid.core.actions.Action attribute)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid.core.actions.html#multigrid.core.actions.Action.toggle">toggle (multigrid.core.actions.Action attribute)</a>
+</li>
         <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.toggle">toggle() (multigrid.core.world_object.WorldObj method)</a>
 </li>
         <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TorchModel">TorchModel (class in multigrid.rllib.model)</a>
@@ -1148,7 +1140,7 @@
         </ul></li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.Type">Type (class in multigrid.core.constants)</a>
 </li>
-        <li><a href="multigrid.core.encodable.html#multigrid.core.encodable.Encodable.TYPE">TYPE (multigrid.core.encodable.Encodable attribute)</a>
+        <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.TYPE">TYPE (multigrid.core.agent.AgentState attribute)</a>
 </li>
         <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.type">type (multigrid.core.world_object.WorldObj property)</a>
 </li>

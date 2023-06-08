@@ -161,7 +161,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.constants.html">multigrid.core.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -249,7 +248,6 @@
 <span class="kn">from</span> <span class="nn">.core.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
 <span class="kn">from</span> <span class="nn">.core.mission</span> <span class="kn">import</span> <span class="n">MissionSpace</span>
 <span class="kn">from</span> <span class="nn">.core.world_object</span> <span class="kn">import</span> <span class="n">WorldObj</span>
-<span class="kn">from</span> <span class="nn">.core.world_object</span> <span class="kn">import</span> <span class="n">can_overlap</span><span class="p">,</span> <span class="n">can_pickup</span>
 <span class="kn">from</span> <span class="nn">.utils.obs</span> <span class="kn">import</span> <span class="n">gen_obs_grid_encoding</span>
 <span class="kn">from</span> <span class="nn">.utils.misc</span> <span class="kn">import</span> <span class="n">dict_update_all</span>
 
@@ -392,10 +390,10 @@
                 <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
                     <span class="n">index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
                     <span class="n">mission_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mission_space</span><span class="p">,</span>
-                    <span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                     <span class="n">view_size</span><span class="o">=</span><span class="n">agent_view_size</span><span class="p">,</span>
                     <span class="n">see_through_walls</span><span class="o">=</span><span class="n">see_through_walls</span><span class="p">,</span>
                 <span class="p">)</span>
+                <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
             <span class="k">assert</span> <span class="p">{</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">}</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">agents</span><span class="p">)))</span>
@@ -492,7 +490,7 @@
         <span class="c1"># Check that agents don&#39;t overlap with other objects</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
             <span class="n">start_cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">can_overlap</span><span class="p">(</span><span class="n">start_cell</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">can_overlap</span><span class="p">(</span><span class="n">start_cell</span><span class="p">)</span>
 
         <span class="c1"># Step count since episode start</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -628,27 +626,26 @@
                 <span class="n">fwd_pos</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span>
                 <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">fwd_pos</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="n">can_overlap</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_agent_overlap</span><span class="p">:</span>
-                        <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">fwd_pos</span>
-                    <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">can_overlap</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_agent_overlap</span><span class="p">:</span>
                         <span class="n">agent_present</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_and</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">fwd_pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-                        <span class="k">if</span> <span class="ow">not</span> <span class="n">agent_present</span><span class="p">:</span>
-                            <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">fwd_pos</span>
+                        <span class="k">if</span> <span class="n">agent_present</span><span class="p">:</span>
+                            <span class="k">continue</span>
 
-                <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">lava</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
+                    <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">fwd_pos</span>
+                    <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">on_success</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">lava</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">on_failure</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">)</span>
 
             <span class="c1"># Pick up an object</span>
             <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="n">Action</span><span class="o">.</span><span class="n">pickup</span><span class="p">:</span>
                 <span class="n">fwd_pos</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span>
                 <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">fwd_pos</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="n">can_pickup</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">can_pickup</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="o">=</span> <span class="n">fwd_obj</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">*</span><span class="n">fwd_pos</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>

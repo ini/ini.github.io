@@ -161,7 +161,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.constants.html">multigrid.core.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -284,11 +283,11 @@
 <span class="sd">    ...     ordered_placeholders=[[&quot;green&quot;, &quot;blue&quot;]])</span>
 <span class="sd">    &gt;&gt;&gt; observation_space.seed(123)</span>
 <span class="sd">    &gt;&gt;&gt; observation_space.sample()</span>
-<span class="sd">    &#39;Get the green ball.&#39;</span>
+<span class="sd">    MissionSpace.sample(&quot;Get the blue ball.&quot;)</span>
 
-<span class="sd">    &gt;&gt;&gt; observation_space = MissionSpace(mission_func=lambda: &quot;Get the ball.&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; observation_space = MissionSpace.from_string(&quot;Get the ball.&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; observation_space.sample()</span>
-<span class="sd">    &#39;Get the ball.&#39;</span>
+<span class="sd">    Mission(&quot;Get the ball.&quot;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MissionSpace.__init__"><a class="viewcode-back" href="../../../multigrid.core.mission.html#multigrid.core.mission.MissionSpace.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>

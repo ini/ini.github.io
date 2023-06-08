@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.core.mission module" href="multigrid.core.mission.html" /><link rel="prev" title="multigrid.core.encodable module" href="multigrid.core.encodable.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.core.mission module" href="multigrid.core.mission.html" /><link rel="prev" title="multigrid.core.constants module" href="multigrid.core.constants.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
         <title>multigrid.core.grid module - multigrid 0.1.0b documentation</title>
@@ -162,7 +162,6 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4 current current-page"><a class="current reference internal" href="#">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -236,7 +235,7 @@
 <dt class="sig sig-object py" id="multigrid.core.grid.Grid">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.grid.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><a class="reference internal" href="_modules/multigrid/core/grid.html#Grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.grid.Grid" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Representation of an environment grid.</p>
+<p>Class representing a grid of <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a> objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -246,7 +245,7 @@
 </dd>
 <dt><strong>world_objects</strong><span class="classifier">dict[tuple[int, int], WorldObj]</span></dt><dd><p>Dictionary of world objects in the grid, indexed by (x, y) location</p>
 </dd>
-<dt><strong>state</strong><span class="classifier">ndarray[int] of shape (width, height, WorldObj.dim)</span></dt><dd><p>Grid state, where each (x, y) entry is a WorldObj encoding</p>
+<dt><strong>state</strong><span class="classifier">ndarray[int] of shape (width, height, WorldObj.dim)</span></dt><dd><p>Grid state, where each (x, y) entry is a world object encoding</p>
 </dd>
 </dl>
 </dd>
@@ -280,7 +279,7 @@
 
 <dl class="py property">
 <dt class="sig sig-object py" id="multigrid.core.grid.Grid.grid">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">multigrid.core.world_object.WorldObj</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.grid.Grid.grid" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.grid.Grid.grid" title="Permalink to this definition">#</a></dt>
 <dd><p>Return a list of all world objects in the grid.</p>
 </dd></dl>
 
@@ -488,14 +487,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="multigrid.core.encodable.html">
+          <a class="prev-page" href="multigrid.core.constants.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">multigrid.core.encodable module</div>
+                <div class="title">multigrid.core.constants module</div>
                 
               </div>
             </a>

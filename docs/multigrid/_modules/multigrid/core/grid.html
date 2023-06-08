@@ -161,7 +161,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.constants.html">multigrid.core.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -253,7 +252,7 @@
 
 <div class="viewcode-block" id="Grid"><a class="viewcode-back" href="../../../multigrid.core.grid.html#multigrid.core.grid.Grid">[docs]</a><span class="k">class</span> <span class="nc">Grid</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Representation of an environment grid.</span>
+<span class="sd">    Class representing a grid of :class:`.WorldObj` objects.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -264,7 +263,7 @@
 <span class="sd">    world_objects : dict[tuple[int, int], WorldObj]</span>
 <span class="sd">        Dictionary of world objects in the grid, indexed by (x, y) location</span>
 <span class="sd">    state : ndarray[int] of shape (width, height, WorldObj.dim)</span>
-<span class="sd">        Grid state, where each (x, y) entry is a WorldObj encoding</span>
+<span class="sd">        Grid state, where each (x, y) entry is a world object encoding</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Static cache of pre-renderer tiles</span>
@@ -300,7 +299,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">WorldObj</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">WorldObj</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a list of all world objects in the grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

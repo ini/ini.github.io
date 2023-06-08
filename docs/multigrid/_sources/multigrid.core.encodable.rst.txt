@@ -1,7 +1,0 @@
-multigrid.core.encodable module
-===============================
-
-.. automodule:: multigrid.core.encodable
-   :members:
-   :undoc-members:
-   :show-inheritance:

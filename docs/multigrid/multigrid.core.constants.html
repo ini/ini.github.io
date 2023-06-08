@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.core.encodable module" href="multigrid.core.encodable.html" /><link rel="prev" title="multigrid.core.agent module" href="multigrid.core.agent.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.core.grid module" href="multigrid.core.grid.html" /><link rel="prev" title="multigrid.core.agent module" href="multigrid.core.agent.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
         <title>multigrid.core.constants module - multigrid 0.1.0b documentation</title>
@@ -162,7 +162,6 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l4 current current-page"><a class="current reference internal" href="#">multigrid.core.constants module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.core.encodable.html">multigrid.core.encodable module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.grid.html">multigrid.core.grid module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
@@ -336,6 +335,12 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.constants.Color.cycle">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Color'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/constants.html#Color.cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.constants.Color.cycle" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a cycle of <code class="docutils literal notranslate"><span class="pre">n</span></code> colors.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.constants.Color.rgb">
 <span class="sig-name descname"><span class="pre">rgb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/core/constants.html#Color.rgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.constants.Color.rgb" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the RGB value of this <code class="docutils literal notranslate"><span class="pre">Color</span></code>.</p>
@@ -405,12 +410,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="multigrid.core.encodable.html">
+          <a class="next-page" href="multigrid.core.grid.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">multigrid.core.encodable module</div>
+                <div class="title">multigrid.core.grid module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -478,6 +483,7 @@
 <li><a class="reference internal" href="#multigrid.core.constants.Color.purple"><code class="docutils literal notranslate"><span class="pre">Color.purple</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.constants.Color.yellow"><code class="docutils literal notranslate"><span class="pre">Color.yellow</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.constants.Color.grey"><code class="docutils literal notranslate"><span class="pre">Color.grey</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.constants.Color.cycle"><code class="docutils literal notranslate"><span class="pre">Color.cycle()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.constants.Color.rgb"><code class="docutils literal notranslate"><span class="pre">Color.rgb()</span></code></a></li>
 </ul>
 </li>
