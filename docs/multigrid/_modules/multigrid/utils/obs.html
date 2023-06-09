@@ -231,7 +231,9 @@
 <span></span><span class="kn">import</span> <span class="nn">numba</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">..core.world_object</span> <span class="kn">import</span> <span class="n">Wall</span>
+<span class="kn">from</span> <span class="nn">..core.agent</span> <span class="kn">import</span> <span class="n">AgentState</span>
+<span class="kn">from</span> <span class="nn">..core.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">from</span> <span class="nn">..core.world_object</span> <span class="kn">import</span> <span class="n">Wall</span><span class="p">,</span> <span class="n">WorldObj</span>
 <span class="kn">from</span> <span class="nn">..core.world_object</span> <span class="kn">import</span> <span class="n">see_behind</span>
 
 <span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span> <span class="k">as</span> <span class="n">ndarray</span>
@@ -241,7 +243,21 @@
 <span class="c1">### Constants</span>
 
 <span class="n">WALL_ENCODING</span> <span class="o">=</span> <span class="n">Wall</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
-<span class="n">ENCODE_DIM</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">WALL_ENCODING</span><span class="p">)</span>
+<span class="n">UNSEEN_ENCODING</span> <span class="o">=</span> <span class="n">WorldObj</span><span class="p">(</span><span class="n">Type</span><span class="o">.</span><span class="n">unseen</span><span class="p">,</span> <span class="n">Color</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<span class="n">ENCODE_DIM</span> <span class="o">=</span> <span class="n">WorldObj</span><span class="o">.</span><span class="n">dim</span>
+
+<span class="n">GRID_ENCODING_IDX</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">AGENT_DIR_IDX</span> <span class="o">=</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">DIR</span>
+<span class="n">AGENT_POS_IDX</span> <span class="o">=</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">POS</span>
+<span class="n">AGENT_TERMINATED_IDX</span> <span class="o">=</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">TERMINATED</span>
+<span class="n">AGENT_CARRYING_IDX</span> <span class="o">=</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">CARRYING</span>
+<span class="n">AGENT_ENCODING_IDX</span> <span class="o">=</span> <span class="n">AgentState</span><span class="o">.</span><span class="n">ENCODING</span>
+
+<span class="n">RIGHT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+<span class="n">LEFT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+<span class="n">UP</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">up</span><span class="p">)</span>
+<span class="n">DOWN</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Direction</span><span class="o">.</span><span class="n">down</span><span class="p">)</span>
 
 
 
@@ -282,7 +298,7 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">agent_view_size</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">agent_view_size</span><span class="p">):</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">vis_mask</span><span class="p">[</span><span class="n">agent</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]:</span>
-                        <span class="n">obs_grid</span><span class="p">[</span><span class="n">agent</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="n">obs_grid</span><span class="p">[</span><span class="n">agent</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">UNSEEN_ENCODING</span>
 
     <span class="k">return</span> <span class="n">obs_grid</span></div>
 
@@ -338,24 +354,24 @@
     <span class="n">obs_width</span><span class="p">,</span> <span class="n">obs_height</span> <span class="o">=</span> <span class="n">agent_view_size</span><span class="p">,</span> <span class="n">agent_view_size</span>
 
     <span class="c1"># Process agent states</span>
-    <span class="n">agent_grid_encoding</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">agent_dir</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-    <span class="n">agent_pos</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-    <span class="n">agent_terminated</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-    <span class="n">agent_carrying_encoding</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span><span class="mi">6</span><span class="o">+</span><span class="n">ENCODE_DIM</span><span class="p">]</span>
+    <span class="n">agent_grid_encoding</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AGENT_ENCODING_IDX</span><span class="p">]</span>
+    <span class="n">agent_dir</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AGENT_DIR_IDX</span><span class="p">]</span>
+    <span class="n">agent_pos</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AGENT_POS_IDX</span><span class="p">]</span>
+    <span class="n">agent_terminated</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AGENT_TERMINATED_IDX</span><span class="p">]</span>
+    <span class="n">agent_carrying_encoding</span> <span class="o">=</span> <span class="n">agent_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">AGENT_CARRYING_IDX</span><span class="p">]</span>
 
     <span class="c1"># Get grid encoding</span>
     <span class="k">if</span> <span class="n">num_agents</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">grid_encoding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="o">*</span><span class="n">grid_state</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ENCODE_DIM</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
-        <span class="n">grid_encoding</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span>
+        <span class="n">grid_encoding</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">GRID_ENCODING_IDX</span><span class="p">]</span>
 
         <span class="c1"># Insert agent grid encodings</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_agents</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">agent_terminated</span><span class="p">[</span><span class="n">agent</span><span class="p">]:</span>
                 <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">agent_pos</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
-                <span class="n">grid_encoding</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_grid_encoding</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
+                <span class="n">grid_encoding</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">GRID_ENCODING_IDX</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_grid_encoding</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">grid_encoding</span> <span class="o">=</span> <span class="n">grid_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">ENCODE_DIM</span><span class="p">]</span>
+        <span class="n">grid_encoding</span> <span class="o">=</span> <span class="n">grid_state</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">GRID_ENCODING_IDX</span><span class="p">]</span>
 
     <span class="c1"># Get top left corner of observation grids</span>
     <span class="n">top_left</span> <span class="o">=</span> <span class="n">get_view_exts</span><span class="p">(</span><span class="n">agent_dir</span><span class="p">,</span> <span class="n">agent_pos</span><span class="p">,</span> <span class="n">agent_view_size</span><span class="p">)</span>
@@ -406,7 +422,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    see_behind_mask : ndarray[bool] of shape (width, height)</span>
-<span class="sd">        Boolean transparency mask</span>
+<span class="sd">        Boolean visibility mask</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">num_agents</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">grid_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
     <span class="n">see_behind_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_agents</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">)</span>
@@ -483,20 +499,20 @@
     <span class="n">top_left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">agent_dir</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)</span>
 
     <span class="c1"># Facing right</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">RIGHT</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">RIGHT</span><span class="p">]</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">RIGHT</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">RIGHT</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
 
     <span class="c1"># Facing down</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">DOWN</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">DOWN</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">DOWN</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">DOWN</span><span class="p">]</span>
 
     <span class="c1"># Facing left</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">LEFT</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">LEFT</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">LEFT</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">LEFT</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
 
     <span class="c1"># Facing up</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">UP</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_x</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">UP</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">top_left</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">UP</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent_y</span><span class="p">[</span><span class="n">agent_dir</span> <span class="o">==</span> <span class="n">UP</span><span class="p">]</span> <span class="o">-</span> <span class="n">agent_view_size</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">top_left</span></div>
 </pre></div>

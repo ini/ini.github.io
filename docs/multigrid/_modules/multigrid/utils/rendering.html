@@ -231,15 +231,37 @@
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
-
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span> <span class="k">as</span> <span class="n">ndarray</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
 
 
-<div class="viewcode-block" id="downsample"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.downsample">[docs]</a><span class="k">def</span> <span class="nf">downsample</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+
+<span class="c1"># Constants</span>
+
+<span class="n">FilterFunction</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span>
+<span class="n">White</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+
+
+<span class="c1"># Functions</span>
+
+<div class="viewcode-block" id="downsample"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.downsample">[docs]</a><span class="k">def</span> <span class="nf">downsample</span><span class="p">(</span><span class="n">img</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Downsample an image along both dimensions by some factor</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    Downsample an image along both dimensions by some factor.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img : ndarray[uint8] of shape (height, width, 3)</span>
+<span class="sd">        The image to downsample</span>
+<span class="sd">    factor : int</span>
+<span class="sd">        The factor by which to downsample the image</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    img : ndarray[uint8] of shape (height/factor, width/factor, 3)</span>
+<span class="sd">        The downsampled image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="k">assert</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span>
 
@@ -251,12 +273,27 @@
 
     <span class="k">return</span> <span class="n">img</span></div>
 
-
-<div class="viewcode-block" id="fill_coords"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.fill_coords">[docs]</a><span class="k">def</span> <span class="nf">fill_coords</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+<div class="viewcode-block" id="fill_coords"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.fill_coords">[docs]</a><span class="k">def</span> <span class="nf">fill_coords</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+    <span class="n">fn</span><span class="p">:</span> <span class="n">FilterFunction</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fill pixels of an image with coordinates matching a filter function</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    Fill pixels of an image with coordinates matching a filter function.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img : ndarray[uint8] of shape (height, width, 3)</span>
+<span class="sd">        The image to fill</span>
+<span class="sd">    fn : Callable(float, float) -&gt; bool</span>
+<span class="sd">        The filter function to use for coordinates</span>
+<span class="sd">    color : ndarray[uint8] of shape (3,)</span>
+<span class="sd">        RGB color to fill matching coordinates</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    img : ndarray[np.uint8] of shape (height, width, 3)</span>
+<span class="sd">        The updated image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
             <span class="n">yf</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">/</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -266,8 +303,26 @@
 
     <span class="k">return</span> <span class="n">img</span></div>
 
+<div class="viewcode-block" id="rotate_fn"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.rotate_fn">[docs]</a><span class="k">def</span> <span class="nf">rotate_fn</span><span class="p">(</span><span class="n">fin</span><span class="p">:</span> <span class="n">FilterFunction</span><span class="p">,</span> <span class="n">cx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rotate a coordinate filter function around a center point by some angle.</span>
 
-<div class="viewcode-block" id="rotate_fn"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.rotate_fn">[docs]</a><span class="k">def</span> <span class="nf">rotate_fn</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fin : Callable(float, float) -&gt; bool</span>
+<span class="sd">        The filter function to rotate</span>
+<span class="sd">    cx : float</span>
+<span class="sd">        The x-coordinate of the center of rotation</span>
+<span class="sd">    cy : float</span>
+<span class="sd">        The y-coordinate of the center of rotation</span>
+<span class="sd">    theta : float</span>
+<span class="sd">        The angle by which to rotate the filter function (in radians)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fout : Callable(float, float) -&gt; bool</span>
+<span class="sd">        The rotated filter function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">fout</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">cx</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">cy</span>
@@ -279,8 +334,30 @@
 
     <span class="k">return</span> <span class="n">fout</span></div>
 
+<div class="viewcode-block" id="point_in_line"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_line">[docs]</a><span class="k">def</span> <span class="nf">point_in_line</span><span class="p">(</span>
+    <span class="n">x0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a filter function that returns True for points within distance r</span>
+<span class="sd">    from the line between (x0, y0) and (x1, y1).</span>
 
-<div class="viewcode-block" id="point_in_line"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_line">[docs]</a><span class="k">def</span> <span class="nf">point_in_line</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x0 : float</span>
+<span class="sd">        The x-coordinate of the line start point</span>
+<span class="sd">    y0 : float</span>
+<span class="sd">        The y-coordinate of the line start point</span>
+<span class="sd">    x1 : float</span>
+<span class="sd">        The x-coordinate of the line end point</span>
+<span class="sd">    y1 : float</span>
+<span class="sd">        The y-coordinate of the line end point</span>
+<span class="sd">    r : float</span>
+<span class="sd">        Maximum distance from the line</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fn : Callable(float, float) -&gt; bool</span>
+<span class="sd">        Filter function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="nb">dir</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">-</span> <span class="n">p0</span>
@@ -310,22 +387,76 @@
 
     <span class="k">return</span> <span class="n">fn</span></div>
 
+<div class="viewcode-block" id="point_in_circle"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">[docs]</a><span class="k">def</span> <span class="nf">point_in_circle</span><span class="p">(</span><span class="n">cx</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a filter function that returns True for points within radius r</span>
+<span class="sd">    from a given point.</span>
 
-<div class="viewcode-block" id="point_in_circle"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">[docs]</a><span class="k">def</span> <span class="nf">point_in_circle</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cx : float</span>
+<span class="sd">        The x-coordinate of the circle center</span>
+<span class="sd">    cy : float</span>
+<span class="sd">        The y-coordinate of the circle center</span>
+<span class="sd">    r : float</span>
+<span class="sd">        The radius of the circle</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fn : Callable(float, float) -&gt; bool</span>
+<span class="sd">        Filter function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">cx</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">cx</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">cy</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">cy</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span>
 
     <span class="k">return</span> <span class="n">fn</span></div>
 
+<div class="viewcode-block" id="point_in_rect"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_rect">[docs]</a><span class="k">def</span> <span class="nf">point_in_rect</span><span class="p">(</span><span class="n">xmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">xmax</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ymin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ymax</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a filter function that returns True for points within a rectangle.</span>
 
-<div class="viewcode-block" id="point_in_rect"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_rect">[docs]</a><span class="k">def</span> <span class="nf">point_in_rect</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">):</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xmin : float</span>
+<span class="sd">        The minimum x-coordinate of the rectangle</span>
+<span class="sd">    xmax : float</span>
+<span class="sd">        The maximum x-coordinate of the rectangle</span>
+<span class="sd">    ymin : float</span>
+<span class="sd">        The minimum y-coordinate of the rectangle</span>
+<span class="sd">    ymax : float</span>
+<span class="sd">        The maximum y-coordinate of the rectangle</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fn : Callable(float, float) -&gt; bool</span>
+<span class="sd">        Filter function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">xmin</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">xmax</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">ymin</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">ymax</span>
 
     <span class="k">return</span> <span class="n">fn</span></div>
 
+<div class="viewcode-block" id="point_in_triangle"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_triangle">[docs]</a><span class="k">def</span> <span class="nf">point_in_triangle</span><span class="p">(</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">b</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">c</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">FilterFunction</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a filter function that returns True for points within a triangle.</span>
 
-<div class="viewcode-block" id="point_in_triangle"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_triangle">[docs]</a><span class="k">def</span> <span class="nf">point_in_triangle</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : tuple[float, float]</span>
+<span class="sd">        The first vertex of the triangle</span>
+<span class="sd">    b : tuple[float, float]</span>
+<span class="sd">        The second vertex of the triangle</span>
+<span class="sd">    c : tuple[float, float]</span>
+<span class="sd">        The third vertex of the triangle</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fn : Callable(float, float) -&gt; bool</span>
+<span class="sd">        Filter function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -352,12 +483,27 @@
 
     <span class="k">return</span> <span class="n">fn</span></div>
 
-
-<div class="viewcode-block" id="highlight_img"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.highlight_img">[docs]</a><span class="k">def</span> <span class="nf">highlight_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.30</span><span class="p">):</span>
+<div class="viewcode-block" id="highlight_img"><a class="viewcode-back" href="../../../multigrid.utils.rendering.html#multigrid.utils.rendering.highlight_img">[docs]</a><span class="k">def</span> <span class="nf">highlight_img</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">],</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]</span> <span class="o">=</span> <span class="n">White</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.30</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Add highlighting to an image</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    Add highlighting to an image.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    img : ndarray[uint8] of shape (height, width, 3)</span>
+<span class="sd">        The image to highlight</span>
+<span class="sd">    color : ndarray[uint8] of shape (3,)</span>
+<span class="sd">        RGB color to use for highlighting</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        The alpha value to use for blending</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    img : ndarray[uint8] of shape (height, width, 3)</span>
+<span class="sd">        The highlighted image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">blend_img</span> <span class="o">=</span> <span class="n">img</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span> <span class="o">-</span> <span class="n">img</span><span class="p">)</span>
     <span class="n">blend_img</span> <span class="o">=</span> <span class="n">blend_img</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
     <span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">blend_img</span></div>

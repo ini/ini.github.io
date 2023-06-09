@@ -430,12 +430,6 @@
 <span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Goal.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Goal.__new__" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.world_object.Goal.can_overlap">
-<span class="sig-name descname"><span class="pre">can_overlap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Goal.can_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Goal.can_overlap" title="Permalink to this definition">#</a></dt>
-<dd><p>Can an agent overlap with this?</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -445,7 +439,7 @@
 <p>Colored floor tile an agent can walk over.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Floor.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Floor.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor.__new__" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Floor.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor.__new__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -454,12 +448,6 @@
 </dl>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.world_object.Floor.can_overlap">
-<span class="sig-name descname"><span class="pre">can_overlap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Floor.can_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor.can_overlap" title="Permalink to this definition">#</a></dt>
-<dd><p>Can an agent overlap with this?</p>
 </dd></dl>
 
 </dd></dl>
@@ -474,12 +462,6 @@
 <span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Lava.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Lava.__new__" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.world_object.Lava.can_overlap">
-<span class="sig-name descname"><span class="pre">can_overlap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Lava.can_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Lava.can_overlap" title="Permalink to this definition">#</a></dt>
-<dd><p>Can an agent overlap with this?</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -489,7 +471,7 @@
 <p>Wall object that agents cannot move through.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Wall.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'grey'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Wall.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Wall.__new__" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.grey</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Wall.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Wall.__new__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -519,7 +501,7 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Door.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_open</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_locked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Door.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Door.__new__" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_open</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_locked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Door.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Door.__new__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -546,12 +528,6 @@
 <dd><p>Whether the door is locked.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.core.world_object.Door.can_overlap">
-<span class="sig-name descname"><span class="pre">can_overlap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Door.can_overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Door.can_overlap" title="Permalink to this definition">#</a></dt>
-<dd><p>Can an agent overlap with this?</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -561,7 +537,7 @@
 <p>Key object that can be picked up and used to unlock doors.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Key.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Key.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Key.__new__" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Key.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Key.__new__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -581,7 +557,7 @@
 <p>Ball object that can be picked up by agents.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Ball.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Ball.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Ball.__new__" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Ball.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Ball.__new__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -601,7 +577,7 @@
 <p>Box object that may contain other objects.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Box.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'yellow'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contains</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Box.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Box.__new__" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.yellow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contains</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/core/world_object.html#Box.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Box.__new__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -694,17 +670,14 @@
 </li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Goal"><code class="docutils literal notranslate"><span class="pre">Goal</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.core.world_object.Goal.__new__"><code class="docutils literal notranslate"><span class="pre">Goal.__new__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.world_object.Goal.can_overlap"><code class="docutils literal notranslate"><span class="pre">Goal.can_overlap()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Floor"><code class="docutils literal notranslate"><span class="pre">Floor</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.core.world_object.Floor.__new__"><code class="docutils literal notranslate"><span class="pre">Floor.__new__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.world_object.Floor.can_overlap"><code class="docutils literal notranslate"><span class="pre">Floor.can_overlap()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Lava"><code class="docutils literal notranslate"><span class="pre">Lava</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.core.world_object.Lava.__new__"><code class="docutils literal notranslate"><span class="pre">Lava.__new__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.world_object.Lava.can_overlap"><code class="docutils literal notranslate"><span class="pre">Lava.can_overlap()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Wall"><code class="docutils literal notranslate"><span class="pre">Wall</span></code></a><ul>
@@ -715,7 +688,6 @@
 <li><a class="reference internal" href="#multigrid.core.world_object.Door.__new__"><code class="docutils literal notranslate"><span class="pre">Door.__new__()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Door.is_open"><code class="docutils literal notranslate"><span class="pre">Door.is_open</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Door.is_locked"><code class="docutils literal notranslate"><span class="pre">Door.is_locked</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.world_object.Door.can_overlap"><code class="docutils literal notranslate"><span class="pre">Door.can_overlap()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multigrid.core.world_object.Key"><code class="docutils literal notranslate"><span class="pre">Key</span></code></a><ul>
