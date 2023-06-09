@@ -1,7 +1,0 @@
-multigrid.rllib.model module
-============================
-
-.. automodule:: multigrid.rllib.model
-   :members:
-   :undoc-members:
-   :show-inheritance:

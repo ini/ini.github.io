@@ -180,7 +180,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -275,6 +275,24 @@ agent view as observation.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.wrappers.SingleAgentWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">SingleAgentWrapper</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#SingleAgentWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.SingleAgentWrapper" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></p>
+<p>Wrapper to convert a multi-agent environment into a
+single-agent environment.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.wrappers.SingleAgentWrapper.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#SingleAgentWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.SingleAgentWrapper.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>Wraps an environment to allow a modular transformation of the <code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> methods.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>env: The environment to wrap</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -330,6 +348,10 @@ agent view as observation.</p>
 <li><a class="reference internal" href="#">multigrid.wrappers module</a><ul>
 <li><a class="reference internal" href="#multigrid.wrappers.OneHotObsWrapper"><code class="docutils literal notranslate"><span class="pre">OneHotObsWrapper</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.wrappers.OneHotObsWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">OneHotObsWrapper.__init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multigrid.wrappers.SingleAgentWrapper"><code class="docutils literal notranslate"><span class="pre">SingleAgentWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.wrappers.SingleAgentWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">SingleAgentWrapper.__init__()</span></code></a></li>
 </ul>
 </li>
 </ul>

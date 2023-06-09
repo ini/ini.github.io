@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.rllib.model - multigrid 0.1.0b documentation</title>
+        <title>multigrid.rllib.models - multigrid 0.1.0b documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -179,7 +179,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -230,7 +230,7 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for multigrid.rllib.model</h1><div class="highlight"><pre>
+          <h1>Source code for multigrid.rllib.models</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">gymnasium</span> <span class="kn">import</span> <span class="n">spaces</span>
 <span class="kn">from</span> <span class="nn">ray.rllib.models.tf.complex_input_net</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ComplexInputNetwork</span> <span class="k">as</span> <span class="n">TFComplexInputNetwork</span>
@@ -246,7 +246,7 @@
 
 
 
-<div class="viewcode-block" id="TFModel"><a class="viewcode-back" href="../../../multigrid.rllib.model.html#multigrid.rllib.model.TFModel">[docs]</a><span class="k">class</span> <span class="nc">TFModel</span><span class="p">(</span><span class="n">TFModelV2</span><span class="p">):</span>
+<div class="viewcode-block" id="TFModel"><a class="viewcode-back" href="../../../multigrid.rllib.models.html#multigrid.rllib.models.TFModel">[docs]</a><span class="k">class</span> <span class="nc">TFModel</span><span class="p">(</span><span class="n">TFModelV2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Basic tensorflow model to use with RLlib.</span>
 
@@ -257,7 +257,7 @@
 <span class="sd">    see https://docs.ray.io/en/latest/rllib/rllib-models.html.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TFModel.__init__"><a class="viewcode-back" href="../../../multigrid.rllib.model.html#multigrid.rllib.model.TFModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="TFModel.__init__"><a class="viewcode-back" href="../../../multigrid.rllib.models.html#multigrid.rllib.models.TFModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">obs_space</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">,</span>
         <span class="n">action_space</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">,</span>
@@ -275,7 +275,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">value_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">value_function</span></div></div>
 
 
-<div class="viewcode-block" id="TorchModel"><a class="viewcode-back" href="../../../multigrid.rllib.model.html#multigrid.rllib.model.TorchModel">[docs]</a><span class="k">class</span> <span class="nc">TorchModel</span><span class="p">(</span><span class="n">TorchModelV2</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="TorchModel"><a class="viewcode-back" href="../../../multigrid.rllib.models.html#multigrid.rllib.models.TorchModel">[docs]</a><span class="k">class</span> <span class="nc">TorchModel</span><span class="p">(</span><span class="n">TorchModelV2</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Basic torch model to use with RLlib.</span>
 
@@ -286,7 +286,7 @@
 <span class="sd">    see https://docs.ray.io/en/latest/rllib/rllib-models.html.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TorchModel.__init__"><a class="viewcode-back" href="../../../multigrid.rllib.model.html#multigrid.rllib.model.TorchModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="TorchModel.__init__"><a class="viewcode-back" href="../../../multigrid.rllib.models.html#multigrid.rllib.models.TorchModel.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">obs_space</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">,</span>
         <span class="n">action_space</span><span class="p">:</span> <span class="n">spaces</span><span class="o">.</span><span class="n">Space</span><span class="p">,</span>

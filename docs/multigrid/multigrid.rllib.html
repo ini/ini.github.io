@@ -180,7 +180,7 @@
 </li>
 <li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">multigrid.rllib package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -234,12 +234,31 @@
         <article role="main">
           <section id="module-multigrid.rllib">
 <span id="multigrid-rllib-package"></span><h1>multigrid.rllib package<a class="headerlink" href="#module-multigrid.rllib" title="Permalink to this heading">#</a></h1>
+<p>This package provides tools for using MultiGrid environments with RLlib.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
+<p>Register the environment configurations in <a class="reference internal" href="multigrid.envs.html#module-multigrid.envs" title="multigrid.envs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multigrid.envs</span></code></a> with RLlib:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">multigrid.rllib</span>
+</pre></div>
+</div>
+<p>Use a specific MultiGrid environment configuration by name:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ray.rllib.algorithms.ppo</span> <span class="kn">import</span> <span class="n">PPOConfig</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">algorithm_config</span> <span class="o">=</span> <span class="n">PPOConfig</span><span class="p">()</span><span class="o">.</span><span class="n">environment</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;MultiGrid-Empty-8x8-v0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Convert a custom <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGridEnv</span></code></a> to an RLlib <code class="docutils literal notranslate"><span class="pre">MultiAgentEnv</span></code>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.rllib</span> <span class="kn">import</span> <span class="n">to_rllib_env</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MyRLLibEnvClass</span> <span class="o">=</span> <span class="n">to_rllib_env</span><span class="p">(</span><span class="n">MyEnvClass</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">algorithm_config</span> <span class="o">=</span> <span class="n">PPOConfig</span><span class="p">()</span><span class="o">.</span><span class="n">environment</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">MyRLLibEnvClass</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </div>
@@ -305,6 +324,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">multigrid.rllib package</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 </ul>
 </li>

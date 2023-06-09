@@ -179,7 +179,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -233,6 +233,7 @@
           <h1>Source code for multigrid.wrappers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
 <span class="kn">import</span> <span class="nn">numba</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -336,224 +337,30 @@
         <span class="k">return</span> <span class="n">out</span></div>
 
 
+<div class="viewcode-block" id="SingleAgentWrapper"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.SingleAgentWrapper">[docs]</a><span class="k">class</span> <span class="nc">SingleAgentWrapper</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Wrapper</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper to convert a multi-agent environment into a</span>
+<span class="sd">    single-agent environment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="c1"># class Wrapper(gym.Wrapper):</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     :meta private:</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SingleAgentWrapper.__init__"><a class="viewcode-back" href="../../multigrid.wrappers.html#multigrid.wrappers.SingleAgentWrapper.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">MultiGridEnv</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">observation_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">observation_space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action_space</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">action_space</span></div>
 
-<span class="c1">#     @classmethod</span>
-<span class="c1">#     def config(cls, **kwargs) -&gt; Callable[[gym.Env], Wrapper]:</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         Return wrapper class with the given configuration,</span>
-<span class="c1">#         whose constructor accepts a single argument: the base environment.</span>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
 
-<span class="c1">#         `MyWrapper.config(**kwargs)(env)` is equivalent to `MyWrapper(env, **kwargs)`. </span>
-
-<span class="c1">#         Parameters</span>
-<span class="c1">#         ----------</span>
-<span class="c1">#         kwargs : dict</span>
-<span class="c1">#             Configuration parameters</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         class ConfigWrapper(cls):</span>
-<span class="c1">#             def __init__(self, env):</span>
-<span class="c1">#                 super().__init__(env, **kwargs)</span>
-
-<span class="c1">#         ConfigWrapper.__name__ = cls.__name__</span>
-<span class="c1">#         return ConfigWrapper</span>
-
-
-<span class="c1"># class MovementReward(Wrapper):</span>
-
-<span class="c1">#     def __init__(self, env: MultiGridEnv, scale: float = 1e-5):</span>
-<span class="c1">#         super().__init__(env)</span>
-<span class="c1">#         self._scale = scale</span>
-
-<span class="c1">#     def step(self, actions):</span>
-<span class="c1">#         prev_pos = {agent_id: self.agents[agent_id].pos for agent_id in actions}</span>
-<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
-<span class="c1">#         for agent_id, action in actions.items():</span>
-<span class="c1">#             if action == Action.forward:</span>
-<span class="c1">#                 reward[agent_id] = self.reward_scale</span>
-<span class="c1">#         return obs, reward, terminated, truncated, info</span>
-
-
-
-
-
-
-
-<span class="c1"># class ActionMaskWrapper(Wrapper):</span>
-
-<span class="c1">#     # def __init__(self, env: MultiGridEnv):</span>
-<span class="c1">#     #     super().__init__(env)</span>
-<span class="c1">#     #     action_mask_space = spaces.Box(low=0, high=1, shape=(len(Action),), dtype=bool)</span>
-<span class="c1">#     #     for agent in self.env.agents:</span>
-<span class="c1">#     #         agent.observation_space[&#39;action_mask&#39;] = action_mask_space</span>
-
-<span class="c1">#     # def observation(self, obs):</span>
-<span class="c1">#     #     for agent_id in obs:</span>
-<span class="c1">#     #         obs[agent_id][&#39;action_mask&#39;] = self.action_mask(self.env.agents[agent_id])</span>
-<span class="c1">#     #     return obs</span>
-
-<span class="c1">#     def step(self, actions):</span>
-<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
-<span class="c1">#         for agent_id, action in actions.items():</span>
-<span class="c1">#             action_mask = self.action_mask(self.env.agents[agent_id])</span>
-<span class="c1">#             if not action_mask[action] or action in {Action.left, Action.right}:</span>
-<span class="c1">#                 reward[agent_id] = -1e-5</span>
-
-<span class="c1">#         return obs, reward, terminated, truncated, info</span>
-
-<span class="c1">#     def action_mask(self, agent: Agent):</span>
-<span class="c1">#         fwd_pos = agent.front_pos</span>
-<span class="c1">#         fwd_obj = self.grid.get(*fwd_pos)</span>
-<span class="c1">#         mask = np.zeros(len(Action), dtype=bool)</span>
-<span class="c1">#         mask[Action.left] = True</span>
-<span class="c1">#         mask[Action.right] = True</span>
-<span class="c1">#         mask[Action.forward] = can_overlap(fwd_obj)</span>
-<span class="c1">#         mask[Action.pickup] = can_pickup(fwd_obj)</span>
-<span class="c1">#         mask[Action.drop] = (fwd_obj is None and agent.state.carrying is not None)</span>
-
-<span class="c1">#         if fwd_obj and fwd_obj.type == Type.door:</span>
-<span class="c1">#             if agent.state.carrying and agent.state.carrying.type == Type.key:</span>
-<span class="c1">#                 if fwd_obj.is_locked:</span>
-<span class="c1">#                     if fwd_obj.color == agent.state.carrying.color:</span>
-<span class="c1">#                         mask[Action.toggle] = True</span>
-<span class="c1">#                 else:</span>
-<span class="c1">#                     mask[Action.toggle] = True</span>
-<span class="c1">#         elif fwd_obj and fwd_obj.type == Type.box:</span>
-<span class="c1">#             mask[Action.toggle] = True</span>
-
-<span class="c1">#             mask[Action.toggle] = (</span>
-<span class="c1">#                 fwd_obj is not None and fwd_obj.type in {Type.box, Type.door})</span>
-<span class="c1">#         mask[Action.toggle] = (</span>
-<span class="c1">#             fwd_obj is not None and fwd_obj.type in {Type.box, Type.door})</span>
-<span class="c1">#         return mask</span>
-
-
-
-
-<span class="c1"># class RewardShaping(Wrapper):</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     General reward shaping wrapper for MultiGrid environments.</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-
-<span class="c1">#     def __init__(self, env: MultiGridEnv, bonus=1e-4):</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         Parameters</span>
-<span class="c1">#         ----------</span>
-<span class="c1">#         env : MultiGridEnv</span>
-<span class="c1">#             Environment to wrap</span>
-<span class="c1">#         bonus : float</span>
-<span class="c1">#             Reward bonus</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         super().__init__(env)</span>
-<span class="c1">#         self._bonus = bonus</span>
-<span class="c1">#         #self.agents[0].color = &#39;purple&#39;</span>
-<span class="c1">#         #self.agents[1].color = &#39;yellow&#39;</span>
-
-<span class="c1">#     def reset(self, *args, **kwargs):</span>
-<span class="c1">#         self._picked_up = [] # objects that have been picked up</span>
-<span class="c1">#         self._opened = [] # doors that have been opened</span>
-<span class="c1">#         return super().reset(*args, **kwargs)</span>
-
-<span class="c1">#     def step(self, actions):</span>
-<span class="c1">#         prev_pos = {agent_id: self.agents[agent_id].pos for agent_id in actions}</span>
-<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
-
-<span class="c1">#         for agent_id, action in actions.items():</span>
-<span class="c1">#             agent = self.agents[agent_id]</span>
-
-<span class="c1">#             # Reward picking up new objects</span>
-<span class="c1">#             if agent.carrying not in self._picked_up:</span>
-<span class="c1">#                 self._picked_up.append(agent.carrying)</span>
-<span class="c1">#                 reward[agent_id] += self._bonus</span>
-
-<span class="c1">#             # Reward opening new doors</span>
-<span class="c1">#             if agent_id in actions and action == Action.toggle:</span>
-<span class="c1">#                 fwd_obj = self.env.grid.get(*agent.front_pos)</span>
-<span class="c1">#                 if isinstance(fwd_obj, Door) and fwd_obj not in self._opened:</span>
-<span class="c1">#                     self._opened.append(fwd_obj)</span>
-<span class="c1">#                     reward[agent_id] += self._bonus</span>
-
-<span class="c1">#         return obs, reward, terminated, truncated, info</span>
-
-
-<span class="c1"># class RewardShaping2(Wrapper):</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     General reward shaping wrapper for MultiGrid environments.</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-
-<span class="c1">#     def __init__(self, env: MultiGridEnv, scale: float = 1e-3):</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         Parameters</span>
-<span class="c1">#         ----------</span>
-<span class="c1">#         env : MultiGridEnv</span>
-<span class="c1">#             Environment to wrap</span>
-<span class="c1">#         scale : float</span>
-<span class="c1">#             Reward scale</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         super().__init__(env)</span>
-<span class="c1">#         self._reward_scale = scale</span>
-
-<span class="c1">#     def reset(self, *args, **kwargs):</span>
-<span class="c1">#         self._picked_up = defaultdict(list) # objects that have been picked up</span>
-<span class="c1">#         self._opened = [] # doors that have been opened</span>
-<span class="c1">#         self._seen = defaultdict(set)</span>
-<span class="c1">#         return super().reset(*args, **kwargs)</span>
-
-<span class="c1">#     def step(self, actions):</span>
-<span class="c1">#         prev_pos = {agent_id: self.agents[agent_id].pos for agent_id in actions}</span>
-<span class="c1">#         obs, reward, terminated, truncated, info = super().step(actions)</span>
-
-<span class="c1">#         for agent_id, action in actions.items():</span>
-<span class="c1">#             agent = self.env.agents[agent_id]</span>
-
-<span class="c1">#             # # Reward new states directly in front of the agent</span>
-<span class="c1">#             # fwd_pos = agent.front_pos</span>
-<span class="c1">#             # fwd_obj = self.env.grid.get(*fwd_pos)</span>
-<span class="c1">#             # fwd_obj = fwd_obj if fwd_obj is None else tuple(fwd_obj)</span>
-<span class="c1">#             # if can_pickup(fwd_obj):</span>
-<span class="c1">#             #     fwd_obj += fwd_pos</span>
-
-<span class="c1">#             # if fwd_obj not in self._seen[agent_id]:</span>
-<span class="c1">#             #     self._seen[agent_id].add(fwd_obj)</span>
-<span class="c1">#             #     reward[agent_id] += self._reward_scale</span>
-            
-<span class="c1">#             # Reward moving in front of new objects</span>
-<span class="c1">#             fwd_obj = self.env.grid.get(*agent.front_pos)</span>
-<span class="c1">#             fwd_obj = tuple(fwd_obj) if fwd_obj else None</span>
-<span class="c1">#             if fwd_obj not in self._seen[agent_id]:</span>
-<span class="c1">#                 self._seen[agent_id].add(fwd_obj)</span>
-<span class="c1">#                 reward[agent_id] += self._reward_scale</span>
-
-<span class="c1">#             # Reward picking up new objects</span>
-<span class="c1">#             if agent.carrying:</span>
-<span class="c1">#                 if agent.carrying not in self._picked_up[agent_id]:</span>
-<span class="c1">#                     self._picked_up[agent_id].append(agent.carrying)</span>
-<span class="c1">#                     reward[agent_id] += self._reward_scale</span>
-<span class="c1">#                     #print(&quot;Agent&quot;, agent_id, &quot;picked up&quot;, agent.carrying)</span>
-
-<span class="c1">#             # # Reward opening new doors</span>
-<span class="c1">#             # if agent_id in actions and action == Action.toggle:</span>
-<span class="c1">#             #     fwd_obj = self.env.grid.get(*agent.front_pos)</span>
-<span class="c1">#             #     if isinstance(fwd_obj, Door) and fwd_obj not in self._opened:</span>
-<span class="c1">#             #         self._opened.append(fwd_obj)</span>
-<span class="c1">#             #         reward[agent_id] += self._reward_scale            </span>
-
-<span class="c1">#             # # Penalize staying in the same position</span>
-<span class="c1">#             # if agent.pos == prev_pos[agent_id]:</span>
-<span class="c1">#             #     reward[agent_id] -= 0.01 * self._reward_scale</span>
-
-<span class="c1">#         return obs, reward, terminated, truncated, info</span>
-    
-<span class="c1">#     @staticmethod</span>
-<span class="c1">#     def weighted(weight: float):</span>
-<span class="c1">#         class WeightedRewardShaping(RewardShaping2):</span>
-<span class="c1">#             def __init__(self, env):</span>
-<span class="c1">#                 super().__init__(env, bonus=weight)</span>
-<span class="c1">#         return WeightedRewardShaping</span>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="n">action</span><span class="p">})</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span></div>
 </pre></div>
         </article>
       </div>

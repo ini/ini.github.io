@@ -180,7 +180,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -419,9 +419,9 @@ or when all agents fail their missions</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>obs</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
+<dt><strong>observations</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
 </dd>
-<dt><strong>info</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
+<dt><strong>infos</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
 </dd>
 </dl>
 </dd>
@@ -442,15 +442,15 @@ using the provided agent actions.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>obs</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
+<dt><strong>observations</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
 </dd>
-<dt><strong>reward</strong><span class="classifier">dict[AgentID, SupportsFloat]</span></dt><dd><p>Reward for each agent</p>
+<dt><strong>rewards</strong><span class="classifier">dict[AgentID, SupportsFloat]</span></dt><dd><p>Reward for each agent</p>
 </dd>
-<dt><strong>terminated</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been terminated for each agent (success or failure)</p>
+<dt><strong>terminations</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been terminated for each agent (success or failure)</p>
 </dd>
-<dt><strong>truncated</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been truncated for each agent (max steps reached)</p>
+<dt><strong>truncations</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been truncated for each agent (max steps reached)</p>
 </dd>
-<dt><strong>info</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
+<dt><strong>infos</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
 </dd>
 </dl>
 </dd>

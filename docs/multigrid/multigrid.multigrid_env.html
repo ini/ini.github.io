@@ -180,7 +180,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -364,9 +364,9 @@ or when all agents fail their missions</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>obs</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
+<dt><strong>observations</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
 </dd>
-<dt><strong>info</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
+<dt><strong>infos</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
 </dd>
 </dl>
 </dd>
@@ -387,15 +387,15 @@ using the provided agent actions.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>obs</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
+<dt><strong>observations</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><p>Observation for each agent</p>
 </dd>
-<dt><strong>reward</strong><span class="classifier">dict[AgentID, SupportsFloat]</span></dt><dd><p>Reward for each agent</p>
+<dt><strong>rewards</strong><span class="classifier">dict[AgentID, SupportsFloat]</span></dt><dd><p>Reward for each agent</p>
 </dd>
-<dt><strong>terminated</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been terminated for each agent (success or failure)</p>
+<dt><strong>terminations</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been terminated for each agent (success or failure)</p>
 </dd>
-<dt><strong>truncated</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been truncated for each agent (max steps reached)</p>
+<dt><strong>truncations</strong><span class="classifier">dict[AgentID, bool]</span></dt><dd><p>Whether the episode has been truncated for each agent (max steps reached)</p>
 </dd>
-<dt><strong>info</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
+<dt><strong>infos</strong><span class="classifier">dict[AgentID, dict[str, Any]]</span></dt><dd><p>Additional information for each agent</p>
 </dd>
 </dl>
 </dd>
@@ -409,7 +409,7 @@ using the provided agent actions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>obs</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><dl class="simple">
+<dt><strong>observations</strong><span class="classifier">dict[AgentID, ObsType]</span></dt><dd><dl class="simple">
 <dt>Mapping from agent ID to observation dict, containing:</dt><dd><ul class="simple">
 <li><p>‘image’: partially observable view of the environment</p></li>
 <li><p>‘direction’: agent’s direction / orientation (acting as a compass)</p></li>
@@ -479,6 +479,12 @@ using the provided agent actions.</p>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv.is_done">
+<span class="sig-name descname"><span class="pre">is_done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/multigrid_env.html#MultiGridEnv.is_done"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv.is_done" title="Permalink to this definition">#</a></dt>
+<dd><p>Return whether the current episode is finished (for all agents).</p>
 </dd></dl>
 
 <dl class="py property">
@@ -666,6 +672,7 @@ using the provided agent actions.</p>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.handle_actions"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.handle_actions()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.on_success"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.on_success()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.on_failure"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.on_failure()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.is_done"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.is_done()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.steps_remaining"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.steps_remaining</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv._gen_grid"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv._gen_grid()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.place_obj"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.place_obj()</span></code></a></li>

@@ -179,7 +179,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -470,9 +470,9 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        obs : dict[AgentID, ObsType]</span>
+<span class="sd">        observations : dict[AgentID, ObsType]</span>
 <span class="sd">            Observation for each agent</span>
-<span class="sd">        info : dict[AgentID, dict[str, Any]]</span>
+<span class="sd">        infos : dict[AgentID, dict[str, Any]]</span>
 <span class="sd">            Additional information for each agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -499,13 +499,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># Return first observation</span>
-        <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
+        <span class="n">observations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
 
         <span class="c1"># Render environment</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">observations</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MultiGridEnv.step"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -526,30 +526,30 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        obs : dict[AgentID, ObsType]</span>
+<span class="sd">        observations : dict[AgentID, ObsType]</span>
 <span class="sd">            Observation for each agent</span>
-<span class="sd">        reward : dict[AgentID, SupportsFloat]</span>
+<span class="sd">        rewards : dict[AgentID, SupportsFloat]</span>
 <span class="sd">            Reward for each agent</span>
-<span class="sd">        terminated : dict[AgentID, bool]</span>
+<span class="sd">        terminations : dict[AgentID, bool]</span>
 <span class="sd">            Whether the episode has been terminated for each agent (success or failure)</span>
-<span class="sd">        truncated : dict[AgentID, bool]</span>
+<span class="sd">        truncations : dict[AgentID, bool]</span>
 <span class="sd">            Whether the episode has been truncated for each agent (max steps reached)</span>
-<span class="sd">        info : dict[AgentID, dict[str, Any]]</span>
+<span class="sd">        infos : dict[AgentID, dict[str, Any]]</span>
 <span class="sd">            Additional information for each agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">rewards</span><span class="p">,</span> <span class="n">terminations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
 
         <span class="c1"># Generate observations</span>
-        <span class="n">obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
+        <span class="n">observations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gen_obs</span><span class="p">()</span>
         <span class="n">truncated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span>
-        <span class="n">truncated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">([</span><span class="n">truncated</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">))</span>
+        <span class="n">truncations</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_id</span><span class="p">:</span> <span class="n">truncated</span> <span class="k">for</span> <span class="n">agent_id</span> <span class="ow">in</span> <span class="n">observations</span><span class="p">}</span>
 
         <span class="c1"># Rendering</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;human&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminations</span><span class="p">,</span> <span class="n">truncations</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MultiGridEnv.gen_obs"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.gen_obs">[docs]</a>    <span class="k">def</span> <span class="nf">gen_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -557,7 +557,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        obs : dict[AgentID, ObsType]</span>
+<span class="sd">        observations : dict[AgentID, ObsType]</span>
 <span class="sd">            Mapping from agent ID to observation dict, containing:</span>
 <span class="sd">                * &#39;image&#39;: partially observable view of the environment</span>
 <span class="sd">                * &#39;direction&#39;: agent&#39;s direction / orientation (acting as a compass)</span>
@@ -571,15 +571,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">see_through_walls</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">obs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">observations</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">):</span>
-            <span class="n">obs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                 <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">direction</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
                 <span class="s1">&#39;mission&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mission</span><span class="p">,</span>
             <span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">obs</span></div>
+        <span class="k">return</span> <span class="n">observations</span></div>
 
 <div class="viewcode-block" id="MultiGridEnv.handle_actions"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.handle_actions">[docs]</a>    <span class="k">def</span> <span class="nf">handle_actions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">Action</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
@@ -735,6 +735,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate this agent only</span>
             <span class="n">terminated</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="MultiGridEnv.is_done"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.is_done">[docs]</a>    <span class="k">def</span> <span class="nf">is_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return whether the current episode is finished (for all agents).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">truncated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">|</span> <span class="n">truncated</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">steps_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

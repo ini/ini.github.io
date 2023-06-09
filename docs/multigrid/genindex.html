@@ -178,7 +178,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.model.html">multigrid.rllib.model module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
@@ -261,9 +261,9 @@
 </li>
           <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__">(multigrid.multigrid_env.MultiGridEnv method)</a>
 </li>
-          <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TFModel.__init__">(multigrid.rllib.model.TFModel method)</a>
+          <li><a href="multigrid.rllib.models.html#multigrid.rllib.models.TFModel.__init__">(multigrid.rllib.models.TFModel method)</a>
 </li>
-          <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TorchModel.__init__">(multigrid.rllib.model.TorchModel method)</a>
+          <li><a href="multigrid.rllib.models.html#multigrid.rllib.models.TorchModel.__init__">(multigrid.rllib.models.TorchModel method)</a>
 </li>
           <li><a href="multigrid.rllib.resnet.html#multigrid.rllib.resnet.BaseResNet.__init__">(multigrid.rllib.resnet.BaseResNet method)</a>
 </li>
@@ -272,6 +272,8 @@
           <li><a href="multigrid.utils.misc.html#multigrid.utils.misc.PropertyAlias.__init__">(multigrid.utils.misc.PropertyAlias method)</a>
 </li>
           <li><a href="multigrid.wrappers.html#multigrid.wrappers.OneHotObsWrapper.__init__">(multigrid.wrappers.OneHotObsWrapper method)</a>
+</li>
+          <li><a href="multigrid.wrappers.html#multigrid.wrappers.SingleAgentWrapper.__init__">(multigrid.wrappers.SingleAgentWrapper method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -612,6 +614,8 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid.utils.enum.html#multigrid.utils.enum.IndexedEnum">IndexedEnum (class in multigrid.utils.enum)</a>
 </li>
+        <li><a href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.is_done">is_done() (multigrid.multigrid_env.MultiGridEnv method)</a>
+</li>
         <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.Door.is_locked">is_locked (multigrid.core.world_object.Door property)</a>
 
         <ul>
@@ -722,7 +726,7 @@
 </li>
           <li><a href="multigrid.rllib.env_utils.html#module-multigrid.rllib.env_utils">multigrid.rllib.env_utils</a>
 </li>
-          <li><a href="multigrid.rllib.model.html#module-multigrid.rllib.model">multigrid.rllib.model</a>
+          <li><a href="multigrid.rllib.models.html#module-multigrid.rllib.models">multigrid.rllib.models</a>
 </li>
           <li><a href="multigrid.rllib.resnet.html#module-multigrid.rllib.resnet">multigrid.rllib.resnet</a>
 </li>
@@ -863,10 +867,10 @@
 </li>
         </ul></li>
         <li>
-    multigrid.rllib.model
+    multigrid.rllib.models
 
         <ul>
-          <li><a href="multigrid.rllib.model.html#module-multigrid.rllib.model">module</a>
+          <li><a href="multigrid.rllib.models.html#module-multigrid.rllib.models">module</a>
 </li>
         </ul></li>
         <li>
@@ -1077,6 +1081,8 @@
 </li>
         <li><a href="multigrid.core.grid.html#multigrid.core.grid.Grid.set">set() (multigrid.core.grid.Grid method)</a>
 </li>
+        <li><a href="multigrid.wrappers.html#multigrid.wrappers.SingleAgentWrapper">SingleAgentWrapper (class in multigrid.wrappers)</a>
+</li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.State">State (class in multigrid.core.constants)</a>
 </li>
     </ul></td>
@@ -1107,7 +1113,7 @@
 </li>
         <li><a href="multigrid.core.agent.html#multigrid.core.agent.AgentState.terminated">terminated (multigrid.core.agent.AgentState property)</a>
 </li>
-        <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TFModel">TFModel (class in multigrid.rllib.model)</a>
+        <li><a href="multigrid.rllib.models.html#multigrid.rllib.models.TFModel">TFModel (class in multigrid.rllib.models)</a>
 </li>
         <li><a href="multigrid.core.constants.html#multigrid.core.constants.TILE_PIXELS">TILE_PIXELS (in module multigrid.core.constants)</a>
 </li>
@@ -1123,9 +1129,9 @@
 </li>
         <li><a href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.toggle">toggle() (multigrid.core.world_object.WorldObj method)</a>
 </li>
-        <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TorchModel">TorchModel (class in multigrid.rllib.model)</a>
+        <li><a href="multigrid.rllib.models.html#multigrid.rllib.models.TorchModel">TorchModel (class in multigrid.rllib.models)</a>
 </li>
-        <li><a href="multigrid.rllib.model.html#multigrid.rllib.model.TorchModel.training">training (multigrid.rllib.model.TorchModel attribute)</a>
+        <li><a href="multigrid.rllib.models.html#multigrid.rllib.models.TorchModel.training">training (multigrid.rllib.models.TorchModel attribute)</a>
 
         <ul>
           <li><a href="multigrid.rllib.resnet.html#multigrid.rllib.resnet.BaseResNet.training">(multigrid.rllib.resnet.BaseResNet attribute)</a>
