@@ -17,4 +17,5 @@ Submodules
    multigrid.utils.minigrid_interface
    multigrid.utils.misc
    multigrid.utils.obs
+   multigrid.utils.random
    multigrid.utils.rendering

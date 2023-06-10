@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="multigrid.multigrid_env module" href="multigrid.multigrid_env.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="multigrid.utils.rendering module" href="multigrid.utils.rendering.html" /><link rel="prev" title="multigrid.utils.obs module" href="multigrid.utils.obs.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.wrappers module - multigrid 0.1.0b documentation</title>
+        <title>multigrid.utils.random module - multigrid 0.1.0b documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -184,17 +184,17 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="multigrid.utils.html">multigrid.utils package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.enum.html">multigrid.utils.enum module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="multigrid.utils.random.html">multigrid.utils.random module</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">multigrid.utils.random module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
-<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">multigrid.wrappers module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
 </li>
 </ul>
@@ -233,61 +233,22 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-multigrid.wrappers">
-<span id="multigrid-wrappers-module"></span><h1>multigrid.wrappers module<a class="headerlink" href="#module-multigrid.wrappers" title="Permalink to this heading">#</a></h1>
+          <section id="module-multigrid.utils.random">
+<span id="multigrid-utils-random-module"></span><h1>multigrid.utils.random module<a class="headerlink" href="#module-multigrid.utils.random" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.OneHotObsWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">OneHotObsWrapper</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#OneHotObsWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.OneHotObsWrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationWrapper</span></code></p>
-<p>Wrapper to get a one-hot encoding of a partially observable
-agent view as observation.</p>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.envs</span> <span class="kn">import</span> <span class="n">EmptyEnv</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.wrappers</span> <span class="kn">import</span> <span class="n">OneHotObsWrapper</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">EmptyEnv</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-<span class="go">array([[2, 5, 0],</span>
-<span class="go">        [2, 5, 0],</span>
-<span class="go">        [2, 5, 0],</span>
-<span class="go">        [2, 5, 0],</span>
-<span class="go">        [2, 5, 0],</span>
-<span class="go">        [2, 5, 0],</span>
-<span class="go">        [2, 5, 0]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">OneHotObsWrapper</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-<span class="go">array([[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
-<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
-<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
-<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
-<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
-<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],</span>
-<span class="go">        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0]],</span>
-<span class="go">        dtype=uint8)</span>
-</pre></div>
-</div>
+<dt class="sig sig-object py" id="multigrid.utils.random.RandomMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.utils.random.</span></span><span class="sig-name descname"><span class="pre">RandomMixin</span></span><a class="reference internal" href="_modules/multigrid/utils/random.html#RandomMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.random.RandomMixin" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin class for random number generation.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.OneHotObsWrapper.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#OneHotObsWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.OneHotObsWrapper.__init__" title="Permalink to this definition">#</a></dt>
+<dt class="sig sig-object py" id="multigrid.utils.random.RandomMixin.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">random_generator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Generator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/utils/random.html#RandomMixin.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.random.RandomMixin.__init__" title="Permalink to this definition">#</a></dt>
 <dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>random_generator</strong><span class="classifier">np.random.Generator</span></dt><dd><p>Random number generator</p>
+</dd>
 </dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="multigrid.wrappers.SingleAgentWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.wrappers.</span></span><span class="sig-name descname"><span class="pre">SingleAgentWrapper</span></span><a class="reference internal" href="_modules/multigrid/wrappers.html#SingleAgentWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.SingleAgentWrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code></p>
-<p>Wrapper to convert a multi-agent environment into a
-single-agent environment.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.wrappers.SingleAgentWrapper.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/wrappers.html#SingleAgentWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.wrappers.SingleAgentWrapper.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Wraps an environment to allow a modular transformation of the <code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> methods.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>env: The environment to wrap</p>
 </dd>
 </dl>
 </dd></dl>
@@ -301,15 +262,23 @@ single-agent environment.</p>
       <footer>
         
         <div class="related-pages">
-          
-          <a class="prev-page" href="multigrid.multigrid_env.html">
+          <a class="next-page" href="multigrid.utils.rendering.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">multigrid.utils.rendering module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="multigrid.utils.obs.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">multigrid.multigrid_env module</div>
+                <div class="title">multigrid.utils.obs module</div>
                 
               </div>
             </a>
@@ -346,13 +315,9 @@ single-agent environment.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">multigrid.wrappers module</a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.OneHotObsWrapper"><code class="docutils literal notranslate"><span class="pre">OneHotObsWrapper</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.OneHotObsWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">OneHotObsWrapper.__init__()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#multigrid.wrappers.SingleAgentWrapper"><code class="docutils literal notranslate"><span class="pre">SingleAgentWrapper</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.wrappers.SingleAgentWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">SingleAgentWrapper.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#">multigrid.utils.random module</a><ul>
+<li><a class="reference internal" href="#multigrid.utils.random.RandomMixin"><code class="docutils literal notranslate"><span class="pre">RandomMixin</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.utils.random.RandomMixin.__init__"><code class="docutils literal notranslate"><span class="pre">RandomMixin.__init__()</span></code></a></li>
 </ul>
 </li>
 </ul>

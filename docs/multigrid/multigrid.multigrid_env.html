@@ -189,6 +189,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.utils.random.html">multigrid.utils.random module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
@@ -237,7 +238,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.multigrid_env.</span></span><span class="sig-name descname"><span class="pre">MultiGridEnv</span></span><a class="reference internal" href="_modules/multigrid/multigrid_env.html#MultiGridEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Env</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Env</span></code>, <a class="reference internal" href="multigrid.utils.random.html#multigrid.utils.random.RandomMixin" title="multigrid.utils.random.RandomMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Base class for multi-agent 2D gridworld environments.</p>
 <dl class="field-list">
 <dt class="field-odd">Agents<span class="colon">:</span></dt>
@@ -306,9 +307,9 @@ corresponding agent action space.</p>
 </dd>
 <dt><strong>grid_size</strong><span class="classifier">int</span></dt><dd><p>Size of the environment grid (width and height)</p>
 </dd>
-<dt><strong>width</strong><span class="classifier">int</span></dt><dd><p>Width of the environment grid (overrides grid_size)</p>
+<dt><strong>width</strong><span class="classifier">int</span></dt><dd><p>Width of the environment grid (if <cite>grid_size</cite> is not provided)</p>
 </dd>
-<dt><strong>height</strong><span class="classifier">int</span></dt><dd><p>Height of the environment grid (overrides grid_size)</p>
+<dt><strong>height</strong><span class="classifier">int</span></dt><dd><p>Height of the environment grid (if <cite>grid_size</cite> is not provided)</p>
 </dd>
 <dt><strong>max_steps</strong><span class="classifier">int</span></dt><dd><p>Maximum number of steps per episode</p>
 </dd>
@@ -328,7 +329,7 @@ or when all agents fail their missions</p>
 </dd>
 <dt><strong>render_mode</strong><span class="classifier">str</span></dt><dd><p>Rendering mode (human or rgb_array)</p>
 </dd>
-<dt><strong>screen_size</strong><span class="classifier">int</span></dt><dd><p>Size of the screen (in tiles)</p>
+<dt><strong>screen_size</strong><span class="classifier">int</span></dt><dd><p>Width and height of the rendering window (in pixels)</p>
 </dd>
 <dt><strong>highlight</strong><span class="classifier">bool</span></dt><dd><p>Whether to highlight the view of each agent when rendering</p>
 </dd>

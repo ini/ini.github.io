@@ -188,6 +188,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../multigrid.utils.random.html">multigrid.utils.random module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
@@ -247,12 +248,13 @@
 
 <span class="kn">from</span> <span class="nn">.core.actions</span> <span class="kn">import</span> <span class="n">Action</span>
 <span class="kn">from</span> <span class="nn">.core.agent</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">AgentState</span>
-<span class="kn">from</span> <span class="nn">.core.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TILE_PIXELS</span>
+<span class="kn">from</span> <span class="nn">.core.constants</span> <span class="kn">import</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TILE_PIXELS</span>
 <span class="kn">from</span> <span class="nn">.core.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
 <span class="kn">from</span> <span class="nn">.core.mission</span> <span class="kn">import</span> <span class="n">MissionSpace</span>
 <span class="kn">from</span> <span class="nn">.core.world_object</span> <span class="kn">import</span> <span class="n">WorldObj</span>
-<span class="kn">from</span> <span class="nn">.utils.obs</span> <span class="kn">import</span> <span class="n">gen_obs_grid_encoding</span>
 <span class="kn">from</span> <span class="nn">.utils.misc</span> <span class="kn">import</span> <span class="n">dict_update_all</span>
+<span class="kn">from</span> <span class="nn">.utils.obs</span> <span class="kn">import</span> <span class="n">gen_obs_grid_encoding</span>
+<span class="kn">from</span> <span class="nn">.utils.random</span> <span class="kn">import</span> <span class="n">RandomMixin</span>
 
 
 
@@ -266,7 +268,7 @@
 
 <span class="c1">### Environment</span>
 
-<div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">RandomMixin</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for multi-agent 2D gridworld environments.</span>
 
@@ -344,9 +346,9 @@
 <span class="sd">        grid_size : int</span>
 <span class="sd">            Size of the environment grid (width and height)</span>
 <span class="sd">        width : int</span>
-<span class="sd">            Width of the environment grid (overrides grid_size)</span>
+<span class="sd">            Width of the environment grid (if `grid_size` is not provided)</span>
 <span class="sd">        height : int</span>
-<span class="sd">            Height of the environment grid (overrides grid_size)</span>
+<span class="sd">            Height of the environment grid (if `grid_size` is not provided)</span>
 <span class="sd">        max_steps : int</span>
 <span class="sd">            Maximum number of steps per episode</span>
 <span class="sd">        see_through_walls : bool</span>
@@ -366,12 +368,15 @@
 <span class="sd">        render_mode : str</span>
 <span class="sd">            Rendering mode (human or rgb_array)</span>
 <span class="sd">        screen_size : int</span>
-<span class="sd">            Size of the screen (in tiles)</span>
+<span class="sd">            Width and height of the rendering window (in pixels)</span>
 <span class="sd">        highlight : bool</span>
 <span class="sd">            Whether to highlight the view of each agent when rendering</span>
 <span class="sd">        tile_size : int</span>
 <span class="sd">            Width and height of each grid tiles (in pixels)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">RandomMixin</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="p">)</span>
+
         <span class="c1"># Initialize mission space</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mission_space</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mission_space</span> <span class="o">=</span> <span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">mission_space</span><span class="p">)</span>
@@ -826,64 +831,6 @@
 <span class="sd">        Compute the reward to be given upon success.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_rand_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate random integer in range [low, high].</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_rand_float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate random float in range [low, high].</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_rand_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate random boolean value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">_rand_elem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Pick a random element in a list.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-
-    <span class="k">def</span> <span class="nf">_rand_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">num_elems</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sample a random subset of distinct elements of a list.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">num_elems</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-
-        <span class="n">out</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_elems</span><span class="p">:</span>
-            <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_elem</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-            <span class="n">lst</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">out</span>
-
-    <span class="k">def</span> <span class="nf">_rand_color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a random color name (string).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_elem</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_rand_pos</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">x_low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">x_high</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y_low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y_high</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a random (x, y) position tuple.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">x_low</span><span class="p">,</span> <span class="n">x_high</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">y_low</span><span class="p">,</span> <span class="n">y_high</span><span class="p">),</span>
-        <span class="p">)</span>
 
 <div class="viewcode-block" id="MultiGridEnv.place_obj"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_obj">[docs]</a>    <span class="k">def</span> <span class="nf">place_obj</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>

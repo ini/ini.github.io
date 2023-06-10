@@ -189,6 +189,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.minigrid_interface.html">multigrid.utils.minigrid_interface module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.misc.html">multigrid.utils.misc module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.obs.html">multigrid.utils.obs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="multigrid.utils.random.html">multigrid.utils.random module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
@@ -350,9 +351,9 @@ when each door is opened.</p>
 </dd>
 <dt><strong>grid_size</strong><span class="classifier">int</span></dt><dd><p>Size of the environment grid (width and height)</p>
 </dd>
-<dt><strong>width</strong><span class="classifier">int</span></dt><dd><p>Width of the environment grid (overrides grid_size)</p>
+<dt><strong>width</strong><span class="classifier">int</span></dt><dd><p>Width of the environment grid (if <cite>grid_size</cite> is not provided)</p>
 </dd>
-<dt><strong>height</strong><span class="classifier">int</span></dt><dd><p>Height of the environment grid (overrides grid_size)</p>
+<dt><strong>height</strong><span class="classifier">int</span></dt><dd><p>Height of the environment grid (if <cite>grid_size</cite> is not provided)</p>
 </dd>
 <dt><strong>max_steps</strong><span class="classifier">int</span></dt><dd><p>Maximum number of steps per episode</p>
 </dd>
@@ -372,7 +373,7 @@ or when all agents fail their missions</p>
 </dd>
 <dt><strong>render_mode</strong><span class="classifier">str</span></dt><dd><p>Rendering mode (human or rgb_array)</p>
 </dd>
-<dt><strong>screen_size</strong><span class="classifier">int</span></dt><dd><p>Size of the screen (in tiles)</p>
+<dt><strong>screen_size</strong><span class="classifier">int</span></dt><dd><p>Width and height of the rendering window (in pixels)</p>
 </dd>
 <dt><strong>highlight</strong><span class="classifier">bool</span></dt><dd><p>Whether to highlight the view of each agent when rendering</p>
 </dd>
