@@ -268,7 +268,7 @@
 
 <div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base for multi-agent 2D gridworld environments.</span>
+<span class="sd">    Base class for multi-agent 2D gridworld environments.</span>
 
 <span class="sd">    :Agents:</span>
 
@@ -387,7 +387,7 @@
         <span class="c1"># Initialize agents</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="n">agents</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span> <span class="c1"># joint agent state (vectorized)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">agents</span><span class="p">):</span>
                 <span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
@@ -396,16 +396,16 @@
                     <span class="n">view_size</span><span class="o">=</span><span class="n">agent_view_size</span><span class="p">,</span>
                     <span class="n">see_through_walls</span><span class="o">=</span><span class="n">see_through_walls</span><span class="p">,</span>
                 <span class="p">)</span>
-                <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
             <span class="k">assert</span> <span class="p">{</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">}</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">agents</span><span class="p">)))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">agents</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span> <span class="o">=</span> <span class="n">AgentState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">agents</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">agent</span><span class="p">:</span> <span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="c1"># copy to joint agent state</span>
-                <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="c1"># reference joint agent state</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="c1"># copy to joint agent state</span>
+                <span class="n">agent</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="c1"># reference joint agent state</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid argument for agents: </span><span class="si">{</span><span class="n">agents</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -456,6 +456,27 @@
             <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span>
         <span class="p">})</span>
 
+<div class="viewcode-block" id="MultiGridEnv._gen_grid"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv._gen_grid">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta public:</span>
+
+<span class="sd">        Generate the grid for a new episode.</span>
+
+<span class="sd">        This method should:</span>
+
+<span class="sd">        * Set ``self.grid`` and populate it with :class:`.WorldObj` instances</span>
+<span class="sd">        * Set the positions and directions of each agent</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        width : int</span>
+<span class="sd">            Width of the grid</span>
+<span class="sd">        height : int</span>
+<span class="sd">            Height of the grid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
 <div class="viewcode-block" id="MultiGridEnv.reset"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
             <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
@@ -487,8 +508,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
 
         <span class="c1"># These fields should be defined by _gen_grid</span>
-        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">pos</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">dir</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># Check that agents don&#39;t overlap with other objects</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
@@ -563,10 +584,10 @@
 <span class="sd">                * &#39;direction&#39;: agent&#39;s direction / orientation (acting as a compass)</span>
 <span class="sd">                * &#39;mission&#39;: textual mission string (instructions for the agent)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">dir</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">dir</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">gen_obs_grid_encoding</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">state</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">view_size</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">see_through_walls</span><span class="p">,</span>
         <span class="p">)</span>
@@ -601,7 +622,7 @@
 <span class="sd">            Whether the episode has been terminated for each agent (success or failure)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reward</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent_index</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">agent_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span><span class="p">)}</span>
-        <span class="n">terminated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span><span class="p">))</span>
+        <span class="n">terminated</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">terminated</span><span class="p">))</span>
 
         <span class="c1"># Randomize agent action order</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_agents</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -632,7 +653,7 @@
                 <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">can_overlap</span><span class="p">():</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_agent_overlap</span><span class="p">:</span>
                         <span class="n">agent_present</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_and</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">fwd_pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">fwd_pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
                         <span class="k">if</span> <span class="n">agent_present</span><span class="p">:</span>
                             <span class="k">continue</span>
 
@@ -660,7 +681,7 @@
 
                 <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span> <span class="ow">and</span> <span class="n">fwd_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">agent_present</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_and</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">fwd_pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">fwd_pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">agent_present</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">*</span><span class="n">fwd_pos</span><span class="p">,</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span><span class="p">)</span>
                         <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">carrying</span><span class="o">.</span><span class="n">cur_pos</span> <span class="o">=</span> <span class="n">fwd_pos</span>
@@ -701,7 +722,7 @@
 <span class="sd">            Termination dictionary to be updated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_termination_mode</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all agents</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all agents</span>
             <span class="n">dict_update_all</span><span class="p">(</span><span class="n">terminated</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate this agent only</span>
@@ -730,7 +751,7 @@
 <span class="sd">            Termination dictionary to be updated</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_termination_mode</span> <span class="o">==</span> <span class="s1">&#39;any&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all agents</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate all agents</span>
             <span class="n">dict_update_all</span><span class="p">(</span><span class="n">terminated</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate this agent only</span>
@@ -741,14 +762,7 @@
 <span class="sd">        Return whether the current episode is finished (for all agents).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">truncated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span>
-        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">|</span> <span class="n">truncated</span><span class="p">)</span></div>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">steps_remaining</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Number of steps remaining in the episode (until truncation).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_count</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">terminated</span> <span class="o">|</span> <span class="n">truncated</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -806,27 +820,6 @@
                 <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
 
         <span class="k">return</span> <span class="n">output</span>
-
-<div class="viewcode-block" id="MultiGridEnv._gen_grid"><a class="viewcode-back" href="../../multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv._gen_grid">[docs]</a>    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :meta public:</span>
-
-<span class="sd">        Generate the grid for a new episode.</span>
-
-<span class="sd">        This method should:</span>
-
-<span class="sd">        * Set ``self.grid`` and populate it with :class:`.WorldObj` instances</span>
-<span class="sd">        * Set the positions and directions of each agent</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        width : int</span>
-<span class="sd">            Width of the grid</span>
-<span class="sd">        height : int</span>
-<span class="sd">            Height of the grid</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
 
     <span class="k">def</span> <span class="nf">_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -943,7 +936,7 @@
                 <span class="k">continue</span>
 
             <span class="c1"># Don&#39;t place the object where agents are</span>
-            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_and</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_state</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">bitwise_and</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent_states</span><span class="o">.</span><span class="n">pos</span> <span class="o">==</span> <span class="n">pos</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
                 <span class="k">continue</span>
 
             <span class="c1"># Check if there is a filtering criterion</span>

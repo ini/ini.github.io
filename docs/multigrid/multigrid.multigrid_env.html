@@ -238,7 +238,7 @@
 <dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.multigrid_env.</span></span><span class="sig-name descname"><span class="pre">MultiGridEnv</span></span><a class="reference internal" href="_modules/multigrid/multigrid_env.html#MultiGridEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Env</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
-<p>Base for multi-agent 2D gridworld environments.</p>
+<p>Base class for multi-agent 2D gridworld environments.</p>
 <dl class="field-list">
 <dt class="field-odd">Agents<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The environment can be configured with any fixed number of agents.
@@ -349,6 +349,29 @@ or when all agents fail their missions</p>
 <dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv.action_space">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action_space</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">spaces.Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">AgentID</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">spaces.Space</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv.action_space" title="Permalink to this definition">#</a></dt>
 <dd><p>Return the joint action space of all agents.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv._gen_grid">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_gen_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/multigrid_env.html#MultiGridEnv._gen_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv._gen_grid" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+</dl>
+<p>Generate the grid for a new episode.</p>
+<p>This method should:</p>
+<ul class="simple">
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">self.grid</span></code> and populate it with <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a> instances</p></li>
+<li><p>Set the positions and directions of each agent</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>width</strong><span class="classifier">int</span></dt><dd><p>Width of the grid</p>
+</dd>
+<dt><strong>height</strong><span class="classifier">int</span></dt><dd><p>Height of the grid</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -485,35 +508,6 @@ using the provided agent actions.</p>
 <dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv.is_done">
 <span class="sig-name descname"><span class="pre">is_done</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/multigrid_env.html#MultiGridEnv.is_done"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv.is_done" title="Permalink to this definition">#</a></dt>
 <dd><p>Return whether the current episode is finished (for all agents).</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv.steps_remaining">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">steps_remaining</span></span><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv.steps_remaining" title="Permalink to this definition">#</a></dt>
-<dd><p>Number of steps remaining in the episode (until truncation).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.multigrid_env.MultiGridEnv._gen_grid">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_gen_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/multigrid/multigrid_env.html#MultiGridEnv._gen_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.multigrid_env.MultiGridEnv._gen_grid" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-</dl>
-<p>Generate the grid for a new episode.</p>
-<p>This method should:</p>
-<ul class="simple">
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">self.grid</span></code> and populate it with <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a> instances</p></li>
-<li><p>Set the positions and directions of each agent</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>width</strong><span class="classifier">int</span></dt><dd><p>Width of the grid</p>
-</dd>
-<dt><strong>height</strong><span class="classifier">int</span></dt><dd><p>Height of the grid</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -666,6 +660,7 @@ using the provided agent actions.</p>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.__init__"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.observation_space"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.observation_space</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.action_space"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.action_space</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv._gen_grid"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv._gen_grid()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.reset"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.reset()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.step"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.step()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.gen_obs"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.gen_obs()</span></code></a></li>
@@ -673,8 +668,6 @@ using the provided agent actions.</p>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.on_success"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.on_success()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.on_failure"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.on_failure()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.is_done"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.is_done()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.steps_remaining"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.steps_remaining</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv._gen_grid"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv._gen_grid()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.place_obj"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.place_obj()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.put_obj"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.put_obj()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.multigrid_env.MultiGridEnv.place_agent"><code class="docutils literal notranslate"><span class="pre">MultiGridEnv.place_agent()</span></code></a></li>
