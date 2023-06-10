@@ -299,7 +299,7 @@
         <span class="k">return</span> <span class="n">obj</span></div>
 
     <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">&#39;empty&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">Type</span><span class="o">.</span><span class="n">empty</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(color=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="si">}</span><span class="s2">)&quot;</span>
@@ -476,8 +476,7 @@
 <span class="sd">    Goal object an agent may be searching for.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Goal.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.Goal.__new__">[docs]</a>    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span> <span class="c1"># reuse instances, since object is effectively immutable</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="Goal.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.Goal.__new__">[docs]</a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Type</span><span class="o">.</span><span class="n">goal</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Color</span><span class="o">.</span><span class="n">green</span><span class="p">)</span></div>
@@ -500,8 +499,7 @@
 <span class="sd">    Colored floor tile an agent can walk over.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Floor.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.Floor.__new__">[docs]</a>    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span> <span class="c1"># reuse instances, since object is effectively immutable</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">blue</span><span class="p">):</span>
+<div class="viewcode-block" id="Floor.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.Floor.__new__">[docs]</a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Color</span><span class="o">.</span><span class="n">blue</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -530,8 +528,7 @@
 <span class="sd">    Lava object an agent can fall onto.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Lava.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.Lava.__new__">[docs]</a>    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span> <span class="c1"># reuse instances, since object is effectively immutable</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="Lava.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.Lava.__new__">[docs]</a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Type</span><span class="o">.</span><span class="n">lava</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Color</span><span class="o">.</span><span class="n">red</span><span class="p">)</span></div>
