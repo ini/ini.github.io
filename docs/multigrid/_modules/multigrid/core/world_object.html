@@ -235,7 +235,6 @@
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">import</span> <span class="nn">numba</span> <span class="k">as</span> <span class="nn">nb</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">NDArray</span> <span class="k">as</span> <span class="n">ndarray</span>
@@ -254,54 +253,6 @@
     <span class="kn">from</span> <span class="nn">..multigrid_env</span> <span class="kn">import</span> <span class="n">MultiGridEnv</span>
 
 
-
-<span class="c1"># WorldObj indices</span>
-<span class="n">TYPE</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">COLOR</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">STATE</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="c1"># Object type indices</span>
-<span class="n">EMPTY</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">empty</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">WALL</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">wall</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">FLOOR</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">floor</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">DOOR</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">door</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">KEY</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">BALL</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">BOX</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">GOAL</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">goal</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">LAVA</span> <span class="o">=</span> <span class="n">Type</span><span class="o">.</span><span class="n">lava</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-
-<span class="c1"># Object state indices</span>
-<span class="n">OPEN</span> <span class="o">=</span> <span class="n">State</span><span class="o">.</span><span class="n">open</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">CLOSED</span> <span class="o">=</span> <span class="n">State</span><span class="o">.</span><span class="n">closed</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-<span class="n">LOCKED</span> <span class="o">=</span> <span class="n">State</span><span class="o">.</span><span class="n">locked</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-
-
-
-<span class="c1">### World Object Qualities</span>
-
-<div class="viewcode-block" id="see_behind"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.see_behind">[docs]</a><span class="nd">@nb</span><span class="o">.</span><span class="n">njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">see_behind</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Can an agent see behind this object?</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    obj : WorldObj or None</span>
-<span class="sd">        Object to check</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">obj</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">==</span> <span class="n">WALL</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">elif</span> <span class="n">obj</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">==</span> <span class="n">DOOR</span> <span class="ow">and</span> <span class="n">obj</span><span class="p">[</span><span class="n">STATE</span><span class="p">]</span> <span class="o">!=</span> <span class="n">OPEN</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
-
-    <span class="k">return</span> <span class="kc">True</span></div>
-
-
-
-<span class="c1">### World Object Classes</span>
 
 <div class="viewcode-block" id="WorldObj"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.WorldObj">[docs]</a><span class="k">class</span> <span class="nc">WorldObj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -322,6 +273,12 @@
 <span class="sd">    cur_pos : tuple[int, int] or None</span>
 <span class="sd">        The current position of the object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># WorldObj vector indices</span>
+    <span class="n">TYPE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">COLOR</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">STATE</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="c1"># WorldObj vector dimension</span>
     <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">TYPE</span><span class="p">,</span> <span class="n">COLOR</span><span class="p">,</span> <span class="n">STATE</span><span class="p">])</span>
 
 <div class="viewcode-block" id="WorldObj.__new__"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.__new__">[docs]</a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -334,8 +291,8 @@
 <span class="sd">            Object color</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
-        <span class="n">obj</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
-        <span class="n">obj</span><span class="p">[</span><span class="n">COLOR</span><span class="p">]</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+        <span class="n">obj</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+        <span class="n">obj</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">COLOR</span><span class="p">]</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">contains</span><span class="p">:</span> <span class="n">WorldObj</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># object contained by this object</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">init_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># initial position of the object</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">cur_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># current position of the object</span>
@@ -356,7 +313,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return an empty WorldObj instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">WorldObj</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;empty&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Color</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">WorldObj</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">Type</span><span class="o">.</span><span class="n">empty</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">Color</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="WorldObj.from_array"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.from_array">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_array</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;WorldObj&#39;</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -368,69 +325,69 @@
 <span class="sd">        arr : ArrayLike[int]</span>
 <span class="sd">            Array encoding the object type, color, and state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">==</span> <span class="n">EMPTY</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">empty</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span>
             <span class="k">return</span> <span class="kc">None</span>
 
         <span class="n">object_idx_to_class</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">WALL</span><span class="p">:</span> <span class="n">Wall</span><span class="p">,</span>
-            <span class="n">FLOOR</span><span class="p">:</span> <span class="n">Floor</span><span class="p">,</span>
-            <span class="n">DOOR</span><span class="p">:</span> <span class="n">Door</span><span class="p">,</span>
-            <span class="n">KEY</span><span class="p">:</span> <span class="n">Key</span><span class="p">,</span>
-            <span class="n">BALL</span><span class="p">:</span> <span class="n">Ball</span><span class="p">,</span>
-            <span class="n">BOX</span><span class="p">:</span> <span class="n">Box</span><span class="p">,</span>
-            <span class="n">GOAL</span><span class="p">:</span> <span class="n">Goal</span><span class="p">,</span>
-            <span class="n">LAVA</span><span class="p">:</span> <span class="n">Lava</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">wall</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Wall</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">floor</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Floor</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">door</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Door</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Key</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">ball</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Ball</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Box</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">goal</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Goal</span><span class="p">,</span>
+            <span class="n">Type</span><span class="o">.</span><span class="n">lava</span><span class="o">.</span><span class="n">to_index</span><span class="p">():</span> <span class="n">Lava</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span> <span class="ow">in</span> <span class="n">object_idx_to_class</span><span class="p">:</span>
-            <span class="bp">cls</span> <span class="o">=</span> <span class="n">object_idx_to_class</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="ow">in</span> <span class="n">object_idx_to_class</span><span class="p">:</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="n">object_idx_to_class</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]]</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
             <span class="n">obj</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span>
             <span class="k">return</span> <span class="n">obj</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown object type: </span><span class="si">{</span><span class="n">arr</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown object type: </span><span class="si">{</span><span class="n">arr</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the object type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Type</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">TYPE</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Type</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">])</span>
 
     <span class="nd">@type</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the object type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the object color.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Color</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">COLOR</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Color</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">COLOR</span><span class="p">])</span>
 
     <span class="nd">@color</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the object color.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">COLOR</span><span class="p">]</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">OLOR</span><span class="p">]</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the name of the object state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">State</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">STATE</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">State</span><span class="o">.</span><span class="n">from_index</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">STATE</span><span class="p">])</span>
 
     <span class="nd">@state</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the name of the object state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">STATE</span><span class="p">]</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">STATE</span><span class="p">]</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
 
 <div class="viewcode-block" id="WorldObj.can_overlap"><a class="viewcode-back" href="../../../multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.can_overlap">[docs]</a>    <span class="k">def</span> <span class="nf">can_overlap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>

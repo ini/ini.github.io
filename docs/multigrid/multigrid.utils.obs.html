@@ -236,6 +236,20 @@
           <section id="module-multigrid.utils.obs">
 <span id="multigrid-utils-obs-module"></span><h1>multigrid.utils.obs module<a class="headerlink" href="#module-multigrid.utils.obs" title="Permalink to this heading">#</a></h1>
 <dl class="py function">
+<dt class="sig sig-object py" id="multigrid.utils.obs.see_behind">
+<span class="sig-prename descclassname"><span class="pre">multigrid.utils.obs.</span></span><span class="sig-name descname"><span class="pre">see_behind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">world_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/utils/obs.html#see_behind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.obs.see_behind" title="Permalink to this definition">#</a></dt>
+<dd><p>Can an agent see behind this object?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>world_obj</strong><span class="classifier">ndarray[int] of shape (encode_dim,)</span></dt><dd><p>World object encoding</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="multigrid.utils.obs.gen_obs_grid_encoding">
 <span class="sig-prename descclassname"><span class="pre">multigrid.utils.obs.</span></span><span class="sig-name descname"><span class="pre">gen_obs_grid_encoding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_view_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">see_through_walls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/multigrid/utils/obs.html#gen_obs_grid_encoding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.obs.gen_obs_grid_encoding" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate encoding for the sub-grid observed by an agent (including visibility mask).</p>
@@ -434,6 +448,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">multigrid.utils.obs module</a><ul>
+<li><a class="reference internal" href="#multigrid.utils.obs.see_behind"><code class="docutils literal notranslate"><span class="pre">see_behind()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.obs.gen_obs_grid_encoding"><code class="docutils literal notranslate"><span class="pre">gen_obs_grid_encoding()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.obs.gen_obs_grid_vis_mask"><code class="docutils literal notranslate"><span class="pre">gen_obs_grid_vis_mask()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.obs.gen_obs_grid"><code class="docutils literal notranslate"><span class="pre">gen_obs_grid()</span></code></a></li>

@@ -235,20 +235,6 @@
         <article role="main">
           <section id="module-multigrid.core.world_object">
 <span id="multigrid-core-world-object-module"></span><h1>multigrid.core.world_object module<a class="headerlink" href="#module-multigrid.core.world_object" title="Permalink to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="multigrid.core.world_object.see_behind">
-<span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">see_behind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#see_behind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.see_behind" title="Permalink to this definition">#</a></dt>
-<dd><p>Can an agent see behind this object?</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>obj</strong><span class="classifier">WorldObj or None</span></dt><dd><p>Object to check</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">WorldObj</span></span><a class="reference internal" href="_modules/multigrid/core/world_object.html#WorldObj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.WorldObj" title="Permalink to this definition">#</a></dt>
@@ -272,6 +258,21 @@
 </dl>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.TYPE">
+<span class="sig-name descname"><span class="pre">TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.TYPE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.COLOR">
+<span class="sig-name descname"><span class="pre">COLOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.COLOR" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.STATE">
+<span class="sig-name descname"><span class="pre">STATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.STATE" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multigrid.core.world_object.WorldObj.dim">
 <span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#multigrid.core.world_object.WorldObj.dim" title="Permalink to this definition">#</a></dt>
@@ -657,8 +658,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">multigrid.core.world_object module</a><ul>
-<li><a class="reference internal" href="#multigrid.core.world_object.see_behind"><code class="docutils literal notranslate"><span class="pre">see_behind()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.world_object.WorldObj"><code class="docutils literal notranslate"><span class="pre">WorldObj</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.core.world_object.WorldObj.TYPE"><code class="docutils literal notranslate"><span class="pre">WorldObj.TYPE</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.world_object.WorldObj.COLOR"><code class="docutils literal notranslate"><span class="pre">WorldObj.COLOR</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.world_object.WorldObj.STATE"><code class="docutils literal notranslate"><span class="pre">WorldObj.STATE</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.world_object.WorldObj.dim"><code class="docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.world_object.WorldObj.__new__"><code class="docutils literal notranslate"><span class="pre">WorldObj.__new__()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.world_object.WorldObj.empty"><code class="docutils literal notranslate"><span class="pre">WorldObj.empty()</span></code></a></li>
