@@ -1,7 +1,0 @@
-multigrid
-=========
-
-.. toctree::
-   :maxdepth: 3
-
-   multigrid

@@ -3,5 +3,6 @@ multigrid.core.constants module
 
 .. automodule:: multigrid.core.constants
    :members:
+   :exclude-members: __new__
    :undoc-members:
    :show-inheritance:
