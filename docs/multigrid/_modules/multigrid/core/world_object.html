@@ -255,27 +255,41 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Metaclass for world objects.</span>
 
-<span class="sd">    Any subclasses of :class:`WorldObj` will automatically be registered with</span>
-<span class="sd">    this metaclass, and added to the :class:`Type` enumeration.</span>
+<span class="sd">    Each subclass is associated with a unique :class:`Type` enumeration value.</span>
+
+<span class="sd">    By default, the type name is the class name (in lowercase), but this can be</span>
+<span class="sd">    overridden by setting the `type_name` attribute in the class definition.</span>
+<span class="sd">    Type names are dynamically added to the :class:`Type` enumeration</span>
+<span class="sd">    if not already present.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; class A(WorldObj): pass</span>
+<span class="sd">    &gt;&gt;&gt; A().type</span>
+<span class="sd">    &lt;Type.a: &#39;a&#39;&gt;</span>
+
+<span class="sd">    &gt;&gt;&gt; class B(WorldObj): type_name = &#39;goal&#39;</span>
+<span class="sd">    &gt;&gt;&gt; B().type</span>
+<span class="sd">    &lt;Type.goal: &#39;goal&#39;&gt;</span>
 
 <span class="sd">    :meta private:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Registry of object classes</span>
-    <span class="n">_TYPE_TO_CLASS</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">_TYPE_IDX_TO_CLASS</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">class_dict</span><span class="p">):</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">class_dict</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;WorldObj&#39;</span><span class="p">:</span>
+            <span class="n">type_name</span> <span class="o">=</span> <span class="n">class_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type_name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
             <span class="c1"># Add the object class name to the `Type` enumeration if not already present</span>
-            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">Type</span><span class="p">):</span>
-                <span class="n">Type</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">type_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">Type</span><span class="p">):</span>
+                <span class="n">Type</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="n">type_name</span><span class="p">)</span>
 
             <span class="c1"># Store the object class with its corresponding type index</span>
-            <span class="n">meta</span><span class="o">.</span><span class="n">_TYPE_TO_CLASS</span><span class="p">[</span><span class="n">Type</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())]</span> <span class="o">=</span> <span class="bp">cls</span>
-            <span class="n">meta</span><span class="o">.</span><span class="n">_TYPE_IDX_TO_CLASS</span><span class="p">[</span><span class="n">Type</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">to_index</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">cls</span>
+            <span class="n">meta</span><span class="o">.</span><span class="n">_TYPE_IDX_TO_CLASS</span><span class="p">[</span><span class="n">Type</span><span class="p">(</span><span class="n">type_name</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">cls</span>
 
         <span class="k">return</span> <span class="bp">cls</span>
 
@@ -283,8 +297,6 @@
 <div class="viewcode-block" id="WorldObj"><a class="viewcode-back" href="../../../multigrid/multigrid.core.world_object.html#multigrid.core.world_object.WorldObj">[docs]</a><span class="k">class</span> <span class="nc">WorldObj</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">WorldObjMeta</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for grid world objects.</span>
-
-<span class="sd">    Subclasses are automatically added to the :class:`.Type` enumeration.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -318,13 +330,21 @@
 <span class="sd">        color : str</span>
 <span class="sd">            Object color</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span> <span class="k">if</span> <span class="nb">type</span> <span class="k">else</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="c1"># infer type from class name</span>
+        <span class="c1"># If not provided, infer the object type from the class</span>
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;type_name&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="n">type_idx</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">type_name</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+
+        <span class="c1"># Use the WorldObj subclass corresponding to the object type</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="n">WorldObjMeta</span><span class="o">.</span><span class="n">_TYPE_IDX_TO_CLASS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">type_idx</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+
+        <span class="c1"># Create the object</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
-        <span class="n">obj</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
+        <span class="n">obj</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span> <span class="o">=</span> <span class="n">type_idx</span>
         <span class="n">obj</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">COLOR</span><span class="p">]</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">to_index</span><span class="p">()</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">contains</span><span class="p">:</span> <span class="n">WorldObj</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># object contained by this object</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">init_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># initial position of the object</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">cur_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># current position of the object</span>
+
         <span class="k">return</span> <span class="n">obj</span></div>
 
     <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -370,7 +390,7 @@
 
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown object type: </span><span class="si">{</span><span class="n">arr</span><span class="p">[</span><span class="n">WorldObj</span><span class="o">.</span><span class="n">TYPE</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
-    <span class="nd">@property</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">cached_property</span>
     <span class="k">def</span> <span class="nf">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the object type.</span>
