@@ -13,6 +13,4 @@ Submodules
    :titlesonly:
    :maxdepth: 3
 
-   multigrid.rllib.env_utils
    multigrid.rllib.models
-   multigrid.rllib.resnet

@@ -1,0 +1,7 @@
+multigrid.pettingzoo package
+============================
+
+.. automodule:: multigrid.pettingzoo
+   :members:
+   :undoc-members:
+   :show-inheritance:

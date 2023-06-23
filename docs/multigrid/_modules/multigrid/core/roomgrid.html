@@ -176,10 +176,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid/multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../../multigrid/multigrid.pettingzoo.html">multigrid.pettingzoo package</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../multigrid/multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../multigrid/multigrid.rllib.env_utils.html">multigrid.rllib.env_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../multigrid/multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../multigrid/multigrid.rllib.resnet.html">multigrid.rllib.resnet module</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../multigrid/multigrid.utils.html">multigrid.utils package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of multigrid.utils package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -234,7 +233,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
-<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Direction</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Direction</span>
 <span class="kn">from</span> <span class="nn">.grid</span> <span class="kn">import</span> <span class="n">Grid</span>
 <span class="kn">from</span> <span class="nn">.world_object</span> <span class="kn">import</span> <span class="n">Ball</span><span class="p">,</span> <span class="n">Box</span><span class="p">,</span> <span class="n">Door</span><span class="p">,</span> <span class="n">Key</span><span class="p">,</span> <span class="n">WorldObj</span>
 
@@ -309,19 +308,11 @@
         <span class="n">room_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
         <span class="n">num_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
         <span class="n">num_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        room_size : int, default=7</span>
-<span class="sd">            Width and height for each of the rooms</span>
-<span class="sd">        num_rows : int, default=3</span>
-<span class="sd">            Number of rows of rooms</span>
-<span class="sd">        num_cols : int, default=3</span>
-<span class="sd">            Number of columns of rooms</span>
-<span class="sd">        **kwargs</span>
-<span class="sd">            See :attr:`multigrid.multigrid_env.MultiGridEnv.__init__`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">agent_view_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">assert</span> <span class="n">room_size</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="k">assert</span> <span class="n">room_size</span> <span class="o">&gt;=</span> <span class="mi">3</span>
         <span class="k">assert</span> <span class="n">num_rows</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="k">assert</span> <span class="n">num_cols</span> <span class="o">&gt;</span> <span class="mi">0</span>
@@ -331,31 +322,36 @@
 
         <span class="n">height</span> <span class="o">=</span> <span class="p">(</span><span class="n">room_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_rows</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">width</span> <span class="o">=</span> <span class="p">(</span><span class="n">room_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_cols</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+        <span class="c1"># By default, this environment has no mission</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mission</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+            <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
+            <span class="n">see_through_walls</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">agent_view_size</span><span class="o">=</span><span class="n">agent_view_size</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="RoomGrid.room_from_pos"><a class="viewcode-back" href="../../../multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.room_from_pos">[docs]</a>    <span class="k">def</span> <span class="nf">room_from_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Room</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the room a given position maps to.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the room a given position maps to&quot;&quot;&quot;</span>
 
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        x : int</span>
-<span class="sd">            Grid x-coordinate</span>
-<span class="sd">        y : int</span>
-<span class="sd">            Grid y-coordinate</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
-        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+        <span class="k">assert</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+
         <span class="n">i</span> <span class="o">=</span> <span class="n">x</span> <span class="o">//</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">j</span> <span class="o">=</span> <span class="n">y</span> <span class="o">//</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cols</span>
+        <span class="k">assert</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_grid</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="RoomGrid.get_room"><a class="viewcode-back" href="../../../multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.get_room">[docs]</a>    <span class="k">def</span> <span class="nf">get_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Room</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get </span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cols</span>
-        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span>
+        <span class="k">assert</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cols</span>
+        <span class="k">assert</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_grid</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="RoomGrid._gen_grid"><a class="viewcode-back" href="../../../multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid._gen_grid">[docs]</a>    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
@@ -417,48 +413,52 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">agent_dir</span> <span class="o">=</span> <span class="mi">0</span></div>
 
 <div class="viewcode-block" id="RoomGrid.place_in_room"><a class="viewcode-back" href="../../../multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.place_in_room">[docs]</a>    <span class="k">def</span> <span class="nf">place_in_room</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">WorldObj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">WorldObj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add an existing object to room (i, j).</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        i : int</span>
-<span class="sd">            Room column</span>
-<span class="sd">        j : int</span>
-<span class="sd">            Room row</span>
-<span class="sd">        obj : WorldObj</span>
-<span class="sd">            Object to add</span>
+<span class="sd">        Add an existing object to room (i, j)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">room</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_room</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
         <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span>
-            <span class="n">obj</span><span class="p">,</span> <span class="n">room</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">room</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">reject_fn</span><span class="o">=</span><span class="n">reject_next_to</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="n">obj</span><span class="p">,</span> <span class="n">room</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">room</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">reject_fn</span><span class="o">=</span><span class="n">reject_next_to</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">1000</span>
+        <span class="p">)</span>
+
         <span class="n">room</span><span class="o">.</span><span class="n">objs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">obj</span><span class="p">,</span> <span class="n">pos</span></div>
 
 <div class="viewcode-block" id="RoomGrid.add_object"><a class="viewcode-back" href="../../../multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_object">[docs]</a>    <span class="k">def</span> <span class="nf">add_object</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">kind</span><span class="p">:</span> <span class="n">Type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">WorldObj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">WorldObj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a new object to room (i, j).</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        i : int</span>
-<span class="sd">            Room column</span>
-<span class="sd">        j : int</span>
-<span class="sd">            Room row</span>
-<span class="sd">        kind : str, optional</span>
-<span class="sd">            Type of object to add (random if not specified)</span>
-<span class="sd">        color : str, optional</span>
-<span class="sd">            Color of the object to add (random if not specified)</span>
+<span class="sd">        Add a new object to room (i, j)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">kind</span> <span class="o">=</span> <span class="n">kind</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_elem</span><span class="p">([</span><span class="n">Type</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">Type</span><span class="o">.</span><span class="n">ball</span><span class="p">,</span> <span class="n">Type</span><span class="o">.</span><span class="n">box</span><span class="p">])</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="n">color</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_color</span><span class="p">()</span>
-        <span class="n">obj</span> <span class="o">=</span> <span class="n">WorldObj</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kind</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_elem</span><span class="p">([</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;ball&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_color</span><span class="p">()</span>
+
+        <span class="c1"># TODO: we probably want to add an Object.make helper function</span>
+        <span class="k">assert</span> <span class="n">kind</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="s2">&quot;ball&quot;</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;key&quot;</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">Key</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;ball&quot;</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">Ball</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">Box</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2"> object kind is not available in this environment.&quot;</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_in_room</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RoomGrid.add_door"><a class="viewcode-back" href="../../../multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_door">[docs]</a>    <span class="k">def</span> <span class="nf">add_door</span><span class="p">(</span>
@@ -467,10 +467,12 @@
         <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">door_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">locked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Door</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="n">locked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Door</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a door to a room, connecting it to a neighbor.</span>
+<span class="sd">        Add a door to a room, connecting it to a neighbor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">room</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_room</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">door_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -481,18 +483,21 @@
                 <span class="k">if</span> <span class="n">room</span><span class="o">.</span><span class="n">neighbors</span><span class="p">[</span><span class="n">door_idx</span><span class="p">]</span> <span class="ow">and</span> <span class="n">room</span><span class="o">.</span><span class="n">doors</span><span class="p">[</span><span class="n">door_idx</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">break</span>
 
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_color</span><span class="p">()</span>
 
+        <span class="k">if</span> <span class="n">locked</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">locked</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_bool</span><span class="p">()</span>
 
         <span class="k">assert</span> <span class="n">room</span><span class="o">.</span><span class="n">doors</span><span class="p">[</span><span class="n">door_idx</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;door already exists&quot;</span>
 
-        <span class="n">color</span> <span class="o">=</span> <span class="n">color</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_color</span><span class="p">()</span>
-        <span class="n">locked</span> <span class="o">=</span> <span class="n">locked</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_bool</span><span class="p">()</span>
         <span class="n">door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">is_locked</span><span class="o">=</span><span class="n">locked</span><span class="p">)</span>
 
         <span class="n">pos</span> <span class="o">=</span> <span class="n">room</span><span class="o">.</span><span class="n">door_pos</span><span class="p">[</span><span class="n">door_idx</span><span class="p">]</span>
         <span class="k">assert</span> <span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">put_obj</span><span class="p">(</span><span class="n">door</span><span class="p">,</span> <span class="o">*</span><span class="n">pos</span><span class="p">)</span>
-      
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">door</span><span class="p">)</span>
+        <span class="n">door</span><span class="o">.</span><span class="n">cur_pos</span> <span class="o">=</span> <span class="n">pos</span>
+
         <span class="k">assert</span> <span class="n">door_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="n">neighbor</span> <span class="o">=</span> <span class="n">room</span><span class="o">.</span><span class="n">neighbors</span><span class="p">[</span><span class="n">door_idx</span><span class="p">]</span>
         <span class="k">assert</span> <span class="n">neighbor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
@@ -505,6 +510,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove a wall between two rooms</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">room</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_room</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
 
         <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">wall_idx</span> <span class="o">&lt;</span> <span class="mi">4</span>
@@ -544,28 +550,20 @@
         <span class="n">j</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rand_dir</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Place an agent in a room.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        agent : Agent</span>
-<span class="sd">            Agent to place</span>
-<span class="sd">        i : int, optional</span>
-<span class="sd">            Room column to place the agent in (random if not specified)</span>
-<span class="sd">        j : int, optional</span>
-<span class="sd">            Room row to place the agent in (random if not specified)</span>
-<span class="sd">        rand_dir : bool, default=True</span>
-<span class="sd">            Whether to select a random agent direction</span>
+<span class="sd">        Place agent in a room.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cols</span><span class="p">)</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_cols</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span><span class="p">)</span>
+
         <span class="n">room</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_grid</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
 
         <span class="c1"># Find a position that is not right in front of an object</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">room</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">room</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">rand_dir</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
             <span class="n">front_cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">front_pos</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">front_cell</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">front_cell</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">Type</span><span class="o">.</span><span class="n">wall</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">front_cell</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">front_cell</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;wall&quot;</span><span class="p">:</span>
                 <span class="k">break</span>
 
         <span class="k">return</span> <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">pos</span></div>

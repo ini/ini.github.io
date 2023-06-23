@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.rllib.models module" href="multigrid.rllib.models.html" /><link rel="prev" title="multigrid.pettingzoo package" href="multigrid.pettingzoo.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.rllib package" href="multigrid.rllib.html" /><link rel="prev" title="multigrid.envs.redbluedoors module" href="multigrid.envs.redbluedoors.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.rllib package - multigrid 0.1.0b documentation</title>
+        <title>multigrid.pettingzoo package - multigrid 0.1.0b documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -177,8 +177,8 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="multigrid.pettingzoo.html">multigrid.pettingzoo package</a></li>
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">multigrid.rllib package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">multigrid.pettingzoo package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multigrid.rllib.html">multigrid.rllib package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.rllib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
 </ul>
 </li>
@@ -229,80 +229,88 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-multigrid.rllib">
-<span id="multigrid-rllib-package"></span><h1>multigrid.rllib package<a class="headerlink" href="#module-multigrid.rllib" title="Permalink to this heading">#</a></h1>
+          <section id="module-multigrid.pettingzoo">
+<span id="multigrid-pettingzoo-package"></span><h1>multigrid.pettingzoo package<a class="headerlink" href="#module-multigrid.pettingzoo" title="Permalink to this heading">#</a></h1>
 <p>This package provides tools for using MultiGrid environments with
-the RLlib MultiAgentEnv API.</p>
+the PettingZoo ParallelEnv API.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h2>
-<p>Use a specific environment configuration from <a class="reference internal" href="multigrid.envs.html#module-multigrid.envs" title="multigrid.envs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multigrid.envs</span></code></a> by name:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">multigrid.rllib</span> <span class="c1"># registers environment configurations with RLlib</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ray.rllib.algorithms.ppo</span> <span class="kn">import</span> <span class="n">PPOConfig</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">algorithm_config</span> <span class="o">=</span> <span class="n">PPOConfig</span><span class="p">()</span><span class="o">.</span><span class="n">environment</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="s1">&#39;MultiGrid-Empty-8x8-v0&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Wrap an environment instance with <a class="reference internal" href="#multigrid.rllib.RLlibWrapper" title="multigrid.rllib.RLlibWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">RLlibWrapper</span></code></a>:</p>
+<p>Wrap an environment instance with <a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper" title="multigrid.pettingzoo.PettingZooWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">PettingZooWrapper</span></code></a>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">multigrid.envs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;MultiGrid-Empty-8x8-v0&#39;</span><span class="p">,</span> <span class="n">agents</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s1">&#39;human&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.rllib</span> <span class="kn">import</span> <span class="n">RLlibWrapper</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">RLlibWrapper</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.pettingzoo</span> <span class="kn">import</span> <span class="n">PettingZooWrapper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">PettingZooWrapper</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Wrap an environment class with <a class="reference internal" href="#multigrid.rllib.to_rllib_env" title="multigrid.rllib.to_rllib_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_rllib_env()</span></code></a>:</p>
+<p>Wrap an environment class with <a class="reference internal" href="#multigrid.pettingzoo.to_pettingzoo_env" title="multigrid.pettingzoo.to_pettingzoo_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_pettingzoo_env()</span></code></a>:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.envs</span> <span class="kn">import</span> <span class="n">EmptyEnv</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.rllib</span> <span class="kn">import</span> <span class="n">to_rllib_env</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MyEnv</span> <span class="o">=</span> <span class="n">to_rllib_env</span><span class="p">(</span><span class="n">EmptyEnv</span><span class="p">,</span> <span class="n">default_config</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;agents&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;render_mode&#39;</span><span class="p">:</span> <span class="s1">&#39;human&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">MyEnv</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">multigrid.pettingzoo</span> <span class="kn">import</span> <span class="n">to_pettingzoo_env</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PZEnv</span> <span class="o">=</span> <span class="n">to_pettingzoo_env</span><span class="p">(</span><span class="n">EmptyEnv</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;empty_v0&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">PZEnv</span><span class="p">(</span><span class="n">agents</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s1">&#39;human&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <dl class="py class">
-<dt class="sig sig-object py" id="multigrid.rllib.RLlibWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.rllib.</span></span><span class="sig-name descname"><span class="pre">RLlibWrapper</span></span><a class="reference internal" href="../_modules/multigrid/rllib.html#RLlibWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.RLlibWrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Wrapper</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiAgentEnv</span></code></p>
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.pettingzoo.</span></span><span class="sig-name descname"><span class="pre">PettingZooWrapper</span></span><a class="reference internal" href="../_modules/multigrid/pettingzoo.html#PettingZooWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelEnv</span></code></p>
 <p>Wrapper for a <code class="docutils literal notranslate"><span class="pre">MultiGridEnv</span></code> environment that implements the
-RLlib <code class="docutils literal notranslate"><span class="pre">MultiAgentEnv</span></code> interface.</p>
-<p>Wraps an environment to allow a modular transformation of the <a class="reference internal" href="#multigrid.rllib.RLlibWrapper.step" title="multigrid.rllib.RLlibWrapper.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> methods.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>env: The environment to wrap</p>
-</dd>
-</dl>
+PettingZoo <code class="docutils literal notranslate"><span class="pre">ParallelEnv</span></code> interface.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="multigrid.rllib.RLlibWrapper.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib.html#RLlibWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.RLlibWrapper.__init__" title="Permalink to this definition">#</a></dt>
-<dd><p>Wraps an environment to allow a modular transformation of the <a class="reference internal" href="#multigrid.rllib.RLlibWrapper.step" title="multigrid.rllib.RLlibWrapper.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> methods.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>env: The environment to wrap</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">MultiGridEnv</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/pettingzoo.html#PettingZooWrapper.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.__init__" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.agents">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">agents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.agents" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.possible_agents">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">possible_agents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.possible_agents" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.observation_spaces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">observation_spaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">gymnasium.spaces.space.Space</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.observation_spaces" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.action_spaces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action_spaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">gymnasium.spaces.space.Space</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.action_spaces" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.observation_space">
+<span class="sig-name descname"><span class="pre">observation_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Space</span></span></span><a class="reference internal" href="../_modules/multigrid/pettingzoo.html#PettingZooWrapper.observation_space"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.observation_space" title="Permalink to this definition">#</a></dt>
+<dd><p>Takes in agent and returns the observation space for that agent.</p>
+<p>MUST return the same value for the same agent name</p>
+<p>Default implementation is to return the observation_spaces dict</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="multigrid.rllib.RLlibWrapper.get_agent_ids">
-<span class="sig-name descname"><span class="pre">get_agent_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib.html#RLlibWrapper.get_agent_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.RLlibWrapper.get_agent_ids" title="Permalink to this definition">#</a></dt>
-<dd><p>Returns a set of agent ids in the environment.</p>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>Set of agent ids.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.action_space">
+<span class="sig-name descname"><span class="pre">action_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Space</span></span></span><a class="reference internal" href="../_modules/multigrid/pettingzoo.html#PettingZooWrapper.action_space"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.action_space" title="Permalink to this definition">#</a></dt>
+<dd><p>Takes in agent and returns the action space for that agent.</p>
+<p>MUST return the same value for the same agent name</p>
+<p>Default implementation is to return the action_spaces dict</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="multigrid.rllib.RLlibWrapper.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib.html#RLlibWrapper.step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.RLlibWrapper.step" title="Permalink to this definition">#</a></dt>
-<dd><p>Uses the <a class="reference internal" href="#multigrid.rllib.RLlibWrapper.step" title="multigrid.rllib.RLlibWrapper.step"><code class="xref py py-meth docutils literal notranslate"><span class="pre">step()</span></code></a> of the <code class="xref py py-attr docutils literal notranslate"><span class="pre">env</span></code> that can be overwritten to change the returned data.</p>
-</dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.pettingzoo.PettingZooWrapper.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.pettingzoo.PettingZooWrapper.metadata" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="multigrid.rllib.to_rllib_env">
-<span class="sig-prename descclassname"><span class="pre">multigrid.rllib.</span></span><span class="sig-name descname"><span class="pre">to_rllib_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_cls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">multigrid.multigrid_env.MultiGridEnv</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">wrappers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Wrapper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">type</span><span class="p"><span class="pre">[</span></span><span class="pre">ray.rllib.env.multi_agent_env.MultiAgentEnv</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/rllib.html#to_rllib_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.to_rllib_env" title="Permalink to this definition">#</a></dt>
-<dd><p>Convert a <code class="docutils literal notranslate"><span class="pre">MultiGridEnv</span></code> environment class to an RLLib <code class="docutils literal notranslate"><span class="pre">MultiAgentEnv</span></code> class.</p>
+<dt class="sig sig-object py" id="multigrid.pettingzoo.to_pettingzoo_env">
+<span class="sig-prename descclassname"><span class="pre">multigrid.pettingzoo.</span></span><span class="sig-name descname"><span class="pre">to_pettingzoo_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_cls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><span class="pre">multigrid.multigrid_env.MultiGridEnv</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">wrappers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Wrapper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">type</span><span class="p"><span class="pre">[</span></span><span class="pre">pettingzoo.utils.env.ParallelEnv</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/pettingzoo.html#to_pettingzoo_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.pettingzoo.to_pettingzoo_env" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert a <code class="docutils literal notranslate"><span class="pre">MultiGridEnv</span></code> environment class to a PettingZoo <code class="docutils literal notranslate"><span class="pre">ParallelEnv</span></code> class.</p>
 <p>Note that this is a wrapper around the environment <strong>class</strong>,
 not environment instances.</p>
 <dl class="field-list simple">
@@ -312,27 +320,19 @@ not environment instances.</p>
 </dd>
 <dt><strong>wrappers</strong><span class="classifier">gym.Wrapper</span></dt><dd><p>Gym wrappers to apply to the environment</p>
 </dd>
-<dt><strong>default_config</strong><span class="classifier">dict</span></dt><dd><p>Default configuration for the environment</p>
+<dt><strong>metadata</strong><span class="classifier">dict[str, Any]</span></dt><dd><p>Environment metadata</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>rllib_env_cls</strong><span class="classifier">type[MultiAgentEnv]</span></dt><dd><p>RLlib <code class="docutils literal notranslate"><span class="pre">MultiAgentEnv</span></code> environment class</p>
+<dt><strong>pettingzoo_env_cls</strong><span class="classifier">type[ParallelEnv]</span></dt><dd><p>PettingZoo <code class="docutils literal notranslate"><span class="pre">ParallelEnv</span></code> environment class</p>
 </dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.rllib.models.html">multigrid.rllib.models module</a></li>
-</ul>
-</div>
-</section>
 </section>
 
         </article>
@@ -340,23 +340,23 @@ not environment instances.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="multigrid.rllib.models.html">
+          <a class="next-page" href="multigrid.rllib.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">multigrid.rllib.models module</div>
+                <div class="title">multigrid.rllib package</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="multigrid.pettingzoo.html">
+          <a class="prev-page" href="multigrid.envs.redbluedoors.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">multigrid.pettingzoo package</div>
+                <div class="title">multigrid.envs.redbluedoors module</div>
                 
               </div>
             </a>
@@ -393,16 +393,20 @@ not environment instances.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">multigrid.rllib package</a><ul>
+<li><a class="reference internal" href="#">multigrid.pettingzoo package</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#multigrid.rllib.RLlibWrapper"><code class="docutils literal notranslate"><span class="pre">RLlibWrapper</span></code></a><ul>
-<li><a class="reference internal" href="#multigrid.rllib.RLlibWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">RLlibWrapper.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.rllib.RLlibWrapper.get_agent_ids"><code class="docutils literal notranslate"><span class="pre">RLlibWrapper.get_agent_ids()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.rllib.RLlibWrapper.step"><code class="docutils literal notranslate"><span class="pre">RLlibWrapper.step()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.__init__"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.agents"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.agents</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.possible_agents"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.possible_agents</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.observation_spaces"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.observation_spaces</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.action_spaces"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.action_spaces</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.observation_space"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.observation_space()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.action_space"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.action_space()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.PettingZooWrapper.metadata"><code class="docutils literal notranslate"><span class="pre">PettingZooWrapper.metadata</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#multigrid.rllib.to_rllib_env"><code class="docutils literal notranslate"><span class="pre">to_rllib_env()</span></code></a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#multigrid.pettingzoo.to_pettingzoo_env"><code class="docutils literal notranslate"><span class="pre">to_pettingzoo_env()</span></code></a></li>
 </ul>
 </li>
 </ul>

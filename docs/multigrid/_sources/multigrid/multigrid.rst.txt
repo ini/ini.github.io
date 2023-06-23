@@ -15,6 +15,7 @@ Subpackages
 
    multigrid.core
    multigrid.envs
+   multigrid.pettingzoo
    multigrid.rllib
    multigrid.utils
 
