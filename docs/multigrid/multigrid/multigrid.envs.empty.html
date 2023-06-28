@@ -191,7 +191,7 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.base.html">multigrid.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
 </li>
@@ -234,7 +234,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="multigrid.envs.empty.EmptyEnv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.envs.empty.</span></span><span class="sig-name descname"><span class="pre">EmptyEnv</span></span><a class="reference internal" href="../_modules/multigrid/envs/empty.html#EmptyEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.envs.empty.EmptyEnv" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGridEnv</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv" title="multigrid.base.MultiGridEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGridEnv</span></code></a></p>
 <a class="reference internal image-reference" href="https://i.imgur.com/wY0tT7R.gif"><img alt="https://i.imgur.com/wY0tT7R.gif" src="https://i.imgur.com/wY0tT7R.gif" style="width: 200px;" /></a>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
@@ -363,7 +363,7 @@ and <code class="docutils literal notranslate"><span class="pre">0</span></code>
 <dt><strong>success_termination_mode</strong><span class="classifier">‘any’ or ‘all’, default=’any’</span></dt><dd><p>Whether to terminate the environment when any agent reaches the goal
 or after all agents reach the goal</p>
 </dd>
-<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__" title="multigrid.multigrid_env.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.multigrid_env.MultiGridEnv.__init__</span></code></a></p>
+<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
 </dd>
 </dl>
 </dd>
@@ -387,12 +387,22 @@ or after all agents reach the goal</p>
 <dt><strong>success_termination_mode</strong><span class="classifier">‘any’ or ‘all’, default=’any’</span></dt><dd><p>Whether to terminate the environment when any agent reaches the goal
 or after all agents reach the goal</p>
 </dd>
-<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__" title="multigrid.multigrid_env.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.multigrid_env.MultiGridEnv.__init__</span></code></a></p>
+<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
 </dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.envs.empty.EmptyEnv.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="multigrid.core.grid.html#multigrid.core.grid.Grid" title="multigrid.core.grid.Grid"><span class="pre">Grid</span></a></em><a class="headerlink" href="#multigrid.envs.empty.EmptyEnv.grid" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.envs.empty.EmptyEnv.agents">
+<span class="sig-name descname"><span class="pre">agents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.agent.html#multigrid.core.agent.Agent" title="multigrid.core.agent.Agent"><span class="pre">Agent</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.envs.empty.EmptyEnv.agents" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 </dd></dl>
@@ -460,6 +470,8 @@ or after all agents reach the goal</p>
 <li><a class="reference internal" href="#">multigrid.envs.empty module</a><ul>
 <li><a class="reference internal" href="#multigrid.envs.empty.EmptyEnv"><code class="docutils literal notranslate"><span class="pre">EmptyEnv</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.envs.empty.EmptyEnv.__init__"><code class="docutils literal notranslate"><span class="pre">EmptyEnv.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.envs.empty.EmptyEnv.grid"><code class="docutils literal notranslate"><span class="pre">EmptyEnv.grid</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.envs.empty.EmptyEnv.agents"><code class="docutils literal notranslate"><span class="pre">EmptyEnv.agents</span></code></a></li>
 </ul>
 </li>
 </ul>

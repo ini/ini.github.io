@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.multigrid_env - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.base - multigrid 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -190,7 +190,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../multigrid/multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../multigrid/multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multigrid/multigrid.base.html">multigrid.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../multigrid/multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
 </li>
@@ -227,7 +227,7 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for multigrid.multigrid_env</h1><div class="highlight"><pre>
+          <h1>Source code for multigrid.base</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span> <span class="nn">gymnasium</span> <span class="k">as</span> <span class="nn">gym</span>
@@ -264,7 +264,7 @@
 
 <span class="c1">### Environment</span>
 
-<div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">RandomMixin</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv">[docs]</a><span class="k">class</span> <span class="nc">MultiGridEnv</span><span class="p">(</span><span class="n">gym</span><span class="o">.</span><span class="n">Env</span><span class="p">,</span> <span class="n">RandomMixin</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for multi-agent 2D gridworld environments.</span>
 
@@ -313,7 +313,7 @@
         <span class="s1">&#39;render_fps&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
     <span class="p">}</span>
 
-<div class="viewcode-block" id="MultiGridEnv.__init__"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.__init__"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mission_space</span><span class="p">:</span> <span class="n">MissionSpace</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;maximize reward&quot;</span><span class="p">,</span>
         <span class="n">agents</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Agent</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -457,7 +457,7 @@
             <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span>
         <span class="p">})</span>
 
-<div class="viewcode-block" id="MultiGridEnv._gen_grid"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv._gen_grid">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="MultiGridEnv._gen_grid"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv._gen_grid">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :meta public:</span>
@@ -478,7 +478,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.reset"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.reset"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
             <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
             <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
@@ -529,7 +529,7 @@
 
         <span class="k">return</span> <span class="n">observations</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.step"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.step"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">actions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">Action</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span>
             <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">],</span>
@@ -574,7 +574,7 @@
 
         <span class="k">return</span> <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminations</span><span class="p">,</span> <span class="n">truncations</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.gen_obs"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.gen_obs">[docs]</a>    <span class="k">def</span> <span class="nf">gen_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
+<div class="viewcode-block" id="MultiGridEnv.gen_obs"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.gen_obs">[docs]</a>    <span class="k">def</span> <span class="nf">gen_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">ObsType</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate observations for each agent (partially observable, low-res encoding).</span>
 
@@ -604,7 +604,7 @@
 
         <span class="k">return</span> <span class="n">observations</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.handle_actions"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.handle_actions">[docs]</a>    <span class="k">def</span> <span class="nf">handle_actions</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.handle_actions"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.handle_actions">[docs]</a>    <span class="k">def</span> <span class="nf">handle_actions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">Action</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handle actions taken by agents.</span>
@@ -701,7 +701,7 @@
 
         <span class="k">return</span> <span class="n">rewards</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.on_success"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_success">[docs]</a>    <span class="k">def</span> <span class="nf">on_success</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.on_success"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.on_success">[docs]</a>    <span class="k">def</span> <span class="nf">on_success</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span>
         <span class="n">rewards</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">],</span>
@@ -732,7 +732,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rewards</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span> <span class="c1"># reward this agent only</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.on_failure"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_failure">[docs]</a>    <span class="k">def</span> <span class="nf">on_failure</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.on_failure"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.on_failure">[docs]</a>    <span class="k">def</span> <span class="nf">on_failure</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span>
         <span class="n">rewards</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">AgentID</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">],</span>
@@ -757,7 +757,7 @@
             <span class="n">agent</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">terminated</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># terminate this agent only</span>
             <span class="n">terminations</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.is_done"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.is_done">[docs]</a>    <span class="k">def</span> <span class="nf">is_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="MultiGridEnv.is_done"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.is_done">[docs]</a>    <span class="k">def</span> <span class="nf">is_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return whether the current episode is finished (for all agents).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -827,7 +827,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_count</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MultiGridEnv.place_obj"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_obj">[docs]</a>    <span class="k">def</span> <span class="nf">place_obj</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.place_obj"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.place_obj">[docs]</a>    <span class="k">def</span> <span class="nf">place_obj</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">top</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -895,7 +895,7 @@
 
         <span class="k">return</span> <span class="n">pos</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.put_obj"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.put_obj">[docs]</a>    <span class="k">def</span> <span class="nf">put_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv.put_obj"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.put_obj">[docs]</a>    <span class="k">def</span> <span class="nf">put_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Put an object at a specific position in the grid.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -903,7 +903,7 @@
         <span class="n">obj</span><span class="o">.</span><span class="n">init_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
         <span class="n">obj</span><span class="o">.</span><span class="n">cur_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.place_agent"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_agent">[docs]</a>    <span class="k">def</span> <span class="nf">place_agent</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.place_agent"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.place_agent">[docs]</a>    <span class="k">def</span> <span class="nf">place_agent</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">agent</span><span class="p">:</span> <span class="n">Agent</span><span class="p">,</span>
         <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -922,7 +922,7 @@
 
         <span class="k">return</span> <span class="n">pos</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.get_pov_render"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_pov_render">[docs]</a>    <span class="k">def</span> <span class="nf">get_pov_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv.get_pov_render"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.get_pov_render">[docs]</a>    <span class="k">def</span> <span class="nf">get_pov_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Render an agent&#39;s POV observation for visualization.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -930,7 +930,7 @@
             <span class="s2">&quot;POV rendering not supported for multiagent environments.&quot;</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.get_full_render"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_full_render">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv.get_full_render"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.get_full_render">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Render a non-partial observation for visualization.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -981,7 +981,7 @@
 
         <span class="k">return</span> <span class="n">img</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.get_frame"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_frame">[docs]</a>    <span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span>
+<div class="viewcode-block" id="MultiGridEnv.get_frame"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.get_frame">[docs]</a>    <span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">highlight</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">tile_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TILE_PIXELS</span><span class="p">,</span>
@@ -1008,7 +1008,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_full_render</span><span class="p">(</span><span class="n">highlight</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.render"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv.render"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.render">[docs]</a>    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Render the environment.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1059,7 +1059,7 @@
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">render_mode</span> <span class="o">==</span> <span class="s1">&#39;rgb_array&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">img</span></div>
 
-<div class="viewcode-block" id="MultiGridEnv.close"><a class="viewcode-back" href="../../multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiGridEnv.close"><a class="viewcode-back" href="../../multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Close the rendering window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

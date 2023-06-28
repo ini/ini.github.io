@@ -1,7 +1,7 @@
-multigrid.mini module
+multigrid.base module
 =====================
 
-.. automodule:: multigrid.mini
+.. automodule:: multigrid.base
    :members:
    :undoc-members:
    :show-inheritance:

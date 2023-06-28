@@ -189,7 +189,7 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid/multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="multigrid/multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid/multigrid.base.html">multigrid.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multigrid/multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
 </li>
@@ -235,9 +235,11 @@
   <h2>_</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.__init__">__init__() (multigrid.core.agent.Agent method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.__init__">__init__() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
+          <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.__init__">(multigrid.core.agent.Agent method)</a>
+</li>
           <li><a href="multigrid/multigrid.core.grid.html#multigrid.core.grid.Grid.__init__">(multigrid.core.grid.Grid method)</a>
 </li>
           <li><a href="multigrid/multigrid.core.mission.html#multigrid.core.mission.MissionSpace.__init__">(multigrid.core.mission.MissionSpace method)</a>
@@ -255,10 +257,6 @@
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.__init__">(multigrid.envs.locked_hallway.Room method)</a>
 </li>
           <li><a href="multigrid/multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorsEnv.__init__">(multigrid.envs.redbluedoors.RedBlueDoorsEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.mini.html#multigrid.mini.TryEnv.__init__">(multigrid.mini.TryEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__">(multigrid.multigrid_env.MultiGridEnv method)</a>
 </li>
           <li><a href="multigrid/multigrid.pettingzoo.html#multigrid.pettingzoo.PettingZooWrapper.__init__">(multigrid.pettingzoo.PettingZooWrapper method)</a>
 </li>
@@ -303,14 +301,12 @@
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid._gen_grid">_gen_grid() (multigrid.core.roomgrid.RoomGrid method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv._gen_grid">_gen_grid() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
+          <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid._gen_grid">(multigrid.core.roomgrid.RoomGrid method)</a>
+</li>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv._gen_grid">(multigrid.envs.locked_hallway.LockedHallwayEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.mini.html#multigrid.mini.TryEnv._gen_grid">(multigrid.mini.TryEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv._gen_grid">(multigrid.multigrid_env.MultiGridEnv method)</a>
 </li>
         </ul></li>
         <li><a href="multigrid/multigrid.utils.random.html#multigrid.utils.random.RandomMixin._rand_bool">_rand_bool() (multigrid.utils.random.RandomMixin method)</a>
@@ -339,7 +335,7 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid/multigrid.core.actions.html#multigrid.core.actions.Action">Action (class in multigrid.core.actions)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.action_space">action_space (multigrid.multigrid_env.MultiGridEnv property)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.action_space">action_space (multigrid.base.MultiGridEnv property)</a>
 
         <ul>
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.action_space">(multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
@@ -355,23 +351,33 @@
 </li>
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_door">add_door() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid/multigrid.utils.enum.html#multigrid.utils.enum.IndexedEnum.add_item">add_item() (multigrid.utils.enum.IndexedEnum class method)</a>
 </li>
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_object">add_object() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
         <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent">Agent (class in multigrid.core.agent)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Type.agent">agent (multigrid.core.constants.Type attribute)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.agent_dir">agent_dir (multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.agent_pos">agent_pos (multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
 </li>
-        <li><a href="multigrid/multigrid.pettingzoo.html#multigrid.pettingzoo.PettingZooWrapper.agents">agents (multigrid.pettingzoo.PettingZooWrapper property)</a>
+        <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.agents">agents (multigrid.core.roomgrid.RoomGrid attribute)</a>
 
         <ul>
+          <li><a href="multigrid/multigrid.envs.blockedunlockpickup.html#multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv.agents">(multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.agents">(multigrid.envs.empty.EmptyEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.agents">(multigrid.envs.locked_hallway.LockedHallwayEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorsEnv.agents">(multigrid.envs.redbluedoors.RedBlueDoorsEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.pettingzoo.html#multigrid.pettingzoo.PettingZooWrapper.agents">(multigrid.pettingzoo.PettingZooWrapper property)</a>
+</li>
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.agents">(multigrid.utils.minigrid_interface.MiniGridInterface attribute)</a>
 </li>
         </ul></li>
@@ -425,14 +431,14 @@
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.carrying">(multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
 </li>
         </ul></li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.close">close() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.close">close() (multigrid.base.MultiGridEnv method)</a>
 </li>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.State.closed">closed (multigrid.core.constants.State attribute)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Color">Color (class in multigrid.core.constants)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Color">Color (class in multigrid.core.constants)</a>
+</li>
         <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.color">color (multigrid.core.agent.Agent property)</a>
 </li>
         <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.AgentState.COLOR">COLOR (multigrid.core.agent.AgentState attribute)</a>
@@ -450,10 +456,6 @@
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.connect_all">connect_all() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
         <li><a href="multigrid/multigrid.core.mission.html#multigrid.core.mission.MissionSpace.contains">contains() (multigrid.core.mission.MissionSpace method)</a>
-</li>
-        <li><a href="multigrid/multigrid.mini.html#multigrid.mini.convert_grid">convert_grid() (in module multigrid.mini)</a>
-</li>
-        <li><a href="multigrid/multigrid.mini.html#multigrid.mini.convert_world_obj">convert_world_obj() (in module multigrid.mini)</a>
 </li>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Color.cycle">cycle() (multigrid.core.constants.Color static method)</a>
 </li>
@@ -567,7 +569,7 @@
   <h2>G</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.gen_obs">gen_obs() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.gen_obs">gen_obs() (multigrid.base.MultiGridEnv method)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.gen_obs_grid">gen_obs_grid() (in module multigrid.utils.obs)</a>
 </li>
@@ -583,20 +585,20 @@
         </ul></li>
         <li><a href="multigrid/multigrid.rllib.html#multigrid.rllib.RLlibWrapper.get_agent_ids">get_agent_ids() (multigrid.rllib.RLlibWrapper method)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_frame">get_frame() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.get_frame">get_frame() (multigrid.base.MultiGridEnv method)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_full_render">get_full_render() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.get_full_render">get_full_render() (multigrid.base.MultiGridEnv method)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.get_pov_render">get_pov_render() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.get_pov_render">get_pov_render() (multigrid.base.MultiGridEnv method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.get_room">get_room() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_see_behind_mask">get_see_behind_mask() (in module multigrid.utils.obs)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_view_exts">get_view_exts() (in module multigrid.utils.obs)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_vis_mask">get_vis_mask() (in module multigrid.utils.obs)</a>
 </li>
         <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.Goal">Goal (class in multigrid.core.world_object)</a>
@@ -612,6 +614,16 @@
         <li><a href="multigrid/multigrid.core.grid.html#multigrid.core.grid.Grid.grid">grid (multigrid.core.grid.Grid property)</a>
 
         <ul>
+          <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.grid">(multigrid.core.roomgrid.RoomGrid attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.blockedunlockpickup.html#multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv.grid">(multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.grid">(multigrid.envs.empty.EmptyEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.grid">(multigrid.envs.locked_hallway.LockedHallwayEnv attribute)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorsEnv.grid">(multigrid.envs.redbluedoors.RedBlueDoorsEnv attribute)</a>
+</li>
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.grid">(multigrid.utils.minigrid_interface.MiniGridInterface attribute)</a>
 </li>
         </ul></li>
@@ -623,7 +635,7 @@
   <h2>H</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.handle_actions">handle_actions() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.handle_actions">handle_actions() (multigrid.base.MultiGridEnv method)</a>
 </li>
         <li><a href="multigrid/multigrid.core.grid.html#multigrid.core.grid.Grid.height">height (multigrid.core.grid.Grid property)</a>
 </li>
@@ -643,7 +655,7 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="multigrid/multigrid.utils.enum.html#multigrid.utils.enum.IndexedEnum">IndexedEnum (class in multigrid.utils.enum)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.is_done">is_done() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.is_done">is_done() (multigrid.base.MultiGridEnv method)</a>
 </li>
         <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.Door.is_locked">is_locked (multigrid.core.world_object.Door property)</a>
 
@@ -709,7 +721,7 @@
   <h2>M</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.metadata">metadata (multigrid.multigrid_env.MultiGridEnv attribute)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.metadata">metadata (multigrid.base.MultiGridEnv attribute)</a>
 
         <ul>
           <li><a href="multigrid/multigrid.pettingzoo.html#multigrid.pettingzoo.PettingZooWrapper.metadata">(multigrid.pettingzoo.PettingZooWrapper attribute)</a>
@@ -726,6 +738,8 @@
 
         <ul>
           <li><a href="multigrid/multigrid.html#module-multigrid">multigrid</a>
+</li>
+          <li><a href="multigrid/multigrid.base.html#module-multigrid.base">multigrid.base</a>
 </li>
           <li><a href="multigrid/multigrid.core.html#module-multigrid.core">multigrid.core</a>
 </li>
@@ -752,10 +766,6 @@
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#module-multigrid.envs.locked_hallway">multigrid.envs.locked_hallway</a>
 </li>
           <li><a href="multigrid/multigrid.envs.redbluedoors.html#module-multigrid.envs.redbluedoors">multigrid.envs.redbluedoors</a>
-</li>
-          <li><a href="multigrid/multigrid.mini.html#module-multigrid.mini">multigrid.mini</a>
-</li>
-          <li><a href="multigrid/multigrid.multigrid_env.html#module-multigrid.multigrid_env">multigrid.multigrid_env</a>
 </li>
           <li><a href="multigrid/multigrid.pettingzoo.html#module-multigrid.pettingzoo">multigrid.pettingzoo</a>
 </li>
@@ -788,6 +798,13 @@
 </li>
         </ul></li>
         <li>
+    multigrid.base
+
+        <ul>
+          <li><a href="multigrid/multigrid.base.html#module-multigrid.base">module</a>
+</li>
+        </ul></li>
+        <li>
     multigrid.core
 
         <ul>
@@ -808,6 +825,8 @@
           <li><a href="multigrid/multigrid.core.agent.html#module-multigrid.core.agent">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     multigrid.core.constants
 
@@ -822,8 +841,6 @@
           <li><a href="multigrid/multigrid.core.grid.html#module-multigrid.core.grid">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     multigrid.core.mission
 
@@ -878,20 +895,6 @@
 
         <ul>
           <li><a href="multigrid/multigrid.envs.redbluedoors.html#module-multigrid.envs.redbluedoors">module</a>
-</li>
-        </ul></li>
-        <li>
-    multigrid.mini
-
-        <ul>
-          <li><a href="multigrid/multigrid.mini.html#module-multigrid.mini">module</a>
-</li>
-        </ul></li>
-        <li>
-    multigrid.multigrid_env
-
-        <ul>
-          <li><a href="multigrid/multigrid.multigrid_env.html#module-multigrid.multigrid_env">module</a>
 </li>
         </ul></li>
         <li>
@@ -971,7 +974,7 @@
           <li><a href="multigrid/multigrid.wrappers.html#module-multigrid.wrappers">module</a>
 </li>
         </ul></li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv">MultiGridEnv (class in multigrid.multigrid_env)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv">MultiGridEnv (class in multigrid.base)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -981,7 +984,7 @@
   <h2>O</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.observation_space">observation_space (multigrid.multigrid_env.MultiGridEnv property)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.observation_space">observation_space (multigrid.base.MultiGridEnv property)</a>
 
         <ul>
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.observation_space">(multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
@@ -993,9 +996,9 @@
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_failure">on_failure() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.on_failure">on_failure() (multigrid.base.MultiGridEnv method)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.on_success">on_success() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.on_success">on_success() (multigrid.base.MultiGridEnv method)</a>
 </li>
         <li><a href="multigrid/multigrid.wrappers.html#multigrid.wrappers.OneHotObsWrapper">OneHotObsWrapper (class in multigrid.wrappers)</a>
 </li>
@@ -1013,20 +1016,20 @@
 </li>
         <li><a href="multigrid/multigrid.core.actions.html#multigrid.core.actions.Action.pickup">pickup (multigrid.core.actions.Action attribute)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.place_agent">place_agent() (multigrid.core.roomgrid.RoomGrid method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.place_agent">place_agent() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_agent">(multigrid.multigrid_env.MultiGridEnv method)</a>
+          <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.place_agent">(multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.place_agent">(multigrid.utils.minigrid_interface.MiniGridInterface method)</a>
 </li>
         </ul></li>
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.place_in_room">place_in_room() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
-        <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.place_obj">place_obj() (multigrid.envs.locked_hallway.Room method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.place_obj">place_obj() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.place_obj">(multigrid.multigrid_env.MultiGridEnv method)</a>
+          <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.place_obj">(multigrid.envs.locked_hallway.Room method)</a>
 </li>
         </ul></li>
         <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">point_in_circle() (in module multigrid.utils.rendering)</a>
@@ -1053,7 +1056,7 @@
 </li>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Color.purple">purple (multigrid.core.constants.Color attribute)</a>
 </li>
-        <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.put_obj">put_obj() (multigrid.multigrid_env.MultiGridEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.put_obj">put_obj() (multigrid.base.MultiGridEnv method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -1073,26 +1076,24 @@
 </li>
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.remove_wall">remove_wall() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.render">render() (multigrid.core.agent.Agent method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.render">render() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
+          <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.render">(multigrid.core.agent.Agent method)</a>
+</li>
           <li><a href="multigrid/multigrid.core.grid.html#multigrid.core.grid.Grid.render">(multigrid.core.grid.Grid method)</a>
 </li>
           <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.render">(multigrid.core.world_object.WorldObj method)</a>
 </li>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.render">(multigrid.multigrid_env.MultiGridEnv method)</a>
-</li>
         </ul></li>
         <li><a href="multigrid/multigrid.core.grid.html#multigrid.core.grid.Grid.render_tile">render_tile() (multigrid.core.grid.Grid class method)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.reset">reset() (multigrid.core.agent.Agent method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.reset">reset() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
+          <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent.reset">(multigrid.core.agent.Agent method)</a>
+</li>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.reset">(multigrid.envs.locked_hallway.LockedHallwayEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.mini.html#multigrid.mini.TryEnv.reset">(multigrid.mini.TryEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.reset">(multigrid.multigrid_env.MultiGridEnv method)</a>
 </li>
           <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.reset">(multigrid.utils.minigrid_interface.MiniGridInterface method)</a>
 </li>
@@ -1139,18 +1140,16 @@
 </li>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.State">State (class in multigrid.core.constants)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.STATE">STATE (multigrid.core.world_object.WorldObj attribute)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.STATE">STATE (multigrid.core.world_object.WorldObj attribute)</a>
+</li>
         <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.state">state (multigrid.core.world_object.WorldObj property)</a>
 </li>
-        <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.step">step() (multigrid.envs.locked_hallway.LockedHallwayEnv method)</a>
+        <li><a href="multigrid/multigrid.base.html#multigrid.base.MultiGridEnv.step">step() (multigrid.base.MultiGridEnv method)</a>
 
         <ul>
-          <li><a href="multigrid/multigrid.mini.html#multigrid.mini.TryEnv.step">(multigrid.mini.TryEnv method)</a>
-</li>
-          <li><a href="multigrid/multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.step">(multigrid.multigrid_env.MultiGridEnv method)</a>
+          <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.step">(multigrid.envs.locked_hallway.LockedHallwayEnv method)</a>
 </li>
           <li><a href="multigrid/multigrid.rllib.html#multigrid.rllib.RLlibWrapper.step">(multigrid.rllib.RLlibWrapper method)</a>
 </li>
@@ -1181,10 +1180,10 @@
 </li>
         <li><a href="multigrid/multigrid.rllib.html#multigrid.rllib.to_rllib_env">to_rllib_env() (in module multigrid.rllib)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Direction.to_vec">to_vec() (multigrid.core.constants.Direction method)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Direction.to_vec">to_vec() (multigrid.core.constants.Direction method)</a>
+</li>
         <li><a href="multigrid/multigrid.core.actions.html#multigrid.core.actions.Action.toggle">toggle (multigrid.core.actions.Action attribute)</a>
 </li>
         <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.toggle">toggle() (multigrid.core.world_object.WorldObj method)</a>
@@ -1192,8 +1191,6 @@
         <li><a href="multigrid/multigrid.rllib.models.html#multigrid.rllib.models.TorchModel">TorchModel (class in multigrid.rllib.models)</a>
 </li>
         <li><a href="multigrid/multigrid.rllib.models.html#multigrid.rllib.models.TorchModel.training">training (multigrid.rllib.models.TorchModel attribute)</a>
-</li>
-        <li><a href="multigrid/multigrid.mini.html#multigrid.mini.TryEnv">TryEnv (class in multigrid.mini)</a>
 </li>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Type">Type (class in multigrid.core.constants)</a>
 </li>

@@ -26,5 +26,5 @@ Submodules
    :titlesonly:
    :maxdepth: 3
 
-   multigrid.multigrid_env
+   multigrid.base
    multigrid.wrappers

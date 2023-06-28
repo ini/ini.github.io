@@ -1,7 +1,0 @@
-multigrid.multigrid\_env module
-===============================
-
-.. automodule:: multigrid.multigrid_env
-   :members:
-   :undoc-members:
-   :show-inheritance:

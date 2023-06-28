@@ -191,7 +191,7 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid.utils.rendering.html">multigrid.utils.rendering module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="multigrid.multigrid_env.html">multigrid.multigrid_env module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid.base.html">multigrid.base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multigrid.wrappers.html">multigrid.wrappers module</a></li>
 </ul>
 </li>
@@ -234,7 +234,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="multigrid.envs.redbluedoors.RedBlueDoorsEnv">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.envs.redbluedoors.</span></span><span class="sig-name descname"><span class="pre">RedBlueDoorsEnv</span></span><a class="reference internal" href="../_modules/multigrid/envs/redbluedoors.html#RedBlueDoorsEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv" title="multigrid.multigrid_env.MultiGridEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGridEnv</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv" title="multigrid.base.MultiGridEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGridEnv</span></code></a></p>
 <a class="reference internal image-reference" href="https://i.imgur.com/usbavAh.gif"><img alt="https://i.imgur.com/usbavAh.gif" src="https://i.imgur.com/usbavAh.gif" style="width: 400px;" /></a>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
@@ -354,7 +354,7 @@ or after all agents fail the task</p>
 <dt><strong>failure_termination_mode</strong><span class="classifier">‘any’ or ‘all’, default=’any’</span></dt><dd><p>Whether to terminate the environment when any agent fails the task
 or after all agents fail the task</p>
 </dd>
-<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__" title="multigrid.multigrid_env.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.multigrid_env.MultiGridEnv.__init__</span></code></a></p>
+<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
 </dd>
 </dl>
 </dd>
@@ -377,12 +377,22 @@ or after all agents fail the task</p>
 <dt><strong>failure_termination_mode</strong><span class="classifier">‘any’ or ‘all’, default=’any’</span></dt><dd><p>Whether to terminate the environment when any agent fails the task
 or after all agents fail the task</p>
 </dd>
-<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.multigrid_env.html#multigrid.multigrid_env.MultiGridEnv.__init__" title="multigrid.multigrid_env.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.multigrid_env.MultiGridEnv.__init__</span></code></a></p>
+<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
 </dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.envs.redbluedoors.RedBlueDoorsEnv.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="multigrid.core.grid.html#multigrid.core.grid.Grid" title="multigrid.core.grid.Grid"><span class="pre">Grid</span></a></em><a class="headerlink" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv.grid" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.envs.redbluedoors.RedBlueDoorsEnv.agents">
+<span class="sig-name descname"><span class="pre">agents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.agent.html#multigrid.core.agent.Agent" title="multigrid.core.agent.Agent"><span class="pre">Agent</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv.agents" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
 
 </section>
 </dd></dl>
@@ -450,6 +460,8 @@ or after all agents fail the task</p>
 <li><a class="reference internal" href="#">multigrid.envs.redbluedoors module</a><ul>
 <li><a class="reference internal" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv"><code class="docutils literal notranslate"><span class="pre">RedBlueDoorsEnv</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv.__init__"><code class="docutils literal notranslate"><span class="pre">RedBlueDoorsEnv.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv.grid"><code class="docutils literal notranslate"><span class="pre">RedBlueDoorsEnv.grid</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.envs.redbluedoors.RedBlueDoorsEnv.agents"><code class="docutils literal notranslate"><span class="pre">RedBlueDoorsEnv.agents</span></code></a></li>
 </ul>
 </li>
 </ul>
