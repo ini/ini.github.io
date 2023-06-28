@@ -174,6 +174,7 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid.envs.playground.html">multigrid.envs.playground module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
@@ -233,7 +234,7 @@
 <span id="multigrid-core-roomgrid-module"></span><h1>multigrid.core.roomgrid module<a class="headerlink" href="#module-multigrid.core.roomgrid" title="Permalink to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.bfs">
-<span class="sig-prename descclassname"><span class="pre">multigrid.core.roomgrid.</span></span><span class="sig-name descname"><span class="pre">bfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#bfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.bfs" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">multigrid.core.roomgrid.</span></span><span class="sig-name descname"><span class="pre">bfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#bfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.bfs" title="Permalink to this definition">#</a></dt>
 <dd><p>Run a breadth-first search from a starting node.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -533,16 +534,6 @@ starting position.</p>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.grid">
-<span class="sig-name descname"><span class="pre">grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="multigrid.core.grid.html#multigrid.core.grid.Grid" title="multigrid.core.grid.Grid"><span class="pre">Grid</span></a></em><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.grid" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.agents">
-<span class="sig-name descname"><span class="pre">agents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.agent.html#multigrid.core.agent.Agent" title="multigrid.core.agent.Agent"><span class="pre">Agent</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.agents" title="Permalink to this definition">#</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 </section>
@@ -626,8 +617,6 @@ starting position.</p>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.place_agent"><code class="docutils literal notranslate"><span class="pre">RoomGrid.place_agent()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.connect_all"><code class="docutils literal notranslate"><span class="pre">RoomGrid.connect_all()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.add_distractors"><code class="docutils literal notranslate"><span class="pre">RoomGrid.add_distractors()</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.grid"><code class="docutils literal notranslate"><span class="pre">RoomGrid.grid</span></code></a></li>
-<li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.agents"><code class="docutils literal notranslate"><span class="pre">RoomGrid.agents</span></code></a></li>
 </ul>
 </li>
 </ul>

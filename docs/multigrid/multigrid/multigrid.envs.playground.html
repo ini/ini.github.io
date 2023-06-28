@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.core.actions module" href="multigrid.core.actions.html" /><link rel="prev" title="multigrid package" href="multigrid.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.envs.redbluedoors module" href="multigrid.envs.redbluedoors.html" /><link rel="prev" title="multigrid.envs.locked_hallway module" href="multigrid.envs.locked_hallway.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.core package - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.envs.playground module - multigrid 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -160,7 +160,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="multigrid.html">multigrid package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of multigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">multigrid.core package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of multigrid.core package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multigrid.core.html">multigrid.core package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of multigrid.core package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
@@ -170,11 +170,11 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid.core.world_object.html">multigrid.core.world_object module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="multigrid.envs.html">multigrid.envs package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="multigrid.envs.html">multigrid.envs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="multigrid.envs.playground.html">multigrid.envs.playground module</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">multigrid.envs.playground module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
@@ -230,22 +230,149 @@
           </label>
         </div>
         <article role="main">
-          <section id="module-multigrid.core">
-<span id="multigrid-core-package"></span><h1>multigrid.core package<a class="headerlink" href="#module-multigrid.core" title="Permalink to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
+          <section id="module-multigrid.envs.playground">
+<span id="multigrid-envs-playground-module"></span><h1>multigrid.envs.playground module<a class="headerlink" href="#module-multigrid.envs.playground" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.envs.playground.PlaygroundEnv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.envs.playground.</span></span><span class="sig-name descname"><span class="pre">PlaygroundEnv</span></span><a class="reference internal" href="../_modules/multigrid/envs/playground.html#PlaygroundEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.envs.playground.PlaygroundEnv" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid" title="multigrid.core.roomgrid.RoomGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">RoomGrid</span></code></a></p>
+<a class="reference internal image-reference" href="https://i.imgur.com/QBz99Vh.gif"><img alt="https://i.imgur.com/QBz99Vh.gif" src="https://i.imgur.com/QBz99Vh.gif" style="width: 380px;" /></a>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p>Environment with multiple rooms and random objects.
+This environment has no specific goals or rewards.</p>
+</section>
+<section id="mission-space">
+<h2>Mission Space<a class="headerlink" href="#mission-space" title="Permalink to this heading">#</a></h2>
+<p>None</p>
+</section>
+<section id="observation-space">
+<h2>Observation Space<a class="headerlink" href="#observation-space" title="Permalink to this heading">#</a></h2>
+<p>The multi-agent observation space is a Dict mapping from agent index to
+corresponding agent observation space.</p>
+<p>Each agent observation is a dictionary with the following entries:</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.constants.html">multigrid.core.constants module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.grid.html">multigrid.core.grid module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.mission.html">multigrid.core.mission module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.roomgrid.html">multigrid.core.roomgrid module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.core.world_object.html">multigrid.core.world_object module</a></li>
+<li><dl>
+<dt>image<span class="classifier">ndarray[int] of shape (view_size, view_size, <a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.WorldObj.dim" title="multigrid.core.world_object.WorldObj.dim"><code class="xref py py-attr docutils literal notranslate"><span class="pre">WorldObj.dim</span></code></a>)</span></dt><dd><p>Encoding of the agent’s partially observable view of the environment,
+where the object at each grid cell is encoded as a vector:
+(<a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Type" title="multigrid.core.constants.Type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>, <a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Color" title="multigrid.core.constants.Color"><code class="xref py py-class docutils literal notranslate"><span class="pre">Color</span></code></a>, <a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.State" title="multigrid.core.constants.State"><code class="xref py py-class docutils literal notranslate"><span class="pre">State</span></code></a>)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>direction<span class="classifier">int</span></dt><dd><p>Agent’s direction (0: right, 1: down, 2: left, 3: up)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>mission<span class="classifier">Mission</span></dt><dd><p>Task string corresponding to the current environment configuration</p>
+</dd>
+</dl>
+</li>
 </ul>
+</section>
+<section id="action-space">
+<h2>Action Space<a class="headerlink" href="#action-space" title="Permalink to this heading">#</a></h2>
+<p>The multi-agent action space is a Dict mapping from agent index to
+corresponding agent action space.</p>
+<p>Agent actions are discrete integer values, given by:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Num</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>left</p></td>
+<td><p>Turn left</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>right</p></td>
+<td><p>Turn right</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>forward</p></td>
+<td><p>Move forward</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>pickup</p></td>
+<td><p>Pick up an object</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>drop</p></td>
+<td><p>Drop an object</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>toggle</p></td>
+<td><p>Toggle / activate an object</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>done</p></td>
+<td><p>Done completing task</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
+<section id="rewards">
+<h2>Rewards<a class="headerlink" href="#rewards" title="Permalink to this heading">#</a></h2>
+<p>None</p>
+</section>
+<section id="termination">
+<h2>Termination<a class="headerlink" href="#termination" title="Permalink to this heading">#</a></h2>
+<p>The episode ends when the following condition is met:</p>
+<ul class="simple">
+<li><p>Timeout (see <code class="docutils literal notranslate"><span class="pre">max_steps</span></code>)</p></li>
+</ul>
+</section>
+<section id="registered-configurations">
+<h2>Registered Configurations<a class="headerlink" href="#registered-configurations" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Playground-v0</span></code></p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>room_size</strong><span class="classifier">int, default=7</span></dt><dd><p>Width and height for each of the rooms</p>
+</dd>
+<dt><strong>num_rows</strong><span class="classifier">int, default=3</span></dt><dd><p>Number of rows of rooms</p>
+</dd>
+<dt><strong>num_cols</strong><span class="classifier">int, default=3</span></dt><dd><p>Number of columns of rooms</p>
+</dd>
+<dt><strong>max_steps</strong><span class="classifier">int, default=100</span></dt><dd><p>Maximum number of steps per episode</p>
+</dd>
+<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.envs.playground.PlaygroundEnv.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rows</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/envs/playground.html#PlaygroundEnv.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.envs.playground.PlaygroundEnv.__init__" title="Permalink to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>room_size</strong><span class="classifier">int, default=7</span></dt><dd><p>Width and height for each of the rooms</p>
+</dd>
+<dt><strong>num_rows</strong><span class="classifier">int, default=3</span></dt><dd><p>Number of rows of rooms</p>
+</dd>
+<dt><strong>num_cols</strong><span class="classifier">int, default=3</span></dt><dd><p>Number of columns of rooms</p>
+</dd>
+<dt><strong>max_steps</strong><span class="classifier">int, default=100</span></dt><dd><p>Maximum number of steps per episode</p>
+</dd>
+<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
 </section>
 
         </article>
@@ -253,23 +380,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="multigrid.core.actions.html">
+          <a class="next-page" href="multigrid.envs.redbluedoors.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">multigrid.core.actions module</div>
+                <div class="title">multigrid.envs.redbluedoors module</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="multigrid.html">
+          <a class="prev-page" href="multigrid.envs.locked_hallway.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">multigrid package</div>
+                <div class="title">multigrid.envs.locked_hallway module</div>
                 
               </div>
             </a>
@@ -306,8 +433,11 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">multigrid.core package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#">multigrid.envs.playground module</a><ul>
+<li><a class="reference internal" href="#multigrid.envs.playground.PlaygroundEnv"><code class="docutils literal notranslate"><span class="pre">PlaygroundEnv</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.envs.playground.PlaygroundEnv.__init__"><code class="docutils literal notranslate"><span class="pre">PlaygroundEnv.__init__()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -173,6 +173,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../multigrid/multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../multigrid/multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../multigrid/multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../multigrid/multigrid.envs.playground.html">multigrid.envs.playground module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../multigrid/multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
@@ -1025,7 +1026,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">window</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span>
                     <span class="p">(</span><span class="n">aspect_ratio</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">screen_size</span><span class="p">)</span>
                 <span class="p">)</span>
-                <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">&#39;multigrid&#39;</span><span class="p">)</span>
+                <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;multigrid - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">clock</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span>
             <span class="n">surf</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">surfarray</span><span class="o">.</span><span class="n">make_surface</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>

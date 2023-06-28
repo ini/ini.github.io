@@ -172,6 +172,7 @@
 <li class="toctree-l3"><a class="reference internal" href="multigrid/multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid/multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid/multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multigrid/multigrid.envs.playground.html">multigrid.envs.playground module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="multigrid/multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
 </ul>
 </li>
@@ -255,6 +256,8 @@
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.__init__">(multigrid.envs.locked_hallway.LockedHallwayEnv method)</a>
 </li>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.__init__">(multigrid.envs.locked_hallway.Room method)</a>
+</li>
+          <li><a href="multigrid/multigrid.envs.playground.html#multigrid.envs.playground.PlaygroundEnv.__init__">(multigrid.envs.playground.PlaygroundEnv method)</a>
 </li>
           <li><a href="multigrid/multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorsEnv.__init__">(multigrid.envs.redbluedoors.RedBlueDoorsEnv method)</a>
 </li>
@@ -355,23 +358,19 @@
 </li>
         <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.add_object">add_object() (multigrid.core.roomgrid.RoomGrid method)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent">Agent (class in multigrid.core.agent)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid/multigrid.core.agent.html#multigrid.core.agent.Agent">Agent (class in multigrid.core.agent)</a>
+</li>
         <li><a href="multigrid/multigrid.core.constants.html#multigrid.core.constants.Type.agent">agent (multigrid.core.constants.Type attribute)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.agent_dir">agent_dir (multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.minigrid_interface.html#multigrid.utils.minigrid_interface.MiniGridInterface.agent_pos">agent_pos (multigrid.utils.minigrid_interface.MiniGridInterface property)</a>
 </li>
-        <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.agents">agents (multigrid.core.roomgrid.RoomGrid attribute)</a>
+        <li><a href="multigrid/multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.agents">agents (multigrid.envs.empty.EmptyEnv attribute)</a>
 
         <ul>
-          <li><a href="multigrid/multigrid.envs.blockedunlockpickup.html#multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv.agents">(multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv attribute)</a>
-</li>
-          <li><a href="multigrid/multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.agents">(multigrid.envs.empty.EmptyEnv attribute)</a>
-</li>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.agents">(multigrid.envs.locked_hallway.LockedHallwayEnv attribute)</a>
 </li>
           <li><a href="multigrid/multigrid.envs.redbluedoors.html#multigrid.envs.redbluedoors.RedBlueDoorsEnv.agents">(multigrid.envs.redbluedoors.RedBlueDoorsEnv attribute)</a>
@@ -595,10 +594,10 @@
 </li>
         <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_see_behind_mask">get_see_behind_mask() (in module multigrid.utils.obs)</a>
 </li>
-        <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_view_exts">get_view_exts() (in module multigrid.utils.obs)</a>
-</li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_view_exts">get_view_exts() (in module multigrid.utils.obs)</a>
+</li>
         <li><a href="multigrid/multigrid.utils.obs.html#multigrid.utils.obs.get_vis_mask">get_vis_mask() (in module multigrid.utils.obs)</a>
 </li>
         <li><a href="multigrid/multigrid.core.world_object.html#multigrid.core.world_object.Goal">Goal (class in multigrid.core.world_object)</a>
@@ -614,10 +613,6 @@
         <li><a href="multigrid/multigrid.core.grid.html#multigrid.core.grid.Grid.grid">grid (multigrid.core.grid.Grid property)</a>
 
         <ul>
-          <li><a href="multigrid/multigrid.core.roomgrid.html#multigrid.core.roomgrid.RoomGrid.grid">(multigrid.core.roomgrid.RoomGrid attribute)</a>
-</li>
-          <li><a href="multigrid/multigrid.envs.blockedunlockpickup.html#multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv.grid">(multigrid.envs.blockedunlockpickup.BlockedUnlockPickupEnv attribute)</a>
-</li>
           <li><a href="multigrid/multigrid.envs.empty.html#multigrid.envs.empty.EmptyEnv.grid">(multigrid.envs.empty.EmptyEnv attribute)</a>
 </li>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.grid">(multigrid.envs.locked_hallway.LockedHallwayEnv attribute)</a>
@@ -765,6 +760,8 @@
 </li>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#module-multigrid.envs.locked_hallway">multigrid.envs.locked_hallway</a>
 </li>
+          <li><a href="multigrid/multigrid.envs.playground.html#module-multigrid.envs.playground">multigrid.envs.playground</a>
+</li>
           <li><a href="multigrid/multigrid.envs.redbluedoors.html#module-multigrid.envs.redbluedoors">multigrid.envs.redbluedoors</a>
 </li>
           <li><a href="multigrid/multigrid.pettingzoo.html#module-multigrid.pettingzoo">multigrid.pettingzoo</a>
@@ -825,8 +822,6 @@
           <li><a href="multigrid/multigrid.core.agent.html#module-multigrid.core.agent">module</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     multigrid.core.constants
 
@@ -834,6 +829,8 @@
           <li><a href="multigrid/multigrid.core.constants.html#module-multigrid.core.constants">module</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     multigrid.core.grid
 
@@ -888,6 +885,13 @@
 
         <ul>
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#module-multigrid.envs.locked_hallway">module</a>
+</li>
+        </ul></li>
+        <li>
+    multigrid.envs.playground
+
+        <ul>
+          <li><a href="multigrid/multigrid.envs.playground.html#module-multigrid.envs.playground">module</a>
 </li>
         </ul></li>
         <li>
@@ -1032,12 +1036,14 @@
           <li><a href="multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.place_obj">(multigrid.envs.locked_hallway.Room method)</a>
 </li>
         </ul></li>
-        <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">point_in_circle() (in module multigrid.utils.rendering)</a>
+        <li><a href="multigrid/multigrid.envs.playground.html#multigrid.envs.playground.PlaygroundEnv">PlaygroundEnv (class in multigrid.envs.playground)</a>
 </li>
-        <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_line">point_in_line() (in module multigrid.utils.rendering)</a>
+        <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_circle">point_in_circle() (in module multigrid.utils.rendering)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_line">point_in_line() (in module multigrid.utils.rendering)</a>
+</li>
         <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_rect">point_in_rect() (in module multigrid.utils.rendering)</a>
 </li>
         <li><a href="multigrid/multigrid.utils.rendering.html#multigrid.utils.rendering.point_in_triangle">point_in_triangle() (in module multigrid.utils.rendering)</a>

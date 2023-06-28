@@ -16,4 +16,5 @@ Submodules
    multigrid.envs.blockedunlockpickup
    multigrid.envs.empty
    multigrid.envs.locked_hallway
+   multigrid.envs.playground
    multigrid.envs.redbluedoors

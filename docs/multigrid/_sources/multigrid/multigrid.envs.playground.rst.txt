@@ -1,0 +1,7 @@
+multigrid.envs.playground module
+================================
+
+.. automodule:: multigrid.envs.playground
+   :members:
+   :undoc-members:
+   :show-inheritance:
