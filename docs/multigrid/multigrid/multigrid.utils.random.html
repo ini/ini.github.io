@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.utils.rendering module" href="multigrid.utils.rendering.html" /><link rel="prev" title="multigrid.utils.obs module" href="multigrid.utils.obs.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.utils.random module - multigrid 0.1.0b documentation</title>
+        <title>multigrid.utils.random module - multigrid 0.1.0rc0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -126,7 +126,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">multigrid 0.1.0b documentation</div></a>
+      <a href="../index.html"><div class="brand">multigrid 0.1.0rc0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">multigrid 0.1.0b documentation</span>
+  <span class="sidebar-brand-text">multigrid 0.1.0rc0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -260,7 +260,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.utils.random.RandomMixin._rand_int">
 <span class="sig-name descname"><span class="pre">_rand_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/multigrid/utils/random.html#RandomMixin._rand_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.random.RandomMixin._rand_int" title="Permalink to this definition">#</a></dt>
-<dd><p>Generate random integer in range [low, high].</p>
+<dd><p>Generate random integer in range [low, high).</p>
 <dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -268,7 +268,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.utils.random.RandomMixin._rand_float">
 <span class="sig-name descname"><span class="pre">_rand_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/multigrid/utils/random.html#RandomMixin._rand_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.random.RandomMixin._rand_float" title="Permalink to this definition">#</a></dt>
-<dd><p>Generate random float in range [low, high].</p>
+<dd><p>Generate random float in range [low, high).</p>
 <dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -293,6 +293,14 @@
 <dt class="sig sig-object py" id="multigrid.utils.random.RandomMixin._rand_subset">
 <span class="sig-name descname"><span class="pre">_rand_subset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_elems</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/utils/random.html#RandomMixin._rand_subset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.random.RandomMixin._rand_subset" title="Permalink to this definition">#</a></dt>
 <dd><p>Sample a random subset of distinct elements of a list.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.utils.random.RandomMixin._rand_perm">
+<span class="sig-name descname"><span class="pre">_rand_perm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/utils/random.html#RandomMixin._rand_perm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.utils.random.RandomMixin._rand_perm" title="Permalink to this definition">#</a></dt>
+<dd><p>Randomly permute a list.</p>
 <dl class="field-list simple">
 </dl>
 </dd></dl>
@@ -383,6 +391,7 @@
 <li><a class="reference internal" href="#multigrid.utils.random.RandomMixin._rand_bool"><code class="docutils literal notranslate"><span class="pre">RandomMixin._rand_bool()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.random.RandomMixin._rand_elem"><code class="docutils literal notranslate"><span class="pre">RandomMixin._rand_elem()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.random.RandomMixin._rand_subset"><code class="docutils literal notranslate"><span class="pre">RandomMixin._rand_subset()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.utils.random.RandomMixin._rand_perm"><code class="docutils literal notranslate"><span class="pre">RandomMixin._rand_perm()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.random.RandomMixin._rand_color"><code class="docutils literal notranslate"><span class="pre">RandomMixin._rand_color()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.utils.random.RandomMixin._rand_pos"><code class="docutils literal notranslate"><span class="pre">RandomMixin._rand_pos()</span></code></a></li>
 </ul>
