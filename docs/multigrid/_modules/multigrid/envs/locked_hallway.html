@@ -377,7 +377,10 @@
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="LockedHallwayEnv._gen_grid"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv._gen_grid">[docs]</a>    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_gen_grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 
         <span class="n">LEFT</span><span class="p">,</span> <span class="n">HALLWAY</span><span class="p">,</span> <span class="n">RIGHT</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># columns</span>
@@ -416,7 +419,7 @@
 
         <span class="c1"># Place agents in hallway</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-            <span class="n">MultiGridEnv</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">hallway_top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">hallway_size</span><span class="p">)</span></div>
+            <span class="n">MultiGridEnv</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">hallway_top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">hallway_size</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
