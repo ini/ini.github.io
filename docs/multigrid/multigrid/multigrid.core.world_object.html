@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.envs package" href="multigrid.envs.html" /><link rel="prev" title="multigrid.core.roomgrid module" href="multigrid.core.roomgrid.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.core.world_object module - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.core.world_object module - multigrid 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -126,7 +126,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">multigrid 0.1.0rc0 documentation</div></a>
+      <a href="../index.html"><div class="brand">multigrid 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">multigrid 0.1.0rc0 documentation</span>
+  <span class="sidebar-brand-text">multigrid 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -251,16 +251,6 @@
 <dt><strong>init_pos</strong><span class="classifier">tuple[int, int] or None</span></dt><dd><p>The initial position of the object</p>
 </dd>
 <dt><strong>cur_pos</strong><span class="classifier">tuple[int, int] or None</span></dt><dd><p>The current position of the object</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>type</strong><span class="classifier">str or None</span></dt><dd><p>Object type</p>
-</dd>
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
 </dd>
 </dl>
 </dd>
@@ -437,16 +427,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Goal</span></span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Goal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Goal" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
 <p>Goal object an agent may be searching for.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>type</strong><span class="classifier">str or None</span></dt><dd><p>Object type</p>
-</dd>
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Goal.__new__">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.green</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Goal.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Goal.__new__" title="Permalink to this definition">#</a></dt>
@@ -469,14 +449,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Floor</span></span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Floor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
 <p>Colored floor tile an agent can walk over.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Floor.__new__">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Floor.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Floor.__new__" title="Permalink to this definition">#</a></dt>
@@ -509,14 +481,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Wall</span></span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Wall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Wall" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
 <p>Wall object that agents cannot move through.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Wall.__new__">
 <span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.grey</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Wall.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Wall.__new__" title="Permalink to this definition">#</a></dt>
@@ -543,18 +507,6 @@
 <dt><strong>is_open: bool</strong></dt><dd><p>Whether the door is open</p>
 </dd>
 <dt><strong>is_locked: bool</strong></dt><dd><p>Whether the door is locked</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-<dt><strong>is_open</strong><span class="classifier">bool</span></dt><dd><p>Whether the door is open</p>
-</dd>
-<dt><strong>is_locked</strong><span class="classifier">bool</span></dt><dd><p>Whether the door is locked</p>
 </dd>
 </dl>
 </dd>
@@ -595,14 +547,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Key" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
 <p>Key object that can be picked up and used to unlock doors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Key.__new__">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Key.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Key.__new__" title="Permalink to this definition">#</a></dt>
@@ -623,14 +567,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Ball</span></span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Ball"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Ball" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
 <p>Ball object that can be picked up by agents.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Ball.__new__">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.blue</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Ball.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Ball.__new__" title="Permalink to this definition">#</a></dt>
@@ -651,16 +587,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.world_object.</span></span><span class="sig-name descname"><span class="pre">Box</span></span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Box" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldObj</span></code></a></p>
 <p>Box object that may contain other objects.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>color</strong><span class="classifier">str</span></dt><dd><p>Object color</p>
-</dd>
-<dt><strong>contains</strong><span class="classifier">WorldObj or None</span></dt><dd><p>Object contents</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.world_object.Box.__new__">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Color.yellow</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contains</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#multigrid.core.world_object.WorldObj" title="multigrid.core.world_object.WorldObj"><span class="pre">WorldObj</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/world_object.html#Box.__new__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.world_object.Box.__new__" title="Permalink to this definition">#</a></dt>

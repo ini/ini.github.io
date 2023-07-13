@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.utils package" href="multigrid.utils.html" /><link rel="prev" title="multigrid.rllib package" href="multigrid.rllib.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.rllib.models module - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.rllib.models module - multigrid 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -126,7 +126,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">multigrid 0.1.0rc0 documentation</div></a>
+      <a href="../index.html"><div class="brand">multigrid 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">multigrid 0.1.0rc0 documentation</span>
+  <span class="sidebar-brand-text">multigrid 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -241,7 +241,6 @@
 <code class="docutils literal notranslate"><span class="pre">Dict</span></code> observation spaces.</p>
 <p>For configuration options (i.e. <code class="docutils literal notranslate"><span class="pre">model_config</span></code>),
 see <a class="reference external" href="https://docs.ray.io/en/latest/rllib/rllib-models.html">https://docs.ray.io/en/latest/rllib/rllib-models.html</a>.</p>
-<p>See <code class="docutils literal notranslate"><span class="pre">TFModelV2.__init__()</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.rllib.models.TFModel.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TFModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TFModel.__init__" title="Permalink to this definition">#</a></dt>
@@ -259,16 +258,112 @@ see <a class="reference external" href="https://docs.ray.io/en/latest/rllib/rlli
 <code class="docutils literal notranslate"><span class="pre">Dict</span></code> observation spaces.</p>
 <p>For configuration options (i.e. <code class="docutils literal notranslate"><span class="pre">model_config</span></code>),
 see <a class="reference external" href="https://docs.ray.io/en/latest/rllib/rllib-models.html">https://docs.ray.io/en/latest/rllib/rllib-models.html</a>.</p>
-<p>See <code class="docutils literal notranslate"><span class="pre">TorchModelV2.__init__()</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.rllib.models.TorchModel.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">joint_obs_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchModel.__init__" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchModel.__init__" title="Permalink to this definition">#</a></dt>
 <dd><p>See <code class="docutils literal notranslate"><span class="pre">TorchModelV2.__init__()</span></code>.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="multigrid.rllib.models.TorchModel.training">
 <span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#multigrid.rllib.models.TorchModel.training" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multigrid.rllib.models.TorchLSTMModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.rllib.models.</span></span><span class="sig-name descname"><span class="pre">TorchLSTMModel</span></span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchLSTMModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchLSTMModel" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TorchModelV2</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Torch LSTM model to use with RLlib.</p>
+<p>Processes observations with a <code class="docutils literal notranslate"><span class="pre">ComplexInputNetwork</span></code> and then passes
+the output through an LSTM layer.</p>
+<p>For configuration options (i.e. <code class="docutils literal notranslate"><span class="pre">model_config</span></code>),
+see <a class="reference external" href="https://docs.ray.io/en/latest/rllib/rllib-models.html">https://docs.ray.io/en/latest/rllib/rllib-models.html</a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.rllib.models.TorchLSTMModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_space</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchLSTMModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchLSTMModel.__init__" title="Permalink to this definition">#</a></dt>
+<dd><p>See <code class="docutils literal notranslate"><span class="pre">TorchModelV2.__init__()</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.rllib.models.TorchLSTMModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq_lens</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchLSTMModel.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchLSTMModel.forward" title="Permalink to this definition">#</a></dt>
+<dd><p>Call the model with the given input tensors and state.</p>
+<p>Any complex observations (dicts, tuples, etc.) will be unpacked by
+__call__ before being passed to forward(). To access the flattened
+observation tensor, refer to input_dict[“obs_flat”].</p>
+<p>This method can be called any number of times. In eager execution,
+each call to forward() will eagerly evaluate the model. In symbolic
+execution, each call to forward creates a computation graph that
+operates over the variables of this model (i.e., shares weights).</p>
+<p>Custom models should override this instead of __call__.</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>input_dict: dictionary of input tensors, including “obs”,</dt><dd><p>“obs_flat”, “prev_action”, “prev_reward”, “is_training”,
+“eps_id”, “agent_id”, “infos”, and “t”.</p>
+</dd>
+<dt>state: list of state tensors with sizes matching those</dt><dd><p>returned by get_initial_state + the batch dimension</p>
+</dd>
+</dl>
+<p>seq_lens: 1d tensor holding input sequence lengths</p>
+</dd>
+<dt>Returns:</dt><dd><p>A tuple consisting of the model output tensor of size
+[BATCH, num_outputs] and the list of new RNN state(s) if any.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ray.rllib.models.modelv2</span> <span class="kn">import</span> <span class="n">ModelV2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">ModelV2</span><span class="p">):</span> 
+<span class="gp">... </span>    <span class="c1"># ...</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dict</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">seq_lens</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">model_out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_model</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">input_dict</span><span class="p">[</span><span class="s2">&quot;obs&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="k">return</span> <span class="n">model_out</span><span class="p">,</span> <span class="n">state</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.rllib.models.TorchLSTMModel.value_function">
+<span class="sig-name descname"><span class="pre">value_function</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchLSTMModel.value_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchLSTMModel.value_function" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the value function output for the most recent forward pass.</p>
+<p>Note that a <cite>forward</cite> call has to be performed first, before this
+methods can return anything and thus that calling this method does not
+cause an extra forward pass through the network.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Value estimate tensor of shape [BATCH].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multigrid.rllib.models.TorchLSTMModel.get_initial_state">
+<span class="sig-name descname"><span class="pre">get_initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/rllib/models.html#TorchLSTMModel.get_initial_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.rllib.models.TorchLSTMModel.get_initial_state" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the initial recurrent state values for the model.</p>
+<dl>
+<dt>Returns:</dt><dd><p>List of np.array (for tf) or Tensor (for torch) objects containing the
+initial hidden state of an RNN, if applicable.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ray.rllib.models.modelv2</span> <span class="kn">import</span> <span class="n">ModelV2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">ModelV2</span><span class="p">):</span> 
+<span class="gp">... </span>    <span class="c1"># ...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">get_initial_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="p">[</span>
+<span class="gp">... </span>            <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cell_size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+<span class="gp">... </span>            <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cell_size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.rllib.models.TorchLSTMModel.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#multigrid.rllib.models.TorchLSTMModel.training" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -341,6 +436,14 @@ see <a class="reference external" href="https://docs.ray.io/en/latest/rllib/rlli
 <li><a class="reference internal" href="#multigrid.rllib.models.TorchModel"><code class="docutils literal notranslate"><span class="pre">TorchModel</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.rllib.models.TorchModel.__init__"><code class="docutils literal notranslate"><span class="pre">TorchModel.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.rllib.models.TorchModel.training"><code class="docutils literal notranslate"><span class="pre">TorchModel.training</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multigrid.rllib.models.TorchLSTMModel"><code class="docutils literal notranslate"><span class="pre">TorchLSTMModel</span></code></a><ul>
+<li><a class="reference internal" href="#multigrid.rllib.models.TorchLSTMModel.__init__"><code class="docutils literal notranslate"><span class="pre">TorchLSTMModel.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.rllib.models.TorchLSTMModel.forward"><code class="docutils literal notranslate"><span class="pre">TorchLSTMModel.forward()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.rllib.models.TorchLSTMModel.value_function"><code class="docutils literal notranslate"><span class="pre">TorchLSTMModel.value_function()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.rllib.models.TorchLSTMModel.get_initial_state"><code class="docutils literal notranslate"><span class="pre">TorchLSTMModel.get_initial_state()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.rllib.models.TorchLSTMModel.training"><code class="docutils literal notranslate"><span class="pre">TorchLSTMModel.training</span></code></a></li>
 </ul>
 </li>
 </ul>

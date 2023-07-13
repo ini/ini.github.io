@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.core.world_object module" href="multigrid.core.world_object.html" /><link rel="prev" title="multigrid.core.mission module" href="multigrid.core.mission.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.core.roomgrid module - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.core.roomgrid module - multigrid 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -126,7 +126,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">multigrid 0.1.0rc0 documentation</div></a>
+      <a href="../index.html"><div class="brand">multigrid 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">multigrid 0.1.0rc0 documentation</span>
+  <span class="sidebar-brand-text">multigrid 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -266,16 +266,6 @@ the agent’s starting point</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">multigrid.core.roomgrid.</span></span><span class="sig-name descname"><span class="pre">Room</span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#Room"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.Room" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Room as an area inside a grid.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>top</strong><span class="classifier">tuple[int, int]</span></dt><dd><p>Top-left position of the room</p>
-</dd>
-<dt><strong>size</strong><span class="classifier">tuple[int, int]</span></dt><dd><p>Room size as (width, height)</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.Room.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#Room.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.Room.__init__" title="Permalink to this definition">#</a></dt>
@@ -298,6 +288,22 @@ the agent’s starting point</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="multigrid.core.roomgrid.Room.set_door_pos">
+<span class="sig-name descname"><span class="pre">set_door_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Direction" title="multigrid.core.constants.Direction"><span class="pre">Direction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">random</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">np.random.Generator</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#Room.set_door_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.Room.set_door_pos" title="Permalink to this definition">#</a></dt>
+<dd><p>Set door position in the given direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dir</strong><span class="classifier">Direction</span></dt><dd><p>Direction of wall to place door</p>
+</dd>
+<dt><strong>random</strong><span class="classifier">np.random.Generator, optional</span></dt><dd><p>Random number generator (if provided, door position will be random)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.Room.pos_inside">
 <span class="sig-name descname"><span class="pre">pos_inside</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#Room.pos_inside"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.Room.pos_inside" title="Permalink to this definition">#</a></dt>
 <dd><p>Check if a position is within the bounds of this room.</p>
@@ -311,20 +317,6 @@ the agent’s starting point</p>
 <dd><p>Bases: <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv" title="multigrid.base.MultiGridEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiGridEnv</span></code></a></p>
 <p>Environment with multiple rooms and random objects.
 This is meant to serve as a base class for other environments.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>room_size</strong><span class="classifier">int, default=7</span></dt><dd><p>Width and height for each of the rooms</p>
-</dd>
-<dt><strong>num_rows</strong><span class="classifier">int, default=3</span></dt><dd><p>Number of rows of rooms</p>
-</dd>
-<dt><strong>num_cols</strong><span class="classifier">int, default=3</span></dt><dd><p>Number of columns of rooms</p>
-</dd>
-<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rows</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#RoomGrid.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.__init__" title="Permalink to this definition">#</a></dt>
@@ -439,7 +431,7 @@ This is meant to serve as a base class for other environments.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.add_door">
-<span class="sig-name descname"><span class="pre">add_door</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Direction" title="multigrid.core.constants.Direction"><span class="pre">Direction</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Color" title="multigrid.core.constants.Color"><span class="pre">Color</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.Door" title="multigrid.core.world_object.Door"><span class="pre">Door</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#RoomGrid.add_door"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.add_door" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">add_door</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Direction" title="multigrid.core.constants.Direction"><span class="pre">Direction</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Color" title="multigrid.core.constants.Color"><span class="pre">Color</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locked</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rand_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.world_object.html#multigrid.core.world_object.Door" title="multigrid.core.world_object.Door"><span class="pre">Door</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multigrid/core/roomgrid.html#RoomGrid.add_door"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.add_door" title="Permalink to this definition">#</a></dt>
 <dd><p>Add a door to a room, connecting it to a neighbor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -453,6 +445,8 @@ This is meant to serve as a base class for other environments.</p>
 <dt><strong>color</strong><span class="classifier">Color, optional</span></dt><dd><p>Color of the door (random if not specified)</p>
 </dd>
 <dt><strong>locked</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether the door is locked (random if not specified)</p>
+</dd>
+<dt><strong>rand_pos</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether to place the door at a random position on the room wall</p>
 </dd>
 </dl>
 </dd>
@@ -534,6 +528,16 @@ starting position.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="multigrid.core.grid.html#multigrid.core.grid.Grid" title="multigrid.core.grid.Grid"><span class="pre">Grid</span></a></em><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.grid" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multigrid.core.roomgrid.RoomGrid.agents">
+<span class="sig-name descname"><span class="pre">agents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="multigrid.core.agent.html#multigrid.core.agent.Agent" title="multigrid.core.agent.Agent"><span class="pre">Agent</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#multigrid.core.roomgrid.RoomGrid.agents" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>
@@ -602,6 +606,7 @@ starting position.</p>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room"><code class="docutils literal notranslate"><span class="pre">Room</span></code></a><ul>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room.__init__"><code class="docutils literal notranslate"><span class="pre">Room.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room.locked"><code class="docutils literal notranslate"><span class="pre">Room.locked</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.roomgrid.Room.set_door_pos"><code class="docutils literal notranslate"><span class="pre">Room.set_door_pos()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.Room.pos_inside"><code class="docutils literal notranslate"><span class="pre">Room.pos_inside()</span></code></a></li>
 </ul>
 </li>
@@ -617,6 +622,8 @@ starting position.</p>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.place_agent"><code class="docutils literal notranslate"><span class="pre">RoomGrid.place_agent()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.connect_all"><code class="docutils literal notranslate"><span class="pre">RoomGrid.connect_all()</span></code></a></li>
 <li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.add_distractors"><code class="docutils literal notranslate"><span class="pre">RoomGrid.add_distractors()</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.grid"><code class="docutils literal notranslate"><span class="pre">RoomGrid.grid</span></code></a></li>
+<li><a class="reference internal" href="#multigrid.core.roomgrid.RoomGrid.agents"><code class="docutils literal notranslate"><span class="pre">RoomGrid.agents</span></code></a></li>
 </ul>
 </li>
 </ul>

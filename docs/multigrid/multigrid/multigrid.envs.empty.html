@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.envs.locked_hallway module" href="multigrid.envs.locked_hallway.html" /><link rel="prev" title="multigrid.envs.blockedunlockpickup module" href="multigrid.envs.blockedunlockpickup.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.envs.empty module - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.envs.empty module - multigrid 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -126,7 +126,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">multigrid 0.1.0rc0 documentation</div></a>
+      <a href="../index.html"><div class="brand">multigrid 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">multigrid 0.1.0rc0 documentation</span>
+  <span class="sidebar-brand-text">multigrid 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -348,27 +348,6 @@ and <code class="docutils literal notranslate"><span class="pre">0</span></code>
 <li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-8x8-v0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-16x16-v0</span></code></p></li>
 </ul>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>size</strong><span class="classifier">int, default=8</span></dt><dd><p>Width and height of the grid</p>
-</dd>
-<dt><strong>agent_start_pos</strong><span class="classifier">tuple[int, int], default=(1, 1)</span></dt><dd><p>Starting position of the agents (random if None)</p>
-</dd>
-<dt><strong>agent_start_dir</strong><span class="classifier">Direction, default=Direction.right</span></dt><dd><p>Starting direction of the agents (random if None)</p>
-</dd>
-<dt><strong>max_steps</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of steps per episode</p>
-</dd>
-<dt><strong>joint_reward</strong><span class="classifier">bool, default=True</span></dt><dd><p>Whether all agents receive the reward when the task is completed</p>
-</dd>
-<dt><strong>success_termination_mode</strong><span class="classifier">‘any’ or ‘all’, default=’any’</span></dt><dd><p>Whether to terminate the environment when any agent reaches the goal
-or after all agents reach the goal</p>
-</dd>
-<dt><strong>**kwargs</strong></dt><dd><p>See <a class="reference internal" href="multigrid.base.html#multigrid.base.MultiGridEnv.__init__" title="multigrid.base.MultiGridEnv.__init__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multigrid.base.MultiGridEnv.__init__</span></code></a></p>
-</dd>
-</dl>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="multigrid.envs.empty.EmptyEnv.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_start_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_start_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="multigrid.core.constants.html#multigrid.core.constants.Direction" title="multigrid.core.constants.Direction"><span class="pre">Direction</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Direction.right</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">joint_reward</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success_termination_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'any'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multigrid/envs/empty.html#EmptyEnv.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multigrid.envs.empty.EmptyEnv.__init__" title="Permalink to this definition">#</a></dt>

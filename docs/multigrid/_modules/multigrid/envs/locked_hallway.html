@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.envs.locked_hallway - multigrid 0.1.0rc0 documentation</title>
+        <title>multigrid.envs.locked_hallway - multigrid 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">multigrid 0.1.0rc0 documentation</div></a>
+      <a href="../../../index.html"><div class="brand">multigrid 0.1.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">multigrid 0.1.0rc0 documentation</span>
+  <span class="sidebar-brand-text">multigrid 0.1.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -230,35 +230,35 @@
         <article role="main">
           <h1>Source code for multigrid.envs.locked_hallway</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
 <span class="kn">from</span> <span class="nn">multigrid</span> <span class="kn">import</span> <span class="n">MultiGridEnv</span>
-
-<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Door</span><span class="p">,</span> <span class="n">Grid</span><span class="p">,</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Wall</span><span class="p">,</span> <span class="n">WorldObj</span>
-<span class="kn">from</span> <span class="nn">..core.actions</span> <span class="kn">import</span> <span class="n">Action</span>
-<span class="kn">from</span> <span class="nn">..core.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Type</span>
-
-
-
+<span class="kn">from</span> <span class="nn">multigrid.core.actions</span> <span class="kn">import</span> <span class="n">Action</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.constants</span> <span class="kn">import</span> <span class="n">Color</span><span class="p">,</span> <span class="n">Direction</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.mission</span> <span class="kn">import</span> <span class="n">MissionSpace</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.roomgrid</span> <span class="kn">import</span> <span class="n">Room</span><span class="p">,</span> <span class="n">RoomGrid</span>
+<span class="kn">from</span> <span class="nn">multigrid.core.world_object</span> <span class="kn">import</span> <span class="n">Door</span><span class="p">,</span> <span class="n">Key</span>
 
 
-<div class="viewcode-block" id="LockedHallwayEnv"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv">[docs]</a><span class="k">class</span> <span class="nc">LockedHallwayEnv</span><span class="p">(</span><span class="n">MultiGridEnv</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LockedHallwayEnv"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv">[docs]</a><span class="k">class</span> <span class="nc">LockedHallwayEnv</span><span class="p">(</span><span class="n">RoomGrid</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. image:: https://i.imgur.com/VylPtnn.gif</span>
+<span class="sd">        :width: 325</span>
+
 <span class="sd">    ***********</span>
 <span class="sd">    Description</span>
 <span class="sd">    ***********</span>
 
 <span class="sd">    This environment consists of a hallway with multiple locked rooms on either side.</span>
 <span class="sd">    To unlock each door, agents must first find the corresponding key,</span>
-<span class="sd">    which may be in a different room. Agents are rewarded for each door they open.</span>
+<span class="sd">    which may be in another locked room. Agents are rewarded for each door they unlock.</span>
 
 <span class="sd">    *************</span>
 <span class="sd">    Mission Space</span>
 <span class="sd">    *************</span>
 
-<span class="sd">    &quot;open all the doors&quot;</span>
+<span class="sd">    &quot;unlock all the doors&quot;</span>
 
 <span class="sd">    *****************</span>
 <span class="sd">    Observation Space</span>
@@ -310,7 +310,7 @@
 <span class="sd">    *******</span>
 
 <span class="sd">    A reward of ``1 - 0.9 * (step_count / max_steps)`` is given</span>
-<span class="sd">    when each door is opened.</span>
+<span class="sd">    when a door is unlocked.</span>
 
 <span class="sd">    ***********</span>
 <span class="sd">    Termination</span>
@@ -318,205 +318,138 @@
 
 <span class="sd">    The episode ends if any one of the following conditions is met:</span>
 
-<span class="sd">    * All doors are opened</span>
+<span class="sd">    * All doors are unlocked</span>
 <span class="sd">    * Timeout (see ``max_steps``)</span>
 
 <span class="sd">    *************************</span>
 <span class="sd">    Registered Configurations</span>
 <span class="sd">    *************************</span>
 
+<span class="sd">    * ``MultiGrid-LockedHallway-2Rooms-v0``</span>
 <span class="sd">    * ``MultiGrid-LockedHallway-4Rooms-v0``</span>
 <span class="sd">    * ``MultiGrid-LockedHallway-6Rooms-v0``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="LockedHallwayEnv.__init__"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">num_rooms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-        <span class="n">max_hallway_keys</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">max_keys_per_room</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-        <span class="n">grid_size</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-        <span class="n">max_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">joint_reward</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">num_rooms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="n">room_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">max_hallway_keys</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_keys_per_room</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">joint_reward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        num_rooms : int, default=6</span>
+<span class="sd">            Number of rooms in the environment</span>
+<span class="sd">        room_size : int, default=5</span>
+<span class="sd">            Width and height for each of the rooms</span>
+<span class="sd">        max_hallway_keys : int, default=1</span>
+<span class="sd">            Maximum number of keys in the hallway</span>
+<span class="sd">        max_keys_per_room : int, default=2</span>
+<span class="sd">            Maximum number of keys in each room</span>
+<span class="sd">        max_steps : int, optional</span>
+<span class="sd">            Maximum number of steps per episode</span>
+<span class="sd">        joint_reward : bool, default=True</span>
+<span class="sd">            Whether all agents receive the same reward</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            See :attr:`multigrid.base.MultiGridEnv.__init__`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">room_size</span> <span class="o">&gt;=</span> <span class="mi">4</span>
+        <span class="k">assert</span> <span class="n">num_rooms</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">num_rooms</span> <span class="o">=</span> <span class="n">num_rooms</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_hallway_keys</span> <span class="o">=</span> <span class="n">max_hallway_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_keys_per_room</span> <span class="o">=</span> <span class="n">max_keys_per_room</span>
 
         <span class="k">if</span> <span class="n">max_steps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">max_steps</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">grid_size</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">max_steps</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">num_rooms</span> <span class="o">*</span> <span class="n">room_size</span><span class="o">**</span><span class="mi">2</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">,</span>
+            <span class="n">mission_space</span><span class="o">=</span><span class="n">MissionSpace</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;unlock all the doors&quot;</span><span class="p">),</span>
+            <span class="n">room_size</span><span class="o">=</span><span class="n">room_size</span><span class="p">,</span>
+            <span class="n">num_rows</span><span class="o">=</span><span class="p">(</span><span class="n">num_rooms</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">num_cols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
             <span class="n">joint_reward</span><span class="o">=</span><span class="n">joint_reward</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="LockedHallwayEnv._gen_grid"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv._gen_grid">[docs]</a>    <span class="k">def</span> <span class="nf">_gen_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-        <span class="c1"># Create the grid</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_gen_grid</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 
-        <span class="c1"># Generate the surrounding walls</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">wall_rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">LEFT</span><span class="p">,</span> <span class="n">HALLWAY</span><span class="p">,</span> <span class="n">RIGHT</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># columns</span>
+        <span class="n">color_sequence</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span> <span class="o">*</span> <span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_rooms</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">Color</span><span class="p">))</span>
+        <span class="n">color_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_perm</span><span class="p">(</span><span class="n">color_sequence</span><span class="p">)[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_rooms</span><span class="p">]</span>
 
-        <span class="c1"># Hallway walls</span>
-        <span class="n">hallway_left</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span>
-        <span class="n">hallway_right</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="c1"># Create hallway</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_wall</span><span class="p">(</span><span class="n">HALLWAY</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">down</span><span class="p">)</span>
 
-        <span class="c1"># Create rooms</span>
-        <span class="n">num_rooms_per_side</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_rooms</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="n">room_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">hallway_left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height</span> <span class="o">//</span> <span class="n">num_rooms_per_side</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">Color</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">Color</span><span class="o">.</span><span class="n">green</span><span class="p">,</span> <span class="n">Color</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span> <span class="n">Color</span><span class="o">.</span><span class="n">yellow</span><span class="p">]</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">permutation</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">]))</span>
+        <span class="c1"># Add doors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Color</span><span class="p">,</span> <span class="n">Room</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">door_colors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_perm</span><span class="p">(</span><span class="n">color_sequence</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_rows</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="p">((</span><span class="n">LEFT</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">right</span><span class="p">),</span> <span class="p">(</span><span class="n">RIGHT</span><span class="p">,</span> <span class="n">Direction</span><span class="o">.</span><span class="n">left</span><span class="p">)):</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="n">door_colors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_room</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_door</span><span class="p">(</span>
+                    <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="nb">dir</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rand_pos</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_rooms_per_side</span><span class="p">):</span>
-            
-            <span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">height</span> <span class="o">//</span> <span class="n">num_rooms_per_side</span><span class="p">)</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="n">height</span> <span class="o">//</span> <span class="n">num_rooms_per_side</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="c1"># Place keys in hallway</span>
+        <span class="n">num_hallway_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hallway_keys</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">hallway_top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_room</span><span class="p">(</span><span class="n">HALLWAY</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">top</span>
+        <span class="n">hallway_size</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_room</span><span class="p">(</span><span class="n">HALLWAY</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key_color</span> <span class="ow">in</span> <span class="n">color_sequence</span><span class="p">[:</span><span class="n">num_hallway_keys</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span><span class="n">Key</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">key_color</span><span class="p">),</span> <span class="n">top</span><span class="o">=</span><span class="n">hallway_top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">hallway_size</span><span class="p">)</span>
 
-            <span class="c1"># Left side</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span>
-                <span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">room_size</span><span class="p">,</span> <span class="p">(</span><span class="n">hallway_left</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span>
+        <span class="c1"># Place keys in rooms</span>
+        <span class="n">key_index</span> <span class="o">=</span> <span class="n">num_hallway_keys</span>
+        <span class="k">while</span> <span class="n">key_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_sequence</span><span class="p">):</span>
+            <span class="n">room</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">color_sequence</span><span class="p">[</span><span class="n">key_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span>
+            <span class="n">num_room_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_keys_per_room</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key_color</span> <span class="ow">in</span> <span class="n">color_sequence</span><span class="p">[</span><span class="n">key_index</span> <span class="p">:</span> <span class="n">key_index</span> <span class="o">+</span> <span class="n">num_room_keys</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span><span class="n">Key</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">key_color</span><span class="p">),</span> <span class="n">top</span><span class="o">=</span><span class="n">room</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">room</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+                <span class="n">key_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="c1"># Right side</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">color</span><span class="p">]</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span>
-                <span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="n">hallway_right</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">room_size</span><span class="p">,</span> <span class="p">(</span><span class="n">hallway_right</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span>
-
-        <span class="c1"># Get doors</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">doors</span> <span class="o">=</span> <span class="p">{</span><span class="n">color</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">color</span><span class="p">]</span><span class="o">.</span><span class="n">door</span> <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">}</span>
-
-        <span class="c1"># color_to_room = {room.color: room for room in self.rooms}</span>
-        <span class="n">color_sequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">permutation</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">])</span>
-
-        <span class="c1"># Randomly place keys in hallway</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_hallway_keys</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">top</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">hallway_left</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">hallway_right</span> <span class="o">-</span> <span class="n">hallway_left</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">key_color</span> <span class="ow">in</span> <span class="n">color_sequence</span><span class="p">[:</span><span class="n">index</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span><span class="n">Key</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">key_color</span><span class="p">),</span> <span class="n">top</span><span class="o">=</span><span class="n">top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
-
-        <span class="c1"># Randomly place keys in rooms</span>
-        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_sequence</span><span class="p">):</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_random</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_keys_per_room</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">room_color</span> <span class="o">=</span> <span class="n">color_sequence</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-            <span class="n">key_colors</span> <span class="o">=</span> <span class="n">color_sequence</span><span class="p">[</span><span class="n">index</span> <span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">key_color</span> <span class="ow">in</span> <span class="n">key_colors</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">room_color</span><span class="p">]</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span><span class="n">Key</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">key_color</span><span class="p">))</span>
-                <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="c1"># Randomize the player start position and orientation</span>
+        <span class="c1"># Place agents in hallway</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span>
-                <span class="n">agent</span><span class="p">,</span>
-                <span class="n">top</span><span class="o">=</span><span class="p">(</span><span class="n">hallway_left</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-                <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hallway_right</span> <span class="o">-</span> <span class="n">hallway_left</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-            <span class="p">)</span></div>
+            <span class="n">MultiGridEnv</span><span class="o">.</span><span class="n">place_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="n">hallway_top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">hallway_size</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LockedHallwayEnv.reset"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">opened_doors</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unlocked_doors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     
-<div class="viewcode-block" id="LockedHallwayEnv.step"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.LockedHallwayEnv.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminations</span><span class="p">,</span> <span class="n">truncations</span><span class="p">,</span> <span class="n">infos</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
 
-        <span class="c1"># Reward for opening new doors</span>
+        <span class="c1"># Reward for unlocking doors</span>
         <span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="n">Action</span><span class="o">.</span><span class="n">toggle</span><span class="p">:</span>
                 <span class="n">fwd_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">front_pos</span><span class="p">)</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">,</span> <span class="n">Door</span><span class="p">)</span> <span class="ow">and</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">opened_doors</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">opened_doors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span>
-                        <span class="n">reward</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">,</span> <span class="n">Door</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fwd_obj</span><span class="o">.</span><span class="n">is_locked</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">fwd_obj</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlocked_doors</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">unlocked_doors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fwd_obj</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint_reward</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">rewards</span><span class="p">:</span>
+                                <span class="n">rewards</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">rewards</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reward</span><span class="p">()</span>
 
-        <span class="c1"># Check if all doors are opened</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opened_doors</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="p">):</span>
+        <span class="c1"># Check if all doors are unlocked</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unlocked_doors</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-                <span class="n">terminated</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">terminations</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="k">return</span> <span class="n">obs</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminated</span><span class="p">,</span> <span class="n">truncated</span><span class="p">,</span> <span class="n">info</span></div></div>
-
-
-<div class="viewcode-block" id="Room"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room">[docs]</a><span class="k">class</span> <span class="nc">Room</span><span class="p">:</span>
-
-<div class="viewcode-block" id="Room.__init__"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">env</span><span class="p">:</span> <span class="n">MultiGridEnv</span><span class="p">,</span>
-        <span class="n">top</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-        <span class="n">size</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-        <span class="n">door_pos</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
-        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="nb">open</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">locked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        env : MultiGridEnv</span>
-<span class="sd">            Environment</span>
-<span class="sd">        top : tuple[int, int]</span>
-<span class="sd">            Top-left position of the room</span>
-<span class="sd">        size : tuple[int, int]</span>
-<span class="sd">            Tuple of room size as (width, height)</span>
-<span class="sd">        door_pos : tuple[int, int]</span>
-<span class="sd">            Position of room door</span>
-<span class="sd">        color : str</span>
-<span class="sd">            Color of room door</span>
-<span class="sd">        open : bool, default=False</span>
-<span class="sd">            Whether room door is open</span>
-<span class="sd">        locked : bool, default=True</span>
-<span class="sd">            Whether room door is locked</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="n">top</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
-
-        <span class="c1"># Get bounds</span>
-        <span class="n">left</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="n">top</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">env</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span>
-        <span class="n">height</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">env</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span>
-
-        <span class="c1"># Create walls</span>
-        <span class="n">env</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">wall_rect</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-
-        <span class="c1"># Create door</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">door_pos</span> <span class="o">=</span> <span class="n">door_pos</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">is_open</span><span class="o">=</span><span class="nb">open</span><span class="p">,</span> <span class="n">is_locked</span><span class="o">=</span><span class="n">locked</span><span class="p">)</span>
-        <span class="n">env</span><span class="o">.</span><span class="n">put_obj</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">door</span><span class="p">,</span> <span class="o">*</span><span class="n">door_pos</span><span class="p">)</span></div>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Color of room door.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">door</span><span class="o">.</span><span class="n">color</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Whether the room door is open.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">door</span><span class="o">.</span><span class="n">is_open</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_locked</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Whether the room door is locked.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">door</span><span class="o">.</span><span class="n">is_locked</span>
-
-<div class="viewcode-block" id="Room.place_obj"><a class="viewcode-back" href="../../../multigrid/multigrid.envs.locked_hallway.html#multigrid.envs.locked_hallway.Room.place_obj">[docs]</a>    <span class="k">def</span> <span class="nf">place_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">WorldObj</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Place object at random position within room.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        obj : WorldObj</span>
-<span class="sd">            Object to place</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">place_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">observations</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">terminations</span><span class="p">,</span> <span class="n">truncations</span><span class="p">,</span> <span class="n">infos</span></div>
 </pre></div>
         </article>
       </div>
