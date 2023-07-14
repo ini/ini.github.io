@@ -1,0 +1,7 @@
+multigrid
+=========
+
+.. toctree::
+   :maxdepth: 1
+
+   multigrid

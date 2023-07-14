@@ -1,17 +1,16 @@
-.. multigrid documentation master file, created by
-   sphinx-quickstart on Fri Nov 18 05:42:10 2022.
+.. MultiGrid documentation master file, created by
+   sphinx-quickstart on Thu Jul 13 19:35:12 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-MultiGrid Documentation
-=======================
+Welcome to MultiGrid's documentation!
+=====================================
 
 .. toctree::
-   :titlesonly:
    :maxdepth: 2
    :caption: Contents:
 
-   multigrid/multigrid.rst
+   multigrid/modules
 
 
 

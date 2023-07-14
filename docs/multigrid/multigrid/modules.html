@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid.envs.blockedunlockpickup module" href="multigrid.envs.blockedunlockpickup.html" /><link rel="prev" title="multigrid.core.world_object module" href="multigrid.core.world_object.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="multigrid package" href="multigrid.html" /><link rel="prev" title="Welcome to MultiGrid’s documentation!" href="../index.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>multigrid.envs package - MultiGrid 0.1.0 documentation</title>
+        <title>multigrid - MultiGrid 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -137,7 +137,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -159,8 +159,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">multigrid</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of multigrid</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="multigrid.html">multigrid package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of multigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">multigrid</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of multigrid</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="multigrid.html">multigrid package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of multigrid package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.core.html">multigrid.core package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of multigrid.core package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.actions.html">multigrid.core.actions module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.agent.html">multigrid.core.agent module</a></li>
@@ -171,7 +171,7 @@
 <li class="toctree-l4"><a class="reference internal" href="multigrid.core.world_object.html">multigrid.core.world_object module</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current has-children current-page"><a class="current reference internal" href="#">multigrid.envs package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="multigrid.envs.html">multigrid.envs package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of multigrid.envs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
@@ -227,75 +227,19 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="module-multigrid.envs">
-<span id="multigrid-envs-package"></span><h1>multigrid.envs package<a class="headerlink" href="#module-multigrid.envs" title="Permalink to this heading">#</a></h1>
-<p>This package contains implementations of several MultiGrid environments.</p>
-<section id="configurations">
-<h2>Configurations<a class="headerlink" href="#configurations" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference external" href="./multigrid.envs.blockedunlockpickup">Blocked Unlock Pickup</a></dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-BlockedUnlockPickup-v0</span></code></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference external" href="./multigrid.envs.empty">Empty</a></dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-5x5-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-Random-5x5-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-6x6-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-Random-6x6-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-8x8-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Empty-16x16-v0</span></code></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference external" href="./multigrid.envs.locked_hallway">Locked Hallway</a></dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-LockedHallway-2Rooms-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-LockedHallway-4Rooms-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-LockedHallway-6Rooms-v0</span></code></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference external" href="./multigrid.envs.playground">Playground</a></dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-Playground-v0</span></code></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference external" href="./multigrid.envs.redbluedoors">Red Blue Doors</a></dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-RedBlueDoors-6x6-v0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MultiGrid-RedBlueDoors-8x8-v0</span></code></p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</section>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
+          <section id="multigrid">
+<h1>multigrid<a class="headerlink" href="#multigrid" title="Permalink to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.envs.blockedunlockpickup.html">multigrid.envs.blockedunlockpickup module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.envs.empty.html">multigrid.envs.empty module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.envs.locked_hallway.html">multigrid.envs.locked_hallway module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.envs.playground.html">multigrid.envs.playground module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multigrid.envs.redbluedoors.html">multigrid.envs.redbluedoors module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multigrid.html">multigrid package</a></li>
 </ul>
 </div>
-</section>
 </section>
 
         </article>
@@ -303,23 +247,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="multigrid.envs.blockedunlockpickup.html">
+          <a class="next-page" href="multigrid.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">multigrid.envs.blockedunlockpickup module</div>
+                <div class="title">multigrid package</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="multigrid.core.world_object.html">
+          <a class="prev-page" href="../index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">multigrid.core.world_object module</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
@@ -344,28 +288,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">multigrid.envs package</a><ul>
-<li><a class="reference internal" href="#configurations">Configurations</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
