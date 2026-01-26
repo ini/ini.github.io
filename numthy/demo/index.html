@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NumThy</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="model-picker" id="modelPicker">
+      <button class="model-picker-btn" id="modelPickerBtn" type="button">
+        <span id="modelPickerLabel">Select model</span>
+        <svg width="10" height="10" viewBox="0 0 12 12">
+          <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </button>
+      <div class="model-picker-dropdown hidden" id="modelPickerDropdown">
+        <div class="model-picker-menu" id="modelPickerMenu"></div>
+        <div class="model-picker-more hidden" id="modelPickerMore">
+          <span>more</span>
+          <svg width="10" height="10" viewBox="0 0 12 12"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page">
+      <main class="home" id="home">
+        <img src="https://i.imgur.com/IjaDdYO.png" alt="NumThy" class="logo" />
+        <div class="search-container">
+          <input
+            type="text"
+            id="prompt"
+            class="search-input"
+            placeholder="Ask a math question ..."
+            autocomplete="off"
+          />
+          <button class="submit-btn" id="submitBtn" title="Submit">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 16V4M10 4L5 9M10 4L15 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </main>
+
+      <div class="results-view hidden" id="resultsView" style="display:none">
+        <header class="results-header">
+          <img src="https://i.imgur.com/IjaDdYO.png" alt="NumThy" class="logo-small" />
+          <div class="search-container-mini">
+            <input
+              type="text"
+              id="promptMini"
+              class="search-input-mini"
+              placeholder="Ask a math question ..."
+              autocomplete="off"
+            />
+            <button class="submit-btn submit-btn-mini" id="submitBtnMini" title="Submit">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                <path d="M10 16V4M10 4L5 9M10 4L15 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <span class="status-indicator" id="status">Idle</span>
+        </header>
+        <section class="results" id="results"></section>
+        <div class="spinner hidden" id="spinner"></div>
+      </div>
+    </div>
+
+    <button class="settings-btn" id="settingsBtn" title="Settings">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M16.2 12.8a1.4 1.4 0 00.3 1.5l.05.05a1.7 1.7 0 11-2.4 2.4l-.05-.05a1.4 1.4 0 00-1.5-.3 1.4 1.4 0 00-.85 1.3v.15a1.7 1.7 0 11-3.4 0v-.08a1.4 1.4 0 00-.92-1.28 1.4 1.4 0 00-1.5.3l-.05.05a1.7 1.7 0 11-2.4-2.4l.05-.05a1.4 1.4 0 00.3-1.5 1.4 1.4 0 00-1.3-.85h-.15a1.7 1.7 0 110-3.4h.08a1.4 1.4 0 001.28-.92 1.4 1.4 0 00-.3-1.5l-.05-.05a1.7 1.7 0 112.4-2.4l.05.05a1.4 1.4 0 001.5.3h.07a1.4 1.4 0 00.85-1.3v-.15a1.7 1.7 0 113.4 0v.08a1.4 1.4 0 00.85 1.28 1.4 1.4 0 001.5-.3l.05-.05a1.7 1.7 0 112.4 2.4l-.05.05a1.4 1.4 0 00-.3 1.5v.07a1.4 1.4 0 001.3.85h.15a1.7 1.7 0 110 3.4h-.08a1.4 1.4 0 00-1.28.85z" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+
+    <div class="settings-panel hidden" id="settingsPanel">
+      <div class="settings-content">
+        <h3>Settings</h3>
+        <label for="bridgeUrl">Bridge URL</label>
+        <input id="bridgeUrl" type="text" value="http://127.0.0.1:7331" />
+        <button class="settings-close" id="settingsClose">Done</button>
+      </div>
+    </div>
+
+    <div class="bridge-overlay hidden" id="bridgeOverlay">
+      <div class="bridge-overlay-content">
+        <h2>Bridge not running</h2>
+        <p>Get started:</p>
+        <pre class="bridge-command">cd numthy-bridge && npm start</pre>
+        <p>Copy / paste the bridge URL:</p>
+        <input id="bridgeUrlOverlay" class="bridge-url-input" type="text" value="http://127.0.0.1:7331" />
+        <button class="bridge-retry" id="bridgeRetry">Retry</button>
+      </div>
+    </div>
+  </body>
+</html>
