@@ -88,12 +88,27 @@
 
     <div class="bridge-overlay hidden" id="bridgeOverlay">
       <div class="bridge-overlay-content">
-        <h2>Bridge not running</h2>
-        <p>Get started:</p>
-        <pre class="bridge-command">cd numthy-bridge && npm start</pre>
-        <p>Copy / paste the bridge URL:</p>
+        <img src="https://i.imgur.com/IjaDdYO.png" alt="NumThy" class="bridge-logo" />
+        <p class="bridge-intro">This demo uses your local Claude Code or GPT Codex to answer math questions using the NumThy library. Requires <a href="https://nodejs.org/en/download/current" target="_blank">Node.js</a>.</p>
+        <hr class="bridge-divider" />
+        <h2>Get Started</h2>
+        <p>Open your terminal and run:</p>
+        <div class="bridge-command-wrapper">
+          <pre class="bridge-command">npx numthy</pre>
+          <button class="copy-btn" id="copyBtn" type="button" title="Copy to clipboard">
+            <svg class="copy-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M3 10V3a1 1 0 011-1h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <svg class="check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8.5L6 11.5L13 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="copy-tooltip">Copied!</span>
+          </button>
+        </div>
+        <p>Paste the bridge URL:</p>
         <input id="bridgeUrlOverlay" class="bridge-url-input" type="text" value="http://127.0.0.1:7331" />
-        <button class="bridge-retry" id="bridgeRetry">Retry</button>
+        <button class="bridge-retry" id="bridgeRetry">Connect</button>
       </div>
     </div>
   </body>

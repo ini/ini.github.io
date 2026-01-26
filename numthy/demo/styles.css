@@ -360,7 +360,6 @@ body {
   margin: 0;
   line-height: 1.6;
   overflow-wrap: break-word;
-  word-break: break-all;
 }
 
 .latex {
@@ -524,7 +523,7 @@ body {
 .bridge-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -533,15 +532,41 @@ body {
 
 .bridge-overlay-content {
   text-align: center;
-  max-width: 400px;
-  padding: 24px;
+  max-width: 540px;
+  padding: 32px;
   background: var(--bg);
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
+.bridge-logo {
+  height: 80px;
+  width: auto;
+}
+
+.bridge-overlay-content .bridge-intro {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.bridge-intro a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.bridge-intro a:hover {
+  text-decoration: underline;
+}
+
+.bridge-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
 .bridge-overlay-content h2 {
-  margin: 0 0 8px;
+  margin: 0 0 16px;
   font-size: 20px;
   color: var(--text);
 }
@@ -552,20 +577,88 @@ body {
   font-size: 14px;
 }
 
+.bridge-command-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 0 16px;
+  width: 100%;
+}
+
 .bridge-command {
+  flex: 1;
   background: #1e1e1e;
   color: #d4d4d4;
-  padding: 14px 18px;
+  padding: 14px 48px;
   border-radius: 8px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
-  margin: 0 0 20px;
-  text-align: left;
+  margin: 0;
+  text-align: center;
+}
+
+.copy-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.copy-btn:hover {
+  color: #d4d4d4;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.copy-btn.copied {
+  color: #4ade80;
+}
+
+.copy-btn .check-icon {
+  display: none;
+}
+
+.copy-btn.copied .copy-icon {
+  display: none;
+}
+
+.copy-btn.copied .check-icon {
+  display: block;
+}
+
+.copy-tooltip {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 8px);
+  transform: translateY(-50%);
+  background: #1e1e1e;
+  color: #4ade80;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.copy-btn.copied .copy-tooltip {
+  opacity: 1;
 }
 
 .bridge-url-input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 14px 12px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
   border: 1px solid var(--border);

@@ -27,6 +27,7 @@ let availableBackends = [];
 let unifiedModels = [];
 let selectedModelValue = null;
 let sessionStartShown = false;
+let autoRetryInterval = null;
 
 const STORAGE_KEYS = {
   bridgeUrl: 'numthy.bridgeUrl',
@@ -522,10 +523,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('resize', updateMiniSearchMargin);
 
+function startAutoRetry() {
+  if (autoRetryInterval) return;
+  autoRetryInterval = setInterval(() => {
+    refreshBackendInfo();
+  }, 5000);
+}
+
+function stopAutoRetry() {
+  if (autoRetryInterval) {
+    clearInterval(autoRetryInterval);
+    autoRetryInterval = null;
+  }
+}
+
 async function refreshBackendInfo() {
   const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
   if (!bridgeUrl) {
     bridgeOverlay.classList.remove('hidden');
+    startAutoRetry();
     return;
   }
 
@@ -533,11 +549,13 @@ async function refreshBackendInfo() {
     const response = await fetch(`${bridgeUrl}/health`);
     if (!response.ok) {
       bridgeOverlay.classList.remove('hidden');
+      startAutoRetry();
       return;
     }
     const data = await response.json();
 
     bridgeOverlay.classList.add('hidden');
+    stopAutoRetry();
 
     if (data.backends && Array.isArray(data.backends)) {
       availableBackends = data.backends;
@@ -547,6 +565,7 @@ async function refreshBackendInfo() {
     }
   } catch (err) {
     bridgeOverlay.classList.remove('hidden');
+    startAutoRetry();
   }
 }
 
@@ -562,11 +581,28 @@ bridgeRetry.addEventListener('click', async () => {
   bridgeUrlEl.value = url;
   localStorage.setItem(STORAGE_KEYS.bridgeUrl, url);
   bridgeRetry.disabled = true;
-  bridgeRetry.textContent = 'Retrying ...';
+  bridgeRetry.textContent = 'Connecting ...';
   await Promise.all([
     refreshBackendInfo(),
     new Promise((r) => setTimeout(r, 1000)),
   ]);
   bridgeRetry.disabled = false;
   bridgeRetry.textContent = 'Retry';
+});
+
+// Copy command to clipboard
+const copyBtn = document.getElementById('copyBtn');
+const bridgeCommand = document.querySelector('.bridge-command');
+
+copyBtn.addEventListener('click', async () => {
+  const text = bridgeCommand.textContent.trim();
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBtn.classList.add('copied');
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+    }, 2000);
+  } catch (err) {
+    console.error('Failed to copy:', err);
+  }
 });
