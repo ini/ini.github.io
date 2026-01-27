@@ -28,6 +28,22 @@ let unifiedModels = [];
 let selectedModelValue = null;
 let sessionStartShown = false;
 let autoRetryInterval = null;
+let blockQueue = [];
+let lastBlockTime = 0;
+let blockTimer = null;
+let typewriterTimer = null;
+let typewriterActive = false;
+
+const EXAMPLE_QUESTIONS = [
+  'Is 2^127 - 1 prime?',
+  'Generate a random 150-bit semiprime, then factor it',
+  'Solve 5^x = 7 mod 13',
+  'Get the first ten Fibonacci numbers',
+  'Find all primes between 100 and 150',
+  'Solve the system 2x + 4y = -2 and 4x + 5y = 11',
+  'Divisors of 360',
+  'What is the totient of 123456789?'
+];
 
 const STORAGE_KEYS = {
   bridgeUrl: 'numthy.bridgeUrl',
@@ -41,6 +57,9 @@ function setStatus(text, type = '') {
   // Show/hide spinner
   if (type === 'running') {
     spinnerEl.classList.remove('hidden');
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 50);
   } else {
     spinnerEl.classList.add('hidden');
   }
@@ -62,6 +81,12 @@ function showResults() {
   resultsViewEl.style.display = '';
   statusEl.style.display = '';
   resultsEl.innerHTML = '';
+  blockQueue = [];
+  if (blockTimer) {
+    clearTimeout(blockTimer);
+    blockTimer = null;
+  }
+  lastBlockTime = 0;
   updateMiniSearchMargin();
 }
 
@@ -175,16 +200,39 @@ function renderBlock(block) {
   return shell;
 }
 
-function appendBlock(block) {
+function showBlock(block) {
   const node = renderBlock(block);
   if (node) {
     resultsEl.appendChild(node);
-    const rect = node.getBoundingClientRect();
-    const scrollPadding = 40;
-    window.scrollTo({
-      top: window.scrollY + rect.bottom - window.innerHeight + scrollPadding,
-      behavior: 'smooth',
-    });
+    // Scroll to show spinner (which is after all blocks)
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 50);
+  }
+  lastBlockTime = Date.now();
+}
+
+function processBlockQueue() {
+  if (blockQueue.length === 0) {
+    blockTimer = null;
+    return;
+  }
+  const block = blockQueue.shift();
+  showBlock(block);
+  blockTimer = setTimeout(processBlockQueue, 500);
+}
+
+function appendBlock(block) {
+  blockQueue.push(block);
+  const now = Date.now();
+  const timeSinceLast = now - lastBlockTime;
+
+  if (!blockTimer) {
+    if (timeSinceLast >= 500) {
+      processBlockQueue();
+    } else {
+      blockTimer = setTimeout(processBlockQueue, 500 - timeSinceLast);
+    }
   }
 }
 
@@ -196,9 +244,15 @@ function closeStream() {
 }
 
 function getSelectedModel() {
-  if (!selectedModelValue) return { backend: 'codex', model: '' };
-  const m = unifiedModels.find((x) => `${x.backend}:${x.model}` === selectedModelValue);
-  return m || { backend: 'codex', model: '' };
+  if (selectedModelValue) {
+    const m = unifiedModels.find((x) => `${x.backend}:${x.model}` === selectedModelValue);
+    if (m) return m;
+  }
+  // Fallback to first available model
+  if (unifiedModels.length > 0) {
+    return unifiedModels[0];
+  }
+  return { backend: 'codex', model: '' };
 }
 
 function buildUnifiedModelList() {
@@ -226,11 +280,19 @@ function buildUnifiedModelList() {
 }
 
 function selectModel(value) {
+  const model = unifiedModels.find((m) => `${m.backend}:${m.model}` === value);
+
+  // If model not found, fall back to first available
+  if (!model && unifiedModels.length > 0) {
+    const fallback = unifiedModels[0];
+    value = `${fallback.backend}:${fallback.model}`;
+  }
+
   selectedModelValue = value;
   localStorage.setItem(STORAGE_KEYS.selectedModel, value);
 
-  const model = unifiedModels.find((m) => `${m.backend}:${m.model}` === value);
-  modelPickerLabel.textContent = model ? model.label : 'Select model';
+  const actualModel = unifiedModels.find((m) => `${m.backend}:${m.model}` === value);
+  modelPickerLabel.textContent = actualModel ? actualModel.label : 'Select model';
 
   // Update selected state in menu
   modelPickerMenu.querySelectorAll('.model-picker-option').forEach((btn) => {
@@ -272,12 +334,16 @@ function renderModelPicker() {
     });
   });
 
-  // Restore saved selection
+  // Restore saved selection or select first available
   const saved = localStorage.getItem(STORAGE_KEYS.selectedModel);
   if (saved && unifiedModels.some((m) => `${m.backend}:${m.model}` === saved)) {
     selectModel(saved);
   } else if (unifiedModels.length > 0) {
     selectModel(`${unifiedModels[0].backend}:${unifiedModels[0].model}`);
+  } else {
+    // No models available - reset state
+    selectedModelValue = null;
+    modelPickerLabel.textContent = 'Select model';
   }
 }
 
@@ -507,6 +573,69 @@ settingsPanel.addEventListener('click', (e) => {
   }
 });
 
+// Typewriter effect for placeholder
+function startTypewriter() {
+  if (typewriterActive) return;
+  typewriterActive = true;
+  promptEl.placeholder = '';
+
+  let questionIndex = Math.floor(Math.random() * EXAMPLE_QUESTIONS.length);
+  let charIndex = 0;
+  let isDeleting = false;
+  let pauseTime = 0;
+
+  function tick() {
+    if (!typewriterActive) return;
+
+    const question = EXAMPLE_QUESTIONS[questionIndex];
+
+    if (pauseTime > 0) {
+      pauseTime -= 50;
+      typewriterTimer = setTimeout(tick, 50);
+      return;
+    }
+
+    if (isDeleting) {
+      charIndex--;
+      promptEl.placeholder = question.substring(0, charIndex);
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        questionIndex = (questionIndex + 1) % EXAMPLE_QUESTIONS.length;
+        pauseTime = 300;
+      }
+      typewriterTimer = setTimeout(tick, 30);
+    } else {
+      charIndex++;
+      promptEl.placeholder = question.substring(0, charIndex);
+
+      if (charIndex === question.length) {
+        isDeleting = true;
+        pauseTime = 2000;
+      }
+      typewriterTimer = setTimeout(tick, 60);
+    }
+  }
+
+  tick();
+}
+
+function stopTypewriter() {
+  typewriterActive = false;
+  if (typewriterTimer) {
+    clearTimeout(typewriterTimer);
+    typewriterTimer = null;
+  }
+  promptEl.placeholder = 'Ask a math question ...';
+}
+
+// Stop typewriter when user types
+promptEl.addEventListener('input', () => {
+  if (promptEl.value !== '') {
+    stopTypewriter();
+  }
+});
+
 // Init
 window.addEventListener('DOMContentLoaded', () => {
   const savedBridgeUrl = localStorage.getItem(STORAGE_KEYS.bridgeUrl);
@@ -519,6 +648,7 @@ window.addEventListener('DOMContentLoaded', () => {
   promptEl.focus();
   refreshBackendInfo();
   updateMiniSearchMargin();
+  startTypewriter();
 });
 
 window.addEventListener('resize', updateMiniSearchMargin);

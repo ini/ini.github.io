@@ -78,6 +78,10 @@ body {
   border-color: transparent;
 }
 
+.search-input::placeholder {
+  color: #bbb;
+}
+
 .submit-btn {
   position: absolute;
   right: 8px;
@@ -223,6 +227,7 @@ body {
 .results-view {
   min-height: 100vh;
   background: var(--bg);
+  padding-bottom: 48px;
 }
 
 .results-header {
@@ -235,6 +240,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .logo-small {
@@ -396,13 +402,13 @@ body {
 
 /* Spinner */
 .spinner {
+  position: relative;
   width: 48px;
   height: 48px;
   border-radius: 50%;
   background: conic-gradient(from 0deg, transparent 0%, var(--accent) 100%);
   animation: spin 0.5s linear infinite, pulse 1.5s ease-in-out infinite;
-  margin: -32px auto 0;
-  position: relative;
+  margin: -16px auto 0;
 }
 
 .spinner::before {
