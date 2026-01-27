@@ -657,7 +657,7 @@ function startAutoRetry() {
   if (autoRetryInterval) return;
   autoRetryInterval = setInterval(() => {
     refreshBackendInfo();
-  }, 5000);
+  }, 2000);
 }
 
 function stopAutoRetry() {
