@@ -21,8 +21,9 @@ const spinnerEl = document.getElementById('spinner');
 const bridgeOverlay = document.getElementById('bridgeOverlay');
 const bridgeUrlOverlay = document.getElementById('bridgeUrlOverlay');
 const bridgeRetry = document.getElementById('bridgeRetry');
-const safariSetup = document.getElementById('safariSetup');
-const safariSetupBtn = document.getElementById('safariSetupBtn');
+
+// Safari detection - Safari blocks mixed content (HTTP from HTTPS page)
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 let currentSource = null;
 let availableBackends = [];
@@ -731,7 +732,6 @@ async function refreshBackendInfo() {
   const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
   if (!bridgeUrl) {
     bridgeOverlay.classList.remove('hidden');
-    safariSetup.classList.add('hidden');
     startAutoRetry();
     return;
   }
@@ -755,26 +755,13 @@ async function refreshBackendInfo() {
     }
   }
 
-  // 3. HTTP fetch failed - check if bridge is running via image ping
-  const pingUrl = bridgeUrl + '/ping.gif';
-  const bridgeRunning = await imagePing(pingUrl);
-  console.log('[numthy] Bridge running (image ping):', bridgeRunning);
-
+  // 3. Not connected - show overlay with instructions
   bridgeOverlay.classList.remove('hidden');
-
-  if (bridgeRunning) {
-    // Bridge is running but fetch is blocked (Safari mixed content)
-    safariSetup.classList.remove('hidden');
-  } else {
-    // Bridge not running
-    safariSetup.classList.add('hidden');
-  }
   startAutoRetry();
 }
 
 function onConnected(data) {
   bridgeOverlay.classList.add('hidden');
-  safariSetup.classList.add('hidden');
   stopAutoRetry();
 
   if (data.backends && Array.isArray(data.backends)) {
@@ -807,20 +794,21 @@ bridgeRetry.addEventListener('click', async () => {
   // Clear saved HTTPS when user changes URL
   localStorage.removeItem(STORAGE_KEYS.bridgeHttpsUrl);
   activeBridgeUrl = null;
-  bridgeRetry.disabled = true;
-  bridgeRetry.textContent = 'Connecting ...';
-  await Promise.all([
-    refreshBackendInfo(),
-    new Promise((r) => setTimeout(r, 1000)),
-  ]);
-  bridgeRetry.disabled = false;
-  bridgeRetry.textContent = 'Retry';
-});
 
-// Safari setup button - opens setup page in new tab
-safariSetupBtn.addEventListener('click', () => {
-  const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
-  window.open(`${bridgeUrl}/setup`, '_blank');
+  if (isSafari) {
+    // Safari: open setup page (HTTP fetch won't work due to mixed content)
+    window.open(`${url}/setup`, '_blank');
+  } else {
+    // Chrome/Firefox: try HTTP fetch
+    bridgeRetry.disabled = true;
+    bridgeRetry.textContent = 'Connecting ...';
+    await Promise.all([
+      refreshBackendInfo(),
+      new Promise((r) => setTimeout(r, 1000)),
+    ]);
+    bridgeRetry.disabled = false;
+    bridgeRetry.textContent = 'Connect';
+  }
 });
 
 // Listen for postMessage from setup page with HTTPS port
