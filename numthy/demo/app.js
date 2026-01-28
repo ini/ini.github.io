@@ -769,27 +769,41 @@ bridgeUrlEl.addEventListener('change', () => {
 });
 
 bridgeRetry.addEventListener('click', async () => {
-  const url = bridgeUrlOverlay.value.trim();
+  const url = bridgeUrlOverlay.value.trim().replace(/\/$/, '');
   bridgeUrlEl.value = url;
   localStorage.setItem(STORAGE_KEYS.bridgeUrl, url);
-  // Clear saved HTTPS when user changes URL
-  localStorage.removeItem(STORAGE_KEYS.bridgeHttpsUrl);
-  activeBridgeUrl = null;
 
-  if (isSafari) {
-    // Safari: open setup page (HTTP fetch won't work due to mixed content)
-    window.open(`${url}/setup`, '_blank');
+  // If URL is already HTTPS, use it directly
+  if (url.startsWith('https://')) {
+    localStorage.setItem(STORAGE_KEYS.bridgeHttpsUrl, url);
+    activeBridgeUrl = url;
   } else {
-    // Chrome/Firefox: try HTTP fetch
-    bridgeRetry.disabled = true;
-    bridgeRetry.textContent = 'Connecting ...';
-    await Promise.all([
-      refreshBackendInfo(),
-      new Promise((r) => setTimeout(r, 1000)),
-    ]);
+    // Clear saved HTTPS when user changes to HTTP URL
+    localStorage.removeItem(STORAGE_KEYS.bridgeHttpsUrl);
+    activeBridgeUrl = null;
+  }
+
+  bridgeRetry.disabled = true;
+  bridgeRetry.textContent = 'Connecting ...';
+
+  // Try to connect
+  const data = await tryFetch(url);
+  if (data) {
+    activeBridgeUrl = url;
+    onConnected(data);
     bridgeRetry.disabled = false;
     bridgeRetry.textContent = 'Connect';
+    return;
   }
+
+  // Connection failed
+  if (isSafari && url.startsWith('http://')) {
+    // Safari with HTTP: open setup page to get HTTPS
+    window.open(`${url}/setup`, '_blank');
+  }
+
+  bridgeRetry.disabled = false;
+  bridgeRetry.textContent = 'Connect';
 });
 
 // Listen for postMessage from setup page with HTTPS port
