@@ -794,6 +794,7 @@ bridgeRetry.addEventListener('click', async () => {
 
 // Listen for postMessage from setup page with HTTPS port
 window.addEventListener('message', (event) => {
+  console.log('[numthy] Received message:', event.data);
   if (event.data && event.data.type === 'numthy-https' && event.data.port) {
     const httpUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
     try {
@@ -807,6 +808,7 @@ window.addEventListener('message', (event) => {
     }
   }
 });
+
 
 // Copy command to clipboard
 const copyBtn = document.getElementById('copyBtn');
