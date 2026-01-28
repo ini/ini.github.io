@@ -21,6 +21,8 @@ const spinnerEl = document.getElementById('spinner');
 const bridgeOverlay = document.getElementById('bridgeOverlay');
 const bridgeUrlOverlay = document.getElementById('bridgeUrlOverlay');
 const bridgeRetry = document.getElementById('bridgeRetry');
+const safariSetup = document.getElementById('safariSetup');
+const safariSetupBtn = document.getElementById('safariSetupBtn');
 
 let currentSource = null;
 let availableBackends = [];
@@ -47,8 +49,38 @@ const EXAMPLE_QUESTIONS = [
 
 const STORAGE_KEYS = {
   bridgeUrl: 'numthy.bridgeUrl',
+  bridgeHttpsUrl: 'numthy.bridgeHttpsUrl',
   selectedModel: 'numthy.selectedModel',
 };
+
+// Image ping to detect if bridge is running (works even when fetch is blocked by Safari)
+function imagePing(url) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url + '?' + Date.now();
+    setTimeout(() => resolve(false), 3000);
+  });
+}
+
+// Get HTTPS URL from HTTP URL (for Safari fallback)
+function getHttpsUrl(httpUrl) {
+  try {
+    const url = new URL(httpUrl);
+    const savedHttps = localStorage.getItem(STORAGE_KEYS.bridgeHttpsUrl);
+    if (savedHttps) {
+      const savedUrl = new URL(savedHttps);
+      // Only use saved HTTPS if it's for the same host
+      if (savedUrl.hostname === url.hostname) {
+        return savedHttps;
+      }
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
 
 function setStatus(text, type = '') {
   statusEl.textContent = text;
@@ -428,7 +460,7 @@ function updateMiniSearchMargin() {
 
 async function runQuery(query) {
   const prompt = query.trim();
-  const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
+  const bridgeUrl = getBridgeUrl();
   const selected = getSelectedModel();
 
   if (!prompt) return;
@@ -644,6 +676,12 @@ window.addEventListener('DOMContentLoaded', () => {
     bridgeUrlOverlay.value = savedBridgeUrl;
   }
 
+  // Restore saved HTTPS URL for Safari returning users
+  const savedHttpsUrl = localStorage.getItem(STORAGE_KEYS.bridgeHttpsUrl);
+  if (savedHttpsUrl) {
+    activeBridgeUrl = savedHttpsUrl;
+  }
+
   statusEl.style.display = 'none'; // Hidden on home view
   promptEl.focus();
   refreshBackendInfo();
@@ -667,42 +705,89 @@ function stopAutoRetry() {
   }
 }
 
+// Track the active bridge URL (may differ from input if using HTTPS)
+let activeBridgeUrl = null;
+
+async function tryFetch(url) {
+  try {
+    const response = await fetch(`${url}/health`);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
 async function refreshBackendInfo() {
   const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
   if (!bridgeUrl) {
     bridgeOverlay.classList.remove('hidden');
+    safariSetup.classList.add('hidden');
     startAutoRetry();
     return;
   }
 
-  try {
-    const response = await fetch(`${bridgeUrl}/health`);
-    if (!response.ok) {
-      bridgeOverlay.classList.remove('hidden');
-      startAutoRetry();
+  // 1. Try HTTP first (works for Chrome)
+  let data = await tryFetch(bridgeUrl);
+  if (data) {
+    activeBridgeUrl = bridgeUrl;
+    onConnected(data);
+    return;
+  }
+
+  // 2. Try saved HTTPS URL (Safari returning user)
+  const savedHttpsUrl = getHttpsUrl(bridgeUrl);
+  if (savedHttpsUrl) {
+    data = await tryFetch(savedHttpsUrl);
+    if (data) {
+      activeBridgeUrl = savedHttpsUrl;
+      onConnected(data);
       return;
     }
-    const data = await response.json();
+  }
 
-    bridgeOverlay.classList.add('hidden');
-    stopAutoRetry();
+  // 3. Use image ping to detect if bridge is running
+  const pingUrl = bridgeUrl.replace(/\/$/, '') + '/ping.gif';
+  const bridgeIsUp = await imagePing(pingUrl);
 
-    if (data.backends && Array.isArray(data.backends)) {
-      availableBackends = data.backends;
-      buildUnifiedModelList();
-      renderModelPicker();
-      updateMiniSearchMargin();
-    }
-  } catch (err) {
-    bridgeOverlay.classList.remove('hidden');
+  bridgeOverlay.classList.remove('hidden');
+
+  if (bridgeIsUp) {
+    // Bridge is running but fetch blocked (Safari)
+    safariSetup.classList.remove('hidden');
+    stopAutoRetry(); // Don't auto-retry, wait for user action
+  } else {
+    // Bridge not running
+    safariSetup.classList.add('hidden');
     startAutoRetry();
   }
+}
+
+function onConnected(data) {
+  bridgeOverlay.classList.add('hidden');
+  safariSetup.classList.add('hidden');
+  stopAutoRetry();
+
+  if (data.backends && Array.isArray(data.backends)) {
+    availableBackends = data.backends;
+    buildUnifiedModelList();
+    renderModelPicker();
+    updateMiniSearchMargin();
+  }
+}
+
+// Get the currently active bridge URL for API calls
+function getBridgeUrl() {
+  return activeBridgeUrl || bridgeUrlEl.value.trim().replace(/\/$/, '');
 }
 
 bridgeUrlEl.addEventListener('change', () => {
   const url = bridgeUrlEl.value.trim();
   bridgeUrlOverlay.value = url;
   localStorage.setItem(STORAGE_KEYS.bridgeUrl, url);
+  // Clear saved HTTPS when user changes URL
+  localStorage.removeItem(STORAGE_KEYS.bridgeHttpsUrl);
+  activeBridgeUrl = null;
   refreshBackendInfo();
 });
 
@@ -710,6 +795,9 @@ bridgeRetry.addEventListener('click', async () => {
   const url = bridgeUrlOverlay.value.trim();
   bridgeUrlEl.value = url;
   localStorage.setItem(STORAGE_KEYS.bridgeUrl, url);
+  // Clear saved HTTPS when user changes URL
+  localStorage.removeItem(STORAGE_KEYS.bridgeHttpsUrl);
+  activeBridgeUrl = null;
   bridgeRetry.disabled = true;
   bridgeRetry.textContent = 'Connecting ...';
   await Promise.all([
@@ -718,6 +806,28 @@ bridgeRetry.addEventListener('click', async () => {
   ]);
   bridgeRetry.disabled = false;
   bridgeRetry.textContent = 'Retry';
+});
+
+// Safari setup button - opens setup page in new tab
+safariSetupBtn.addEventListener('click', () => {
+  const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
+  window.open(`${bridgeUrl}/setup`, '_blank');
+});
+
+// Listen for postMessage from setup page with HTTPS port
+window.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'numthy-https' && event.data.port) {
+    const httpUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
+    try {
+      const url = new URL(httpUrl);
+      const httpsUrl = `https://${url.hostname}:${event.data.port}`;
+      localStorage.setItem(STORAGE_KEYS.bridgeHttpsUrl, httpsUrl);
+      activeBridgeUrl = httpsUrl;
+      refreshBackendInfo();
+    } catch {
+      // Invalid URL, ignore
+    }
+  }
 });
 
 // Copy command to clipboard
