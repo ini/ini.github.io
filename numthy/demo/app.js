@@ -57,10 +57,19 @@ const STORAGE_KEYS = {
 function imagePing(url) {
   return new Promise((resolve) => {
     const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
+    img.onload = () => {
+      console.log('[numthy] Image ping success:', url);
+      resolve(true);
+    };
+    img.onerror = (e) => {
+      console.log('[numthy] Image ping failed:', url, e);
+      resolve(false);
+    };
     img.src = url + '?' + Date.now();
-    setTimeout(() => resolve(false), 3000);
+    setTimeout(() => {
+      console.log('[numthy] Image ping timeout:', url);
+      resolve(false);
+    }, 3000);
   });
 }
 
@@ -727,7 +736,7 @@ async function refreshBackendInfo() {
     return;
   }
 
-  // 1. Try HTTP first (works for Chrome)
+  // 1. Try HTTP fetch first (works for Chrome)
   let data = await tryFetch(bridgeUrl);
   if (data) {
     activeBridgeUrl = bridgeUrl;
@@ -746,21 +755,21 @@ async function refreshBackendInfo() {
     }
   }
 
-  // 3. Use image ping to detect if bridge is running
-  const pingUrl = bridgeUrl.replace(/\/$/, '') + '/ping.gif';
-  const bridgeIsUp = await imagePing(pingUrl);
+  // 3. HTTP fetch failed - check if bridge is running via image ping
+  const pingUrl = bridgeUrl + '/ping.gif';
+  const bridgeRunning = await imagePing(pingUrl);
+  console.log('[numthy] Bridge running (image ping):', bridgeRunning);
 
   bridgeOverlay.classList.remove('hidden');
 
-  if (bridgeIsUp) {
-    // Bridge is running but fetch blocked (Safari)
+  if (bridgeRunning) {
+    // Bridge is running but fetch is blocked (Safari mixed content)
     safariSetup.classList.remove('hidden');
-    stopAutoRetry(); // Don't auto-retry, wait for user action
   } else {
     // Bridge not running
     safariSetup.classList.add('hidden');
-    startAutoRetry();
   }
+  startAutoRetry();
 }
 
 function onConnected(data) {
