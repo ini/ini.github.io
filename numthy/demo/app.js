@@ -54,25 +54,6 @@ const STORAGE_KEYS = {
   selectedModel: 'numthy.selectedModel',
 };
 
-// Image ping to detect if bridge is running (works even when fetch is blocked by Safari)
-function imagePing(url) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => {
-      console.log('[numthy] Image ping success:', url);
-      resolve(true);
-    };
-    img.onerror = (e) => {
-      console.log('[numthy] Image ping failed:', url, e);
-      resolve(false);
-    };
-    img.src = url + '?' + Date.now();
-    setTimeout(() => {
-      console.log('[numthy] Image ping timeout:', url);
-      resolve(false);
-    }, 3000);
-  });
-}
 
 // Get HTTPS URL from HTTP URL (for Safari fallback)
 function getHttpsUrl(httpUrl) {
