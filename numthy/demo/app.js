@@ -166,6 +166,16 @@ function renderBlock(block) {
     return shell;
   }
 
+  if (block.type === 'error') {
+    const shell = blockShell('Error');
+    shell.classList.add('error-block');
+    const p = document.createElement('p');
+    p.className = 'error';
+    p.textContent = block.content;
+    shell.appendChild(p);
+    return shell;
+  }
+
   if (block.type === 'text') {
     const shell = blockShell('Output');
     const p = document.createElement('p');
@@ -531,22 +541,32 @@ async function runQuery(query) {
     });
 
     source.addEventListener('fail', (event) => {
+      clearTimeout(sessionStartTimeout);
+      blockQueue = [];
       const payload = event.data ? JSON.parse(event.data) : {};
-      setStatus(`Error: ${payload.message || 'Failed'}`, 'error');
+      const message = payload.message || 'Failed';
+      appendBlock({ type: 'error', content: message });
+      setStatus('Error', 'error');
       closeStream();
     });
 
     source.addEventListener('done', () => {
-      setStatus('Done');
+      setStatus('Done', 'done');
       closeStream();
     });
 
     source.onerror = () => {
-      setStatus('Connection error', 'error');
+      clearTimeout(sessionStartTimeout);
+      blockQueue = [];
+      appendBlock({ type: 'error', content: 'Connection error' });
+      setStatus('Error', 'error');
       closeStream();
     };
   } catch (err) {
-    setStatus(`Error: ${err.message}`, 'error');
+    clearTimeout(sessionStartTimeout);
+    blockQueue = [];
+    appendBlock({ type: 'error', content: err.message });
+    setStatus('Error', 'error');
   }
 }
 

@@ -298,6 +298,11 @@ body {
   background: var(--accent-bg);
 }
 
+.status-indicator.done {
+  color: #188038;
+  background: #e6f4ea;
+}
+
 /* Results area */
 .results {
   max-width: 800px;
@@ -398,6 +403,11 @@ body {
 
 .error {
   color: var(--danger);
+}
+
+.error-block {
+  border-left: 3px solid var(--danger);
+  background: #fce8e6;
 }
 
 /* Spinner */
