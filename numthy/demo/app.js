@@ -806,7 +806,8 @@ bridgeRetry.addEventListener('click', async () => {
   bridgeRetry.disabled = true;
   bridgeRetry.textContent = 'Connecting ...';
 
-  // Try to connect
+  // Try to connect (show "Connecting ..." for at least 1s)
+  const start = Date.now();
   const data = await tryFetch(url);
   if (data) {
     activeBridgeUrl = url;
@@ -822,6 +823,10 @@ bridgeRetry.addEventListener('click', async () => {
     window.open(`${url}/setup`, '_blank');
   }
 
+  const elapsed = Date.now() - start;
+  if (elapsed < 1000) {
+    await new Promise(r => setTimeout(r, 1000 - elapsed));
+  }
   bridgeRetry.disabled = false;
   bridgeRetry.textContent = 'Connect';
 });
