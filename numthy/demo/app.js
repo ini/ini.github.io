@@ -1167,26 +1167,23 @@ bridgeRetry.addEventListener('click', async () => {
   }
 
   // Connection failed - check if Safari mixed content issue
-  if (isSafari && url.startsWith('http://')) {
-    // Check if server is actually running (no-cors bypasses mixed content for detection)
-    const serverRunning = await isServerReachable(url);
+  // Safari on HTTPS can't reliably detect HTTP servers due to mixed content blocking
+  // So we always show the setup option in this case
+  const isHttps = window.location.protocol === 'https:';
+  if (isSafari && isHttps && url.startsWith('http://')) {
+    const setupUrl = `${url}/setup`;
+    const popup = window.open(setupUrl, '_blank');
 
-    if (serverRunning) {
-      // Server is running but blocked by mixed content - open setup page
-      const setupUrl = `${url}/setup`;
-      const popup = window.open(setupUrl, '_blank');
+    if (!popup || popup.closed) {
+      // Popup blocked - show manual link in overlay
+      const hint = document.createElement('p');
+      hint.className = 'bridge-popup-hint';
+      hint.innerHTML = `Safari requires HTTPS. <a href="${setupUrl}" target="_blank">Click here to set up secure access</a>`;
 
-      if (!popup || popup.closed) {
-        // Popup blocked - show manual link in overlay
-        const hint = document.createElement('p');
-        hint.className = 'bridge-popup-hint';
-        hint.innerHTML = `Safari blocked the popup. <a href="${setupUrl}" target="_blank">Click here to open setup</a>`;
+      const existingHint = bridgeOverlay.querySelector('.bridge-popup-hint');
+      if (existingHint) existingHint.remove();
 
-        const existingHint = bridgeOverlay.querySelector('.bridge-popup-hint');
-        if (existingHint) existingHint.remove();
-
-        bridgeOverlay.querySelector('.bridge-overlay-content').appendChild(hint);
-      }
+      bridgeOverlay.querySelector('.bridge-overlay-content').appendChild(hint);
     }
   }
 
