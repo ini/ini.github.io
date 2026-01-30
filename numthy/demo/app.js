@@ -57,7 +57,7 @@ let typewriterActive = false;
 const EXAMPLE_QUESTIONS = [
   'Is 2^127 - 1 prime?',
   'Generate a random 150-bit semiprime, then factor it',
-  'Solve 5^x = 7 mod 13',
+  'Solve 7^x = 5 mod 13',
   'Get the first ten Fibonacci numbers',
   'Find all primes between 100 and 150',
   'Solve the system 2x + 4y = -2 and 4x + 5y = 11',
