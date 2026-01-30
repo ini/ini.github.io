@@ -843,6 +843,8 @@ body {
 }
 
 .overlay-cancel {
+  -webkit-appearance: none;
+  appearance: none;
   margin-top: 12px;
   padding: 9px 23px;
   background: #fce8e6;
