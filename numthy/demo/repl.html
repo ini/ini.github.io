@@ -494,7 +494,7 @@
 
       clearBtn.addEventListener('click', () => {
         editor.value = '';
-        output.textContent = '';
+        output.textContent = '\u00A0';
         output.classList.remove('error');
         status.textContent = '';
         updateHighlight();
