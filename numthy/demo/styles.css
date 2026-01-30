@@ -799,6 +799,17 @@ body {
   cursor: not-allowed;
 }
 
+.bridge-popup-hint {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.bridge-popup-hint a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 /* Gemini auth overlay */
 .gemini-auth-overlay {
   position: fixed;
@@ -831,22 +842,22 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.gemini-auth-cancel {
+.overlay-cancel {
   margin-top: 12px;
-  padding: 8px 16px;
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  padding: 9px 23px;
+  background: #fce8e6;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 8px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s;
 }
 
-.gemini-auth-cancel:hover {
-  background: var(--border);
-  color: var(--text);
+.overlay-cancel:hover {
+  background: #f8d7da;
 }
 
 /* Responsive */

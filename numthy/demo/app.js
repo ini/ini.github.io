@@ -21,6 +21,7 @@ const spinnerEl = document.getElementById('spinner');
 const bridgeOverlay = document.getElementById('bridgeOverlay');
 const bridgeUrlOverlay = document.getElementById('bridgeUrlOverlay');
 const bridgeRetry = document.getElementById('bridgeRetry');
+const bridgeCancel = document.getElementById('bridgeCancel');
 const replLink = document.getElementById('replLink');
 
 // Gemini auth overlay elements
@@ -1026,6 +1027,17 @@ async function tryFetch(url) {
   }
 }
 
+// Check if server is reachable (even if CORS blocks the response)
+// Uses no-cors mode which succeeds if server responds, fails if server is down
+async function isServerReachable(url) {
+  try {
+    await fetch(`${url}/health`, { mode: 'no-cors' });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Try connecting to the bridge silently (no overlay).
  * Used on page load and when settings change.
@@ -1154,10 +1166,28 @@ bridgeRetry.addEventListener('click', async () => {
     return;
   }
 
-  // Connection failed
+  // Connection failed - check if Safari mixed content issue
   if (isSafari && url.startsWith('http://')) {
-    // Safari with HTTP: open setup page to get HTTPS
-    window.open(`${url}/setup`, '_blank');
+    // Check if server is actually running (no-cors bypasses mixed content for detection)
+    const serverRunning = await isServerReachable(url);
+
+    if (serverRunning) {
+      // Server is running but blocked by mixed content - open setup page
+      const setupUrl = `${url}/setup`;
+      const popup = window.open(setupUrl, '_blank');
+
+      if (!popup || popup.closed) {
+        // Popup blocked - show manual link in overlay
+        const hint = document.createElement('p');
+        hint.className = 'bridge-popup-hint';
+        hint.innerHTML = `Safari blocked the popup. <a href="${setupUrl}" target="_blank">Click here to open setup</a>`;
+
+        const existingHint = bridgeOverlay.querySelector('.bridge-popup-hint');
+        if (existingHint) existingHint.remove();
+
+        bridgeOverlay.querySelector('.bridge-overlay-content').appendChild(hint);
+      }
+    }
   }
 
   const elapsed = Date.now() - start;
@@ -1223,6 +1253,11 @@ geminiAuthSubmit.addEventListener('click', async () => {
 geminiAuthCancel.addEventListener('click', () => {
   geminiAuthOverlay.classList.add('hidden');
   pendingGeminiQuery = null;
+  showHome();
+});
+
+bridgeCancel.addEventListener('click', () => {
+  bridgeOverlay.classList.add('hidden');
   showHome();
 });
 
