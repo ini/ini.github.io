@@ -348,6 +348,7 @@ function buildUnifiedModelList() {
       model: model.value,
       label: model.label,
       available: true,
+      isDefault: model.isDefault,
     });
   });
 
