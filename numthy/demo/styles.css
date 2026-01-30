@@ -536,6 +536,34 @@ body {
   }
 }
 
+/* GitHub link */
+.github-link {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.github-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.github-link:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
 /* Settings */
 .settings-btn {
   position: fixed;
