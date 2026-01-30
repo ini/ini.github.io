@@ -390,7 +390,7 @@
         output.classList.remove('error');
         spinner.classList.add('hidden');
 
-        // Show spinner, status, and cancel after 1 second delay
+        // Show spinner, status, and cancel after 0.5 second delay
         if (spinnerTimeout) clearTimeout(spinnerTimeout);
         spinnerTimeout = setTimeout(() => {
           runBtn.classList.add('hidden');
@@ -398,7 +398,7 @@
           output.classList.add('hidden');
           spinner.classList.remove('hidden');
           status.textContent = 'Executing ...';
-        }, 1000);
+        }, 500);
 
         if (!workerReady) {
           status.textContent = 'Loading Python runtime ...';
@@ -472,6 +472,7 @@
         output.textContent = '(cancelled)';
         status.textContent = '';
         isRunning = false;
+        runBtn.disabled = false;
         runBtn.classList.remove('hidden');
         cancelBtn.classList.add('hidden');
 
