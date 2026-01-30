@@ -801,6 +801,7 @@ body {
 
 .bridge-popup-hint {
   margin-top: 16px;
+  padding-top: 16px;
   font-size: 13px;
   color: var(--danger);
 }
