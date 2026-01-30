@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NumThy REPL</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <style>
+      .repl-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 24px 20px;
+        min-height: 100vh;
+      }
+
+      .repl-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .repl-header img {
+        height: 64px;
+        pointer-events: none;
+      }
+
+      .repl-header h1 {
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--text);
+        margin: 0;
+      }
+
+      .repl-editor-wrapper {
+        position: relative;
+        width: 100%;
+        min-height: 200px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #f1f3f4;
+        overflow: hidden;
+      }
+
+      .repl-editor-wrapper:focus-within {
+        border-color: var(--accent);
+      }
+
+      .repl-editor-highlight {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 14px;
+        margin: 0;
+        font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow: auto;
+        pointer-events: none;
+        background: transparent;
+        border: none;
+      }
+
+      .repl-editor-highlight code {
+        font-family: inherit;
+        font-size: inherit;
+        background: transparent;
+        padding: 0;
+      }
+
+      .repl-editor {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 200px;
+        padding: 14px;
+        font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        border: none;
+        background: transparent;
+        color: transparent;
+        caret-color: var(--text);
+        resize: none;
+        outline: none;
+        overflow: auto;
+      }
+
+      .repl-editor::selection {
+        background: rgba(98, 52, 109, 0.3);
+      }
+
+      .repl-editor::placeholder {
+        color: #999;
+      }
+
+      /* Token colors */
+      .repl-editor-highlight .token.keyword { color: var(--accent); }
+      .repl-editor-highlight .token.builtin { color: #2563eb; }
+      .repl-editor-highlight .token.function { color: #0891b2; }
+      .repl-editor-highlight .token.number { color: #059669; }
+      .repl-editor-highlight .token.string { color: #b45309; }
+      .repl-editor-highlight .token.operator { color: #64748b; background: none; }
+      .repl-editor-highlight .token.comment { color: #94a3b8; font-style: italic; }
+      .repl-editor-highlight .token.punctuation { color: var(--text); }
+
+      .repl-spinner {
+        width: 60px;
+        height: 60px;
+        margin: 20px auto;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, transparent 0%, var(--accent) 100%);
+        animation: spin 0.5s linear infinite, pulse 1.0s ease-in-out infinite;
+        position: relative;
+      }
+
+      .repl-spinner::before {
+        content: '';
+        position: absolute;
+        inset: 3px;
+        border-radius: 50%;
+        background: #f1f3f4;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes pulse {
+        0%, 100% { scale: 0.7; opacity: 0.6; }
+        50% { scale: 1; opacity: 1; }
+      }
+
+      .hidden { display: none !important; }
+
+      .repl-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .repl-btn {
+        padding: 10px 20px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+
+      .repl-btn-run {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .repl-btn-run:hover:not(:disabled) {
+        background: var(--accent-hover);
+      }
+
+      .repl-btn-run:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .repl-btn-clear {
+        background: #f1f3f4;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+
+      .repl-btn-clear:hover {
+        background: #e8eaed;
+      }
+
+      .repl-btn-cancel {
+        background: #fce8e6;
+        color: var(--danger);
+        border: 1px solid var(--danger);
+      }
+
+      .repl-btn-cancel:hover {
+        background: #f8d7da;
+      }
+
+      .repl-output {
+        margin-top: 24px;
+      }
+
+      .repl-output-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 12px;
+      }
+
+      .repl-result {
+        padding: 14px;
+        background: #f1f3f4;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 14px;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .repl-result.error {
+        background: #fce8e6;
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+
+      .repl-status {
+        font-size: 13px;
+        color: var(--accent);
+        background: var(--accent-bg);
+        padding: 8px 14px;
+        border-radius: 20px;
+        margin-left: auto;
+      }
+
+      .repl-status:empty {
+        display: none;
+      }
+
+      .repl-examples {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+      }
+
+      .repl-examples h3 {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 12px;
+      }
+
+      .repl-example-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 4px 4px 4px 0;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
+      }
+
+      .repl-example-btn:hover {
+        background: var(--accent-bg);
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="repl-container">
+      <div class="repl-header">
+        <a href="index.html"><img src="https://i.imgur.com/IjaDdYO.png" alt="NumThy" /></a>
+        <h1>Interactive REPL</h1>
+      </div>
+
+      <div class="repl-editor-wrapper">
+        <pre id="highlight" class="repl-editor-highlight"><code class="language-python"></code></pre>
+        <textarea id="editor" class="repl-editor" placeholder="# Enter Python code here&#10;import numthy as nt&#10;&#10;nt.is_prime(127)" spellcheck="false"></textarea>
+      </div>
+
+      <div class="repl-controls">
+        <button id="runBtn" class="repl-btn repl-btn-run">Run</button>
+        <button id="cancelBtn" class="repl-btn repl-btn-cancel hidden">Cancel</button>
+        <button id="clearBtn" class="repl-btn repl-btn-clear">Clear</button>
+        <div id="status" class="repl-status"></div>
+      </div>
+
+      <div class="repl-output">
+        <div class="repl-output-title">Output</div>
+        <div id="spinner" class="repl-spinner hidden"></div>
+        <div id="output" class="repl-result">&nbsp;</div>
+      </div>
+
+      <div class="repl-examples">
+        <h3>Examples</h3>
+        <button class="repl-example-btn" data-code="nt.is_prime(2**127 - 1)">is_prime(2**127 - 1)</button>
+        <button class="repl-example-btn" data-code="nt.prime_factors(123456789)">prime_factors(123456789)</button>
+        <button class="repl-example-btn" data-code="nt.fibonacci(50)">fibonacci(50)</button>
+        <button class="repl-example-btn" data-code="nt.totient(123456789)">totient(123456789)</button>
+        <button class="repl-example-btn" data-code="nt.discrete_log(5, 7, 13)">discrete_log(5, 7, 13)</button>
+        <button class="repl-example-btn" data-code="nt.divisors(360)">divisors(360)</button>
+        <button class="repl-example-btn" data-code="nt.random_prime(128)">random_prime(128)</button>
+      </div>
+    </div>
+
+    <script>
+      const editor = document.getElementById('editor');
+      const highlight = document.getElementById('highlight');
+      const highlightCode = highlight.querySelector('code');
+      const output = document.getElementById('output');
+      const status = document.getElementById('status');
+      const spinner = document.getElementById('spinner');
+      const runBtn = document.getElementById('runBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const clearBtn = document.getElementById('clearBtn');
+
+      let worker = null;
+      let workerReady = false;
+      let isRunning = false;
+      let runResolve = null;
+      let spinnerTimeout = null;
+
+      function createWorker() {
+        if (worker) worker.terminate();
+        worker = new Worker('pyworker.js');
+        workerReady = false;
+
+        worker.onmessage = (e) => {
+          const { type, message, result, error } = e.data;
+
+          if (type === 'status') {
+            status.textContent = message;
+          } else if (type === 'ready') {
+            workerReady = true;
+            status.textContent = '';
+          } else if (type === 'result') {
+            if (runResolve) runResolve({ ok: true, result });
+          } else if (type === 'error') {
+            if (runResolve) runResolve({ ok: false, error });
+          }
+        };
+
+        worker.onerror = (err) => {
+          if (runResolve) runResolve({ ok: false, error: err.message });
+        };
+      }
+
+      // Load Pyodide on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        status.textContent = 'Loading Python runtime ...';
+        createWorker();
+        worker.postMessage({ type: 'init' });
+      });
+
+      function updateHighlight() {
+        const code = editor.value + '\n';
+        highlightCode.textContent = code;
+        Prism.highlightElement(highlightCode);
+      }
+
+      function syncScroll() {
+        highlight.scrollTop = editor.scrollTop;
+        highlight.scrollLeft = editor.scrollLeft;
+      }
+
+      editor.addEventListener('input', updateHighlight);
+      editor.addEventListener('scroll', syncScroll);
+      editor.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+          updateHighlight();
+        }
+      });
+      updateHighlight();
+
+      async function run() {
+        const code = editor.value.trim();
+        if (!code || isRunning) return;
+
+        isRunning = true;
+        runBtn.disabled = true;
+        output.textContent = '\u00A0';
+        output.classList.remove('error');
+        spinner.classList.add('hidden');
+
+        // Show spinner, status, and cancel after 1 second delay
+        if (spinnerTimeout) clearTimeout(spinnerTimeout);
+        spinnerTimeout = setTimeout(() => {
+          runBtn.classList.add('hidden');
+          cancelBtn.classList.remove('hidden');
+          output.classList.add('hidden');
+          spinner.classList.remove('hidden');
+          status.textContent = 'Executing ...';
+        }, 1000);
+
+        if (!workerReady) {
+          status.textContent = 'Loading Python runtime ...';
+          createWorker();
+          await new Promise(resolve => {
+            const checkReady = setInterval(() => {
+              if (workerReady) {
+                clearInterval(checkReady);
+                resolve();
+              }
+            }, 50);
+            worker.postMessage({ type: 'init' });
+          });
+        }
+
+        const response = await new Promise(resolve => {
+          runResolve = resolve;
+          worker.postMessage({ type: 'exec', code });
+        });
+        runResolve = null;
+
+        // Clear spinner timeout and hide spinner
+        if (spinnerTimeout) {
+          clearTimeout(spinnerTimeout);
+          spinnerTimeout = null;
+        }
+        spinner.classList.add('hidden');
+        output.classList.remove('hidden');
+
+        if (!response.ok) {
+          output.textContent = response.error;
+          output.classList.add('error');
+        } else {
+          const result = response.result;
+          if (result.ok && result.blocks && result.blocks.length > 0) {
+            const texts = result.blocks.map(b => b.content).filter(Boolean);
+            output.textContent = texts.join('\n') || '(no output)';
+          } else if (!result.ok) {
+            output.textContent = result.error;
+            output.classList.add('error');
+          } else {
+            output.textContent = '(no output)';
+          }
+        }
+
+        status.textContent = '';
+        isRunning = false;
+        runBtn.disabled = false;
+        runBtn.classList.remove('hidden');
+        cancelBtn.classList.add('hidden');
+      }
+
+      function cancel() {
+        if (!isRunning) return;
+
+        // Terminate worker to kill running computation
+        if (worker) {
+          worker.terminate();
+          worker = null;
+          workerReady = false;
+        }
+        runResolve = null;
+
+        // Clear spinner timeout and hide spinner
+        if (spinnerTimeout) {
+          clearTimeout(spinnerTimeout);
+          spinnerTimeout = null;
+        }
+        spinner.classList.add('hidden');
+        output.classList.remove('hidden');
+        output.textContent = '(cancelled)';
+        status.textContent = '';
+        isRunning = false;
+        runBtn.classList.remove('hidden');
+        cancelBtn.classList.add('hidden');
+
+        // Recreate worker for next run
+        status.textContent = 'Reloading Python runtime ...';
+        createWorker();
+        worker.postMessage({ type: 'init' });
+      }
+
+      runBtn.addEventListener('click', run);
+      cancelBtn.addEventListener('click', cancel);
+
+      editor.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+          e.preventDefault();
+          run();
+        }
+      });
+
+      clearBtn.addEventListener('click', () => {
+        editor.value = '';
+        output.textContent = '';
+        output.classList.remove('error');
+        status.textContent = '';
+        updateHighlight();
+      });
+
+      document.querySelectorAll('.repl-example-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          editor.value = btn.dataset.code;
+          updateHighlight();
+          editor.focus();
+        });
+      });
+    </script>
+  </body>
+</html>

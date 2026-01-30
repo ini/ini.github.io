@@ -21,12 +21,28 @@ const spinnerEl = document.getElementById('spinner');
 const bridgeOverlay = document.getElementById('bridgeOverlay');
 const bridgeUrlOverlay = document.getElementById('bridgeUrlOverlay');
 const bridgeRetry = document.getElementById('bridgeRetry');
+const replLink = document.getElementById('replLink');
+
+// Gemini auth overlay elements
+const geminiAuthOverlay = document.getElementById('geminiAuthOverlay');
+const geminiAuthLink = document.getElementById('geminiAuthLink');
+const geminiAuthCode = document.getElementById('geminiAuthCode');
+const geminiAuthSubmit = document.getElementById('geminiAuthSubmit');
+const geminiAuthError = document.getElementById('geminiAuthError');
+const geminiAuthCancel = document.getElementById('geminiAuthCancel');
+
+// Pending Gemini query (stored while auth is in progress)
+let pendingGeminiQuery = null;
+
+// Pending bridge query (stored while waiting for bridge connection)
+let pendingBridgeQuery = null;
 
 // Safari detection - Safari blocks mixed content (HTTP from HTTPS page)
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 let currentSource = null;
-let availableBackends = [];
+let bridgeBackends = [];
+let bridgeConnected = false;
 let unifiedModels = [];
 let selectedModelValue = null;
 let sessionStartShown = false;
@@ -54,6 +70,30 @@ const STORAGE_KEYS = {
   selectedModel: 'numthy.selectedModel',
 };
 
+// Static model lists for Claude and Codex (shown when bridge is offline)
+// Values must match what the bridge returns
+const CLAUDE_MODELS = [
+  { value: 'haiku', label: 'Haiku' },
+  { value: 'sonnet', label: 'Sonnet' },
+  { value: 'opus', label: 'Opus' },
+];
+
+const CODEX_MODELS = [
+  { value: 'gpt-5.2-codex', label: 'GPT 5.2 Codex' },
+  { value: 'gpt-5.2', label: 'GPT 5.2' },
+  { value: 'gpt-5.1-codex-max', label: 'GPT 5.1 Codex Max' },
+  { value: 'gpt-5.1-codex-mini', label: 'GPT 5.1 Codex Mini' },
+];
+
+// Format Codex model slug to nice label (e.g., "gpt-5.1-codex-mini" -> "GPT 5.1 Codex Mini")
+function formatCodexLabel(slug) {
+  return slug
+    .replace(/^gpt-/, 'GPT ')
+    .replace(/-codex/, ' Codex')
+    .replace(/-max$/, ' Max')
+    .replace(/-mini$/, ' Mini')
+    .replace(/-/g, '.');
+}
 
 // Get HTTPS URL from HTTP URL (for Safari fallback)
 function getHttpsUrl(httpUrl) {
@@ -94,6 +134,7 @@ function showHome() {
   resultsViewEl.classList.add('hidden');
   resultsViewEl.style.display = 'none';
   statusEl.style.display = 'none';
+  replLink.style.display = '';
   promptEl.value = promptMiniEl.value;
   promptEl.focus();
 }
@@ -103,6 +144,7 @@ function showResults() {
   resultsViewEl.classList.remove('hidden');
   resultsViewEl.style.display = '';
   statusEl.style.display = '';
+  replLink.style.display = 'none';
   resultsEl.innerHTML = '';
   blockQueue = [];
   if (blockTimer) {
@@ -142,8 +184,14 @@ function renderBlock(block) {
     if (block.expr) {
       const expr = document.createElement('pre');
       expr.className = 'expr';
-      expr.textContent = block.expr;
+      const code = document.createElement('code');
+      code.className = 'language-python';
+      code.textContent = block.expr;
+      expr.appendChild(code);
       shell.appendChild(expr);
+      if (window.Prism) {
+        Prism.highlightElement(code);
+      }
     }
 
     if (block.error) {
@@ -285,47 +333,123 @@ function getSelectedModel() {
   if (unifiedModels.length > 0) {
     return unifiedModels[0];
   }
-  return { backend: 'codex', model: '' };
+  return { backend: 'gemini', model: GEMINI_DEFAULT_MODEL };
 }
 
 function buildUnifiedModelList() {
   unifiedModels = [];
 
-  availableBackends.forEach((backend) => {
-    if (backend.models && backend.models.length) {
-      backend.models.forEach((model) => {
-        unifiedModels.push({
-          backend: backend.name,
-          backendDisplayName: backend.displayName || backend.name,
-          model: model.value,
-          label: model.label,
-        });
+  // Always include Gemini models (browser-side, no bridge needed)
+  GEMINI_MODELS.forEach((model) => {
+    unifiedModels.push({
+      backend: 'gemini',
+      backendDisplayName: 'Gemini',
+      model: model.value,
+      label: model.label,
+      available: true,
+    });
+  });
+
+  // Find bridge backends
+  const bridgeClaude = bridgeBackends.find(b => b.name === 'claude');
+  const bridgeCodex = bridgeBackends.find(b => b.name === 'codex');
+
+  // Claude: show bridge models if connected, otherwise static models (unavailable)
+  if (bridgeConnected && bridgeClaude?.models?.length) {
+    bridgeClaude.models.forEach((model) => {
+      unifiedModels.push({
+        backend: 'claude',
+        backendDisplayName: bridgeClaude.displayName || 'Claude',
+        model: model.value,
+        label: model.label.replace(/^Claude\s+/, ''),
+        available: true,
       });
-    } else if (backend.defaultModel) {
+    });
+  } else {
+    // Show static Claude models as unavailable
+    CLAUDE_MODELS.forEach((model) => {
+      unifiedModels.push({
+        backend: 'claude',
+        backendDisplayName: 'Claude',
+        model: model.value,
+        label: model.label,
+        available: false,
+      });
+    });
+  }
+
+  // Codex: show bridge models if connected, otherwise static models (unavailable)
+  if (bridgeConnected && bridgeCodex?.models?.length) {
+    bridgeCodex.models.forEach((model) => {
+      unifiedModels.push({
+        backend: 'codex',
+        backendDisplayName: bridgeCodex.displayName || 'Codex',
+        model: model.value,
+        label: formatCodexLabel(model.value),
+        available: true,
+      });
+    });
+  } else {
+    // Show static Codex models as unavailable
+    CODEX_MODELS.forEach((model) => {
+      unifiedModels.push({
+        backend: 'codex',
+        backendDisplayName: 'Codex',
+        model: model.value,
+        label: model.label,
+        available: false,
+      });
+    });
+  }
+
+  // Add any other backends from bridge
+  bridgeBackends.forEach((backend) => {
+    if (backend.name === 'gemini' || backend.name === 'claude' || backend.name === 'codex') return;
+    (backend.models || []).forEach((model) => {
       unifiedModels.push({
         backend: backend.name,
         backendDisplayName: backend.displayName || backend.name,
-        model: backend.defaultModel,
-        label: backend.defaultModel,
+        model: model.value,
+        label: model.label,
+        available: true,
       });
-    }
+    });
   });
 }
 
-function selectModel(value) {
+function selectModel(value, isManualSelection = false) {
   const model = unifiedModels.find((m) => `${m.backend}:${m.model}` === value);
 
-  // If model not found, fall back to first available
+  // If model not found, fall back to default or first available
   if (!model && unifiedModels.length > 0) {
-    const fallback = unifiedModels[0];
+    const fallback = unifiedModels.find(m => m.available && m.isDefault) ||
+                     unifiedModels.find(m => m.available) ||
+                     unifiedModels[0];
     value = `${fallback.backend}:${fallback.model}`;
+  }
+
+  const actualModel = unifiedModels.find((m) => `${m.backend}:${m.model}` === value);
+
+  // On manual selection, trigger auth/bridge overlay if needed
+  if (isManualSelection && actualModel) {
+    if (actualModel.backend === 'gemini' && !checkGeminiAuth()) {
+      // Gemini needs auth
+      showGeminiAuthOverlay();
+    } else if (!actualModel.available) {
+      // Claude/Codex need bridge
+      bridgeOverlay.classList.remove('hidden');
+      startAutoRetry();
+    }
+    // Still update the selection so user sees what they picked
   }
 
   selectedModelValue = value;
   localStorage.setItem(STORAGE_KEYS.selectedModel, value);
 
-  const actualModel = unifiedModels.find((m) => `${m.backend}:${m.model}` === value);
   modelPickerLabel.textContent = actualModel ? actualModel.label : 'Select model';
+
+  // Update picker button styling for unavailable models
+  modelPickerBtn.classList.toggle('unavailable', actualModel && !actualModel.available);
 
   // Update selected state in menu
   modelPickerMenu.querySelectorAll('.model-picker-option').forEach((btn) => {
@@ -347,7 +471,18 @@ function renderModelPicker() {
     grouped[m.backendDisplayName].push(m);
   });
 
-  Object.entries(grouped).forEach(([backendName, models]) => {
+  // Preferred order: Claude, GPT/Codex, Gemini, then others
+  const order = ['Claude', 'Claude Code', 'Codex', 'GPT Codex', 'Gemini'];
+  const sortedGroups = Object.entries(grouped).sort(([a], [b]) => {
+    const ai = order.indexOf(a);
+    const bi = order.indexOf(b);
+    if (ai === -1 && bi === -1) return a.localeCompare(b);
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+
+  sortedGroups.forEach(([backendName, models]) => {
     const groupLabel = document.createElement('div');
     groupLabel.className = 'model-picker-group';
     groupLabel.textContent = backendName;
@@ -362,17 +497,26 @@ function renderModelPicker() {
       if (btn.dataset.value === selectedModelValue) {
         btn.classList.add('selected');
       }
-      btn.addEventListener('click', () => selectModel(btn.dataset.value));
+      // Mark unavailable models
+      if (!m.available) {
+        btn.classList.add('unavailable');
+        btn.title = 'Requires bridge (npx numthy)';
+      }
+      btn.addEventListener('click', () => selectModel(btn.dataset.value, true));
       modelPickerMenu.appendChild(btn);
     });
   });
 
-  // Restore saved selection or select first available
+  // Restore saved selection or select first available (not manual, don't trigger overlays)
   const saved = localStorage.getItem(STORAGE_KEYS.selectedModel);
   if (saved && unifiedModels.some((m) => `${m.backend}:${m.model}` === saved)) {
     selectModel(saved);
   } else if (unifiedModels.length > 0) {
-    selectModel(`${unifiedModels[0].backend}:${unifiedModels[0].model}`);
+    // Default to model with isDefault flag, or first available (Gemini if bridge offline)
+    const firstAvailable = unifiedModels.find(m => m.available && m.isDefault) ||
+                           unifiedModels.find(m => m.available) ||
+                           unifiedModels[0];
+    selectModel(`${firstAvailable.backend}:${firstAvailable.model}`);
   } else {
     // No models available - reset state
     selectedModelValue = null;
@@ -400,10 +544,7 @@ function openModelPicker() {
     // Scroll to selected model
     const selected = modelPickerMenu.querySelector('.model-picker-option.selected');
     if (selected) {
-      const menuRect = modelPickerMenu.getBoundingClientRect();
-      const selectedRect = selected.getBoundingClientRect();
-      const offset = selectedRect.top - menuRect.top - (menuRect.height / 2) + (selectedRect.height / 2);
-      modelPickerMenu.scrollTop = offset;
+      selected.scrollIntoView({ block: 'center', behavior: 'instant' });
     }
     updateMoreIndicator();
   }, 0);
@@ -461,13 +602,153 @@ function updateMiniSearchMargin() {
 
 async function runQuery(query) {
   const prompt = query.trim();
-  const bridgeUrl = getBridgeUrl();
   const selected = getSelectedModel();
-
   if (!prompt) return;
 
-  localStorage.setItem(STORAGE_KEYS.bridgeUrl, bridgeUrl);
   promptMiniEl.value = prompt;
+
+  // Branch on backend
+  if (selected.backend === 'gemini') {
+    return runGeminiQuery(prompt, selected.model);
+  }
+  return runBridgeQuery(prompt, selected);
+}
+
+// --- Gemini query: fully client-side (OAuth + Code Assist API + Pyodide) ---
+
+async function runGeminiQuery(prompt, model) {
+  showResults();
+
+  try {
+    // 1. Check if authenticated
+    const isAuthed = checkGeminiAuth();
+    if (!isAuthed) {
+      // Store pending query and show auth overlay
+      pendingGeminiQuery = { prompt, model };
+      await showGeminiAuthOverlay();
+      return; // Will continue in auth callback
+    }
+
+    // 2. Continue with the query
+    await executeGeminiQuery(prompt, model);
+  } catch (err) {
+    blockQueue = [];
+    appendBlock({ type: 'error', content: err.message });
+    setStatus('Error', 'error');
+  }
+}
+
+async function showGeminiAuthOverlay() {
+  try {
+    const authUrl = await startGeminiAuth();
+    geminiAuthLink.href = authUrl;
+    geminiAuthCode.value = '';
+    geminiAuthError.classList.add('hidden');
+    geminiAuthOverlay.classList.remove('hidden');
+  } catch (err) {
+    throw new Error(`Failed to start auth: ${err.message}`);
+  }
+}
+
+async function executeGeminiQuery(prompt, model) {
+  try {
+    // 1. Show session start immediately
+    appendBlock({
+      type: 'step',
+      title: 'Session Start',
+      explain: 'Import NumThy',
+      expr: 'import numthy as nt',
+    });
+
+    // 2. Start Pyodide loading and plan generation in parallel
+    setStatus('Planning ...', 'running');
+    const pyodidePromise = initPyodide((status) => {
+      // Only update status if still planning (don't overwrite "Running ...")
+      if (statusEl.textContent.includes('Planning') || statusEl.textContent.includes('Loading')) {
+        setStatus(status, 'running');
+      }
+    });
+    const planPromise = geminiGeneratePlan(prompt, model);
+
+    // Wait for both plan and Pyodide (in parallel)
+    const [plan] = await Promise.all([planPromise, pyodidePromise]);
+    pyReset();
+
+    // 3. Execute each step: show command, then execute, then show result
+    setStatus('Running ...', 'running');
+    // Double RAF to ensure paint before continuing
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+    for (const step of plan.steps) {
+      // Show the step (command + explanation) immediately
+      const stepBlock = {
+        type: 'step',
+        title: step.label,
+        explain: step.explain,
+        expr: step.expr,
+        result: [],
+      };
+      const node = renderBlock(stepBlock);
+      if (node) {
+        resultsEl.appendChild(node);
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        // Double RAF to ensure step is painted before executing
+        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      }
+
+      // Execute and append result to this node
+      const result = await pyExec(step.expr);
+
+      if (!result.ok) {
+        const error = document.createElement('p');
+        error.className = 'error';
+        error.textContent = result.error;
+        node.appendChild(error);
+      } else if (result.blocks && result.blocks.length > 0) {
+        const resultsDiv = document.createElement('div');
+        resultsDiv.className = 'step-results';
+        result.blocks.forEach((block) => {
+          const blockNode = renderBlock(block);
+          if (blockNode) resultsDiv.appendChild(blockNode);
+        });
+        node.appendChild(resultsDiv);
+      }
+
+      // Scroll to show the result
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // 6. Show final note (skip if it looks like code - no spaces or starts with variable/bracket)
+    const finalText = (plan.final || '').trim();
+    if (finalText && /\s/.test(finalText) && !/^[\w({[]/.test(finalText)) {
+      appendBlock({ type: 'text', content: finalText });
+    }
+
+    setStatus('Done', 'done');
+  } catch (err) {
+    if (err.message === 'AUTH_REQUIRED') {
+      // Token expired, need to re-auth
+      pendingGeminiQuery = { prompt, model };
+      await showGeminiAuthOverlay();
+      return;
+    }
+    throw err;
+  }
+}
+
+// --- Bridge query: uses local bridge server for Claude/Codex ---
+
+async function runBridgeQuery(prompt, selected) {
+  // Check bridge connection first
+  if (!bridgeConnected) {
+    pendingBridgeQuery = { prompt, selected };
+    bridgeOverlay.classList.remove('hidden');
+    startAutoRetry();
+    return;
+  }
+
+  const bridgeUrl = getBridgeUrl();
+  localStorage.setItem(STORAGE_KEYS.bridgeUrl, bridgeUrl);
 
   showResults();
   setStatus('Planning ...', 'running');
@@ -607,7 +888,7 @@ settingsBtn.addEventListener('click', () => {
 settingsClose.addEventListener('click', () => {
   settingsPanel.classList.add('hidden');
   localStorage.setItem(STORAGE_KEYS.bridgeUrl, bridgeUrlEl.value.trim());
-  refreshBackendInfo();
+  tryBridgeConnection();
 });
 
 settingsPanel.addEventListener('click', (e) => {
@@ -620,43 +901,51 @@ settingsPanel.addEventListener('click', (e) => {
 function startTypewriter() {
   if (typewriterActive) return;
   typewriterActive = true;
-  promptEl.placeholder = '';
 
+  const initialText = 'Ask a math question ...';
   let questionIndex = Math.floor(Math.random() * EXAMPLE_QUESTIONS.length);
-  let charIndex = 0;
-  let isDeleting = false;
-  let pauseTime = 0;
+  let charIndex = initialText.length;
+  let isDeleting = true; // Start by deleting the initial text
+  let pauseTime = 2000; // 2s delay before starting
+  let currentText = initialText;
+
+  promptEl.placeholder = initialText;
+
+  function getTypeDelay() {
+    return 55 + Math.random() * 25; // 55-80ms, slight randomness for natural feel
+  }
 
   function tick() {
     if (!typewriterActive) return;
 
-    const question = EXAMPLE_QUESTIONS[questionIndex];
-
     if (pauseTime > 0) {
-      pauseTime -= 50;
-      typewriterTimer = setTimeout(tick, 50);
+      pauseTime -= 16;
+      typewriterTimer = setTimeout(tick, 16);
       return;
     }
 
     if (isDeleting) {
       charIndex--;
-      promptEl.placeholder = question.substring(0, charIndex);
+      promptEl.placeholder = currentText.substring(0, charIndex);
 
       if (charIndex === 0) {
         isDeleting = false;
-        questionIndex = (questionIndex + 1) % EXAMPLE_QUESTIONS.length;
-        pauseTime = 300;
+        currentText = EXAMPLE_QUESTIONS[questionIndex];
+        pauseTime = 400;
       }
-      typewriterTimer = setTimeout(tick, 30);
+      // Delete faster, with slight easing
+      const deleteDelay = 20 + (charIndex / currentText.length) * 15;
+      typewriterTimer = setTimeout(tick, deleteDelay);
     } else {
       charIndex++;
-      promptEl.placeholder = question.substring(0, charIndex);
+      promptEl.placeholder = currentText.substring(0, charIndex);
 
-      if (charIndex === question.length) {
+      if (charIndex === currentText.length) {
         isDeleting = true;
-        pauseTime = 2000;
+        pauseTime = 2500;
+        questionIndex = (questionIndex + 1) % EXAMPLE_QUESTIONS.length;
       }
-      typewriterTimer = setTimeout(tick, 60);
+      typewriterTimer = setTimeout(tick, getTypeDelay());
     }
   }
 
@@ -694,8 +983,16 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   statusEl.style.display = 'none'; // Hidden on home view
+
+  // Always show Gemini models immediately (no bridge needed)
+  buildUnifiedModelList();
+  renderModelPicker();
+
   promptEl.focus();
-  refreshBackendInfo();
+
+  // Try bridge silently in background for Claude/Codex
+  tryBridgeConnection();
+
   updateMiniSearchMargin();
   startTypewriter();
 });
@@ -729,6 +1026,39 @@ async function tryFetch(url) {
   }
 }
 
+/**
+ * Try connecting to the bridge silently (no overlay).
+ * Used on page load and when settings change.
+ */
+async function tryBridgeConnection() {
+  const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
+  if (!bridgeUrl) return;
+
+  let data = await tryFetch(bridgeUrl);
+  if (data) {
+    activeBridgeUrl = bridgeUrl;
+    onBridgeConnected(data);
+    return;
+  }
+
+  const savedHttpsUrl = getHttpsUrl(bridgeUrl);
+  if (savedHttpsUrl) {
+    data = await tryFetch(savedHttpsUrl);
+    if (data) {
+      activeBridgeUrl = savedHttpsUrl;
+      onBridgeConnected(data);
+      return;
+    }
+  }
+
+  // Not connected — that's fine, Gemini still works
+  bridgeConnected = false;
+}
+
+/**
+ * Legacy refreshBackendInfo — used by overlay retry and settings.
+ * Shows overlay if not connected.
+ */
 async function refreshBackendInfo() {
   const bridgeUrl = bridgeUrlEl.value.trim().replace(/\/$/, '');
   if (!bridgeUrl) {
@@ -737,39 +1067,45 @@ async function refreshBackendInfo() {
     return;
   }
 
-  // 1. Try HTTP fetch first (works for Chrome)
   let data = await tryFetch(bridgeUrl);
   if (data) {
     activeBridgeUrl = bridgeUrl;
-    onConnected(data);
+    onBridgeConnected(data);
     return;
   }
 
-  // 2. Try saved HTTPS URL (Safari returning user)
   const savedHttpsUrl = getHttpsUrl(bridgeUrl);
   if (savedHttpsUrl) {
     data = await tryFetch(savedHttpsUrl);
     if (data) {
       activeBridgeUrl = savedHttpsUrl;
-      onConnected(data);
+      onBridgeConnected(data);
       return;
     }
   }
 
-  // 3. Not connected - show overlay with instructions
   bridgeOverlay.classList.remove('hidden');
   startAutoRetry();
 }
 
-function onConnected(data) {
+function onBridgeConnected(data) {
   bridgeOverlay.classList.add('hidden');
   stopAutoRetry();
+  bridgeConnected = true;
 
   if (data.backends && Array.isArray(data.backends)) {
-    availableBackends = data.backends;
+    bridgeBackends = data.backends;
+    // Rebuild model list with bridge backends merged in
     buildUnifiedModelList();
     renderModelPicker();
     updateMiniSearchMargin();
+  }
+
+  // Resume pending bridge query if any
+  if (pendingBridgeQuery) {
+    const { prompt, selected } = pendingBridgeQuery;
+    pendingBridgeQuery = null;
+    runBridgeQuery(prompt, selected);
   }
 }
 
@@ -785,7 +1121,8 @@ bridgeUrlEl.addEventListener('change', () => {
   // Clear saved HTTPS when user changes URL
   localStorage.removeItem(STORAGE_KEYS.bridgeHttpsUrl);
   activeBridgeUrl = null;
-  refreshBackendInfo();
+  bridgeConnected = false;
+  tryBridgeConnection();
 });
 
 bridgeRetry.addEventListener('click', async () => {
@@ -811,7 +1148,7 @@ bridgeRetry.addEventListener('click', async () => {
   const data = await tryFetch(url);
   if (data) {
     activeBridgeUrl = url;
-    onConnected(data);
+    onBridgeConnected(data);
     bridgeRetry.disabled = false;
     bridgeRetry.textContent = 'Connect';
     return;
@@ -848,6 +1185,53 @@ window.addEventListener('message', (event) => {
   }
 });
 
+
+// --- Gemini auth overlay handlers ---
+
+geminiAuthSubmit.addEventListener('click', async () => {
+  const code = geminiAuthCode.value.trim();
+  if (!code) {
+    geminiAuthError.textContent = 'Please paste the authorization code';
+    geminiAuthError.classList.remove('hidden');
+    return;
+  }
+
+  geminiAuthSubmit.disabled = true;
+  geminiAuthSubmit.textContent = 'Verifying ...';
+  geminiAuthError.classList.add('hidden');
+
+  try {
+    await exchangeGeminiCode(code);
+    geminiAuthOverlay.classList.add('hidden');
+    geminiAuthSubmit.disabled = false;
+    geminiAuthSubmit.textContent = 'Continue';
+
+    // Resume pending query
+    if (pendingGeminiQuery) {
+      const { prompt, model } = pendingGeminiQuery;
+      pendingGeminiQuery = null;
+      await executeGeminiQuery(prompt, model);
+    }
+  } catch (err) {
+    geminiAuthError.textContent = err.message || 'Failed to verify code';
+    geminiAuthError.classList.remove('hidden');
+    geminiAuthSubmit.disabled = false;
+    geminiAuthSubmit.textContent = 'Continue';
+  }
+});
+
+geminiAuthCancel.addEventListener('click', () => {
+  geminiAuthOverlay.classList.add('hidden');
+  pendingGeminiQuery = null;
+  showHome();
+});
+
+geminiAuthCode.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    geminiAuthSubmit.click();
+  }
+});
 
 // Copy command to clipboard
 const copyBtn = document.getElementById('copyBtn');
