@@ -62,7 +62,8 @@ const EXAMPLE_QUESTIONS = [
   'Find all primes between 100 and 150',
   'Solve the system 2x + 4y = -2 and 4x + 5y = 11',
   'Divisors of 360',
-  'What is the totient of 123456789?'
+  'What is the totient of 123456789?',
+  'LLL-reduce the lattice [[1, 2], [3, 4]]'
 ];
 
 const STORAGE_KEYS = {
@@ -1256,6 +1257,7 @@ geminiAuthCancel.addEventListener('click', () => {
 
 bridgeCancel.addEventListener('click', () => {
   bridgeOverlay.classList.add('hidden');
+  stopAutoRetry();
   showHome();
 });
 
